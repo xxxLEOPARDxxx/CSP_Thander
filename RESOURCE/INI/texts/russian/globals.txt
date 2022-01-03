@@ -1,0 +1,150 @@
+
+QUEST_MESSAGE1	{Колония Эль Каймано окупирована.}
+QUEST_MESSAGE2	{Колония Эль Каймано захвачена.}
+QUEST_MESSAGE3	{Вы уже слишком стары чтобы сопротивляться проклятию Ацтекского золота...}
+QUEST_MESSAGE4	{Вы нашли клад!}
+QUEST_MESSAGE5	{Найджел Блайт атаковал корвет контрабандистов!}
+QUEST_MESSAGE6	{Пропал Найджел Блайт!}
+QUEST_MESSAGE7	{Капитан, Чёрная Жемчужина на горизонте!}
+QUEST_MESSAGE8	{Отличная работа, вы убили Учителя!}
+QUEST_MESSAGE9	{Вы теперь один на один с этим жестоким миром!}
+QUEST_MESSAGE10	{Пирату без чувства милосердия}
+QUEST_MESSAGE11	{предназначается особая награда!}
+QUEST_MESSAGE12	{К сожалению вы, уже наняли слишком много офицеров! Нанять нового вы сможете только после увольнения кого-либо из офицеров!}
+
+Address_Form_Eng	{Сэр}
+Address_FormFEng	{Мисс}
+Address_FormEngW	{Миссис}
+
+Address_Form_Fra	{Месье}
+Address_FormFFra	{Мадмуазель}
+Address_FormFraW	{Мадам}
+
+Address_Form_Spa	{Сеньор}
+Address_FormFSpa	{Сеньоритта}
+Address_FormSpaW	{Seсora}
+
+Address_Form_Hol	{Минхер}
+Address_FormFHol	{Миледи}
+Address_FormHolW	{Леди}
+
+Address_FormPir		{Кэп}
+Address_FormFPir	{Милочка}
+Address_FormPirW	{Хозяйка}
+
+Address_Form_Por	{Сеньор}
+
+Swear_1		{Лопни моя селезёнка!}
+Swear_2		{Проклятье!}
+Swear_3		{О мой бог!}
+Swear_4		{Черт тебя дери!}
+Swear_5		{Тысяча чертей!}
+Swear_6		{Якорь мне в корму!}
+Swear_7		{О, силы небесные!}
+Swear_8		{Аргхх!!!}
+Swear_9		{Тысяча акул!}
+Swear_10	{Дьявол!!}
+Swear_11	{Святая мадоннa!}
+Swear_12	{О боже!}
+Swear_13	{О, небеса!}
+
+TimeGreeting	{Добрый день}
+TimeGreeting_2	{Доброе утро}
+TimeGreeting_3	{Прошу прощения}
+TimeGreeting_4	{Славная ночь}
+TimeGreeting_5	{Здравствуй}
+
+Antigua			{Антигуа}
+Barbados		{Барбадос}
+Curacao			{Кюрасао}
+Dominica		{Доминика}
+Grenada			{Гренада}
+Guadeloupe		{Гваделупа}
+Hispaniola		{Испаньола}
+IslaMona		{Исла Мона}
+Jamaica			{Ямайка}
+MarieGalante	{Мария Галанте}
+Martinique		{Мартиника}
+Montserrat		{Монтсеррат}
+Nevis			{Невис}
+PuertoRico		{Пуэрто-Рико}
+StEustatius		{Святой Евстафий}
+StKitts			{Святые Киттс}
+StMartin		{Святой Мартин}
+Tortuga			{Тортуга}
+LaVega			{Ла Вега}
+SantoDomingo	{Санто-Доминго}
+PetitGoave		{Петит-Гоав}
+Bridgetown		{Бриджтаун}
+SanJuan			{Сан-Хуан}
+SantiagoVega	{Саньтяго Вега}
+
+OFFIC_TYPE_NAVIGATOR	{Штурман}
+OFFIC_TYPE_BOATSWAIN	{Боцман}
+OFFIC_TYPE_CANNONEER	{Канонир}
+OFFIC_TYPE_FIRSTMATE	{Врач}
+OFFIC_TYPE_QMASTER		{Квартирмейстер}
+
+England		{Англичанин}
+France		{Француз}
+Spain		{Испанец}
+Holland		{Голландец}
+Pirate		{Пират}
+Smuggler	{Контрабандист}
+
+Title_0		{Нет}
+Title_1_Pir	{Пират}
+Title_1_Hol	{Флибустьер}
+Title_1_Eng	{Приватир}
+Title_1_Fra	{Приватир}
+Title_1_Spa	{Корсар}
+Title_2		{Коммандующий}
+Title_3		{Капитан}
+Title_4		{Командор}
+Title_5		{Адмирал}
+
+NationKingsCrownEng		{English throne}
+NationKingsCrownFra		{French crown}
+NationKingsCrownSpa		{Spanish crown}
+NationKingsCrownHol		{Kingdom of the Netherlands}
+NationKingsCrownPir		{Brotherhood of the Coast}
+NationKingsNameEng		{His Majesty Karl II Stuart}
+NationKingsNameFra		{His Majesty Louis XIV}
+NationKingsNameSpa		{His Catholic Majesty Karl II Hapsburg}
+NationKingsNameHol		{His Majesty Wilhelm III of Orange}
+NationKingsNamePir		{Brotherhood of the Coast}
+NationNameManEng		{Englishman}
+NationNameManFra		{Frenchman}
+NationNameManSpa		{Spanish crown}
+NationNameManHol		{Dutch}
+NationNameManPir		{Pirate}
+NationNamePeopleEng		{English}
+NationNamePeopleFra		{French}
+NationNamePeopleSpa		{Spanish}
+NationNamePeopleHol		{Dutch}
+NationNamePeoplePir		{Pirates}
+NationNamePeopleEngAcc	{by the English}
+NationNamePeopleFraAcc	{by the French}
+NationNamePeopleSpaAcc	{by the Spanish}
+NationNamePeopleHolAcc	{by the Dutch}
+NationNamePeoplePirAcc	{by the pirates}
+NationNameAblativeEng	{England}
+NationNameAblativeFra	{France}
+NationNameAblativeSpa	{Spain}
+NationNameAblativeHol	{the Netherlands}
+NationNameAblativePir	{pirates}
+NationNameNominativeEng	{England}
+NationNameNominativeFra	{France}
+NationNameNominativeSpa	{Spain}
+NationNameNominativeHol	{the Netherlands}
+NationNameNominativePir	{Береговое Братство }
+NationNameGenitiveEng	{England}
+NationNameGenitiveFra	{France}
+NationNameGenitiveSpa	{Spain}
+NationNameGenitiveHol	{Holland}
+NationNameGenitivePir	{pirates}
+NationEuropaTownEng		{London}
+NationEuropaTownFra		{La Rochelle}
+NationEuropaTownSpa		{Seville}
+NationEuropaTownPir		{Tortuga}
+NationEuropaTownHol		{Amsterdam}

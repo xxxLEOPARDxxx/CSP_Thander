@@ -1,0 +1,12 @@
+//Hero: Part_HeroPart  + (10 - Complex)*Part_Complex + (7 - ClassShip)* Part_CompanionShipPerClass^QtyShip
+//Crew: Part_Officer * QtyOff + Part_Companion*QtyComp + Part_Crew * QtyCrew
+
+Partition_on	{1}
+
+Part_Officer	{10}
+Part_Companion	{30}
+Part_Crew		{1}
+
+Part_HeroPart				{200}
+Part_CompanionShipPerClass	{20}
+Part_Complex				{50}

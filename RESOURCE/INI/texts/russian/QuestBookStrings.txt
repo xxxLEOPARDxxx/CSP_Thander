@@ -1,0 +1,355 @@
+WhisperTitanic {Титаник}
+
+PGGWhisper {Посягнуть на святое}
+
+TheLastMass {Последняя месса}
+
+BSHangover {Тяжелое похмелье}
+
+BSUrka {Неуловимая 'Урка'}
+
+PDM_Aptekar {Аптекарь}
+
+PDM_Proklyataya_Jara {Проклятая жара}
+
+BSChaseBegun {Погоня началась!}
+
+BSCourtlyPassions {Куртуазные страсти}
+
+BSOnTheHorizon {Чёрные паруса на горизонте!}
+
+BSPrologue {Не плюй в колодец...}
+
+PDM_Clan_Lambrini {Клан Ламбрини}
+
+UnexpectedInheritance {Нежданное наследство}
+
+DHRaceAgainstTime {Наперегонки со временем}
+
+DarkHumanIncquisitorJournal {Дневник инквизитора}
+
+DarkHumanQuestline {Назад в будущее}
+
+PDM_Neputyovy_kaznachey {Непутёвый казначей}
+
+PDM_Poteryanoe_Koltso {Кольцо Жозефины Лодет}
+
+pirateVikingQuest {Осколок прошлого}
+
+PDM_Ohota_na_vedmu {Охота на ведьму}
+
+PDM_Novaya_Rodina {В поисках новой Родины}
+
+Findship {Поиск корабля}
+
+PDM_Cursed_Idol {Проклятый идол}
+
+WhisperContraband {Незавершенное дело Билла}
+
+WhisperChardQuest {Карты, деньги, два клинка}
+
+WhisperChinamanRelic {Китайская реликвия}
+
+WhisperQuestline {В новом мире}
+
+Silence_Price {История давней дружбы}
+
+VolversonRum {Ром для Волверстона}
+
+CursedSkeleton {Проклятый капитан}
+
+ShipOrder {Корабль на заказ}
+
+BurntShipQuest {Сгоревшее судно}
+
+GiveShipLetters {Найденные документы}
+
+ReasonToFast {Повод для спешки}
+
+PiratesOnUninhabited {Пираты на необитаемом острове}
+
+ShipWrecked {Потерпевшие кораблекрушение}
+
+JungleGirl {Девица в джунглях}
+
+ShipEpidemy {Эпидемия на корабле}
+
+Andre_Abel_Quest {Сопровождение флейта "Орион"}
+
+ChurchGenQuest1 {Вернуть рукописи священника}
+
+ChurchGenQuest2 {Ограбление церкви}
+
+CaptainComission1 {Поручение капитана}
+
+CaptainComission2 {Поручение капитана}
+
+Convict {Каторжане}
+
+HoldQuest {Пленный капитан}
+
+zpq {Опасный груз}
+
+pSQ {Травля крыс}
+
+LSC_Ring {Тайна 'Санта-Люсии'}
+
+RingCapBook {Записи в судовом журнале пинаса 'Санта-Люсия'}
+
+Albreht_Zalpfer {Альбрехт Цальпфер}
+
+CompanionTravel {Компаньон в свободном плавании}
+
+Xebeca_BlueBird {Уничтожить шебеку 'Синяя Птица'}
+
+SharpPearl {Найти промысел ловцов жемчуга.}
+
+SharpPearl_SeekSpy {Найти человека среди ловцов жемчуга, который дает информацию Шарпу}
+
+Pir_Line_0_Waiting {Капитан Гудли в Пуэрто-Принсипе}
+
+Pir_Line_1_JohnBolton {Услуга Моргану}
+
+Pir_Line_2_BlackLabel {Черная Метка}
+
+Pir_Line_3_KillLoy {Разыскать и убить Эдварда Лоу}
+
+Pir_Line_4_Pearl {Наводка Моргана на тартаны ловцов жемчуга}
+
+Pir_Line_5_Hunter {Работа охотника за головами}
+
+Pir_Line_6_Jackman {Отправиться к Джекмену}
+
+Pir_Line_7_Soukins {Разыскать Стива Линнея}
+
+Pir_Line_8_Panama {Поход на Панаму}
+
+ShipyardsMap {Промышленный шпионаж}
+
+SeekMayorsRing {Поиски обручального кольца в борделе}
+
+SeekUsurersJewel {Найти драгоценный камень ростовщика}
+
+Church_DestroyGhost {Задание церкви. Чистка от нечисти.}
+
+Church_NightGuard {Ночное дежурство в церкви}
+
+PortmansBook_Delivery {Задание начальника порта. Догнать капитана.}
+
+Portmans_SeekShip {Задание начальника порта. Вернуть украденный корабль.}
+
+SCQ_manSlave {Месть бывшего раба. Просьба горожанина.}
+
+SCQ_womanHasband {Найти мужа горожанки}
+
+SCQ_manRapeWife {Отбить у пирата жену горожанина}
+
+SCQ_manFriend {Найти земляка горожанина}
+
+SCQ_womanRevenge {Месть отвергнутой горожанки}
+
+SCQ_womanPirates {Вызволение из плена мужа горожанки}
+
+ISS_PoorsMurder {Убить всех нищих}
+
+ISS_MainLine {В Городе Потерянных Кораблей}
+
+ISS_takeCandles {Свечи для прихода}
+
+ISS_takeStoreMoney {Пробраться в жилые помещения магазина на 'Эсмеральде'}
+
+ISS_ElisHusband {Непутевый муж Элис Тейло.}
+
+LSC_findDekster {Пропавший пират Лейтон Декстер}
+
+TakeVineToPrisoner {Поручение Доминика Легро}
+
+SeekDoubleMushket {Найти двуствольный мушкет}
+
+CapBloodLine_q1 {Врач}
+
+CapBloodLine_q2 {Предложение Вакера}
+
+WeaponsForEscape {Оружие для побега}
+
+HugtorpTrouble {Проблема Хагторпа}
+
+DiekeQuest {Младший офицер Николас Дайк}
+
+OglQuest {Одноглазый артиллерист}
+
+FishermanQuest {Рыбное место}
+
+UsurerQuest {Безымянный должник}
+
+PirateQuest {Павший пират}
+
+EscapeFormBarbados {Побег с Барбадоса}
+
+Tenochtitlan {Тенотчитлан}
+
+MagicCity {Зачарованный город}
+
+Slavetrader {Работорговец.}
+
+PrisonGun {Орудия для форта}
+
+Headhunt {Кондотьер}
+
+GhostShipQuest {Корабль-призрак}
+
+Gen_CityCapture {Хроника захвата городов}
+
+Gen_Contraband  {Сбыт контрабанды}
+
+Gen_ContrabandTravel  {Плавание с контрабандистами}
+
+Gen_StrangeInfo {Странные слухи}
+
+Gen_PGGQuest1 {Предложение пирата}
+
+Gen_PGGQuest1woman {Предложение пирата}
+
+Rumour_GoldFleet {Испанский золотой флот}
+
+MerchantOnMap {Легкая добыча}
+
+ShipTuning {Улучшение корабля}
+
+Gen_LoanFindCitizen {Помощь ростовщикам. Найти должника.}
+
+Gen_LoanTakeChest {Помощь ростовщикам. Доставить золото.}
+
+convoy_quest {Сопровождение торговцев}
+
+Gen_convoy_passenger {Доставить пассажира}
+
+MayorsQuestsList {Задания губернаторов}
+
+GivePrisonFree {Тюремные дела}
+
+Eng_Line_1_Albermal {Сопровождение герцога Альбермаля}
+
+Eng_Line_2_Talking {Убедить известных пиратов напасть на Кюрасао}
+
+Eng_Line_3_Morgan {Предложение Генри Моргана}
+
+Eng_Line_4_Intelligence_Curacao {Разведка в Кюрасао}
+
+Eng_Line_5_AttackFortOrange {Нападение на голландское поселение Форт Оранж}
+
+Eng_Line_6_MorrisWillams {Капитан каперского фрегата Моррис Уильямс}
+
+Eng_Line_7_SevenTresures {Найти клады известных корсаров}
+
+Eng_Line_8_ToMansfield {К Эдварду Мэнсфилду за золотом}
+
+Eng_Line_9_AttackSantiago {Нападение на Сантьяго}
+
+Eng_Line_10_SpanishAttack {Нападение испанской эскадры на Порт-Рояль}
+
+Eng_Line_11_OccupyMein {Захват Каракаса и Куманы}
+
+Eng_Line_12_ColonelLinch {Прояснить ситуацию в Сент-Джонсе}
+
+Hol_Line_1_Chumakeiro {Доставить главу янсенистов Чумакейро в Виллемстад}
+
+Hol_Line_2_TakeFoodCuracao {Закупить партию товара в форте Оранж и доставить все в Виллемстад}
+
+Hol_Line_3_WormEnglishPlans {Добыть информацию о планах англичан в связи с торговой войной}
+
+Hol_Line_4_DefenceOrange {Защитить Форт Оранж от готовящегося нападения англичан}
+
+Hol_Line_5_ThreeFleutes {Сопроводить три флейта к поселению буканьеров Ла Вега и обратно}
+
+Hol_Line_6_RevengeMansfield {Возмездие за смерть Мэнсфилда}
+
+Hol_Line_7_DelivLettTortuga {Доставить депешу губернатору Тортуги Бертрану д'Ожерону}
+
+Hol_Line_8_SeekBible {Командировка в распоряжение Аарона Мендеса Чумакейро}
+
+Hol_Line_9_TakeThreeShips {Захватить четыре линейных корабля первого класса}
+
+Hol_Line_10_SpaAttackCuracao {Отразить нападение испанской эскадры на Кюрасао}
+
+Hol_Line_11_SpaAttackSentMartin {Отразить нападение испанцев на Сан Мартин}
+
+Hol_Line_12_OccupyMaracaibo {Захват Маракайбо}
+
+Spa_Line_1_SaveCitizens {Освободить трех испанских граждан}
+
+Spa_Line_2_Inquisition {Работа на Святую Инквизицию}
+
+Spa_Line_3_RockBrasilian {Захватить Рока Бразильца}
+
+Spa_Line_4_MirderDetection {Расследование убийства коменданта Гаваны Хосе Рамиреса де Лейва}
+
+Spa_Line_5_LaVegaAttack {Командировка в Сантьяго}
+
+Spa_Line_6_TakeMessangeer {Перехват вестового генерал-губернатора Голландии}
+
+Spa_Line_7_SavePardal {Оказать помощь Маноэлю Риверо Пардалю}
+
+Spa_Line_8_SaveCumana {Защита Куманы от нападения объединенной франко-английской эскадры пиратов}
+
+Spa_Line_9_FourGolgGaleons {Задание губернатора Порто Белло на сопровождение кораблей}
+
+Spa_Line_10_Maracaibo {Защита Маракайбо от возможного вторжения}
+
+Spa_Line_11_DestrHolland {Разорение голландских колоний}
+
+Spa_Line_12_OccupyPortPax {Захват Порт-о-Принса}
+
+Fra_Line_1_LegranDis {Доставить Пьера Леграна до бухты Ле Марен, что на острове Мартиника}
+
+Fra_Line_2_DelivLetter {Доставка письма д'Ожерона на остров Кюрасао}
+
+Fra_Line_3_TakeAnna {Изыскать способ привезти донну Анну на Тортугу}
+
+Fra_Line_4_SoleiRoyal {Сопровождение линейного корабля 'Солей Руаяль' до Гваделупы}
+
+Fra_Line_5_KillAnnaHanters {Месть донне Анне со стороны соотечественников}
+
+Fra_Line_6_Olone {Доставить письмо флибустьеру Франсуа Олоне}
+
+Fra_Line_7_RockBras {Вызволить из тюрьмы Рока Бразильца}
+
+Fra_Line_8_ThreeCorsairs {Отправиться в распоряжение маркиза Бонрепо}
+
+Fra_Line_9_GuardPortPax {Отражение нападения испанцев на Порт-о-Принс}
+
+Fra_Line_10_OccupySantoDomingo {Захват Санто-Доминго}
+
+Fra_Line_11_OccupySantaCatalina {Захват Санта Каталины}
+
+Fra_Line_12_EndOfWar {Встреча с маркизом Бонрепо}
+
+Ascold {Поиски порошка мумии}
+
+ContractWithHell {Текст контракта с Департаментом Ада по учету людей}
+
+Azzy_HellSign {Текущая рассылка сообщений абонентам канцелярии Ада}
+
+BerglarsGang {Банда грабителей и убийц}
+
+QuestionsMessages {Местонахождение подаренных предметов}
+
+DELIVERY_TRADE_QUEST {Доставка грузов для магазинов}
+
+MyNotices {Мои записки}
+
+MY_COLONY {Будни колонии}
+
+ColonyBuilding {Строительство колонии}
+
+Dozor {Дозор}
+
+ShipWreck {Кораблекрушение}
+
+QuestDuel {Дуэлянт}
+
+LOOSER_GENERATOR {Проигравшийся игрок}
+
+Romantic_Line {История прекрасной Изабеллы}
+
+HeadHunter {Охотники за головами}

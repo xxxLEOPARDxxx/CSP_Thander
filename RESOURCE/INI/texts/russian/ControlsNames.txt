@@ -1,0 +1,176 @@
+newLine{}
+
+// Меню настроек
+HelpChooser				{Выбор раздела помощи}
+MainInterface			{Управление в интерфейсах}
+DialogControls			{Диалог}
+WorldMapControls		{Карта мира}
+BattleInterfaceControls	{Управление в интерфейсах}
+Sailing1Pers			{Море от 1го лица}
+Sailing3Pers			{Море от 3го лица}
+FightModeControls		{Режим боя}
+PrimaryLand				{Управление на земле}
+
+ChrCamTurnV			{Вертикальное перемещение камеры за персонажем}
+ChrCamTurnH			{Горизонтальное перемещение камеры за персонажем}
+ChrCamCameraSwitch	{Изменение режима камеры 'за персонажем' \ 'вид из глаз'}
+ChrCamNormalize		{Центрирование камеры}
+
+ChrTurnH 	{Поворот персонажа}
+ChrTurnV	{Движение персонажа}
+ChrTurnHL	{Поворот персонажа влево}
+ChrTurnHR	{Поворот персонажа вправо}
+
+ChrForward	{Идти вперед}
+ChrForward1	{Идти вперед}
+ChrForward2	{Идти вперед (альтернативная)}
+ChrBackward	{Идти назад}
+ChrBackward1{Идти назад}
+ChrRun		{Перейти на бег}
+ChrRunStick	{Перейти на бег}
+
+ChrStrafeLeft		{Рывок влево}
+ChrStrafeRight		{Рывок вправо}
+
+ChrBlock			{Блок}
+ChrRecoil			{Отскок}
+ChrParry			{Парирование}
+ChrAttackForce		{Выпад}
+ChrAttackFast		{Удар}
+ChrAttackRound		{Круговой удар}
+ChrAttackBreak		{Пробивающий удар}
+ChrAttackFient		{Финт}
+ChrAttackBreakBase	{Пробивающий удар/Финт}
+ChrAttackRoundBase	{Круговой удар}
+ChrAttackChoseBase	{Переключатель ударов}
+ChrBlockBase		{Блок}
+ChrAttackBase		{Выпад/Парирование}
+ChrAltAttackBase	{Удар/Круговой удар}
+ChrAltAttackBaseA	{Круговой удар}
+SoloParry			{Парирование (уворот)}
+SoloFient			{Финт (контратака)}
+
+ChrFire				{Выстрелить}
+MushketHotkey		{Переключить (мушкет)/(сабля+пистолет)}
+BOAL_UsePotion		{Выпить хилку}
+
+BOAL_ActivateRush	{Активировать 'Берсерка'}
+PusherHotkey		{Активировать "Громилу"}
+ChrFightMode		{Включение/выключение боевого режима}
+csmRunLootCollector	{Открыть сундук (перк Мародёрство, абордажи и осады)}
+
+DlgAction			{Выбор ответа в диалоге}
+DlgAction1			{Выбор ответа в диалоге}
+DlgUp				{Перейти к предыдущему варианту ответа в диалоге}
+DlgDown				{Перейти к следующему варианту ответа в диалоге}
+DlgScrollUp			{Пролистать строки диалога вниз}
+DlgScrollDown		{Пролистать строки диалога вверх}
+Say					{Вызов интерфейса автозакупки казначеем}
+MapView				{Открыть атлас карт}
+Map_Best			{Открыть отличную карту}
+
+OfficersCharge	{Команда офицерам "Атаковать"}
+OfficersHold	{Команда офицерам "Стоять"}
+OfficersFollow	{Команда офицерам "Следовать"}
+OfficersFree	{Команда офицерам "Вольно"}
+
+ChrJump			{Прыжок}
+BOAL_DeadSearch	{Обыск трупа}
+hk_Cure			{Выпить хилку}
+UseAntidote		{Выпить противоядие}
+UseFood			{Использовать еду}
+hk_Rush			{Активировать 'Ярость'}
+ChrAction		{Выполнить действие}
+
+ShipCamera_Turn_V	{Вертикальное перемещение камеры за кораблем}
+ShipCamera_Turn_H	{Горизонтальное перемещение камеры за кораблем}
+ShipCamera_Forward	{Приближение камеры к кораблю}
+ShipCamera_Backward	{Удаление камеры от корабля}
+
+Sea_CameraSwitch	{Переключение камеры "за кораблем"/"на палубе"}
+Telescope			{Включить/выключить подзорную трубу}
+TelescopeIn			{Включить/приблизить подзорную трубу}
+TelescopeOut		{Выключить/удалить подзорную трубу}
+
+DeckCamera_Turn_V	{Вертикальный поворот камеры (вид с палубы)}
+DeckCamera_Turn_H	{Горизонтальный поворот камеры (вид с палубы)}
+DeckCamera_Forward	{Вперед (вид с палубы)}
+DeckCamera_Backward	{Назад (вид с палубы)}
+DeckCamera_Left		{Левый стрейф (вид с палубы)}
+DeckCamera_Right	{Правый стрейф (вид с палубы)}
+
+Ship_TurnLeft	{Поворот корабля влево}
+Ship_TurnRight	{Поворот корабля вправо}
+Ship_SailUp		{Поднять паруса}
+Ship_SailDown	{Спустить паруса}
+
+hk_charge1	{Зарядить ядрами}
+hk_charge2	{Зарядить картечью}
+hk_charge3	{Зарядить книппеллями}
+hk_charge4	{Зарядить бомбами}
+Ship_Fire	{Произвести пушечный залп}
+
+CIC_LoadBalls					{Эскадра: "Зарядить ядра"}
+CIC_LoadGrapes					{Эскадра: "Зарядить картечь"}
+CIC_LoadChain					{Эскадра: "Зарядить книпели"}
+CIC_LoadBombs					{Эскадра: "Зарядить бомбы"}
+CIC_LoadAtWill					{Эскадра: "Зарядка по усмотрению"}
+CIC_SailAway					{Эскадра: "Уплыть"}
+CIC_LowerSails					{Эскадра: "Спустить паруса"}
+CIC_ProtFlagship				{Эскадра: "Защищать флагман"}
+
+BOAL_ActivateImmediateReload	{Навык "Предварительная перезарядка"}
+hk_ImmediateReload				{Активировать "Предварительную перезарядку"}
+BOAL_ActivateLightRepair		{Навык "Лёгкий ремонт"}
+hk_LightRepair					{Активировать "Лёгкий ремонт"}
+BOAL_ActivateInstantRepair		{Навык "Быстрый ремонт"}
+hk_InstantRepair				{Активировать "Быстрый ремонт"}
+BOAL_ActivateTurn180			{Навык "Манёвренный разворот корабля"}
+hk_Turn180						{Активировать "Манёвренный разворот корабля"}
+BOAL_ActivateSandbankManeuver	{Навык "Манёвры на мелководье"}
+hk_SandbankManeuver				{Активировать "Манёвры на мелководье"}
+
+MiniMapZoomIn		{Увеличить масштаб миникарты}
+MiniMapZoomOut		{Уменьшить масштаб миникарты}
+BI_MapEnter			{Выход на карту}
+
+WMapTurnH		{Вращение камеры вокруг корабля (в режиме карты)}
+WMapTurnV		{Высота камеры (в режиме карты)}
+WMapCameraRotate{Включение режима скольжения/вращения камеры}
+WMapForward		{Приближение камеры}
+WMapBackward	{Удаление камеры}
+WMapCameraSwitch{Переключение режима обзора}
+
+WMapShipSailUp		{Плыть вперед}
+WMapShipSailDown	{Плыть назад}
+WMapShipTurnLeft	{Поворот влево}
+WMapShipTurnRight	{Поворот вправо}
+
+WMapCancel	{Выход из карты в море}
+
+Interface			{Вызов интерфейса игры}
+InterfaceDisabler	{Отключить интерфейсы}
+
+MainMenu			{Вызов главного меню}
+MainMenuDouble		{Вызов главного меню}
+
+BICommandsActivate	{Вызвать командное меню}
+LICommandsActivate	{Вызвать командное меню}
+BICommandsConfirm	{Выбрать команду}
+BICommandsCancel	{Отменить команду}
+BICommandsLeft		{Движение по командному меню влево}
+BICommandsRight		{Движение по командному меню вправо}
+
+Help				{Вызов справки по игре}
+HelpChooser_Cancel	{Выход из справки}
+HelpChooser_Action	{Показать справку по текущему элементу}
+HelpChooser_Next	{Переход к следующему элементу справки}
+HelpChooser_Prev	{Переход к предыдущему элементу справки}
+HelpChooser_Left	{Влево (в режиме справки)}
+HelpChooser_Right	{Вправо (в режиме справки)}
+HelpChooser_Up		{Вверх (в режиме справки)}
+HelpChooser_Down	{Вниз (в режиме справки)}
+
+CreateNotice		{Сделать заметку в судовом журнале}
+BIFastCommand		{Выполнить "быструю" команду}
+Ship_GetCoordinates	{Показать координаты}

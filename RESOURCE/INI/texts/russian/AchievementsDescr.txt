@@ -1,0 +1,323 @@
+money_1{Первый миллион}
+money_1_descr{Накопите 1 миллионов пиастров}
+money_icon{AchMoney}
+money_2{Внушительная сумма}
+money_2_descr{Накопите 5 миллионов пиастров}
+money_3{Миллионер}
+money_3_descr{Накопите 15 миллионов пиастров}
+
+rank_1{Начинающий}
+rank_1_descr{Поднять ранг главного героя до 10}
+rank_icon{AchLvlUp}
+rank_2{На опыте}
+rank_2_descr{Поднять ранг главного героя до 25}
+rank_3{Всё по плечу}
+rank_3_descr{Поднять ранг главного героя до 40}
+
+bank_money_3{Огромный вклад}
+bank_money_3_descr{Сделайте вклады в банки на общую сумму 50 миллионов}
+bank_money_icon{AchVklad}
+
+taxes_1{Первые налоги}
+taxes_1_descr{Оплатите 10 портовых сборов}
+taxes_icon{AchShipPortman}
+taxes_2{Дань государству}
+taxes_2_descr{Оплатите 50 портовых сборов}
+taxes_3{Честный мореплаватель}
+taxes_3_descr{Оплатите 100 портовых сборов}
+
+AchVzyatka_1{Дать на лапу}
+AchVzyatka_1_descr{Дайте 10 взяток стражникам}
+AchVzyatka_icon{AchVzyatka}
+AchVzyatka_2{Взяточник}
+AchVzyatka_2_descr{Дайте 25 взяток стражникам}
+AchVzyatka_3{Коррупционер}
+AchVzyatka_3_descr{Дайте 50 взяток стражникам}
+
+AchTreasure_1{Удачливый капитан}
+AchTreasure_1_descr{Найти 5 кладов}
+AchTreasure_icon{AchTreasure}
+AchTreasure_2{В поисках сокровищ}
+AchTreasure_2_descr{Найти 15 кладов}
+AchTreasure_3{Кладоискатель}
+AchTreasure_3_descr{Найти 30 кладов}
+
+AchChest_1{Специалист по взлому}
+AchChest_1_descr{Взломать 5 сундуков}
+AchChest_icon{AchChest}
+AchChest_2{Взломщик}
+AchChest_2_descr{Взломать 15 сундуков}
+AchChest_3{Медвежатник}
+AchChest_3_descr{Взломать 30 сундуков}
+
+kills_1{Жестокий человек}
+kills_1_descr{Совершите 50 убийств}
+kills_icon{AchKillAll}
+kills_2{Кровавый путь}
+kills_2_descr{Совершите 150 убийств}
+kills_3{Серийный убийца}
+kills_3_descr{Совершите 500 убийств}
+
+ship_kills_1{Настоящий корсар}
+ship_kills_1_descr{Потопите 10 кораблей в бою}
+ship_kills_icon{AchShipDead}
+ship_kills_2{Морской волк}
+ship_kills_2_descr{Потопите 35 кораблей в бою}
+ship_kills_3{Гроза морей}
+ship_kills_3_descr{Потопите 70 кораблей в бою}
+
+skel_kills_1{Очистка от темных сил}
+skel_kills_1_descr{Убить 30 нежити}
+skel_kills_icon{AchSkeletDead}
+skel_kills_2{Священный воитель}
+skel_kills_2_descr{Убить 75 нежити}
+skel_kills_3{Паладин}
+skel_kills_3_descr{Убить 150 нежити}
+
+poisons_1{Опасная жидкость}
+poisons_1_descr{Нанести 50 отравляющих ударов}
+poisons_icon{AchPoison}
+poisons_2{Отравленное лезвие}
+poisons_2_descr{Нанести 100 отравляющих ударов}
+poisons_3{Специалист по ядам}
+poisons_3_descr{Нанести 150 отравляющих ударов}
+
+criticals_1{Уязвимое место}
+criticals_1_descr{Нанести 100 критических ударов}
+criticals_icon{AchCritical}
+criticals_2{Смертельные удары}
+criticals_2_descr{Нанести 250 критических ударов}
+criticals_3{Знаток анатомии}
+criticals_3_descr{Нанести 500 критических ударов}
+
+AchBlood_1{Лёгкая рана}
+AchBlood_1_descr{Нанести 50 кровоточащих ран}
+AchBlood_icon{AchBlood}
+AchBlood_2{Кровоточаящий порез}
+AchBlood_2_descr{Нанести 100 кровоточащих ран}
+AchBlood_3{Море крови}
+AchBlood_3_descr{Нанести 200 кровоточащих ран}
+
+AchTravma_1{Хирург-дровосек}
+AchTravma_1_descr{Нанести 50 травм}
+AchTravma_icon{AchTravma}
+AchTravma_2{Мастер переломов}
+AchTravma_2_descr{Нанести 150 травм}
+AchTravma_3{Костолом}
+AchTravma_3_descr{Нанести 300 травм}
+
+AchStanS_1{Быстрый как ветер}
+AchStanS_1_descr{Нанести 50 резких ударов}
+AchStanS_icon{AchStanS}
+AchStanS_2{Порхай как бабочка}
+AchStanS_2_descr{Нанести 150 резких ударов}
+AchStanS_3{Жаль как пчела}
+AchStanS_3_descr{Нанести 300 резких ударов}
+
+AchStanH_1{Мощный удар}
+AchStanH_1_descr{Нанести 50 оглушающих ударов}
+AchStanH_icon{AchStanH}
+AchStanH_2{Тяжелые руки}
+AchStanH_2_descr{Нанести 150 оглушающих ударов}
+AchStanH_3{Викинг}
+AchStanH_3_descr{Нанести 300 оглушающих ударов}
+
+craft_1{Конструктор}
+craft_1_descr{Создайте 300 предметов}
+craft_icon{AchCraft}
+craft_2{Механик}
+craft_2_descr{Создайте 500 предметов}
+craft_3{Крафтер}
+craft_3_descr{Создайте 1000 предметов}
+
+books_1{Начальное обучение}
+books_1_descr{Прочтите 3 книги для обучения навыкам}
+books_icon{AchBooksRead}
+books_2{Читатель}
+books_2_descr{Прочтите 6 книг для обучения навыкам}
+books_3{Книжный червь}
+books_3_descr{Прочтите 10 книг для обучения навыкам}
+
+officers_1{Помощники не помешают}
+officers_1_descr{Наймите в таверне 3 офицера}
+officers_icon{AchOfficers}
+officers_2{Распределение обязанностей}
+officers_2_descr{Наймите в таверне 6 офицеров}
+officers_3{Отряд офицеров}
+officers_3_descr{Наймите в таверне 10 офицеров}
+
+ships_3{Эскадра}
+ships_3_descr{Собрать эскадру из 8 кораблей, под управлением главного героя}
+ships_icon{AchEscadr}
+
+heal_bottles_1{Первая помощь}
+heal_bottles_1_descr{Выпить 50 лечебных зелий}
+heal_bottles_icon{AchHealth}
+heal_bottles_2{Лекарь-любитель}
+heal_bottles_2_descr{Выпить 100 лечебных зелий}
+heal_bottles_3{Профессионал по самолечению}
+heal_bottles_3_descr{Выпить 200 лечебных зелий}
+
+AchFood_1{Любитель поесть}
+AchFood_1_descr{Скушать 50 единиц еды}
+AchFood_icon{AchFood}
+AchFood_2{Ненасытный}
+AchFood_2_descr{Скушать 150 единиц еды}
+AchFood_3{Обжора}
+AchFood_3_descr{Скушать 300 единиц еды}
+
+AchTurnir_1{Новичок}
+AchTurnir_1_descr{Выиграть 1 турнир}
+AchTurnir_icon{AchTurnir}
+AchTurnir_2{Победитель}
+AchTurnir_2_descr{Выиграть 3 турнира}
+AchTurnir_3{Чемпион}
+AchTurnir_3_descr{Выиграть 7 турниров}
+
+AchDuelyant_1{Лёгкая работа}
+AchDuelyant_1_descr{Выиграть 5 дуэлей по квесту 'Дуэлянт'}
+AchDuelyant_icon{AchDuelyant}
+AchDuelyant_2{Любитель вмешаться}
+AchDuelyant_2_descr{Выиграть 10 дуэлей по квесту 'Дуэлянт'}
+AchDuelyant_3{Усмиритель}
+AchDuelyant_3_descr{Выиграть 20 дуэлей по квесту 'Дуэлянт'}
+
+AchShipOrder_1{Новый заказ}
+AchShipOrder_1_descr{Заказать 5 кораблей на верфи}
+AchShipOrder_icon{AchShipOrder}
+AchShipOrder_2{Только своё}
+AchShipOrder_2_descr{Заказать 10 кораблей на верфи}
+AchShipOrder_3{Идеальный вариант}
+AchShipOrder_3_descr{Заказать 20 кораблей на верфи}
+
+AchSityRobbery_1{Грабёж}
+AchSityRobbery_1_descr{Разграбить 5 городов}
+AchSityRobbery_icon{AchSityRobbery}
+AchSityRobbery_2{Разоритель}
+AchSityRobbery_2_descr{Разграбить 10 городов}
+AchSityRobbery_3{Мародёр}
+AchSityRobbery_3_descr{Разграбить 15 городов}
+
+AchGoldFleet_1{На абордаж}
+AchGoldFleet_1_descr{Уничтожить 1 Испанский золотой флот}
+AchGoldFleet_icon{AchGoldFleet}
+AchGoldFleet_2{Золото будет моим}
+AchGoldFleet_2_descr{Уничтожить 3 Испанских золотых флота}
+AchGoldFleet_3{Крах Испании}
+AchGoldFleet_3_descr{Уничтожить 7 Испанских золотых флота}
+
+AchBuildColony_1{Своё убежище}
+AchBuildColony_1_descr{Построить колонию 1 уровня}
+AchBuildColony_icon{AchBuildColony}
+AchBuildColony_2{Свой город}
+AchBuildColony_2_descr{Построить колонию 2 уровня}
+AchBuildColony_3{Свой остров}
+AchBuildColony_3_descr{Прокачать свою колонию охранной базой и завершить все постройки}
+
+AchShipSearch_3{Исследователь}
+AchShipSearch_3_descr{Исследовать все существующие корабли, кроме квестовых}
+AchShipSearch_icon{AchShipSearch}
+
+AchOrion_3{Сопроводитель}
+AchOrion_3_descr{Выполнить линейку квестов по сопровождению флейта 'Орион'}
+AchOrion_icon{AchOrion}
+
+AchRabotorg_3{Хорошие деньги}
+AchRabotorg_3_descr{Выполнить ряд заданий по квесту 'Работорговец'}
+AchRabotorg_icon{AchRabotorg}
+
+AchKondotier_3{Холоднокровный}
+AchKondotier_3_descr{Выполнить ряд заданий по квесту 'Кондотьер'}
+AchKondotier_icon{AchKondotier}
+
+AchTich_3{Чёрная борода}
+AchTich_3_descr{Завершить серию заданий от 'Эдварда Тича'}
+AchTich_icon{AchTich}
+
+AchRagnar_3{Восстание викингов}
+AchRagnar_3_descr{Завершить квест 'Осколок прошлого'}
+AchRagnar_icon{AchRagnar}
+
+AchSalazar_3{Демон в ночи}
+AchSalazar_3_descr{Завершить ивент 'Армандо Салазара'}
+AchSalazar_icon{AchSalazar}
+
+AchKaskos_3{Чистильщик}
+AchKaskos_3_descr{Завершить ивент 'Альберто Каскоса'}
+AchKaskos_icon{AchKaskos}
+
+AchUmSamil_3{Древнее зло}
+AchUmSamil_3_descr{Завершить ивент 'Юм Самиля'}
+AchUmSamil_icon{AchUmSamil}
+
+gen_quests_1{На правильном пути}
+gen_quests_1_descr{Выполнить 10 генераторных квестов жителей городов}
+gen_quests_icon{AchGenQuestComlite}
+gen_quests_2{Неоценимая помощь}
+gen_quests_2_descr{Выполнить 20 генераторных квестов жителей городов}
+gen_quests_3{Покровитель}
+gen_quests_3_descr{Выполнить 40 генераторных квестов жителей городов}
+
+LSC_quest_3{В Городе Потерянных Кораблей}
+LSC_quest_3_descr{Завершить квест 'В Городе Потерянных Кораблей'}
+LSC_quest_icon{AchBlackPearl}
+
+Teno_quest_3{Тенотчитлан}
+Teno_quest_3_descr{Завершить квест 'Тенотчитлан'}
+Teno_quest_icon{AchTenochtitlan}
+
+Killbeggars_quest_3{Убить всех нищих}
+Killbeggars_quest_3_descr{Завершить квест 'Убить всех нищих'}
+Killbeggars_quest_icon{AchQuestComlite}
+
+Ghostship_quest_3{Корабль-призрак}
+Ghostship_quest_3_descr{Завершить квест 'Корабль-призрак'}
+Ghostship_quest_icon{AchFlyingDutchman}
+
+Bluebird_quest_3{Уничтожить шебеку 'Синяя Птица'}
+Bluebird_quest_3_descr{Завершить квест 'Уничтожить шебеку 'Синяя Птица''}
+Bluebird_quest_icon{AchQuestComlite}
+
+Berglarsgang_quest_3{Банда Остина}
+Berglarsgang_quest_3_descr{Завершить квест 'Банда Остина'}
+Berglarsgang_quest_icon{AchQuestComlite}
+
+Mummydust_quest_3{Поиски порошка мумии}
+Mummydust_quest_3_descr{Завершить квест 'Поиски порошка мумии'}
+Mummydust_quest_icon{AchQuestComlite}
+
+Enchantcity_quest_3{Зачарованный город}
+Enchantcity_quest_3_descr{Завершить квест 'Зачарованный город'}
+Enchantcity_quest_icon{AchFregatQueen}
+
+Isabella_quest_3{История прекрасной Изабеллы}
+Isabella_quest_3_descr{Завершить квест 'История прекрасной Изабеллы'}
+Isabella_quest_icon{AchQuestComlite}
+
+CapBladLine_3{Капитан Блад}
+CapBladLine_3_descr{Завершить серию квестов по линейке капитана Блада}
+CapBladLine_icon{AchQuestComlite}
+
+WhisperLine_3{Будущее уже рядом}
+WhisperLine_3_descr{Завершить серию квестов по линейке Виспер}
+WhisperLine_icon{AchQuestComlite}
+
+Nation_quest_E_3{На службе Англии}
+Nation_quest_E_3_descr{Завершить серию квестов за Англию}
+Nation_quest_E_icon{AchAngQuestComlite}
+
+Nation_quest_F_3{На службе Франции}
+Nation_quest_F_3_descr{Завершить серию квестов за Францию}
+Nation_quest_F_icon{AchFraQuestComlite}
+
+Nation_quest_H_3{На службе Голландии}
+Nation_quest_H_3_descr{Завершить серию квестов за Голландию}
+Nation_quest_H_icon{AchHolQuestComlite}
+
+Nation_quest_S_3{На службе Испании}
+Nation_quest_S_3_descr{Завершить серию квестов за Испанию}
+Nation_quest_S_icon{AchSpaQuestComlite}
+
+Nation_quest_P_3{На службе Береговому Братству}
+Nation_quest_P_3_descr{Завершить серию квестов за Береговое Братство}
+Nation_quest_P_icon{AchPirQuestComlite}

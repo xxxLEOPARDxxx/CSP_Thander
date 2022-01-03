@@ -1,0 +1,12 @@
+// Pay for Save Load  - платный сэйв/лоад. Сумма платежа = Ранг ГГ*(Pay For Save Load Money Qty)}
+
+Pay For Save Load			{Off}
+Pay For Save Load Money Qty	{1000}
+
+// SalaryComplex_Coeff - множитель увеличения зарплаты офицеров и команды ( от 0.5 до +бесконечности)
+
+SalaryComplex_Coeff	{0.5}
+
+// SeaBattleMode_SaveEnable - запрет сохранения на море в боевом режиме (On/Off)
+
+SeaBattleMode_SaveEnable	{On}

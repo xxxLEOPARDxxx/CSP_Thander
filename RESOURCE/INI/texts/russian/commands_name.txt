@@ -1,0 +1,84 @@
+sea_Moor			{Причалить}
+sea_SailTo			{Доплыть}
+sea_Map				{Карта}
+
+sea_Cancel			{Отмена}
+sea_Cabin			{Каюта}
+sea_Board			{Абордаж}
+sea_LandTroops		{Десант}
+sea_Attack			{Атака}
+sea_Abordage		{Абордаж}
+sea_Defend			{Защита}
+sea_SailAway		{Уплыть}
+sea_HeaveToDrift	{Спустить паруса}
+sea_Reload			{Обмен}
+sea_Charge			{Перезарядить}
+sea_Speed			{Паруса}
+sea_CCommand		{Приказать}
+sea_Ability			{Способность}
+sea_ImmediateDeath	{Уничтожить!}
+sea_InstantBoarding	{читовый абордаж}
+sea_Speak			{Разговор}
+sea_Sneak			{Прокрасться в город}
+sea_Repair			{Починка}
+worldmap_sea		{Выход в море}
+
+sea_SailDir			{Уплыть на ..}
+	sea_SailNW			{Северо-Запад}
+	sea_SailN			{Север}
+	sea_SailNE			{Северо-Восток}
+	sea_SailE			{Восток}
+	sea_SailSE			{Юго-Восток}
+	sea_SailS			{Юг}
+	sea_SailSW			{Юго-Запад}
+	sea_SailW			{Запад}
+
+sea_Brander				{Брандер}
+sea_ImmediateReload		{Перезарядка}
+sea_LightRepair 		{Лёгкий ремонт}
+sea_InstantRepair		{Быстрая починка}
+sea_SandbankManeuver	{Манёвры на мелководье}
+sea_Turn180				{Манёвренный разворот корабля}
+sea_Boat				{Спустить шлюпку}
+sea_Cabin				{Каюта}
+
+land_DeadBox			{Обыск трупа}
+land_UseFood			{Восстановить энергию}
+land_TalkSelf			{Мысли вслух}
+land_ItemsDead			{Труп}
+land_FastReload			{Переход}
+land_ItemsUse			{Использовать}
+land_DialogStart		{Разговор}
+land_ItemsChange		{Обмен}
+land_TakeItem			{Взять}
+land_PlaceItem			{Положить}
+land_OutDoor			{Открыть}
+land_UseBox				{Открыть}
+land_ActivateRush		{Берсерк}
+land_ActivateCabine		{Каюта капитана}
+land_DeActivateCabine	{Земля}
+land_Look				{Смотреть}
+land_Exit				{Море}
+
+go_port			{Порт}
+go_store		{Магазин}
+go_shipyard		{Верфь}
+go_tavern		{Таверна}
+go_residence	{Резиденция}
+go_loanshark	{Ростовщик}
+go_usurer		{Ростовщик}
+go_church		{Церковь}
+go_prison		{Тюрьма}
+go_brothel		{Бордель}
+go_portman		{Портовое управление}
+go_duel			{Дуэль}
+go_townexit		{Выход из города}
+go_fort			{Форт}
+go_storehouse	{Склад}
+go_graveyard	{Кладбище}
+go_GWIK			{Представительство ГВИК}
+go_Inquisition	{Инквизиция}
+
+go_planthouse	{Дом управляющего плантацией}
+go_forthouse	{Дом начальника охранной базы}
+go_minehouse	{Дом управляющего рудниками}
