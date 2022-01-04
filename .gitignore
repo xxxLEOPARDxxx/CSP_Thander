@@ -4,6 +4,8 @@
 *.ppk
 *.log
 *.bat
+*.exe.manifest
+*.pdb
 
 # Compiled Object files
 *.slo
@@ -83,7 +85,9 @@
 *RESOURCE/MODELS/
 *RESOURCE/Particles/
 *RESOURCE/Sea/
+*RESOURCE/shared/
 *RESOURCE/Sounds/
+*RESOURCE/techniques/
 # *RESOURCE/Textures/
 *RESOURCE/VIDEOS/
 *RESOURCE_Copy/
