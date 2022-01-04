@@ -1099,7 +1099,7 @@ void Ship_ChangeChargeEvent() // нигде не используется???
 
 void Ship_ChangeCharge(ref rCharacter, int iNewChargeType)
 {
-	if( rCharacter == Pchar) SendMessage(&AISea, "la", AI_MESSAGE_CANNON_RELOAD, rCharacter);
+	if( rCharacter.id == "Blaze") SendMessage(&AISea, "la", AI_MESSAGE_CANNON_RELOAD, rCharacter);
 
 	ref rGood = GetGoodByType(iNewChargeType);
 	if (rGood) {
