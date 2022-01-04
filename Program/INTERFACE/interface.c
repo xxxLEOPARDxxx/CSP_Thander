@@ -2107,7 +2107,7 @@ void MakeAutoReload()
 	string curSave = PlayerProfile.name + " AutoReloadSave";
 	SetEventHandler("evntLoad","LoadAutoGame",0);
 	//#20170301-3
-	PostEvent("evntLoad",0,"s", "SAVE" + PlayerProfile.name+"\"+curSave);
+	PostEvent("evntLoad",0,"s", "SAVE\" + PlayerProfile.name+"\"+curSave);
 }
 //End Boyer add AutoReload
 void MakeQuickLoad()
@@ -2122,7 +2122,7 @@ void MakeQuickLoad()
 	string curSave = PlayerProfile.name + " QuickSave " + QuickSaveIndex;
 	// <-- ugeen 2017
 	SetEventHandler("evntLoad","LoadGame",0);
-	PostEvent("evntLoad",0,"s", "SAVE" + PlayerProfile.name+"\"+curSave);
+	PostEvent("evntLoad",0,"s", "SAVE\" + PlayerProfile.name+"\"+curSave);
 }
 
 void MakeQuickSave()
