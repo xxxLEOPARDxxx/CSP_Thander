@@ -1747,6 +1747,7 @@ float LAi_NPC_StunChance()
 	if (IsCharacterPerkOn(chr, "SwordplayProfessional")) return npc_return_tmp -= 50;	
 	if (IsCharacterPerkOn(chr, "AdvancedDefence")) return npc_return_tmp -= 30;
 	if (IsCharacterPerkOn(chr, "BasicDefence")) return npc_return_tmp -= 10;
+	return npc_return_tmp;
 }
 
 //Параметры стрельбы
