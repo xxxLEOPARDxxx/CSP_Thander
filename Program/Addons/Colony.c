@@ -3657,13 +3657,13 @@ void CreateModificyColonyCaiman()
 	rExitTown.models.always.grassPatch.texture = "grass\grassshore.tga.tx";
 	rExitTown.models.always.l1 = "plan1";
 	rExitTown.models.always.l1.level = 9;
-	rExitTown.models.always.l1.tech = "LocationModelBlend";
+	rExitTown.models.always.l1.tech = "DLightModel";
 	rExitTown.models.always.l2 = "plan2";
 	rExitTown.models.always.l2.level = 8;
-	rExitTown.models.always.l2.tech = "LocationModelBlend";
+	rExitTown.models.always.l2.tech = "DLightModel";
 	rExitTown.models.always.l3 = "plan3";
 	rExitTown.models.always.l3.level = 7;
-	rExitTown.models.always.l3.tech = "LocationModelBlend";
+	rExitTown.models.always.l3.tech = "DLightModel";
 	rExitTown.models.day.charactersPatch = "townExitY_patch";
 	rExitTown.models.day.fonars = "townExitY_fd";
 	rExitTown.models.night.charactersPatch = "townExitY_patch";
