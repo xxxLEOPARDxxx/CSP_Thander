@@ -218,8 +218,6 @@ void SetMainCharacterIndex(int index)
 int EventReturn_iGrassQuality()
 {
     //trace("GrassQuality"); - эта хрень работает 5-10 раз в секунду
-    // if (bSeaActive && bStorm && iGrassQuality < 2) { return 2; } //Low
-    if (bSeaActive) { return 3; } //Disabled LEO: ‚ырубили нахрен
 	return iGrassQuality;
 }
 
