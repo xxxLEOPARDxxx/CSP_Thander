@@ -250,7 +250,7 @@ void InitInterface(string iniName)
 	GetCorrectShipCoords(&X, &Y);
 	AddImageToImageList("PShip", "ICONS", "ship class icon", X, Y, 20, 20);
 
-	SendMessage(&GameInterface, "ls", MSG_INTERFACE_INIT, "INTERFACES\activemap.ini");
+	SendMessage(&GameInterface, "ls", MSG_INTERFACE_INIT, "RESOURCE\INI\INTERFACES\activemap.ini");
 
 	//Show boundaries
 	if(SHOW_BOUNDARIES == 1)
