@@ -579,7 +579,7 @@ void AddCharacterSkillDontClearExp(ref _chref, string _skill, int _addValue)
 
 void ApplayNewSkill(ref _chref, string _skill, int _addValue)
 {
-	if (_chref == pchar)
+	if (_chref.id == pchar.id)
 	{
 		float P = makefloat(GetCharacterSPECIALSimple(_chref, SPECIAL_P)*10);
 		//Enemy ship

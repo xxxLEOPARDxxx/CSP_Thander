@@ -49,10 +49,7 @@ void LAi_type_guardian_Init(aref chr)
 		}
 	}
 	//Установим анимацию персонажу
-	bool isMusk = false;
-	string sAni = strcut(chr.model.animation, 0, 8);
-	if (sAni == "mushketer")
-        isMusk = true;
+	bool isMusk = HasSubStr(chr.model.animation,"mushketer");
 	if (isMusk && !CheckAttribute(chr, "isMusketer.weapon") && chr.index != getmaincharacterindex() && !isOfficer(chr))
 	{
         while (FindCharacterItemByGroup(chr, BLADE_ITEM_TYPE) != "")
