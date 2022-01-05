@@ -1099,17 +1099,14 @@ void Ship_ChangeChargeEvent() // нигде не используется???
 
 void Ship_ChangeCharge(ref rCharacter, int iNewChargeType)
 {
-	if( rCharacter.id == Pchar.id) SendMessage(&AISea, "la", AI_MESSAGE_CANNON_RELOAD, rCharacter);
-
+	SendMessage(&AISea, "la", AI_MESSAGE_CANNON_RELOAD, rCharacter);
 	ref rGood = GetGoodByType(iNewChargeType);
-	if (rGood) {
-		rCharacter.Ship.Cannons.Charge = rGood.name;
-		rCharacter.Ship.Cannons.Charge.Type = iNewChargeType;
-	}
+	rCharacter.Ship.Cannons.Charge = rGood.name;
+	rCharacter.Ship.Cannons.Charge.Type = iNewChargeType;
 
 	Cannon_RecalculateParameters(sti(rCharacter.index));
+	
 	LetCharge = LetRecharge();
- // чтоб пока не стрельнул не выпендривал (нужно для приказа компаньону)
 	//fix Ship_PlaySound3D(rCharacter, "reloadstart_" + rGood.name, 1.0);
 
 	Ship_ClearBortsReloadedEvent(rCharacter);
