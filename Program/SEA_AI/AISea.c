@@ -101,7 +101,7 @@ void SeaAI_SailToCreateFader()
 	SendMessage(&SailToFader, "lfl", FADER_OUT, 0.5, false);
 	SendMessage(&SailToFader, "l", FADER_STARTFRAME);
 
-	SendMessage(&SailToFader, "ls", FADER_PICTURE, "loading\sea_" + rand(31) + ".tga");
+	SendMessage(&SailToFader, "ls", FADER_PICTURE0, "loading\sea_" + rand(31) + ".tga");
 }
 
 void SeaAI_SailToLocator(string sLocName)

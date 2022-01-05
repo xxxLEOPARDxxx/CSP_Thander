@@ -64,7 +64,7 @@ void wdmReloadToSea()
 		}*/ // boal пусть будет одна
 	}
 	wdmLoginToSea.imageName = imageName;
-	SendMessage(&wdm_fader, "ls",FADER_PICTURE, imageName);
+	SendMessage(&wdm_fader, "ls",FADER_PICTURE0, imageName);
 }
 
 void WdmStartFade()

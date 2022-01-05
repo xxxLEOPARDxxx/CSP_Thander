@@ -580,7 +580,7 @@ void LAi_ReloadBoarding()
 	{
 		if(CheckAttribute(&Locations[FindLocation(nextDeck)], "image"))
 		{
-			SendMessage(&boarding_fader, "ls", FADER_PICTURE, Locations[FindLocation(nextDeck)].image);
+			SendMessage(&boarding_fader, "ls", FADER_PICTURE0, Locations[FindLocation(nextDeck)].image);
 		}
 	}
 	float fadeOutTime = RELOAD_TIME_FADE_OUT;
@@ -646,7 +646,7 @@ void LAi_ReloadEndFade()
 				boarding_enemy_crew = 1;
 				if(CheckAttribute(&Locations[FindLocation(boarding_enemy.ShipCabinLocationId)], "image"))
 				{
-					SendMessage(&boarding_fader, "ls", FADER_PICTURE, Locations[FindLocation(boarding_enemy.ShipCabinLocationId)].image);
+					SendMessage(&boarding_fader, "ls", FADER_PICTURE0, Locations[FindLocation(boarding_enemy.ShipCabinLocationId)].image);
 				}
 				LAi_LoadLocation(boarding_enemy.ShipCabinLocationId, -1);
 				DeleteAttribute(boarding_enemy, "ShipCabinLocationId"); // чтоб не зациклилось
