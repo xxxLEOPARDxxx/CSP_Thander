@@ -942,7 +942,7 @@ void LAi_FadeDelay(float _delayTime, string sPath)
 	CreateEntity(&LAi_QuestFader, "fader");
 	//Boyer add #20170401-02
 	pchar.loadscreen = sPath;
-	SendMessage(&LAi_QuestFader, "ls", FADER_PICTURE, sPath);
+	SendMessage(&LAi_QuestFader, "ls", FADER_PICTURE0, sPath);
 	SendMessage(&LAi_QuestFader, "lfl", FADER_OUT, 0.5, false);
 	LAi_QuestFader.oldSaveState = InterfaceStates.Buttons.Save.enable;
 	InterfaceStates.Buttons.Save.enable = 0;

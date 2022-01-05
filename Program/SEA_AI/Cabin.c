@@ -57,7 +57,7 @@ void Sea_CabinStartNow()
     	SetEventHandler("FaderEvent_StartFade", "Cabin_ReloadStartFade", 0);
     	SetEventHandler("FaderEvent_EndFade", "Cabin_ReloadEndFade", 0);
 
-    	SendMessage(&reload_fader, "ls", FADER_PICTURE, Get_My_Cabin_Pic());//"loading\Cabin.tga");
+    	SendMessage(&reload_fader, "ls", FADER_PICTURE0, Get_My_Cabin_Pic());//"loading\Cabin.tga");
     	SendMessage(&reload_fader, "lfl", FADER_OUT, 1.0, false);
     	SendMessage(&reload_fader, "l", FADER_STARTFRAME);
 
@@ -190,7 +190,7 @@ void Return2SeaAfterCabin()
 	SetEventHandler("FaderEvent_EndFade", "Cabin_ReloadEndFadeAfter", 0);
 	//Создаём фейдер и запускаем
 	CreateEntity(&boarding_fader, "fader");
-	SendMessage(&boarding_fader, "ls", FADER_PICTURE, "loading\sea_" + rand(31) + ".tga");
+	SendMessage(&boarding_fader, "ls", FADER_PICTURE0, "loading\sea_" + rand(31) + ".tga");
 
 	float fadeOutTime = RELOAD_TIME_FADE_OUT;
 
@@ -373,7 +373,7 @@ void Sea_DeckBoatStartNow(ref _iShipsCharacter)
 		SetEventHandler("FaderEvent_StartFade", "Cabin_ReloadStartFade", 0);  // одинаковый с каютой
 		SetEventHandler("FaderEvent_EndFade", "DeckBoat_ReloadEndFade", 0);
 
-		SendMessage(&reload_fader, "ls", FADER_PICTURE, boat_pic);
+		SendMessage(&reload_fader, "ls", FADER_PICTURE0, boat_pic);
 		SendMessage(&reload_fader, "lfl", FADER_OUT, 1.0, false);
 		SendMessage(&reload_fader, "l", FADER_STARTFRAME);
 

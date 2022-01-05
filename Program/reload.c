@@ -85,7 +85,7 @@ bool LoadMainCharacterInFirstLocation(string location_id, string emerge_locator,
 bool LoadMainCharacterInFirstLocationGroup(string location_id, string sGroup, string emerge_locator)
 {
 	int lindex;
-
+	ReloadProgressStart();
 	//Find location
 	lindex = FindLocation(location_id);
 	if(lindex < 0)
@@ -104,6 +104,7 @@ bool LoadMainCharacterInFirstLocationGroup(string location_id, string sGroup, st
 	LoadLocation(&Locations[lindex]);
 	//Fader
 	PostEvent("LoadSceneSound", 100);
+	ReloadProgressEnd();
 	return true;
 }
 
@@ -224,11 +225,11 @@ int Reload(aref reload_group, string locator_name, string current_location)
 	{
 		if(!CheckAttribute(mc, "todeck"))
 		{
-			SendMessage(&reload_fader, "ls",FADER_PICTURE,"loading\seaStand_" + rand(13) + ".tga");
+			SendMessage(&reload_fader, "ls",FADER_PICTURE0,"loading\seaStand_" + rand(13) + ".tga");
 		}
 		else
 		{
-			SendMessage(&reload_fader, "ls",FADER_PICTURE,"loading\cabine.tga");
+			SendMessage(&reload_fader, "ls",FADER_PICTURE0,"loading\cabine.tga");
 		}
 	}
 	else
@@ -243,13 +244,13 @@ int Reload(aref reload_group, string locator_name, string current_location)
 				{
 				    //Boyer add #20170401-02
                     pchar.loadscreen = "loading\rescue.tga";
-					SendMessage(&reload_fader, "ls",FADER_PICTURE,"loading\rescue.tga");
+					SendMessage(&reload_fader, "ls",FADER_PICTURE0,"loading\rescue.tga");
 					sGlobalTemp = "";
 				}
 				else {
                     //Boyer add #20170401-02
                     pchar.loadscreen = Locations[loc_pict_index].image;
-					SendMessage(&reload_fader, "ls", FADER_PICTURE, Locations[loc_pict_index].image);
+					SendMessage(&reload_fader, "ls", FADER_PICTURE0, Locations[loc_pict_index].image);
 				}
 			}
 		}
@@ -384,6 +385,7 @@ void ReloadEndFade()
 	}
 	SendMessage(&reload_fader, "lfl", FADER_IN, RELOAD_TIME_FADE_IN, true);
 	PostEvent("LoadSceneSound", 500);
+	ReloadProgressUpdate();
 	ReloadProgressEnd();
 }
 
