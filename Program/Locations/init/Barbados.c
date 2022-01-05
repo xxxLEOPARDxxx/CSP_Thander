@@ -792,13 +792,13 @@ int LocationInitBarbados(int n)
 
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
-	Locations[n].models.always.l1.tech = "LocationModelBlend";
+	Locations[n].models.always.l1.tech = "DLightModel";
 	Locations[n].models.always.l2 = "plan2";
 	Locations[n].models.always.l2.level = 8;
-	Locations[n].models.always.l2.tech = "LocationModelBlend";
+	Locations[n].models.always.l2.tech = "DLightModel";
 	Locations[n].models.always.l3 = "plan3";
 	Locations[n].models.always.l3.level = 7;
-	Locations[n].models.always.l3.tech = "LocationModelBlend";
+	Locations[n].models.always.l3.tech = "DLightModel";
 	//Day
 	locations[n].models.day.charactersPatch = "townExitT_patch";
 	locations[n].models.day.fonars = "townExitT_fd";
@@ -1143,10 +1143,10 @@ int LocationInitBarbados(int n)
 
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
-	Locations[n].models.always.l1.tech = "LocationModelBlend";
+	Locations[n].models.always.l1.tech = "DLightModel";
 	Locations[n].models.always.l2 = "plan2";
 	Locations[n].models.always.l2.level = 8;
-	Locations[n].models.always.l2.tech = "LocationModelBlend";
+	Locations[n].models.always.l2.tech = "DLightModel";
 	//Day
 	locations[n].models.day.winday = "lighthouse_winday";
 	locations[n].models.day.fonar = "lighthouse_fd";
@@ -1217,13 +1217,13 @@ int LocationInitBarbados(int n)
 	Locations[n].models.always.grassPatch.texture = "grass\grassshore.tga.tx";
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
-	Locations[n].models.always.l1.tech = "LocationModelBlend";
+	Locations[n].models.always.l1.tech = "DLightModel";
 	Locations[n].models.always.l2 = "plan2";
 	Locations[n].models.always.l2.level = 8;
-	Locations[n].models.always.l2.tech = "LocationModelBlend";
+	Locations[n].models.always.l2.tech = "DLightModel";
 	Locations[n].models.always.l3 = "plan3";
 	Locations[n].models.always.l3.level = 7;
-	Locations[n].models.always.l3.tech = "LocationModelBlend";
+	Locations[n].models.always.l3.tech = "DLightModel";
 	//Day
 	locations[n].models.day.charactersPatch = "jungle5_patch";
 	//Night
@@ -1277,13 +1277,13 @@ int LocationInitBarbados(int n)
 
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
-	Locations[n].models.always.l1.tech = "LocationModelBlend";
+	Locations[n].models.always.l1.tech = "DLightModel";
 	Locations[n].models.always.l2 = "plan2";
 	Locations[n].models.always.l2.level = 8;
-	Locations[n].models.always.l2.tech = "LocationModelBlend";
+	Locations[n].models.always.l2.tech = "DLightModel";
 	Locations[n].models.always.l3 = "plan3";
 	Locations[n].models.always.l3.level = 7;
-	Locations[n].models.always.l3.tech = "LocationModelBlend";
+	Locations[n].models.always.l3.tech = "DLightModel";
 	//Day
 	locations[n].models.day.charactersPatch = "shore05_patch";
 	//Night
@@ -1325,13 +1325,13 @@ int LocationInitBarbados(int n)
 	Locations[n].models.always.grassPatch.texture = "grass\grassshore.tga.tx";
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
-	Locations[n].models.always.l1.tech = "LocationModelBlend";
+	Locations[n].models.always.l1.tech = "DLightModel";
 	Locations[n].models.always.l2 = "plan2";
 	Locations[n].models.always.l2.level = 8;
-	Locations[n].models.always.l2.tech = "LocationModelBlend";
+	Locations[n].models.always.l2.tech = "DLightModel";
 	Locations[n].models.always.l3 = "plan3";
 	Locations[n].models.always.l3.level = 7;
-	Locations[n].models.always.l3.tech = "LocationModelBlend";
+	Locations[n].models.always.l3.tech = "DLightModel";
 	//Day
 	locations[n].models.day.charactersPatch = "jungle3_patch";
 	//Night
@@ -1380,16 +1380,16 @@ int LocationInitBarbados(int n)
 	Locations[n].models.always.grassPatch.texture = "grass\grassshore.tga.tx";
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
-	Locations[n].models.always.l1.tech = "LocationModelBlend";
+	Locations[n].models.always.l1.tech = "DLightModel";
 	Locations[n].models.always.l2 = "plan2";
 	Locations[n].models.always.l2.level = 8;
-	Locations[n].models.always.l2.tech = "LocationModelBlend";
+	Locations[n].models.always.l2.tech = "DLightModel";
 	Locations[n].models.always.l3 = "plan3";
 	Locations[n].models.always.l3.level = 7;
-	Locations[n].models.always.l3.tech = "LocationModelBlend";
+	Locations[n].models.always.l3.tech = "DLightModel";
 	Locations[n].models.always.l4 = "plan4";
 	Locations[n].models.always.l4.level = 6;
-	Locations[n].models.always.l4.tech = "LocationModelBlend";
+	Locations[n].models.always.l4.tech = "DLightModel";
 	//Day
 	locations[n].models.day.charactersPatch = "caveEnt2_patch";
 	//Night
@@ -1476,13 +1476,13 @@ int LocationInitBarbados(int n)
 
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
-	Locations[n].models.always.l1.tech = "LocationModelBlend";
+	Locations[n].models.always.l1.tech = "DLightModel";
 	Locations[n].models.always.l2 = "plan2";
 	Locations[n].models.always.l2.level = 8;
-	Locations[n].models.always.l2.tech = "LocationModelBlend";
+	Locations[n].models.always.l2.tech = "DLightModel";
 	Locations[n].models.always.l3 = "plan3";
 	Locations[n].models.always.l3.level = 7;
-	Locations[n].models.always.l3.tech = "LocationModelBlend";
+	Locations[n].models.always.l3.tech = "DLightModel";
 	//Day
 	locations[n].models.day.charactersPatch = "shore09_patch";
 	//Night

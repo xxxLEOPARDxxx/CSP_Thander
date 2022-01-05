@@ -308,9 +308,9 @@ int LocationInitOldWorld(int n)
 	rLoc.models.always.grassPatch = "Town_Exit_g";
 	rLoc.models.always.grassPatch.texture = "grass\grassshore.tga.tx";
 
-	Location_AddNewModel(sLocID, "", "", "plan_1", "always", "LocationModelBlend", 9, false);
-	Location_AddNewModel(sLocID, "", "", "plan_2", "always", "LocationModelBlend", 8, false);
-	Location_AddNewModel(sLocID, "", "", "plan_3", "always", "LocationModelBlend", 7, false);
+	Location_AddNewModel(sLocID, "", "", "plan_1", "always", "DLightModel", 9, false);
+	Location_AddNewModel(sLocID, "", "", "plan_2", "always", "DLightModel", 8, false);
+	Location_AddNewModel(sLocID, "", "", "plan_3", "always", "DLightModel", 7, false);
 
 
 	//Day
