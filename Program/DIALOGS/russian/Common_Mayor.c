@@ -140,10 +140,13 @@ void ProcessDialogEvent()
 						}
 					}
 
-					if(sti(pchar.rank) >= 10 && !CheckAttribute(PChar, "questTemp.pirateVikingQuest"))
+					if(!CheckAttribute(PChar, "questTemp.pirateVikingQuest"))
 					{
-						link.l3 = "Есть какое-нибудь интересное дело для меня?";
-						link.l3.go = "pirateVikingQuest";
+						if(sti(pchar.rank) >= 10)
+						{
+							link.l3 = "Есть какое-нибудь интересное дело для меня?";
+							link.l3.go = "pirateVikingQuest";
+						}
 					}
 					else
 					{

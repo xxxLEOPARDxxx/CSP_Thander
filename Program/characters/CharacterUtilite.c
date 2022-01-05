@@ -139,7 +139,7 @@ int RecalculateCargoLoad(ref _refCharacter)
 {
 	int loadSpace = 0;
 	// boal 27/07/06 учет орудий на борту -->
-	if (sti(_refCharacter.Ship.Cannons.Type) != CANNON_TYPE_NONECANNON)
+	if (CheckAttribute(_refCharacter,"Ship.Cannons.Type") && sti(_refCharacter.Ship.Cannons.Type) != CANNON_TYPE_NONECANNON)
 	{
 		ref Cannon = GetCannonByType(sti(_refCharacter.Ship.Cannons.Type));
 		loadSpace = GetCannonsNum(_refCharacter) * sti(Cannon.Weight);
