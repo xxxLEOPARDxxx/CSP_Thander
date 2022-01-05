@@ -85,7 +85,8 @@ void Fort_Login(int iIslandIndex)
 
 			//SetTextureForShip(refBaseShip, rCharacter);
 
-			SendMessage(&Forts[iNumForts], "ls", MSG_MODEL_SET_LIGHT_PATH, GetLightingPath());
+			//SendMessage(&Forts[iNumForts], "ls", MSG_MODEL_SET_LIGHT_PATH, GetLightingPath());
+			SendMessage(&Forts[iNumForts], "ls", MSG_MODEL_SET_LIGHT_PATH, "");
 			SendMessage(&Forts[iNumForts], "ls", MSG_MODEL_LOAD_GEO, sFortModel);
 			SendMessage(&Island, "li", MSG_ISLAND_ADD_FORT,  &Forts[iNumForts]);
 			//LayerAddObject(SEA_REALIZE, &Forts[iNumForts], 10000);
