@@ -1099,7 +1099,7 @@ void Ship_ChangeChargeEvent() // нигде не используется???
 
 void Ship_ChangeCharge(ref rCharacter, int iNewChargeType)
 {
-	if( rCharacter == Pchar) SendMessage(&AISea, "la", AI_MESSAGE_CANNON_RELOAD, rCharacter);
+	if( rCharacter.id == Pchar.id) SendMessage(&AISea, "la", AI_MESSAGE_CANNON_RELOAD, rCharacter);
 
 	ref rGood = GetGoodByType(iNewChargeType);
 	if (rGood) {
@@ -2354,15 +2354,6 @@ void ShipDead(int iDeadCharacterIndex, int iKillStatus, int iKillerCharacterInde
 	                // boal statistic info 17.12.2003 -->
 	                Statistic_AddValue(rKillerCharacter, "KillShip_" + rBaseShip.Class, 1);
 	                // boal statistic info 17.12.2003 <--
-					if (isPgg && !isntPgg1 && !isntPgg2)
-					{
-						DeleteAttribute(PChar,"PGG_EnemyPP");
-						if(rKillerCharacter == pchar)
-						{
-
-							PChar.PGG_Enemy = "1";
-						}
-					}
 			    break;
 			    case KILL_BY_BALL:
 			        AddCharacterExpToSkill(rKillerCharacter, "Accuracy", stf(rKillerBaseShip.Class) / fBaseClass * 35);
@@ -2380,14 +2371,6 @@ void ShipDead(int iDeadCharacterIndex, int iKillStatus, int iKillerCharacterInde
                         if(!CheckAttribute(rDead, "DontRansackCaptain") || rDead.DontRansackCaptain == false) AISeaGoods_AddGood(rDead, "enemy_boat", "lo_boat", 1000.0, 1); //homo 25/06/07 спасается на шлюпке
                     }
                     //homo
-					if (isPgg && !isntPgg1 && !isntPgg2)
-					{
-						DeleteAttribute(PChar,"PGG_EnemyPP");
-						if(rKillerCharacter == pchar)
-						{
-							PChar.PGG_Enemy = "1";
-						}
-					}
 			    break;
 			    case KILL_BY_ABORDAGE:
 			        AddCharacterExpToSkill(rKillerCharacter, "Grappling", stf(rKillerBaseShip.Class) / fBaseClass * 110);
@@ -2399,16 +2382,7 @@ void ShipDead(int iDeadCharacterIndex, int iKillStatus, int iKillerCharacterInde
 			        // boal statistic info 17.12.2003 -->
 	                Statistic_AddValue(rKillerCharacter, "KillAbordShip_" + rBaseShip.Class, 1);
 	                // boal statistic info 17.12.2003 <--
-					if (rKillerCharacter == pchar) FlagPerkForCapturedShip(rDead);
-					if (isPgg && !isntPgg1 && !isntPgg2)
-					{
-						DeleteAttribute(PChar,"PGG_EnemyPP");
-						if(rKillerCharacter == pchar)
-						{
-
-							PChar.PGG_Enemy = "1";
-						}
-					}
+					if (rKillerCharacter.id == pchar.id) FlagPerkForCapturedShip(rDead);
 			    break;
 		    }
 			if (iKillStatus != KILL_BY_SELF)
