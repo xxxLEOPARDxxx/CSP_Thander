@@ -1467,7 +1467,9 @@ void Sea_LoadIsland(string sIslandID)
         Log_TestInfo("Sea_LoadIsland Sea.MaxSeaHeight " + Sea.MaxSeaHeight);
 		// boal <--
 		CreateEntity(&Island, "Island");
-		Island.LightingPath = GetLightingPath();
+		//Island.LightingPath = GetLightingPath();
+		Island.LightingPath = "";
+		Island.dynamicLightsOn = 1;
 		Island.ImmersionDistance = Islands[iIslandIndex].ImmersionDistance;			// distance = fRadius * ImmersionDistance, from island begin immersion
 		Island.ImmersionDepth = Islands[iIslandIndex].ImmersionDepth;			// immersion depth = (Distance2Camera / (fRadius * ImmersionDistance) - 1.0) * ImmersionDepth
 		string sTexturePath = "islands\" + Islands[iIslandIndex].TexturePath + "\";
@@ -1484,7 +1486,8 @@ void Sea_LoadIsland(string sIslandID)
 			CreateGrass("resource\models\islands\"+ Islands[iIslandIndex].id +"\"+ Islands[iIslandIndex].jungle.patch + ".grs", "Grass\"+Islands[iIslandIndex].jungle.texture+".tga.tx", fJungleScale, 20.0, 200.0, 100.0, 1000.0, 0.6);
 		}
 		SendMessage(&SeaLighter, "ss", "ModelsPath", Islands[iIslandIndex].filespath.models);
-		SendMessage(&SeaLighter, "ss", "LightPath", GetLightingPath());
+		//SendMessage(&SeaLighter, "ss", "LightPath", GetLightingPath());
+		SendMessage(&SeaLighter, "ss", "LightPath", "");
 
 		SendMessage(&Island, "lsss", MSG_ISLAND_LOAD_GEO, "islands", Islands[iIslandIndex].filespath.models, Islands[iIslandIndex].model);
 		LayerAddObject(SEA_REALIZE, &Island, 4);
@@ -1499,7 +1502,8 @@ void Sea_LoadIsland(string sIslandID)
 
 		CreateEntity(&IslandReflModel, "MODELR");
 		string sReflModel = Islands[iIslandIndex].filespath.models + "\" + Islands[iIslandIndex].refl_model;
-		SendMessage(&IslandReflModel, "ls", MSG_MODEL_SET_LIGHT_PATH, GetLightingPath());
+		//SendMessage(&IslandReflModel, "ls", MSG_MODEL_SET_LIGHT_PATH, GetLightingPath());
+		SendMessage(&IslandReflModel, "ls", MSG_MODEL_SET_LIGHT_PATH, "");
 		SendMessage(&IslandReflModel, "ls", MSG_MODEL_LOAD_GEO, sReflModel);
 		SendMessage(&IslandReflModel, "lllf", MSG_MODEL_SET_FOG, 1, 1, stf(Weather.Fog.IslandDensity));
 		LayerAddObject(SEA_REFLECTION2, &IslandReflModel, -1);

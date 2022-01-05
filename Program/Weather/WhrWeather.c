@@ -550,7 +550,8 @@ void CreateWeatherEnvironment()
 
 	if (bSeaActive)
 	{
-		Island.LightingPath = GetLightingPath();
+		//Island.LightingPath = GetLightingPath();
+		Island.LightingPath = "";
 		Island.FogDensity = Weather.Fog.IslandDensity;
 		SendMessage(&IslandReflModel, "lllf", MSG_MODEL_SET_FOG, 1, 1, stf(Weather.Fog.IslandDensity));
 	}
@@ -715,7 +716,8 @@ void Whr_TimeUpdate()
 	//zagolski. динамическая смена тумана на островах и на море
 	if (bSeaActive)
 	{
-		Island.LightingPath = GetLightingPath();
+		//Island.LightingPath = GetLightingPath();
+		Island.LightingPath = "";
 		Island.FogDensity = Weather.Fog.IslandDensity;
 		Sea.Fog.SeaDensity = Weather.Fog.SeaDensity;
 	}
