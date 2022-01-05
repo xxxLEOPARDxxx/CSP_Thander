@@ -283,7 +283,13 @@ bool LoadLocation(ref loc)
 		SendMessage(loc, "ls", MSG_LOCATION_TEXTURESPATH, loc.filespath.textures);
 	}
 	//Set lighting path
-	SendMessage(loc, "ls", MSG_LOCATION_LIGHTPATH, GetLightingPath());
+	string lightingPath = GetLightingPath();
+
+	if (isDynamicLightsEnabled(loc.filespath.models)) {
+		lightingPath = "";
+	}
+
+	SendMessage(loc, "ls", MSG_LOCATION_LIGHTPATH, lightingPath);
 	SendMessage(loc, "ls", MSG_LOCATION_SHADOWPATH, GetLmLightingPath());
 	//#20170911-01 Ambient light mod
 	//if(nAmbient != 0) {
@@ -909,7 +915,13 @@ bool LocLoadModel(aref loc, string sat, string addition)
         if(!bSeaActive) level += 10;
     }
     attr = sat + ".lights";
-    int dynamicLightsOn = 0;
+
+	int dynamicLightsOn = 0;
+	
+	if (isDynamicLightsEnabled(loc.filespath.models)) {
+		dynamicLightsOn = 1
+	}
+
     if(CheckAttribute(loc, attr)) dynamicLightsOn = MakeInt(loc.(attr));
     //Грузим модельку
     res = SendMessage(loc, "lssll", MSG_LOCATION_ADD_MODEL, loc.(sat) + addition, tech, level, dynamicLightsOn);
@@ -1523,4 +1535,18 @@ bool CheckFP(ref loc)
             return true;
     }
     return false;*/
+}
+
+bool isDynamicLightsEnabled(string modelPath)
+{
+	// Костылики из-за того, что движок не воспринимает иначе
+	bool isDisabled = HasSubstr(modelPath, "decks") || 
+		HasSubstr(modelPath, "EstateRooms") || 
+		HasSubstr(modelPath, "Fort_Inside") || 
+		HasSubstr(modelPath, "Incas Temple") || 
+		HasSubstr(modelPath, "Inside") || 
+		HasSubstr(modelPath, "LostShipsCityInsides") || 
+		HasSubstr(modelPath, "TenochtitlanInside") || 
+		HasSubstr(modelPath, "UnderWater");
+	return !isDisabled;
 }
