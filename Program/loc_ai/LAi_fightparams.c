@@ -1729,6 +1729,18 @@ float LAi_NPC_GetDefenceWeightParry()
 	return npc_return_tmp;
 }
 
+#event_handler("NPC_Event_StunChance","LAi_NPC_StunChance");
+float LAi_NPC_StunChance()
+{
+	aref chr = GetEventData();
+	npc_return_tmp = 100;
+	if (IsCharacterPerkOn(chr, "BasicDefence")) npc_return_tmp -= 10;
+	if (IsCharacterPerkOn(chr, "AdvancedDefence")) npc_return_tmp -= 30;
+	if (IsCharacterPerkOn(chr, "SwordplayProfessional")) npc_return_tmp -= 50;	
+	if (CheckAttribute(chr,"cirassid")) npc_return_tmp -= 35;
+	return npc_return_tmp;
+}
+
 //Разрешён ли отскок
 #event_handler("NPC_Event_EnableRecoil","LAi_NPC_EnableRecoil");
 bool LAi_NPC_EnableRecoil()
