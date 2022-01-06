@@ -122,7 +122,7 @@ int LocationInitBoarding(int n)
 	Locations[n].models.always.grassPatch.texture = "grass\grassshore.tga.tx";
 
 	Locations[n].models.always.l1 = "plan1";
-	Locations[n].models.always.l1.tech = "LocationModelBlend";
+	Locations[n].models.always.l1.tech = "DLightModel";
 	locations[n].models.always.l1.level = 9;
 	//Day
 	locations[n].models.day.charactersPatch = "fortV_patch";
@@ -207,7 +207,7 @@ int LocationInitBoarding(int n)
 	Locations[n].models.always.grassPatch.texture = "grass\grassshore.tga.tx";
 
 	Locations[n].models.always.l1 = "plan1";
-	Locations[n].models.always.l1.tech = "LocationModelBlend";
+	Locations[n].models.always.l1.tech = "DLightModel";
 	locations[n].models.always.l1.level = 9;
 	//Day
 	locations[n].models.day.charactersPatch = "fortVRight_patch";
@@ -293,7 +293,7 @@ int LocationInitBoarding(int n)
 
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
-	Locations[n].models.always.l1.tech = "LocationModelBlend";
+	Locations[n].models.always.l1.tech = "DLightModel";
 	//Day
 	locations[n].models.day.charactersPatch = "fortV_patch";
 	Locations[n].models.day.fortVFonarsDay = "fortV_fd";
@@ -378,7 +378,7 @@ int LocationInitBoarding(int n)
 
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
-	Locations[n].models.always.l1.tech = "LocationModelBlend";
+	Locations[n].models.always.l1.tech = "DLightModel";
 	//Day
 	locations[n].models.day.charactersPatch = "fortVRight_patch";
 	Locations[n].models.day.fortVFonarsDay = "fortVRight_fd";
@@ -463,7 +463,7 @@ int LocationInitBoarding(int n)
 
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
-	Locations[n].models.always.l1.tech = "LocationModelBlend";
+	Locations[n].models.always.l1.tech = "DLightModel";
 	//Day
 	locations[n].models.day.charactersPatch = "fortVRight_patch";
 	Locations[n].models.day.fortVFonarsDay = "fortVRight_fd";
@@ -548,7 +548,7 @@ int LocationInitBoarding(int n)
 
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
-	Locations[n].models.always.l1.tech = "LocationModelBlend";
+	Locations[n].models.always.l1.tech = "DLightModel";
 	//Day
 	locations[n].models.day.charactersPatch = "fortVRight_patch";
 	Locations[n].models.day.fortVFonarsDay = "fortVRight_fd";
@@ -633,7 +633,7 @@ int LocationInitBoarding(int n)
 
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
-	Locations[n].models.always.l1.tech = "LocationModelBlend";
+	Locations[n].models.always.l1.tech = "DLightModel";
 	//Day
 	locations[n].models.day.charactersPatch = "fortVRight_patch";
 	Locations[n].models.day.fortVFonarsDay = "fortVRight_fd";
@@ -718,7 +718,7 @@ int LocationInitBoarding(int n)
 
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
-	Locations[n].models.always.l1.tech = "LocationModelBlend";
+	Locations[n].models.always.l1.tech = "DLightModel";
 	//Day
 	locations[n].models.day.charactersPatch = "fortVRight_patch";
 	Locations[n].models.day.fortVFonarsDay = "fortVRight_fd";
@@ -803,7 +803,7 @@ int LocationInitBoarding(int n)
 
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
-	Locations[n].models.always.l1.tech = "LocationModelBlend";
+	Locations[n].models.always.l1.tech = "DLightModel";
 	//Day
 	locations[n].models.day.charactersPatch = "fortVRight_patch";
 	Locations[n].models.day.fortVFonarsDay = "fortVRight_fd";
@@ -888,7 +888,7 @@ int LocationInitBoarding(int n)
 
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
-	Locations[n].models.always.l1.tech = "LocationModelBlend";
+	Locations[n].models.always.l1.tech = "DLightModel";
 	//Day
 	locations[n].models.day.charactersPatch = "fortV_patch";
 	Locations[n].models.day.fortVFonarsDay = "fortV_fd";
@@ -973,7 +973,7 @@ int LocationInitBoarding(int n)
 
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
-	Locations[n].models.always.l1.tech = "LocationModelBlend";
+	Locations[n].models.always.l1.tech = "DLightModel";
 	//Day
 	locations[n].models.day.charactersPatch = "fortV_patch";
 	Locations[n].models.day.fortVFonarsDay = "fortV_fd";
@@ -1058,7 +1058,7 @@ int LocationInitBoarding(int n)
 
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
-	Locations[n].models.always.l1.tech = "LocationModelBlend";
+	Locations[n].models.always.l1.tech = "DLightModel";
 	//Day
 	locations[n].models.day.charactersPatch = "fortVRight_patch";
 	Locations[n].models.day.fortVFonarsDay = "fortVRight_fd";
@@ -1144,7 +1144,7 @@ int LocationInitBoarding(int n)
 
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
-	Locations[n].models.always.l1.tech = "LocationModelBlend";
+	Locations[n].models.always.l1.tech = "DLightModel";
 	//Day
 	locations[n].models.day.charactersPatch = "fortVRight_patch";
 	Locations[n].models.day.fortVFonarsDay = "fortVRight_fd";
@@ -1228,7 +1228,7 @@ int LocationInitBoarding(int n)
 
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
-	Locations[n].models.always.l1.tech = "LocationModelBlend";
+	Locations[n].models.always.l1.tech = "DLightModel";
 	//Day
 	locations[n].models.day.charactersPatch = "fortVRight_patch";
 	Locations[n].models.day.fortVFonarsDay = "fortVRight_fd";
@@ -1313,7 +1313,7 @@ int LocationInitBoarding(int n)
 
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
-	Locations[n].models.always.l1.tech = "LocationModelBlend";
+	Locations[n].models.always.l1.tech = "DLightModel";
 	//Day
 	locations[n].models.day.charactersPatch = "fortV_patch";
 	Locations[n].models.day.fortVFonarsDay = "fortV_fd";
@@ -1397,7 +1397,7 @@ int LocationInitBoarding(int n)
 
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
-	Locations[n].models.always.l1.tech = "LocationModelBlend";
+	Locations[n].models.always.l1.tech = "DLightModel";
 	//Day
 	locations[n].models.day.charactersPatch = "fortVRight_patch";
 	Locations[n].models.day.fortVFonarsDay = "fortVRight_fd";
@@ -1482,7 +1482,7 @@ int LocationInitBoarding(int n)
 
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
-	Locations[n].models.always.l1.tech = "LocationModelBlend";
+	Locations[n].models.always.l1.tech = "DLightModel";
 	//Day
 	locations[n].models.day.charactersPatch = "fortV_patch";
 	Locations[n].models.day.fortVFonarsDay = "fortV_fd";
@@ -1566,7 +1566,7 @@ int LocationInitBoarding(int n)
 
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
-	Locations[n].models.always.l1.tech = "LocationModelBlend";
+	Locations[n].models.always.l1.tech = "DLightModel";
 	//Day
 	locations[n].models.day.charactersPatch = "fortVRight_patch";
 	Locations[n].models.day.fortVFonarsDay = "fortVRight_fd";
@@ -1650,7 +1650,7 @@ int LocationInitBoarding(int n)
 
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
-	Locations[n].models.always.l1.tech = "LocationModelBlend";
+	Locations[n].models.always.l1.tech = "DLightModel";
 	//Day
 	locations[n].models.day.charactersPatch = "fortVRight_patch";
 	Locations[n].models.day.fortVFonarsDay = "fortVRight_fd";
@@ -1734,7 +1734,7 @@ int LocationInitBoarding(int n)
 
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
-	Locations[n].models.always.l1.tech = "LocationModelBlend";
+	Locations[n].models.always.l1.tech = "DLightModel";
 	//Day
 	locations[n].models.day.charactersPatch = "fortVRight_patch";
 	Locations[n].models.day.fortVFonarsDay = "fortVRight_fd";
@@ -1818,7 +1818,7 @@ int LocationInitBoarding(int n)
 
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
-	Locations[n].models.always.l1.tech = "LocationModelBlend";
+	Locations[n].models.always.l1.tech = "DLightModel";
 	//Day
 	locations[n].models.day.charactersPatch = "fortVRight_patch";
 	Locations[n].models.day.fortVFonarsDay = "fortVRight_fd";
@@ -1902,7 +1902,7 @@ int LocationInitBoarding(int n)
 
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
-	Locations[n].models.always.l1.tech = "LocationModelBlend";
+	Locations[n].models.always.l1.tech = "DLightModel";
 	//Day
 	locations[n].models.day.charactersPatch = "fortVRight_patch";
 	Locations[n].models.day.fortVFonarsDay = "fortVRight_fd";
@@ -1986,7 +1986,7 @@ int LocationInitBoarding(int n)
 
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
-	Locations[n].models.always.l1.tech = "LocationModelBlend";
+	Locations[n].models.always.l1.tech = "DLightModel";
 	//Day
 	locations[n].models.day.charactersPatch = "fortVRight_patch";
 	Locations[n].models.day.fortVFonarsDay = "fortVRight_fd";
