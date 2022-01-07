@@ -361,7 +361,7 @@ void ProcessDialogEvent()
 			PChar.quest.BSUrka_Fail2.function = "BSUrka_Fail";
 
 			SetCompanionIndex(PChar, -1, GetCharacterIndex(npchar.id));//Флинт присоединяется к эскадре
-			Flag_PIRATE();
+			Flag_Change(4);
 			BSRepairShip(npchar);
 			LAi_SetImmortal(npchar, false);
 

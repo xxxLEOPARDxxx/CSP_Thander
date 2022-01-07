@@ -1004,10 +1004,6 @@ void QuestComplete(string sQuestName, string qname)
                 RefreshBattleInterface();
             }
 		break;
-
-        case "pir_flag_rise":
-			Flag_PIRATE();
-		break;
 		// агенты в тавернах -->
         case "any_patent_take":
             AddMoneyToCharacter(pchar, -sti(pchar.PatentPrice));
@@ -1020,23 +1016,6 @@ void QuestComplete(string sQuestName, string qname)
             Items[sti(pchar.EquipedPatentId)].TitulCur = 1; // текущ звание сбросим
         	Items[sti(pchar.EquipedPatentId)].TitulCurNext = 0; // счетчик звание сбросим
 		break;
-
-        case "fra_flag_rise":
-            Flag_FRANCE();
-        break;
-
-        case "eng_flag_rise":
-            Flag_ENGLAND();
-        break;
-
-        case "spa_flag_rise":
-            Flag_SPAIN();
-        break;
-
-        case "hol_flag_rise":
-            Flag_HOLLAND();
-        break;
-
         case "QuestAboardCabinDialog":  // диалог в абордаже, в каюте при достижении минНР
 			sld = &Characters[sti(pchar.GenQuest.QuestAboardCabinDialogIdx)]; // фантом, тень отца капитана
 			LAi_SetActorType(pchar);
@@ -11093,20 +11072,36 @@ void NationUpdate()
 }
 
 // подъем флагов
-void Flag_PIRATE()
+void Flag_Change(int iNation)
 {
-	PChar.nation	= PIRATE;
+	PChar.nation = iNation;
 	Ship_FlagRefresh(PChar); //флаг на лету
-	SetNationToOfficers(PIRATE);
+	SetNationToOfficers(iNation);
 
-	SetNationRelation2MainCharacter(ENGLAND, RELATION_ENEMY);
-	SetNationRelation2MainCharacter(FRANCE, RELATION_ENEMY);
-	SetNationRelation2MainCharacter(SPAIN, RELATION_ENEMY);
-
-	SetNationRelation2MainCharacter(PIRATE, RELATION_FRIEND);
-	SetNationRelation2MainCharacter(HOLLAND, RELATION_ENEMY);
-
-	LAi_group_SetRelation("PIRATE_CITIZENS", LAI_GROUP_PLAYER, LAI_GROUP_NEITRAL);
+	for (int i = 0; i < MAX_NATIONS; i++)
+	{
+		SetNationRelation2MainCharacter(i, GetNationRelation(iNation,i));
+	}
+	string sCitiz;
+	switch (iNation)
+	{
+		case 0:
+			sCitiz = "ENGLAND_CITIZENS"
+		break;
+		case 1:
+			sCitiz = "FRANCE_CITIZENS"
+		break;
+		case 2:
+			sCitiz = "SPAIN_CITIZENS"
+		break;
+		case 3:
+			sCitiz = "HOLLAND_CITIZENS"
+		break;
+		case 4:
+			sCitiz = "PIRATE_CITIZENS"
+		break;
+	}
+	LAi_group_SetRelation(sCitiz, LAI_GROUP_PLAYER, LAI_GROUP_NEITRAL);
 	//Relation_PIRATE_SOLDIERS();
 
 	LAi_group_ClearAllTargets();
@@ -11121,136 +11116,12 @@ void Flag_PIRATE()
     else { if(IsEntity(worldMap))
         SetSchemeForMap();
     }
-	//SendMessage(&worldMap, "ll", MSG_WORLDMAP_FLAG_SET,  sti(pchar.nation));
-}
-
-void Flag_FRANCE()
-{
-	PChar.nation	= FRANCE;
-    Ship_FlagRefresh(PChar); //флаг на лету
-    SetNationToOfficers(FRANCE);
-
-    SetNationRelation2MainCharacter(ENGLAND, GetNationRelation(ENGLAND, FRANCE));
-    SetNationRelation2MainCharacter(FRANCE, RELATION_FRIEND);
-    SetNationRelation2MainCharacter(SPAIN, GetNationRelation(FRANCE, SPAIN));
-    SetNationRelation2MainCharacter(PIRATE, RELATION_ENEMY);
-
-    SetNationRelation2MainCharacter(HOLLAND, GetNationRelation(FRANCE, HOLLAND));
-
-    LAi_group_SetRelation("FRANCE_CITIZENS", LAI_GROUP_PLAYER, LAI_GROUP_NEITRAL); //LAI_GROUP_FRIEND);
-    //Relation_FRANCE_SOLDIERS();
-    LAi_group_ClearAllTargets();
-    DoQuestCheckDelay("NationUpdate", 3.0);
-    UpdateRelations();
-    if(bSeaActive)
-    {
-        RefreshBattleInterface();
-        //#20181021-01
-	    SetSchemeForSea();
-    }
-    else { if(IsEntity(worldMap))
-        SetSchemeForMap();
-    }
-	//SendMessage(&worldMap, "ll", MSG_WORLDMAP_FLAG_SET,  sti(pchar.nation));
-}
-
-void Flag_ENGLAND()
-{
-	PChar.nation	= ENGLAND;
-    Ship_FlagRefresh(PChar); //флаг на лету
-    SetNationToOfficers(ENGLAND);
-
-	SetNationRelation2MainCharacter(ENGLAND, RELATION_FRIEND);
-	SetNationRelation2MainCharacter(FRANCE, GetNationRelation(ENGLAND, FRANCE));
-	SetNationRelation2MainCharacter(SPAIN, GetNationRelation(ENGLAND, SPAIN));
-	SetNationRelation2MainCharacter(PIRATE, RELATION_ENEMY);
-    SetNationRelation2MainCharacter(HOLLAND, GetNationRelation(ENGLAND, HOLLAND));
-
-    LAi_group_SetRelation("ENGLAND_CITIZENS", LAI_GROUP_PLAYER, LAI_GROUP_NEITRAL);
-    //Relation_ENGLAND_SOLDIERS();
-    LAi_group_ClearAllTargets();
-    DoQuestCheckDelay("NationUpdate", 3.0);
-    UpdateRelations();
-    if(bSeaActive)
-    {
-        RefreshBattleInterface();
-        //#20181021-01
-	    SetSchemeForSea();
-    }
-    else { if(IsEntity(worldMap))
-        SetSchemeForMap();
-    }
-	//SendMessage(&worldMap, "ll", MSG_WORLDMAP_FLAG_SET,  sti(pchar.nation));
-}
-
-void Flag_SPAIN()
-{
-	PChar.nation = SPAIN;
-    Ship_FlagRefresh(PChar); //флаг на лету
-    SetNationToOfficers(SPAIN);
-
-	SetNationRelation2MainCharacter(ENGLAND, GetNationRelation(ENGLAND, SPAIN));
-	SetNationRelation2MainCharacter(FRANCE, GetNationRelation(FRANCE, SPAIN));
-	SetNationRelation2MainCharacter(SPAIN, RELATION_FRIEND);
-	SetNationRelation2MainCharacter(PIRATE, RELATION_ENEMY);
-    SetNationRelation2MainCharacter(HOLLAND, GetNationRelation(SPAIN, HOLLAND));
-
-    LAi_group_SetRelation("SPAIN_CITIZENS", LAI_GROUP_PLAYER, LAI_GROUP_NEITRAL);
-    //Relation_SPAIN_SOLDIERS();
-    LAi_group_ClearAllTargets();
-    DoQuestCheckDelay("NationUpdate", 3.0);
-    UpdateRelations();
-    if(bSeaActive)
-    {
-        RefreshBattleInterface();
-        //#20181021-01
-	    SetSchemeForSea();
-    }
-    else { if(IsEntity(worldMap))
-        SetSchemeForMap();
-    }
-	//SendMessage(&worldMap, "ll", MSG_WORLDMAP_FLAG_SET,  sti(pchar.nation));
-}
-
-void Flag_HOLLAND()
-{
-	PChar.nation	= HOLLAND;
-    Ship_FlagRefresh(PChar); //флаг на лету
-    SetNationToOfficers(HOLLAND);
-
-    SetNationRelation2MainCharacter(ENGLAND, GetNationRelation(ENGLAND, HOLLAND));
-    SetNationRelation2MainCharacter(FRANCE, GetNationRelation(FRANCE, HOLLAND));
-    SetNationRelation2MainCharacter(SPAIN, GetNationRelation(SPAIN, HOLLAND));
-    SetNationRelation2MainCharacter(PIRATE, RELATION_ENEMY);
-    SetNationRelation2MainCharacter(HOLLAND, RELATION_FRIEND);
-
-    LAi_group_SetRelation("HOLLAND_CITIZENS", LAI_GROUP_PLAYER, LAI_GROUP_NEITRAL);
-    //Relation_HOLLAND_SOLDIERS();
-    LAi_group_ClearAllTargets();
-    DoQuestCheckDelay("NationUpdate", 3.0);
-    UpdateRelations();
-    if(bSeaActive)
-    {
-        RefreshBattleInterface();
-        //#20181021-01
-	    SetSchemeForSea();
-    }
-    else { if(IsEntity(worldMap))
-        SetSchemeForMap();
-    }
-	//SendMessage(&worldMap, "ll", MSG_WORLDMAP_FLAG_SET,  sti(pchar.nation));
+	SendMessage(&worldMap, "ll", MSG_WORLDMAP_SET_NATION_FLAG,  sti(pchar.nation));
 }
 
 void Flag_Rerise()
 {
-	switch (sti(PChar.nation))
-	{
-    	case ENGLAND:	Flag_ENGLAND();	break;
-    	case FRANCE:	Flag_FRANCE();	break;
-    	case SPAIN:		Flag_SPAIN();	break;
-    	case PIRATE:	Flag_PIRATE();	break;
-    	case HOLLAND:	Flag_HOLLAND();	break;
-	}
+	Flag_Change(sti(pchar.nation));
 }
 
 // blackthorn - генератор "Проклятый капитан"

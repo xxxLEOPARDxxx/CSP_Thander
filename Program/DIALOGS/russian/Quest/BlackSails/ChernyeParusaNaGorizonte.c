@@ -432,7 +432,7 @@ void ProcessDialogEvent()
 
 		case "BS_CPNG_32_flint":
 			SetCompanionIndex(PChar, -1, GetCharacterIndex(npchar.id));//Флинт присоединяется к эскадре
-			Flag_PIRATE();
+			Flag_Change(4);
 			BSRepairShip(npchar);
 			SetShipRemovable(npchar, false);
 			Fantom_SetBalls(npchar, "war");

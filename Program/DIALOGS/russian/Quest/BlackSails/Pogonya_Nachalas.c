@@ -630,7 +630,7 @@ void ProcessDialogEvent()
 			DeleteAttribute(pchar, "LockMapReload");
 			DeleteAttribute(pchar, "LockShoreReload");
 			SetCompanionIndex(PChar, -1, GetCharacterIndex(npchar.id));//Флинт присоединяется к эскадре
-			Flag_PIRATE();
+			Flag_Change(4);
 
 			for (z = 1; z < 9; z++)
 			{

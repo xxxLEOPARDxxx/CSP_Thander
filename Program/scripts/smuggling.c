@@ -413,7 +413,7 @@ void SetCoastalGuardPursuit()
 	}
 	else
 	{
-		if (CheckAttribute(pchar, "SmugglingFlag")) Flag_PIRATE();
+		if (CheckAttribute(pchar, "SmugglingFlag")) Flag_Change(4);
 		pchar.ContraInterruptWaiting = true;
 		for (i = 1; i <= 3; i++)
 		{

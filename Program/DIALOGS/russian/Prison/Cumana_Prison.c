@@ -180,7 +180,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			LAi_SetFightMode(PChar, true);
-			Flag_PIRATE();
+			Flag_Change(4);
 			pchar.questTemp.zpq = "failed";
             		AddQuestRecord("zpq", "4");
 			CloseQuestHeader("zpq");
