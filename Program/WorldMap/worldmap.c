@@ -165,7 +165,7 @@ void wdmCreateWorldMap()
 	//Создаём накопившиеся квестовые энкоунтеры
 	worldMap.addQuestEncounters = "updateQuest";
 	InitWmInterface();
-	//SendMessage(&worldMap, "ll", MSG_WORLDMAP_FLAG_SET,  sti(pchar.nation)); //Zero based array
+	SendMessage(&worldMap, "ll", MSG_WORLDMAP_SET_NATION_FLAG,  sti(pchar.nation)); 
 }
 
 void wdmLoadSavedMap()
