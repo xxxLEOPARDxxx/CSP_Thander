@@ -289,17 +289,10 @@ void FlagsProcess()
 	}
 	// смена флага
 	Sea_ClearCheckFlag(); // сбросить всем в море проверку смотрения на флаг.
+	Flag_Change(curNationIdx);
 	pchar.DisableChangeFlagMode = true; //закрываем Флаг
-	DoQuestFunctionDelay("FreeChangeFlagMode", 15.0); // ролик + запас
-
-	switch (curNationIdx)
-	{
-    	case ENGLAND:	EnglandProcess();	break;
-    	case FRANCE:	FranceProcess();	break;
-    	case SPAIN:		SpainProcess();	break;
-    	case PIRATE:	PirateProcess();	break;
-    	case HOLLAND:	HollandProcess();	break;
-	}
+	DoQuestFunctionDelay("FreeChangeFlagMode", 10.0); // ролик + запас
+	ProcessExitCancel();
 }
 
 void ProcessCommandExecute()
@@ -418,50 +411,4 @@ void SetNewNation(int add)
 	    SetNodeUsing("RIGHTCHANGE_NATION",false);
 	    SetNodeUsing("LEFTCHANGE_NATION",false);
     }
-}
-void PirateProcess()
-{
-    //DoQuestCheckDelay("pir_flag_rise", 1.0);
-    PChar.GenQuest.VideoAVI        = "Pirate";
-    PChar.GenQuest.VideoAfterQuest = "pir_flag_rise";
-
-    DoQuestCheckDelay("PostVideo_Start", 0.2);
-	ProcessExitCancel();
-}
-
-void EnglandProcess()
-{
-    //DoQuestCheckDelay("eng_flag_rise", 1.0);
-    PChar.GenQuest.VideoAVI        = "England";
-    PChar.GenQuest.VideoAfterQuest = "eng_flag_rise";
-
-    DoQuestCheckDelay("PostVideo_Start", 0.2);
-    ProcessExitCancel();
-}
-
-void FranceProcess()
-{
-    PChar.GenQuest.VideoAVI        = "France";
-    PChar.GenQuest.VideoAfterQuest = "fra_flag_rise";
-
-    DoQuestCheckDelay("PostVideo_Start", 0.2);
-	ProcessExitCancel();
-}
-
-void SpainProcess()
-{
-    PChar.GenQuest.VideoAVI        = "Spain";
-    PChar.GenQuest.VideoAfterQuest = "spa_flag_rise";
-
-    DoQuestCheckDelay("PostVideo_Start", 0.2);
-    ProcessExitCancel();
-}
-
-void HollandProcess()
-{
-    PChar.GenQuest.VideoAVI        = "Holland";
-    PChar.GenQuest.VideoAfterQuest = "hol_flag_rise";
-
-    DoQuestCheckDelay("PostVideo_Start", 0.2);
-	ProcessExitCancel();
 }

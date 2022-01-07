@@ -14,7 +14,7 @@ void Whisper_StartGame(string qName)
 //	Линейка Виспер	начало
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
     SetCharacterPerk(Pchar, "FlagPir");
-    Flag_SPAIN();
+    Flag_Change(SPAIN);
 
     //Обираем до нитки
     RemoveCharacterEquip(pchar, BLADE_ITEM_TYPE);
@@ -1246,7 +1246,7 @@ void WhisperSmugglingPatrol()
 	Group_SetPursuitGroup("Coastal_Guards", PLAYER_GROUP);
 	Group_SetTaskAttack("Coastal_Guards", PLAYER_GROUP);
 	Group_LockTask("Coastal_Guards");
-	Flag_PIRATE();
+	Flag_Change(PIRATE);
 }
 
 void WhisperHuntersCaveEntrance(string qName)
@@ -1743,7 +1743,7 @@ void WhisperEnglandRevengel()
 	}
 	Group_SetTaskAttack("Coastal_Guards", PLAYER_GROUP);
 	Group_LockTask("Coastal_Guards");
-	Flag_PIRATE();
+	Flag_Change(PIRATE);
 }
 
 void WhisperSelectRandomUsurer() // Выбор случайного ростовщика по квесту
@@ -1810,7 +1810,7 @@ void DarkHuman_StartGame(string qName)
 
 	GiveNationLicence(SPAIN, 45);
 	GiveNationLicence(HOLLAND, 80);
-	Flag_HOLLAND();
+	Flag_Change(HOLLAND);
 	pchar.money = 1000;
 	GiveItem2Character(pchar, "DHGlove");
 	EquipCharacterbyItem(pchar, "DHGlove");
