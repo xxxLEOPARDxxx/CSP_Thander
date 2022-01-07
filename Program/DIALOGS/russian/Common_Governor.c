@@ -459,7 +459,7 @@ void ProcessDialogEvent()
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			LAi_SetFightMode(PChar, true);
-			Flag_Change(4);
+			Flag_Change(PIRATE);
 			LAi_SetImmortal(CharacterFromID("Andre_Abel_Quest_Officer_1"), false);
 			sTemp = "hol_guard";
 			LAi_group_MoveCharacter(CharacterFromID("Andre_Abel_Quest_Officer_1"), sTemp);

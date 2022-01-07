@@ -5859,7 +5859,7 @@ void Blood_StartGame(string qName)
     DeleteAttribute(Pchar, "perks.list.FlagSpa");
     DeleteAttribute(Pchar, "perks.list.FlagHol");
     SetCharacterPerk(Pchar, "FlagEng");
-    Flag_Change(0);
+    Flag_Change(ENGLAND);
     //Подготовка Барбадоса
     int n = FindLocation("Bridgetown_town");
     DeleteAttribute(&locations[n], "questSeekCap");
@@ -10322,7 +10322,7 @@ void MaksCome(string qName)
 void LukesEscape(string qName)
 {
 	AddQuestRecord("Silence_Price", "6");
-	Flag_Change(4);
+	Flag_Change(PIRATE);
 	AddCharacterHealth(pchar, -30);
 	Pchar.Luke.BadPoison = "1";
 }

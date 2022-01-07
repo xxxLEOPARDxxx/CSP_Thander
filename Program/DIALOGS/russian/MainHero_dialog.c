@@ -1259,7 +1259,7 @@ void ProcessDialogEvent()
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit_Self();
 			Pchar.BaseNation = FRANCE;
-			Flag_Change(1);
+			Flag_Change(FRANCE);
 			chrDisableReloadToLocation = false;
 			bDisableCharacterMenu = false;
 			InterfaceStates.DisFastTravel = false;

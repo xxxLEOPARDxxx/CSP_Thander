@@ -144,7 +144,7 @@ void ProcessDialogEvent()
 			Pchar.BaseNation = ENGLAND;
 			SetCharacterPerk(Pchar, "FlagEng");
 			AddMoneyToCharacter(pchar, -1000);
-			Flag_Change(0);
+			Flag_Change(ENGLAND);
 			link.l1 = "Готово.";
 			link.l1.go = "Whisper_exit";
 		break;
@@ -153,7 +153,7 @@ void ProcessDialogEvent()
 			Pchar.BaseNation = FRANCE;
 			SetCharacterPerk(Pchar, "FlagFra");
 			AddMoneyToCharacter(pchar, -1000);
-			Flag_Change(1);
+			Flag_Change(FRANCE);
 			link.l1 = "Готово.";
 			link.l1.go = "Whisper_exit";
 		break;
@@ -162,7 +162,7 @@ void ProcessDialogEvent()
 			AddMoneyToCharacter(pchar, -1000);
 			Pchar.BaseNation = HOLLAND;
 			SetCharacterPerk(pchar, "FlagHol");
-			Flag_Change(3);
+			Flag_Change(HOLLAND);
 			link.l1 = "Готово.";
 			link.l1.go = "Whisper_exit";
 		break;
@@ -174,7 +174,7 @@ void ProcessDialogEvent()
 			{
 				dialog.text = "В таком случае прошу меня не отвлекать.";
 				Pchar.BaseNation = PIRATE;
-				Flag_Change(4);
+				Flag_Change(PIRATE);
 			}
 			PChar.quest.WhisperPirateTownGetHat.win_condition.l1 = "location";
 			PChar.quest.WhisperPirateTownGetHat.win_condition.l1.location = "PuertoPrincipe_town";

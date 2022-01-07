@@ -306,7 +306,7 @@ void Andre_Abel_Quest_Runaway_From_Prison()	// По другую сторону 
 	ChangeCharacterAddressGroup(rChar, "Villemstad_prison", "reload", "reload1");
 
 	LAi_SetFightMode(PChar, true);
-	Flag_Change(4);
+	Flag_Change(PIRATE);
 
 	PChar.Quest.Andre_Abel_Quest_In_Sea_After_Prison.win_condition.l1 = "EnterToSea";
 	PChar.Quest.Andre_Abel_Quest_In_Sea_After_Prison.function = "Andre_Abel_Quest_In_Sea_After_Prison";
