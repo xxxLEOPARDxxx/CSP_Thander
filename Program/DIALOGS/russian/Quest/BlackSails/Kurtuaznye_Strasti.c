@@ -135,7 +135,7 @@ void ProcessDialogEvent()
 			if (pchar.nation != FRANCE)
 			{
 				order1 = "Возвращайся на борт и подними французский флаг. ";
-				Flag_FRANCE();
+				Flag_Change(FRANCE);
 			}
 			else order1 = "";
 			if (pchar.location != "Shore39")

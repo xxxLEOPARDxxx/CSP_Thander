@@ -528,7 +528,7 @@ void ProcessDialogEvent()
             pchar.quest.ReasonToFast_ExitFromTown.function    				= "ReasonToFast_ExitFromTownFight";
 			pchar.questTemp.ReasonToFast.canSpeakSailor = true;
 			pchar.TownEscape = true;
-			Flag_PIRATE();
+			Flag_Change(PIRATE);
 		break;
 		// ------------------------- Повод для спешки -----------------------------
 
