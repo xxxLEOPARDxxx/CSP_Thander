@@ -11082,27 +11082,8 @@ void Flag_Change(int iNation)
 	{
 		SetNationRelation2MainCharacter(i, GetNationRelation(iNation,i));
 	}
-	string sCitiz;
-	switch (iNation)
-	{
-		case 0:
-			sCitiz = "ENGLAND_CITIZENS"
-		break;
-		case 1:
-			sCitiz = "FRANCE_CITIZENS"
-		break;
-		case 2:
-			sCitiz = "SPAIN_CITIZENS"
-		break;
-		case 3:
-			sCitiz = "HOLLAND_CITIZENS"
-		break;
-		case 4:
-			sCitiz = "PIRATE_CITIZENS"
-		break;
-	}
+	string sCitiz = ToUpper(GetNationNameByType(iNation)+"_CITIZENS");
 	LAi_group_SetRelation(sCitiz, LAI_GROUP_PLAYER, LAI_GROUP_NEITRAL);
-	//Relation_PIRATE_SOLDIERS();
 
 	LAi_group_ClearAllTargets();
 	DoQuestCheckDelay("NationUpdate", 3.0);
