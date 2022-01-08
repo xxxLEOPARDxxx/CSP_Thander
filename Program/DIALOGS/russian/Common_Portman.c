@@ -4131,11 +4131,14 @@ string findTraderCity_PU(ref NPChar)
 
 	for(n=0; n<MAX_COLONIES; n++)
 	{
-		nation = GetNationRelation(sti(npchar.nation), sti(colonies[n].nation));
-		if (nation != RELATION_ENEMY && colonies[n].id != "Panama" && colonies[n].nation != "none" && GetIslandByCityName(npchar.city) != colonies[n].islandLable) //на свой остров
+		if (colonies[n].id != "Panama" && colonies[n].nation != "none" && GetIslandByCityName(npchar.city) != colonies[n].islandLable) //на свой остров
 		{
-			storeArray[howStore] = n;
-			howStore++;
+			nation = GetNationRelation(sti(npchar.nation), sti(colonies[n].nation));
+			if(nation != RELATION_ENEMY)
+			{
+				storeArray[howStore] = n;
+				howStore++;
+			}
 		}
 	}
 	if (howStore == 0) return "none";
