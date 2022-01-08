@@ -11083,9 +11083,7 @@ void Flag_Change(int iNation)
 		SetNationRelation2MainCharacter(i, GetNationRelation(iNation,i));
 	}
 	string sCitiz = ToUpper(GetNationNameByType(iNation)+"_CITIZENS");
-	Log_Info(sCitiz);
 	LAi_group_SetRelation(sCitiz, LAI_GROUP_PLAYER, LAI_GROUP_NEITRAL);
-	//Relation_PIRATE_SOLDIERS();
 
 	LAi_group_ClearAllTargets();
 	DoQuestCheckDelay("NationUpdate", 3.0);
