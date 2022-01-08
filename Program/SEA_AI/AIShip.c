@@ -515,7 +515,7 @@ float Ship_MastDamage()
 				}
 				else
 				{
-					iResist = 1 + 1.0/(iClass-iXmark);
+					iResist = 1.0/(iClass-iXmark);
 				}
 			}
 		//<---- Lipsar резист урона мачтам от калибра и класса
