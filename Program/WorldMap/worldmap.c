@@ -133,7 +133,7 @@ void wdmCreateWorldMap()
 	worldMap.date.monthnames.m12 = XI_ConvertString("target_month_12");
 	worldMap.date.font = "normal";
 	worldMap.nationFlag.count = 8;
-	if(iFlagAllWdm == 2) worldMap.nationFlag.width = 80;
+	if(iFlagAllWdm == 2) worldMap.nationFlag.width = 96;
 	else worldMap.nationFlag.width = 48;
  	worldMap.nationFlag.height = 48;
 	worldMap.nationFlag.texName = "WorldMap/Interfaces/WorldMapEnsigns" + iFlagAllWdm + ".tga";
