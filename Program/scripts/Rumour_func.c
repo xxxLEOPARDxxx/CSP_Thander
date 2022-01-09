@@ -525,8 +525,9 @@ int AddTemplRumour(string stName, int nid )//добавляет шаблонны
 	}
 //navy <--
 	ishods = sti(CurTpl.next);
-	if (ishods > 0)   // если есть несколько вариантов развития
-	{   ishods--;
+	if (ishods > 1)   // если есть несколько вариантов развития
+	{   
+        ishods--;
 		att = "n" + ishods;
 		Next = CurTpl.next.(att);
 

@@ -2043,12 +2043,16 @@ string SelectNotEnemyColony(ref NPChar)
 
 	for(n=0; n<MAX_COLONIES; n++)
 	{
-		nation = GetNationRelation(sti(npchar.nation), sti(colonies[n].nation));
+		
 		/* if (nation != RELATION_ENEMY && colonies[n].id != "Panama" && colonies[n].id != "FortOrange" && colonies[n].id != "Caiman" && colonies[n].nation != "none" && sti(colonies[n].nation) != PIRATE && GetIslandByCityName(npchar.city) != colonies[n].islandLable) //не на свой остров */
-		if (nation != RELATION_ENEMY && colonies[n].id != "Panama" && colonies[n].id != "FortOrange" && colonies[n].id != "Caiman" && colonies[n].nation != "none"  && GetIslandByCityName(npchar.city) != colonies[n].islandLable) //не на свой остров
+		if (colonies[n].id != "Panama" && colonies[n].id != "FortOrange" && colonies[n].id != "Caiman" && colonies[n].nation != "none"  && GetIslandByCityName(npchar.city) != colonies[n].islandLable) //не на свой остров
 		{
-			storeArray[howStore] = n;
-			howStore++;
+			nation = GetNationRelation(sti(npchar.nation), sti(colonies[n].nation));
+			if (nation != RELATION_ENEMY)
+			{
+				storeArray[howStore] = n;
+				howStore++;
+			}
 		}
 	}
 	if (howStore == 0) return "none";
