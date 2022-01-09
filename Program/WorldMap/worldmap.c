@@ -132,8 +132,11 @@ void wdmCreateWorldMap()
 	worldMap.date.monthnames.m11 = XI_ConvertString("target_month_11");
 	worldMap.date.monthnames.m12 = XI_ConvertString("target_month_12");
 	worldMap.date.font = "normal";
-	worldMap.showFlag.count = 10;
-	worldMap.showFlag.texture = "flagallWDM" + iFlagAllWdm + ".tga";  //path to texture if not in root: "WorldMap\Interfaces\texturename.tga.tx"
+	worldMap.nationFlag.count = 8;
+	if(iFlagAllWdm == 2) worldMap.nationFlag.width = 80;
+	else worldMap.nationFlag.width = 48;
+ 	worldMap.nationFlag.height = 48;
+	worldMap.nationFlag.texName = "WorldMap/Interfaces/WorldMapEnsigns" + iFlagAllWdm + ".tga";
 	//#20200226-03
 	worldMap.outputRum = true;
 	worldMap.resizeRatio = fHtRatio;
