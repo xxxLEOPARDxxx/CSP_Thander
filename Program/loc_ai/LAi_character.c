@@ -1067,14 +1067,16 @@ void LAi_AllCharactersUpdate(float dltTime)
 
 			if(CheckAttribute(chr_ai, "noeat"))
 			{
-				chr_ai.noeat = stf(chr_ai.noeat) - dltTime;
-				pchar.query_delay = stf(pchar.query_delay) - dltTime;
-				if (stf(pchar.query_delay) <= 0.0)
+				if(CheckAttribute(pchar,"query_delay")) 
 				{
-					DeleteAttribute(pchar, "query_delay");
+					pchar.query_delay = stf(pchar.query_delay) - dltTime;
+					if (stf(pchar.query_delay) <= 0.0)
+					{
+						DeleteAttribute(pchar, "query_delay");
+					}
 				}
-
-
+				chr_ai.noeat = stf(chr_ai.noeat) - dltTime;
+				
 				if(stf(chr_ai.noeat) <= 0.0 )
 				{
 					DeleteAttribute(chr_ai, "noeat");
