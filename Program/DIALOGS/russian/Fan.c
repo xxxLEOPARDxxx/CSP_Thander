@@ -14,7 +14,7 @@ void ProcessDialogEvent()
 	{
 		case "FirstMeet":
 			dialog.text = "Вот это да, сам великий чемпион арены вышел мне навстречу! Можно мне следовать за тобой? Ну пожалуйста-пожалуйста!";
-			link.l1 = "Так и быть...";
+			link.l1 = "Так и быть... Идём.";
 			link.l1.go = "exit";
 			LAi_CharacterPlaySound(NPChar, "Fan_FirstMeet");
 		break;
