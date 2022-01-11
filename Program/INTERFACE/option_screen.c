@@ -593,19 +593,16 @@ void procCheckBoxChange()
 					iFlagAllWdm=2;
 					SendMessage(&GameInterface,"lslll",MSG_INTERFACE_MSG_TO_NODE,"FLAGALLWDM_CHECKBOX", 2, 2, false );
 					SendMessage(&GameInterface,"lslll",MSG_INTERFACE_MSG_TO_NODE,"FLAGALLWDM_CHECKBOX", 2, 3, false );
-					worldMap.showFlag.texture = "flagallWDM" + iFlagAllWdm + ".tga";
 				break;
 				case 2:
 					iFlagAllWdm=1;
 					SendMessage(&GameInterface,"lslll",MSG_INTERFACE_MSG_TO_NODE,"FLAGALLWDM_CHECKBOX", 2, 1, false );
 					SendMessage(&GameInterface,"lslll",MSG_INTERFACE_MSG_TO_NODE,"FLAGALLWDM_CHECKBOX", 2, 3, false );
-					worldMap.showFlag.texture = "flagallWDM" + iFlagAllWdm + ".tga";
 				break;
 				case 3:
 					iFlagAllWdm=0;
 					SendMessage(&GameInterface,"lslll",MSG_INTERFACE_MSG_TO_NODE,"FLAGALLWDM_CHECKBOX", 2, 1, false );
 					SendMessage(&GameInterface,"lslll",MSG_INTERFACE_MSG_TO_NODE,"FLAGALLWDM_CHECKBOX", 2, 2, false );
-					worldMap.showFlag.texture = "flagallWDM" + iFlagAllWdm + ".tga";
 				break;
 			}
 		}
