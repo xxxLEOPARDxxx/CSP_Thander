@@ -402,7 +402,6 @@ void CreateWeatherEnvironment()
 
 	aref aCurWeather = GetCurrentWeather();
 
-	WeatherParams.test = 1;
 	sLightingPath = Whr_GetString(aCurWeather,"Lighting");
 	sLmLightingPath = Whr_GetString(aCurWeather,"LightingLm");
 	sInsideBack = Whr_GetString(aCurWeather,"InsideBack");
