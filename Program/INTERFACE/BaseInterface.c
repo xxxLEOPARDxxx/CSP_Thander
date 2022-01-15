@@ -29,9 +29,9 @@ void InitBaseInterfaces()
 string questTextFileName[3];
 ref GetQuestTextFileName()
 {
-	questTextFileName[0] = "resource\ini\texts\russian\questbook\QuestBook_Part1.txt";
-	questTextFileName[1] = "resource\ini\texts\russian\questbook\QuestBook_Part2.txt";
-	questTextFileName[2] = "resource\ini\texts\russian\questbook\QuestBook_New.txt"; // Warship. ®то наш квестбук
+	questTextFileName[0] = "PROGRAM\questbook\QuestBook_Part1.txt";
+	questTextFileName[1] = "PROGRAM\questbook\QuestBook_Part2.txt";
+	questTextFileName[2] = "PROGRAM\questbook\QuestBook_New.txt"; // Warship. ®то наш квестбук
 	return &questTextFileName;
 }
 
