@@ -402,6 +402,7 @@ void CreateWeatherEnvironment()
 
 	aref aCurWeather = GetCurrentWeather();
 
+	WeatherParams.test = 1;
 	sLightingPath = Whr_GetString(aCurWeather,"Lighting");
 	sLmLightingPath = Whr_GetString(aCurWeather,"LightingLm");
 	sInsideBack = Whr_GetString(aCurWeather,"InsideBack");
@@ -963,12 +964,13 @@ void doShipLightChange(ref aCurWeather)
 
     ref rChar;
     Sea.Lights = aCurWeather.Lights;
-    for(j = 0; j < iNumShips; j++) {
+    for(j = 0; j < iNumShips; j++) 
+	{
         iCharIdx = Ships[j];
         if (iCharIdx < 0 || iCharIdx >= TOTAL_CHARACTERS) continue;
         rChar = GetCharacter(Ships[j]);
         Ship_SetLightsAndFlares(rChar);
-        SendMessage(&characters[iCharIdx], "l", MSG_SHIP_LIGHTSRESET);
+        SendMessage(rChar, "ll", MSG_SHIP_LIGHTSRESET, sti(Sea.Lights));
     }
 }
 

@@ -2103,6 +2103,8 @@ void SetParameterData()
 	BattleInterface.battleborder.speed = 1.5;
 	BattleInterface.battleborder.texture = "battle_interface\battleborder.tga";
 
+	BattleInterface.FillSailToIcons = "town";
+
 	//Новый стиль HUD по чекбоксу
 	if (InterfaceStates.HUDStyle)
 	{
