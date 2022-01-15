@@ -4286,13 +4286,15 @@ void SetTextureForShip(aref refBaseShip, aref rCharacter)
 	}
 
 	string sPath = "ships\" + refBaseShip.name + "\";
+	string sPath2 = "";
 
 	if(CheckAttribute(refBaseShip, "ship.Upgrades.hull"))  // boal 16/07/06 просто разные корпуса, без НПС
 	{
-		sPath = sPath + "hull" + refBaseShip.ship.upgrades.hull + "\";
+		sPath2 = sPath + "hull" + refBaseShip.ship.upgrades.hull + "\";
 	}
 
-	SetTexturePath(0, sPath);
+	SetTexturePath(0, sPath2);
+	SetTexturePath(1, sPath);
 }
 
 void DropGoodsToSea()
