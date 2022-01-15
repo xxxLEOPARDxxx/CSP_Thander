@@ -509,14 +509,7 @@ float Ship_MastDamage()
 			}
 			else
 			{
-				if(iXmark == iClass)
-				{
-					iResist = 1;
-				}
-				else
-				{
-					iResist = 1.0/(iClass-iXmark);
-				}
+				iResist = 1 + 1.0/(iClass-iXmark);
 			}
 		//<---- Lipsar резист урона мачтам от калибра и класса
             float nDirect = 0.35; //Glancing
