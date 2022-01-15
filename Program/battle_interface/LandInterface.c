@@ -726,11 +726,11 @@ void BLI_SetObjectData()
 		objLandInterface.ManSign.gunreloadbackcolor		= ARGB(255, 0, 255, 62);
 		objLandInterface.ManSign.gunreloadUV			= "0.0,0.0,1.0,1.0";
 		fTmp 											= makeint(0.0 * fHtRatio);
-		fTmp2 											= makeint(30.0 * fHtRatio);
+		fTmp2 											= makeint(26.0 * fHtRatio);
 		objLandInterface.ManSign.gunreloadoffset		= fTmp + "," + fTmp2;
 		fTmp 											= makeint(60.0 * fHtRatio);
 		fTmp2 											= makeint(85.0 * fHtRatio);
-		objLandInterface.ManSign.gunreloadiconsize		= "50.0,20.0";
+		objLandInterface.ManSign.gunreloadiconsize		= "48.0,8.0";
 	}
 
 	for(i = 1; i<=MAX_NUM_FIGHTERS + 1; i++) {
