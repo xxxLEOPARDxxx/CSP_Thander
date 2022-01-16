@@ -638,7 +638,7 @@ void BLI_SetObjectData()
 		objLandInterface.ManSign.gunreloadtexturename	= "battle_interface\MORALE_bar.tga";
 		objLandInterface.ManSign.gunreloadcolor 		= ARGB(255, 0, 255, 62);
 		objLandInterface.ManSign.gunreloadbackcolor		= ARGB(255, 0, 255, 62);
-		objLandInterface.ManSign.gunreloadUV            = "0.0,0.0,1.0,1.0"; 
+		objLandInterface.ManSign.gunreloadUV			= "0.0,0.0,1.0,1.0";
 		fTmp 											= makeint(-10.0 * fHtRatio);
 		fTmp2 											= makeint(26.0 * fHtRatio);
 		objLandInterface.ManSign.gunreloadoffset		= fTmp + "," + fTmp2;
