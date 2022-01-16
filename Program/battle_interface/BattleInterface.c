@@ -2138,11 +2138,7 @@ void SetParameterData()
 		BattleInterface.ShipIcon.shipspoffset			= RecalculateHIcon(54.5* fHtRatio)+","+RecalculateVIcon(-3.5* fHtRatio);
 		BattleInterface.ShipIcon.shipspiconsize			= RecalculateHIcon(makeint(64* fHtRatio))+","+RecalculateVIcon(makeint(88* fHtRatio));
 
-		BattleInterface.ShipIcon.shipclasstexturename	= ""; // Класс кораблей "звездочки"
-		BattleInterface.ShipIcon.shipclasscolor			= argb(255,250,250,150);
-		BattleInterface.ShipIcon.shipclassuv			= "0.0,0.0,1.0,1.0";
-		BattleInterface.ShipIcon.shipclassoffset		= RecalculateHIcon(makeint(-5* fHtRatio))+","+RecalculateVIcon(makeint(35* fHtRatio));
-		BattleInterface.ShipIcon.shipclassiconsize		= RecalculateHIcon(makeint(100* fHtRatio))+","+RecalculateVIcon(makeint(24* fHtRatio));
+		BattleInterface.ShipIcon.shipclassiconsize		= "0,0";
 		BattleInterface.ShipIcon.gunchargeprogress		= "0.0625, 0.219, 0.359, 0.5, 0.641, 0.781, 0.983";
 
 		BattleInterface.ShipIcon.shiptexturename		= "battle_interface\ship_icons2.tga"; // Иконка корабля
@@ -2219,11 +2215,7 @@ void SetParameterData()
 		BattleInterface.ShipIcon.shipspoffset			= RecalculateHIcon(16* fHtRatio)+","+RecalculateVIcon(-2* fHtRatio);
 		BattleInterface.ShipIcon.shipspiconsize			= RecalculateHIcon(makeint(78* fHtRatio))+","+RecalculateVIcon(makeint(75* fHtRatio));
 
-		BattleInterface.ShipIcon.shipclasstexturename	= ""; // Класс кораблей "звездочки"
-		BattleInterface.ShipIcon.shipclasscolor			= argb(255,128,128,128);
-		BattleInterface.ShipIcon.shipclassuv			= "0.0,0.0,1.0,1.0";
-		BattleInterface.ShipIcon.shipclassoffset		= RecalculateHIcon(makeint(-13* fHtRatio))+","+RecalculateVIcon(makeint(-53* fHtRatio));
-		BattleInterface.ShipIcon.shipclassiconsize		= RecalculateHIcon(makeint(64* fHtRatio))+","+RecalculateVIcon(makeint(16* fHtRatio));
+		BattleInterface.ShipIcon.shipclassiconsize		= "0,0";
 		BattleInterface.ShipIcon.gunchargeprogress		= "0.0625, 0.219, 0.359, 0.5, 0.641, 0.781, 0.983";
 
 		BattleInterface.ShipIcon.shiptexturename		= "battle_interface\ship_icons2_johnny88hud.tga"; // Иконка корабля
