@@ -101,7 +101,7 @@ float Cannon_GetFireHeight()
 	float Y,DY;
 	Y = stf(rEnemyShip.Height.(sBallName).Y);
 	DY = stf(rEnemyShip.Height.(sBallName).DY);
-	return (Y + (frnd()-0.5) * DY * 2);
+	return (Y + (frnd()-0.5) * DY);
 }
 
 // calculate recharge time for cannon
