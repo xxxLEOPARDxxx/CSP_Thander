@@ -313,8 +313,12 @@ void SetButtonsState()
 	}
 	else
 	{
-        xi_refCharacter = pchar;
-        SetVariable();
+		if (xi_refCharacter.id != pchar.id)
+		{
+			xi_refCharacter = pchar;
+			SetVariable();
+		}
+        
 	}
 }
 
