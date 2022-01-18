@@ -11,13 +11,13 @@ void ProcessDialogEvent()
 	makearef(NextDiag, NPChar.Dialog);
 
 	int iTemp;
-
+	
 	switch(Dialog.CurrentNode)
 	{
 		case "First time":
 			dialog.text = "Не о чем говорить.";
 			link.l1 = "Ладно...";
-			link.l1.go = "exit";
+			link.l1.go = "exit";			
 			NextDiag.TempNode = "First time";
 		break;
 
@@ -26,7 +26,7 @@ void ProcessDialogEvent()
 			DialogExit();
 		break;
 
-		case "exit_orient":
+		case "exit_orient":			
 			for (i=1; i<=12; i++)
 			{
 				sld = characterFromId("CaracasCit_"+i);
@@ -98,7 +98,7 @@ void ProcessDialogEvent()
 			for (i=1; i<=12; i++)
 			{
 				sld = characterFromId("CaracasCit_"+i);
-				sld.dialog.currentnode = "CaracasMan2";
+				sld.dialog.currentnode = "CaracasMan2";  
 				LAi_SetActorTypeNoGroup(sld);
 				LAi_ActorWaitDialog(sld, pchar);
 			}
@@ -222,13 +222,13 @@ void ProcessDialogEvent()
 			if (pchar.questTemp.MC == "toSeekQueen")
 			{
 				dialog.text = "Здравствуйте, капитан! Что скажете?";
-				link.l1 = "Я отравил"+ GetSexPhrase("ся","ась") +" на поиски фрегата 'Королева'. Похоже, что это последний шаг к вашему освобождению.";
+				link.l1 = "Я отравил"+ GetSexPhrase("ся","ась") +" на поиски галеон 'Королева'. Похоже, что это последний шаг к вашему освобождению.";
 				link.l1.go = "exit";
 			}
 			if (pchar.questTemp.MC == "over")
 			{
 				dialog.text = "Это вы сняли проклятие? В какой-то момент у нас все нормализовалось!";
-				link.l1 = "Да. Я наш"+ GetSexPhrase("ел","ла") +" фрегат 'Королева' и все сделал"+ GetSexPhrase("","а") +". Рад"+ GetSexPhrase("","а") +", что сумел"+ GetSexPhrase("","а") +" вам помочь.";
+				link.l1 = "Да. Я наш"+ GetSexPhrase("ел","ла") +" галеон 'Королева' и все сделал"+ GetSexPhrase("","а") +". Рад"+ GetSexPhrase("","а") +", что сумел"+ GetSexPhrase("","а") +" вам помочь.";
 				link.l1.go = "DMHeadOver";
 			}
 			if (CheckAttribute(pchar, "questTemp.MC.DesMoines"))
@@ -255,13 +255,13 @@ void ProcessDialogEvent()
 		break;
 
 		case "FoundLiz":
-			dialog.text = NPCStringReactionRepeat("Отлично! И что вы выяснили?",
-				"Мы уже говорили об этом, капитан.",
+			dialog.text = NPCStringReactionRepeat("Отлично! И что вы выяснили?", 
+				"Мы уже говорили об этом, капитан.", 
 				"Капитан, мы уже говорили об этом.",
                 "Капитан, ну сколько можно?", "block", 0, npchar, Dialog.CurrentNode);
-			link.l1 = HeroStringReactionRepeat("Элизабет не знает, как и почему было наложено это проклятие. Но ей стало известно, как его снять.",
+			link.l1 = HeroStringReactionRepeat("Элизабет не знает, как и почему было наложено это проклятие. Но ей стало известно, как его снять.", 
 				"Да, я помню.",
-                "Да, конечно...",
+                "Да, конечно...", 
 				"Я так"+ GetSexPhrase("ой","ая") +", настойчив"+ GetSexPhrase("ый","ая") +". Вот думаю, буду одно и то же спрашивать - авось случится чудо! Заклятие спадет, или еще чего-нибудь...", npchar, Dialog.CurrentNode);
 			link.l1.go = DialogGoNodeRepeat("FoundLiz_1", "", "", "", npchar, Dialog.CurrentNode);
 		break;
@@ -334,7 +334,7 @@ void ProcessDialogEvent()
 			if (pchar.questTemp.MC == "toSeekQueen")
 			{
 				dialog.text = "Здравствуйте, капитан! Что скажете?";
-				link.l1 = "Я отравил"+ GetSexPhrase("ся","ась") +" на поиски фрегата 'Королева'. Похоже, что это последний шаг к вашему освобождению.";
+				link.l1 = "Я отравил"+ GetSexPhrase("ся","ась") +" на поиски галеона 'Королева'. Похоже, что это последний шаг к вашему освобождению.";
 				link.l1.go = "exit";
 			}
 		break;
@@ -344,8 +344,8 @@ void ProcessDialogEvent()
 			link.l1.go = "DMSkelHead_2";
 		break;
 		case "DMSkelHead_2":
-			dialog.text = "Как-то причалил к нашему мысу пиратский фрегат 'Королева'. Пираты здесь рабов контрабандистам продали. Договариваются между собой...\n"+
-				"Продали пираты рабов, а потом у них между собой ссора какая-то вышла. Часть команды здесь осталась, а остальные с капитаном на фрегате в море ушли. С той поры все и началось.";
+			dialog.text = "Как-то причалил к нашему мысу пиратский галеон 'Королева'. Пираты здесь рабов контрабандистам продали. Договариваются между собой...\n"+
+				"Продали пираты рабов, а потом у них между собой ссора какая-то вышла. Часть команды здесь осталась, а остальные с капитаном на галеоне в море ушли. С той поры все и началось.";
 			link.l1 = "Да что началось? Говорите вы толком!";
 			link.l1.go = "DMSkelHead_3";
 		break;
@@ -372,7 +372,7 @@ void ProcessDialogEvent()
 		case "DMSkelHead_7":
 			dialog.text = "Пожалуй, что так\nВпрочем, силком вас держать никто не будет. Все равно вашим рассказам никто не поверит, а если поверят, пришлют Инквизицию с сотней солдат... и жизнь целого города будет на вашей совести. Впрочем, видно, вам-то не привыкать...";
 			link.l1 = "Черт, вы правы. Может, я смогу чем-то помочь?";
-			link.l1.go = "DMSkelHead_8";
+			link.l1.go = "DMSkelHead_8";		
 			link.l2 = "Вы абсолютно правы, господин мэр. Какое мне дело до вас и вашего городишки? Приятных снов!";
 			link.l2.go = "DMSkelHead_bye";
 			LocatorReloadEnterDisable("DesMoines_town", "reload1_back", false); //выпускаем из города
@@ -386,12 +386,12 @@ void ProcessDialogEvent()
 			AddQuestRecord("MagicCity", "4");
 			AddQuestUserData("MagicCity", "sSex", GetSexPhrase("","а"));
 			AddQuestUserData("MagicCity", "sSex1", GetSexPhrase("ел","ла"));
-			pchar.questTemp.MC = "toByeBye"; //флаг квеста
+			pchar.questTemp.MC = "toByeBye"; //флаг квеста	
 		break;
 
 		case "DMSkelHead_8":
 			dialog.text = "Снять проклятие - это наша мечта. Беда в том, что мы даже не знаем, в чем дело.";
-			link.l1 = "Плохо... Может попытаться разыскать этот фрегат, на котором ушли пираты? Похоже, что это единственная ниточка.";
+			link.l1 = "Плохо... Может попытаться разыскать этот галеон, на котором ушли пираты? Похоже, что это единственная ниточка.";
 			link.l1.go = "DMSkelHead_9";
 		break;
 		case "DMSkelHead_9":
@@ -410,22 +410,22 @@ void ProcessDialogEvent()
 			link.l1.go = "DMSkelHead_12";
 		break;
 		case "DMSkelHead_12":
-			dialog.text = "Без сомнения. Я признаю, что дал маху, отпустив ее на все четыре стороны. Надо было допытаться до всего, что она знает.\nСейчас я прошу вас найти ее и выяснить все, что ей известно об этих проклятых пиратах и фрегате 'Королева'.";
+			dialog.text = "Без сомнения. Я признаю, что дал маху, отпустив ее на все четыре стороны. Надо было допытаться до всего, что она знает.\nСейчас я прошу вас найти ее и выяснить все, что ей известно об этих проклятых пиратах и галеоне 'Королева'.";
 			link.l1 = "Хорошо, я так и поступлю.";
 			link.l1.go = "exit";
 			ChangeCharacterReputation(pchar, 5);
 			AddQuestRecord("MagicCity", "5");
 			AddQuestUserData("MagicCity", "sSex", GetSexPhrase("ся","ась"));
-			pchar.questTemp.MC = "toSeekSister"; //флаг квеста
+			pchar.questTemp.MC = "toSeekSister"; //флаг квеста	
 			LocatorReloadEnterDisable("Charles_town", "housePirate", false);
 			//ставим Лиз Шеппард
 			sld = GetCharacter(NPC_GenerateCharacter("LizSheppard", "BaynesDaughterSTOK", "woman", "towngirl", 10, ENGLAND, -1, false));
 			sld.name = "Элизабет";
-			sld.lastname = "Шеппард";
+			sld.lastname = "Шеппард";		
 			sld.dialog.filename = "Quest\MagicCity.c";
-			sld.dialog.currentnode = "LizBegin";
+			sld.dialog.currentnode = "LizBegin"; 
 			LAi_SetCitizenType(sld);
-			LAi_group_MoveCharacter(sld, "ENGLAND_CITIZENS");
+			LAi_group_MoveCharacter(sld, "ENGLAND_CITIZENS");	
 			ChangeCharacterAddressGroup(sld, "Charles_PirateHouse", "goto", "goto1");
 		break;
 		//Элизабет Шеппард
@@ -446,12 +446,12 @@ void ProcessDialogEvent()
 		break;
 		case "LizBegin_3":
 			dialog.text = "Чем я могу помочь?";
-			link.l1 = "Помогите мне разыскать фрегат 'Королева'.";
+			link.l1 = "Помогите мне разыскать галеон 'Королева'.";
 			link.l1.go = "LizBegin_4";
 		break;
 		case "LizBegin_4":
 			dialog.text = "Зачем ему нужен этот фрегат?";
-			link.l1 = "Дело в том, юная леди, что жители города связывают с этим фрегатом... возникновение внезапной эпидемии, поразившей город.";
+			link.l1 = "Дело в том, юная леди, что жители города связывают с этим галеоном... возникновение внезапной эпидемии, поразившей город.";
 			link.l1.go = "LizBegin_5";
 		break;
 		case "LizBegin_5":
@@ -460,7 +460,7 @@ void ProcessDialogEvent()
 			link.l1.go = "LizBegin_6";
 		break;
 		case "LizBegin_6":
-			dialog.text = "Конечно знаю! Дело в том, что капитан фрегата 'Королева' - очень дорогой мне человек. Последнее время я только тем и занимаюсь, что пытаюсь распутать этот клубок и развеять дьявольские чары.";
+			dialog.text = "Конечно знаю! Дело в том, что капитан галеона 'Королева' - очень дорогой мне человек. Последнее время я только тем и занимаюсь, что пытаюсь распутать этот клубок и развеять дьявольские чары.";
 			link.l1 = "Получается?";
 			link.l1.go = "LizBegin_7";
 		break;
@@ -517,7 +517,7 @@ void ProcessDialogEvent()
 				link.l1.go = "LizBegin_seekSkull";
 			}
 		break;
-
+		
 		case "LizBegin_SeekSkull":
 			dialog.text = "Именно так. В заброшенной столице ацтеков Теночтитлане.";
 			link.l1 = "Понятно. Если мне удасться раздобыть этот череп, то я первым делом отправлюсь сюда, в Чарльзтаун.";
@@ -531,7 +531,7 @@ void ProcessDialogEvent()
 			AddQuestRecord("MagicCity", "6");
 			AddQuestUserData("MagicCity", "sSex", GetSexPhrase("ел","ла"));
 			AddQuestUserData("MagicCity", "sSex1", GetSexPhrase("ся","ась"));
-			pchar.questTemp.MC = "toSeekSkull"; //флаг квеста
+			pchar.questTemp.MC = "toSeekSkull"; //флаг квеста	
 			NextDiag.TempNode = "LizCheckSkull";
 		break;
 
@@ -560,26 +560,26 @@ void ProcessDialogEvent()
 			link.l1.go = "LizCheckSkull_1";
 		break;
 		case "LizCheckSkull_1":
-			dialog.text = "Теперь у нас есть инструмент для снятия проклятия. Вам нужно отыскать фрегат 'Королева' и, собственно, снять проклятие с капитана.";
+			dialog.text = "Теперь у нас есть инструмент для снятия проклятия. Вам нужно отыскать галеон 'Королева' и, собственно, снять проклятие с капитана.";
 			link.l1 = "Ацтекский бог мертвых, тот самый, что дал мне нефритовый череп, сказал между прочим, что череп способен помочь проклятым живым. А как помочь - не объяснил...";
 			link.l1.go = "LizCheckSkull_2";
 		break;
 		case "LizCheckSkull_2":
 			dialog.text = "Полагаю, что нужно просто доставить череп в каюту к капитану 'Королевы'. В этом случае проклятие должно исчезнуть само по себе.";
-			link.l1 = "Может быть... А где искать это фрегат?";
+			link.l1 = "Может быть... А где искать это галеон?";
 			link.l1.go = "LizCheckSkull_3";
 		break;
 		case "LizCheckSkull_3":
-			dialog.text = "Не знаю. Скорей всего, капитан блуждает по морю вдали от городов. Смотрите внимательней вокруг, этот фрегат вы не пропустите.";
+			dialog.text = "Не знаю. Скорей всего, капитан блуждает по морю вдали от городов. Смотрите внимательней вокруг, этот галеон вы точно не пропустите.";
 			link.l1 = "Ясно. Ну что же, займусь поисками.";
 			link.l1.go = "exit";
 			SetDanielleInWorld();
 			AddQuestRecord("MagicCity", "7");
-			pchar.questTemp.MC = "toSeekQueen"; //флаг квеста
+			pchar.questTemp.MC = "toSeekQueen"; //флаг квеста	
 			NextDiag.TempNode = "LizSeekQueen";
 		break;
 		case "LizSeekQueen":
-			dialog.text = "Капитан, вы нашли фрегат 'Королева'?";
+			dialog.text = "Капитан, вы нашли галеон 'Королева'?";
 			link.l1 = "Нет еще...";
 			link.l1.go = "exit";
 			if (pchar.questTemp.MC == "over")
@@ -617,7 +617,7 @@ void ProcessDialogEvent()
 			link.l1 = "Прощайте, Элизабет.";
 			link.l1.go = "exit";
 			npchar.lifeDay = 30;
-			SaveCurrentNpcQuestDateParam(npchar, "LifeTimeCreate");
+			SaveCurrentNpcQuestDateParam(npchar, "LifeTimeCreate");	
 			NextDiag.TempNode = "LizOver_end";
 		break;
 		case "LizOver_end":
@@ -632,8 +632,8 @@ void ProcessDialogEvent()
 			link.l1.go = "DanAbordage_1";
 		break;
 		case "DanAbordage_1":
-			dialog.text = "Нам не о чем разговаривать. Ты напал"+ GetSexPhrase("","а") +" на мой фрегат!";
-			link.l1 = "Мне нужно было попасть в капитанскую каюту, иного варианта у меня не было!.. Подождите, разве этот фрегат ваш?";
+			dialog.text = "Нам не о чем разговаривать. Ты напал"+ GetSexPhrase("","а") +" на мой галеон!";
+			link.l1 = "Мне нужно было попасть в капитанскую каюту, иного варианта у меня не было!.. Подождите, разве этот галеон ваш?";
 			link.l1.go = "DanAbordage_2";
 		break;
 		case "DanAbordage_2":
@@ -648,7 +648,7 @@ void ProcessDialogEvent()
 		break;
 		case "DanAbordage_4":
 			dialog.text = "Точно! Позвольте вас спросить, кто вы так"+ GetSexPhrase("ой","ая") +"?";
-			link.l1 = "Меня зовут капитан " + GetFullName(pchar) + ". Я разыскал"+ GetSexPhrase("","а") +" ваш фрегат для того, чтобы снять проклятие. Расскажите мне, как получилось, что на вас пало проклятие ацтекского бога мертвых.";
+			link.l1 = "Меня зовут капитан " + GetFullName(pchar) + ". Я разыскал"+ GetSexPhrase("","а") +" ваш галеон для того, чтобы снять проклятие. Расскажите мне, как получилось, что на вас пало проклятие ацтекского бога мертвых.";
 			link.l1.go = "DanAbordage_5";
 		break;
 		case "DanAbordage_5":
@@ -660,7 +660,7 @@ void ProcessDialogEvent()
 			link.l1.go = "DanAbordage_6";
 		break;
 		case "DanAbordage_6":
-			dialog.text = "Все стояли, как громом пораженные. Ни о каком поединке не могло быть и речи. Но и взять Кабаля на борт фрегата тоже было невозможно. Поэтому, с большей частью команды я ушла в море. С Пьером остались только те, кто ему симпатизировал.";
+			dialog.text = "Все стояли, как громом пораженные. Ни о каком поединке не могло быть и речи. Но и взять Кабаля на борт галеона тоже было невозможно. Поэтому, с большей частью команды я ушла в море. С Пьером остались только те, кто ему симпатизировал.";
 			link.l1 = "А потом вы поняли, что проклятие - не шутка..";
 			link.l1.go = "DanAbordage_7";
 		break;
@@ -676,7 +676,7 @@ void ProcessDialogEvent()
 		break;
 		case "DanAbordage_10":
 			dialog.text = "Малышка Элизабет! Да уж, есть повод для гордости за сестру\nТак что, капитан, если вы пришли снимать проклятие, то делайте это!";
-			link.l1 = "Похоже, что дело уже сделано. Мне нужно было доставить нефритовый череп Миктлантекутли поближе к капитану фрегата 'Королева', что я сделал"+ GetSexPhrase("","а") +".";
+			link.l1 = "Похоже, что дело уже сделано. Мне нужно было доставить нефритовый череп Миктлантекутли поближе к капитану галеона 'Королева', что я сделал"+ GetSexPhrase("","а") +".";
 			link.l1.go = "DanAbordage_11";
 		break;
 		case "DanAbordage_11":
@@ -729,9 +729,9 @@ void ProcessDialogEvent()
 			sld.HalfImmortal = true;  // Контузия
 			sld.loyality = MAX_LOYALITY;
 			AddDialogExitQuestFunction("LandEnc_OfficerHired");
-			QuestAboardCabinDialogNotBattle();
+			QuestAboardCabinDialogNotBattle(); 
             DialogExit();
-		break;
+		break;	
 	}
 }
 
@@ -744,10 +744,10 @@ void SetDanielleInWorld()
 	sld.dialog.filename   = "Quest\MagicCity.c";
 	sld.dialog.currentnode   = "DanAbordage";
 	sld.greeting = "";
-	sld.GenQuest.CrewSkelModeClassic = true; //команда - скелеты
+	sld.GenQuest.CrewSkelModeClassic = true; //команда - скелеты 
 	FantomMakeCoolSailor(sld, SHIP_CATHERINE, "Королева", CANNON_TYPE_CANNON_LBS32, 90, 90, 90);
 	RealShips[sti(sld.Ship.Type)].ship.upgrades.hull = 1;
-	sld.Ship.Mode = "pirate";
+	sld.Ship.Mode = "pirate";	
 
 	DeleteAttribute(sld, "SinkTenPercent");
 	DeleteAttribute(sld, "SaveItemsForDead");
@@ -783,7 +783,7 @@ void SetDanielleInWorld()
 	Group_LockTask(sGroup);
 	Group_AddCharacter(sGroup, sld.id);
 	Group_SetGroupCommander(sGroup, sld.id);
-	SetRandGeraldSail(sld, sti(sld.Nation));
+	SetRandGeraldSail(sld, sti(sld.Nation)); 
 	sld.quest = "InMap"; //личный флаг искомого кэпа
 	sld.city = "SantaCatalina"; //определим колонию, из бухты которой с мушкетом выйдет
 	sld.cityShore = GetIslandRandomShoreId(GetArealByCityName(sld.city));
