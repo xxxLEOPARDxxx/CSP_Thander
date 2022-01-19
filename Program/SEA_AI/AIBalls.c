@@ -83,7 +83,7 @@ void Ball_AddBall(aref aCharacter, float fX, float fY, float fZ, float fSpeedV0,
 	AIBalls.z = fZ;
 	AIBalls.CharacterIndex    = aCharacter.Index;
 	AIBalls.Type = Goods[sti(aCharacter.Ship.Cannons.Charge.Type)].Name;
-	AIBalls.HeightMultiply    = fCannonHeightMultiply;
+	AIBalls.HeightMultiply    = 0.5;
 	AIBalls.SizeMultiply      = rCannon.SizeMultiply;
 	AIBalls.TimeSpeedMultiply = rCannon.TimeSpeedMultiply;
 	AIBalls.MaxFireDistance   = fMaxFireDistance;
