@@ -62,10 +62,10 @@ bool EnableFoodUsing(ref mc, aref arItm)
 void DoCharacterUsedFood(ref chref, string itmID)
 {
 	aref arItm;
-	if(Items_FindItem(itmID,&arItm)<0) return;
+	if( Items_FindItem(itmID,&arItm)<0 || CheckAttribute(chref,"chr_ai.Swift")) return;
 	TakeItemFromCharacter(chref,itmID);
 
-	if( Items_FindItem(itmID,&arItm)<0 || CheckAttribute(chref,"chr_ai.Swift")) return;
+	if( CheckAttribute(arItm,"Food.energy") ) return;
 	{
 		chref.chr_ai.noeat = 10.0;
 		LAi_UseEnergyBottle(chref,stf(arItm.Food.energy));
