@@ -25,6 +25,9 @@ void SetPerspectiveSettings()
 
     SeaFreeCamera.Perspective = fCamPersp;
 	SeaShipCamera.Perspective = fCamPersp;
+	
+	SendMessage(&locCamera, "lf", MSG_CAMERA_SET_RADIUS, CalcLandRadius());
+	SendMessage(&locCamera, "lf", MSG_CAMERA_SET_PERSPECTIVE, CalcLandPerspective());
 }
 //#20171223-01 Camera perspective option
 float CalcSeaPerspective()
