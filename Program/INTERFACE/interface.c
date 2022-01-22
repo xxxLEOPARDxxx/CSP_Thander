@@ -1673,15 +1673,15 @@ void procInfoShow()
 			switch(sInfoID)
 			{
 			case "save game":
-				objInfoList[nInfoIdx].picfilename = "loading\" + LanguageGetLanguage() + "\save_game.tga";
+				objInfoList[nInfoIdx].picbackfilename = "loading\" + LanguageGetLanguage() + "\save_game.tga";
 			break;
 
 			case "lost controller":
-				objInfoList[nInfoIdx].picfilename = "loading\" + LanguageGetLanguage() + "\lost_controller.tga";
+				objInfoList[nInfoIdx].picbackfilename = "loading\" + LanguageGetLanguage() + "\lost_controller.tga";
 			break;
 
 			case "Low Storage":
-				objInfoList[nInfoIdx].picfilename = "loading\" + LanguageGetLanguage() + "\low_storage.tga";
+				objInfoList[nInfoIdx].picbackfilename = "loading\" + LanguageGetLanguage() + "\low_storage.tga";
 			break;
 
 			case "game prepare":
@@ -1689,15 +1689,15 @@ void procInfoShow()
 			break;
 
 			case "MainMenuLaunch":
-				objInfoList[nInfoIdx].picfilename = "interfaces\mainmenu_ss.tga";
+				objInfoList[nInfoIdx].picbackfilename = "interfaces\mainmenu_ss.tga";
 			break;
 
 			case "OptionsBreak":
-				objInfoList[nInfoIdx].picfilename = "loading\" + LanguageGetLanguage() + "\options.tga";
+				objInfoList[nInfoIdx].picbackfilename = "loading\" + LanguageGetLanguage() + "\options.tga";
 			break;
 
 			case "Game Over Picture":
-				objInfoList[nInfoIdx].picfilename = InterfaceStates.GameOverPicture;
+				objInfoList[nInfoIdx].picbackfilename = InterfaceStates.GameOverPicture;
 			break;
 			}
 
