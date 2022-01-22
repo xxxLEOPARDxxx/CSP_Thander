@@ -11049,14 +11049,14 @@ void StartActorSelfDialog(string _CurrentNode)
     LAi_SetActorType(pchar);
     LAi_CharacterSaveAy(pchar);
     locCameraSleep(true);
-    if (stf(pchar.chr_ai.type.ay) > 0)
+    /*if (stf(pchar.chr_ai.type.ay) > 0)
     {
     	CharacterTurnAy(pchar,  -PI + abs(stf(pchar.chr_ai.type.ay)));  // 180 == 1
     }
     else
     {
     	CharacterTurnAy(pchar,  PI - abs(stf(pchar.chr_ai.type.ay)));  // 180 == 1
-    }
+    }*/
     pchar.Dialog.CurrentNode = _CurrentNode;
     LAi_ActorSelfDialog(pchar, "pchar_back_to_player");
 }
