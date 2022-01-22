@@ -1740,6 +1740,14 @@ bool LAi_NPC_EnableRecoil()
 
 
 //Параметры стрельбы
+
+//Shot through allies
+#event_handler("NPC_Event_ShotOnlyEnemyTest", "LAi_NPC_ShotOnlyEnemyTest");
+bool LAi_NPC_ShotOnlyEnemyTest()
+{
+	return LAi_grp_alarmactive;
+}
+
 //Вероятность желания выстрелить - кубик с такой вероятностью кидается 2 раза в секунду
 #event_handler("NPC_Event_GetFireActive","LAi_NPC_GetFireActive");
 float LAi_NPC_GetFireActive()

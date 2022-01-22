@@ -634,6 +634,17 @@ void BLI_SetObjectData()
 		objLandInterface.ManSign.commandlistverticaloffset = -36 * fHtRatio;
 		fTmp 											= makeint(60.0 * fHtRatio);
 		fTmp2 											= makeint(85.0 * fHtRatio);
+
+		objLandInterface.ManSign.gunreloadtexturename	= "battle_interface\MORALE_bar.tga";
+		objLandInterface.ManSign.gunreloadcolor 		= ARGB(255, 0, 255, 62);
+		objLandInterface.ManSign.gunreloadbackcolor		= ARGB(255, 0, 255, 62);
+		objLandInterface.ManSign.gunreloadUV			= "0.0,0.0,1.0,1.0";
+		fTmp 											= makeint(-10.0 * fHtRatio);
+		fTmp2 											= makeint(26.0 * fHtRatio);
+		objLandInterface.ManSign.gunreloadoffset		= fTmp + "," + fTmp2;
+		fTmp 											= makeint(60.0 * fHtRatio);
+		fTmp2 											= makeint(85.0 * fHtRatio);
+		objLandInterface.ManSign.gunreloadiconsize		= "70.0,6.0"
 	}
 	else
 	{
@@ -709,6 +720,17 @@ void BLI_SetObjectData()
 		objLandInterface.ManSign.commandlistverticaloffset = -36 * fHtRatio;
 		fTmp 											= makeint(60.0 * fHtRatio);
 		fTmp2 											= makeint(85.0 * fHtRatio);
+
+		objLandInterface.ManSign.gunreloadtexturename	= "battle_interface\MORALE_bar.tga";
+		objLandInterface.ManSign.gunreloadcolor 		= ARGB(255, 0, 255, 62);
+		objLandInterface.ManSign.gunreloadbackcolor		= ARGB(255, 0, 255, 62);
+		objLandInterface.ManSign.gunreloadUV			= "0.0,0.0,1.0,1.0";
+		fTmp 											= makeint(0.0 * fHtRatio);
+		fTmp2 											= makeint(26.0 * fHtRatio);
+		objLandInterface.ManSign.gunreloadoffset		= fTmp + "," + fTmp2;
+		fTmp 											= makeint(60.0 * fHtRatio);
+		fTmp2 											= makeint(85.0 * fHtRatio);
+		objLandInterface.ManSign.gunreloadiconsize		= "48.0,8.0";
 	}
 
 	for(i = 1; i<=MAX_NUM_FIGHTERS + 1; i++) {
@@ -1545,6 +1567,7 @@ void SetCharacterIconData(int chrindex, aref arData)
 	arData.energy = LAi_GetCharacterRelEnergy(chref);
 	arData.shootMax = LAi_GetCharacterChargeQuant(chref);
 	arData.shootCur = LAi_GetCharacterChargeCur(chref);
+	arData.gunprogress = LAi_GetGunChargeProgress(chref);
 	if( CheckAttribute(chref,"FaceId") ) {
 		if(InterfaceStates.HUDStyle) arData.texture = "battle_interface\portraits_csp\face_"+chref.FaceID+".tga";
 		else arData.texture = "battle_interface\portraits\face_"+chref.FaceID+".tga";
@@ -1561,25 +1584,4 @@ void SetCharacterIconData(int chrindex, aref arData)
 			arData.uv = "0.0,0.0,0.5,1.0";
 		}
 	}
-
-	aref chr_ai;
-	makearef(chr_ai, chref.chr_ai);
-	if (CheckAttribute(chref,"chr_ai.charge"))
-	{
-		float gunch = chr_ai.charge;
-		if (gunch > 1.0)
-		{
-			gunch -= makeint(gunch);
-		}
-
-		if (CheckAttribute(chref,"chr_ai.charge_max"))
-		{
-			if (MakeInt(chr_ai.charge) == makeint(chr_ai.charge_max))
-			{
-				gunch = 1.0;
-			}
-		}
-	}
-	arData.UDFVal1 = 1.0;
-	arData.UDFVal2 = gunch;
 }

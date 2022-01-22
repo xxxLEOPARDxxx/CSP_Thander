@@ -641,7 +641,18 @@ void LAi_GunSetChargeQuant(aref chr, int quant)
 
 	chr.chr_ai.chargeprc = "1";
 }
+float LAi_GetGunChargeProgress(aref chr)
+{
+	if(CheckAttribute(chr, "chr_ai.charge"))
+	{
+		float charge = chr.chr_ai.charge;
+		if(charge > 1) charge -= MakeInt(chr.chr_ai.charge);
+		if(CheckAttribute(chr, "chr_ai.charge_max") && MakeInt(chr.chr_ai.charge_max) == MakeInt(chr.chr_ai.charge)) 
+			charge = 1.0;
+	}
 
+	return charge;
+}
 bool LAi_SetCharacterUseBullet(ref rChar, string sBullet)
 {
 	string 	sAttr;
