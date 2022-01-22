@@ -1,5 +1,5 @@
 float fNewPos;
-#define MAX_LINE         98
+#define MAX_LINE         106
 
 string STR_TEXT[MAX_LINE] = {
 "",
@@ -20,7 +20,7 @@ string STR_TEXT[MAX_LINE] = {
 "Создатели модификации",
 "",
 "LEOPARD's team",
-"Corsairs Ship Pack: MaelStrom Edition",
+"Corsairs Ship Pack: OpenSource Edition",
 "",
 "",
 "",
@@ -37,6 +37,8 @@ string STR_TEXT[MAX_LINE] = {
 "Qwerry, St.",
 "Lipsar",
 "Arty",
+"Bestreducer",
+"annoyer",
 "",
 "",
 "",
@@ -46,6 +48,7 @@ string STR_TEXT[MAX_LINE] = {
 "Qwerry, St.",
 "BlackThorn",
 "Lipsar",
+"annoyer",
 "",
 "Тестирование",
 "LEOPARD",
@@ -57,6 +60,8 @@ string STR_TEXT[MAX_LINE] = {
 "Lipsar",
 "Sinistra",
 "Arty",
+"Bestreducer",
+"annoyer",
 "",
 "",
 "При создании модификации были",
@@ -84,10 +89,13 @@ string STR_TEXT[MAX_LINE] = {
 "Ерилейн за его уникального героя 'Темный Странник' и за помощь по мелочам",
 "Konstrush за его описание для героев и за сочный, крутой HUD",
 "Etienne и Narve за шикарных персонажей из Чёрныйх парусов и не только",
-"karlik-nos за помощь по моделированию разных вещей",
+"karlik-nos за моделирование многих вещей и за город Мариго",
 "johnny88 за классный худ и переделку кучи портретов",
+"johnny88 а также за кучу переделок по графике",
 "Kormach за переделку множества персонажей",
 "EvgAnt за шикарную озвучку боссов-нежить",
+"Noctus за шикарную переделку половины всех кораблей",
+"Shanks за предоставление качественных кораблей",
 "",
 "",
 "Ребята, ранее помогавшие по проекту",
@@ -97,8 +105,8 @@ string STR_TEXT[MAX_LINE] = {
 "Krah_an_Krait",
 "",
 "",
-"Особая благодарность раазработчику",
-"движка MaelStrom ChezJfrey из Buccaneer's Reef",
+"Особая благодарность всем раазработчикам движка",
+"OpenSource, а также нашему главному штурману - kb31",
 "Без него мы вряд ли бы увидели развитие проекта!",
 };
 
@@ -141,14 +149,19 @@ string STR_COLOR[MAX_LINE] = {
 "",
 "",
 "",
-"yellow",
-"",
-"",
-"",
-"",
 "",
 "",
 "yellow",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"yellow",
+"",
+"",
 "",
 "",
 "",
@@ -180,6 +193,9 @@ string STR_COLOR[MAX_LINE] = {
 "blue",
 "blue",
 "blue",
+"",
+"",
+"",
 "",
 "",
 "",
@@ -207,8 +223,8 @@ string STR_COLOR[MAX_LINE] = {
 void InitInterface(string iniName)
 {
 	GameInterface.title = "";
-
-	SendMessage(&GameInterface, "ls", MSG_INTERFACE_INIT, iniName);
+	
+	SendMessage(&GameInterface, "ls", MSG_INTERFACE_INIT,iniName);
 
 	SetEventHandler("InterfaceBreak", "ProcessCancelExit", 0);
 	SetEventHandler("exitCancel", "ProcessCancelExit", 0);
@@ -216,11 +232,11 @@ void InitInterface(string iniName)
 
 	SetFormatedText("INFO_TEXT", "");
 	int i, k;
-
+	
 	for(i = 0; i < MAX_LINE; i++)
 	{
 		SendMessage(&GameInterface, "lsle", MSG_INTERFACE_MSG_TO_NODE, "INFO_TEXT", 0, STR_TEXT[i] + "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-
+	
 		if(STR_COLOR[i] != "")
 		{
 			switch (STR_COLOR[i])
@@ -260,7 +276,7 @@ void IDoExit(int exitCode)
  	DelEventHandler("InterfaceBreak","ProcessCancelExit");
 	DelEventHandler("exitCancel","ProcessCancelExit");
 	DelEventHandler("My_MoveText","MoveText");
-
+    
 	interfaceResultCommand = exitCode;
 	if(CheckAttribute(&InterfaceStates,"InstantExit") && sti(InterfaceStates.InstantExit) == true)
 		EndCancelInterface(true);
@@ -277,7 +293,7 @@ void MoveText()
 	else
 	{
 		SendMessage(&GameInterface,"lslf",MSG_INTERFACE_MSG_TO_NODE,"INFO_TEXT",2, fNewPos);
-		PostEvent("My_MoveText", 20);
-		fNewPos = fNewPos + 0.0003;
+		PostEvent("My_MoveText", 30);
+		fNewPos = fNewPos + 0.0002;
 	}
 }
