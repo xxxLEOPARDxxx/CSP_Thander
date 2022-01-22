@@ -38,6 +38,7 @@
 // Addon things -->
 #include "Addons\utils.c"
 // Addon things <--
+#include "Controls\hotkey_travel.c"
 //// {*} BUHO-CIC - ADDED CODE - CIC vars and routines.
 #include "BUHO_CIC.c"
 //// {*} BUHO END ADDITION
@@ -1255,6 +1256,63 @@ void ProcessControls()
                 }
 				return;
             break;
+
+			case "AltModificatorOff":
+				if (!IsEntity(&ILogAndActions)) return;
+				if(loadedLocation.type == "Underwater") return;
+				bAltInfo = false;
+				ModifyTextInfo();
+			break;
+			
+			case "AltModificator":
+				if (!IsEntity(&ILogAndActions)) return;
+				if(loadedLocation.type == "Underwater") return;
+				bAltInfo = true;
+				SendMessage(&ILogAndActions,"l",LI_CLEAR_STRINGS);
+				ModifyTextInfo();
+			break; 
+
+			case "Fast_port":
+				if(bAltInfo)  HKT_Button(ControlName); 
+			break;
+			
+			case "Fast_store":
+				if(bAltInfo) HKT_Button(ControlName);
+					
+			break;
+			
+			case "Fast_Shipyard":
+				 if(bAltInfo) HKT_Button(ControlName);
+			break;
+			
+			case "Fast_tavern":
+				if(bAltInfo) HKT_Button(ControlName);
+			break;
+			
+			case "Fast_townhall":
+				if(bAltInfo) HKT_Button(ControlName);
+			break;
+			
+			case "Fast_bank":
+				if(bAltInfo) HKT_Button(ControlName);
+			break;
+			
+			case "Fast_church":
+				if(bAltInfo) HKT_Button(ControlName);
+			break;
+			
+			case "Fast_Brothel":
+				if(bAltInfo) HKT_Button(ControlName);
+			break;
+			
+			case "Fast_PortOffice":
+				if(bAltInfo) HKT_Button(ControlName);
+			break;
+			
+			case "Fast_prison":
+				if(bAltInfo) HKT_Button(ControlName);
+			break;
+			
             case "OfficersCharge":
                 pchar.OfficerAttRange = 35.0;
                 OfficersFollow();
@@ -1687,7 +1745,7 @@ void ProcessControls()
 		}
 		break;
 	    case "BOAL_DeadSearch":  // boal KEY_1
-			if (bLandInterfaceStart)
+			if (bLandInterfaceStart && !bAltInfo)
             {
                 itmIdx = Dead_FindCloseBody();
 			    if (itmIdx != -1)
