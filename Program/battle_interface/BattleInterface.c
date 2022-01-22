@@ -1179,6 +1179,7 @@ void BI_InitializeCommands()
 	BattleInterface.Commands.SailTo.texNum			= BI_ICONS_TEXTURE_COMMAND;
 	BattleInterface.Commands.SailTo.event			= "BI_SailTo";
 	BattleInterface.Commands.SailTo.note			= LanguageConvertString(idLngFile, "sea_SailTo");
+	BattleInterface.FillSailToIcons = "town";
 	//
 	BattleInterface.Commands.Board.enable			= false;
 	BattleInterface.Commands.Board.picNum			= 30;
@@ -2103,7 +2104,6 @@ void SetParameterData()
 	BattleInterface.battleborder.speed = 1.5;
 	BattleInterface.battleborder.texture = "battle_interface\battleborder.tga";
 
-	BattleInterface.FillSailToIcons = "town";
 
 	//Новый стиль HUD по чекбоксу
 	if (InterfaceStates.HUDStyle)
