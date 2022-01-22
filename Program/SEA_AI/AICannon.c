@@ -101,39 +101,7 @@ float Cannon_GetFireHeight()
 	float Y,DY;
 	Y = stf(rEnemyShip.Height.(sBallName).Y);
 	DY = stf(rEnemyShip.Height.(sBallName).DY);
-
-    // charge/ship depend
-	// boal new goals -->
-	//return (Y + (frnd()-0.5) * DY * 2);
-	// введем логику и учет от расстояния. также учет что, бомбы тяжелее ядер
-	float dist = Ship_GetDistance2D(aCharacter, aEnemy);
-	// Y- высоты прицела, задана для борта от типа корабля противника 1-3 для ядер 10-20 для книпперей 2-4 картеч DY - дисперсия
-	// Будем исходить из подобия треугольников и того, что высота подобрана Акеллой на середину радиура выстрела
-	ref	rCannon = GetCannonByType(sti(aCharacter.Ship.Cannons.Type));
-	if (sBallName == "Bombs" || sBallName == "Grapes")
-	{
-	   Y = Y + 0.6;
-	}
-	/* if (sBallName == "Knippels" )
-	{
-	   Y = Y + 2.6;
-	} */
-	if (sti(aEnemy.Ship.Type) == SHIP_FORT)
-	{
-	   Y = 40;
-	   DY = 16;
-	}
-	float RY = abs(Y * (dist / ( stf(rCannon.FireRange) / 2)) + (frnd()-0.5) * DY / 4));
-	if (RY < 0.8)
-	{
-	   RY = 0.8;
-	}
-	if (RY > 55)
-	{
-	   RY = 55;
-	}
-	return RY;
-	// boal <--
+	return (Y + (frnd()-0.5) * DY);
 }
 
 // calculate recharge time for cannon

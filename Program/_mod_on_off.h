@@ -19,6 +19,8 @@ string sGlobalTemp;
 // quest.c bool    bQuestCheckProcessFreeze = false; // заморозка квестов
 //Времянка типа для сдачи
 int surrenderenabled = 1;
+//Lipsar для альт переходов
+bool bAltInfo = false;
 // запрет всех случаек на суше (офицеры и клады тоже)
 bool    bDisableLandEncounters = false;
 // запрет жать ф2

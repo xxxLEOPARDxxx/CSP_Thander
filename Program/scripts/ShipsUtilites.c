@@ -2677,7 +2677,7 @@ void CreatePGG_Trade(ref ch, int iNation, ref shipOwner)
 	iType = storeArray2[rand(j-1)];
 
 	ch.Ship.Type = GenerateShipExt(iType, 1, ch);
-	ch.Ship.Mode = "merchant";
+	ch.Ship.Mode = "trade";
 }
 //--->Lipsar корабли по квесту Предложение Пирата
 void CreateFortDefenders(ref ch, int iNation)

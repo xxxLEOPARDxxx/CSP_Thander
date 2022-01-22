@@ -634,6 +634,17 @@ void BLI_SetObjectData()
 		objLandInterface.ManSign.commandlistverticaloffset = -36 * fHtRatio;
 		fTmp 											= makeint(60.0 * fHtRatio);
 		fTmp2 											= makeint(85.0 * fHtRatio);
+
+		objLandInterface.ManSign.gunreloadtexturename	= "battle_interface\MORALE_bar.tga";
+		objLandInterface.ManSign.gunreloadcolor 		= ARGB(255, 0, 255, 62);
+		objLandInterface.ManSign.gunreloadbackcolor		= ARGB(255, 0, 255, 62);
+		objLandInterface.ManSign.gunreloadUV			= "0.0,0.0,1.0,1.0";
+		fTmp 											= makeint(-10.0 * fHtRatio);
+		fTmp2 											= makeint(26.0 * fHtRatio);
+		objLandInterface.ManSign.gunreloadoffset		= fTmp + "," + fTmp2;
+		fTmp 											= makeint(60.0 * fHtRatio);
+		fTmp2 											= makeint(85.0 * fHtRatio);
+		objLandInterface.ManSign.gunreloadiconsize		= "70.0,6.0"
 	}
 	else
 	{
@@ -709,6 +720,17 @@ void BLI_SetObjectData()
 		objLandInterface.ManSign.commandlistverticaloffset = -36 * fHtRatio;
 		fTmp 											= makeint(60.0 * fHtRatio);
 		fTmp2 											= makeint(85.0 * fHtRatio);
+
+		objLandInterface.ManSign.gunreloadtexturename	= "battle_interface\MORALE_bar.tga";
+		objLandInterface.ManSign.gunreloadcolor 		= ARGB(255, 0, 255, 62);
+		objLandInterface.ManSign.gunreloadbackcolor		= ARGB(255, 0, 255, 62);
+		objLandInterface.ManSign.gunreloadUV			= "0.0,0.0,1.0,1.0";
+		fTmp 											= makeint(0.0 * fHtRatio);
+		fTmp2 											= makeint(26.0 * fHtRatio);
+		objLandInterface.ManSign.gunreloadoffset		= fTmp + "," + fTmp2;
+		fTmp 											= makeint(60.0 * fHtRatio);
+		fTmp2 											= makeint(85.0 * fHtRatio);
+		objLandInterface.ManSign.gunreloadiconsize		= "48.0,8.0";
 	}
 
 	for(i = 1; i<=MAX_NUM_FIGHTERS + 1; i++) {
@@ -840,6 +862,34 @@ void BLI_SetObjectData()
 		// }
 	// }
 
+	if(CheckAttribute(loadedLocation,"fastreload")) // подсказка только там, где она нужна
+	{
+		objLandInterface.textinfo.AltInfo.font = "interface_normal";
+		objLandInterface.textinfo.AltInfo.color = argb(243,254,252,169);
+		objLandInterface.textinfo.AltInfo.scale = 1.1 * fHtRatio;
+		objLandInterface.textinfo.AltInfo.pos.x = sti(showWindow.left) + RecalculateHIcon(300 * fHtRatio); 
+		objLandInterface.textinfo.AltInfo.pos.y = RecalculateVIcon(20 * fHtRatio);
+		objLandInterface.textinfo.AltInfo.refreshable = true;
+		
+		objLandInterface.textinfo.AltInfo1.font = "interface_normal";
+		objLandInterface.textinfo.AltInfo1.scale = 1.1 * fHtRatio;
+		objLandInterface.textinfo.AltInfo1.pos.x = sti(showWindow.left) + RecalculateHIcon(285 * fHtRatio); 
+		objLandInterface.textinfo.AltInfo1.pos.y = RecalculateVIcon(40 * fHtRatio);
+		objLandInterface.textinfo.AltInfo1.refreshable = true;
+		
+		objLandInterface.textinfo.AltInfo2.font = "interface_normal";
+		objLandInterface.textinfo.AltInfo2.scale = 1.1 * fHtRatio;
+		objLandInterface.textinfo.AltInfo2.pos.x = sti(showWindow.left) + RecalculateHIcon(285 * fHtRatio); 
+		objLandInterface.textinfo.AltInfo2.pos.y = RecalculateVIcon(60 * fHtRatio);
+		objLandInterface.textinfo.AltInfo2.refreshable = true;
+
+		objLandInterface.textinfo.AltInfo3.font = "interface_normal";
+		objLandInterface.textinfo.AltInfo3.scale = 1.1 * fHtRatio;
+		objLandInterface.textinfo.AltInfo3.pos.x = sti(showWindow.left) + RecalculateHIcon(306 * fHtRatio); 
+		objLandInterface.textinfo.AltInfo3.pos.y = RecalculateVIcon(80 * fHtRatio);
+		objLandInterface.textinfo.AltInfo3.refreshable = true;
+	}
+
 	objLandInterface.textinfo.deadboxinfo.font = "interface_button";
 	objLandInterface.textinfo.deadboxinfo.scale = 1.3 * fHtRatio;
 	objLandInterface.textinfo.deadboxinfo.pos.x = sti(showWindow.right) - RecalculateHIcon(makeint(130 * fHtRatio));
@@ -864,9 +914,40 @@ void BLI_SetObjectData()
 	objLandInterface.CommandList.UDArrow_Offset_Up = RecalculateHIcon(makeint(-41 * fHtRatio)) + "," + RecalculateVIcon(makeint(-30 * fHtRatio));
 	objLandInterface.CommandList.UDArrow_Offset_Down = RecalculateHIcon(makeint(-41 * fHtRatio)) + "," + RecalculateVIcon(makeint(46 * fHtRatio));
 
+	ModifyTextInfo();
+
 	SendMessage(&objLandInterface,"l",MSG_BATTLE_LAND_START);
 }
 
+void ModifyTextInfo()
+{
+	if(bAltInfo)
+	{
+		objLandInterface.textinfo.AltInfo4.text = "";
+		if(CheckAttribute(loadedLocation,"fastreload"))
+		{
+			objLandInterface.textinfo.AltInfo.text  = "Для быстрого перехода используйте кнопки:"; 
+			objLandInterface.textinfo.AltInfo1.text = "1-Порт, 2-Магазин, 3-Верфь, 4-Таверна ";
+			objLandInterface.textinfo.AltInfo2.text = "5-Резиденция, 6-Ростовщик, 7-Церковь ";
+			objLandInterface.textinfo.AltInfo3.text = "8-Бордель, 9-Портовое управление, 0-Тюрьма"; 
+
+		}
+		else
+		{
+			objLandInterface.textinfo.AltInfo.text  = " "; 
+			objLandInterface.textinfo.AltInfo1.text = " ";
+			objLandInterface.textinfo.AltInfo2.text = " ";
+			objLandInterface.textinfo.AltInfo3.text = " "; 
+		}
+	}
+	else
+	{
+		objLandInterface.textinfo.AltInfo.text  =  " "; 
+		objLandInterface.textinfo.AltInfo1.text =  " ";
+		objLandInterface.textinfo.AltInfo2.text =  " ";
+		objLandInterface.textinfo.AltInfo3.text = " "; 
+	}
+}
 
 void RefreshChargeTime()
 {
@@ -1523,7 +1604,12 @@ void LI_ProcessControlPress()
 		break;
 
 		case "LICommandsActivate":
-			PlaySound("interface\ok.wav"); // boal даешь звуки!
+			PlaySound("interface\ok.wav"); // boal даешь звуки! 
+			if(bAltInfo)
+			{
+				bAltInfo = false;
+				ModifyTextInfo();
+			}				
 		break;
 	}
 }
@@ -1545,6 +1631,7 @@ void SetCharacterIconData(int chrindex, aref arData)
 	arData.energy = LAi_GetCharacterRelEnergy(chref);
 	arData.shootMax = LAi_GetCharacterChargeQuant(chref);
 	arData.shootCur = LAi_GetCharacterChargeCur(chref);
+	arData.gunprogress = LAi_GetGunChargeProgress(chref);
 	if( CheckAttribute(chref,"FaceId") ) {
 		if(InterfaceStates.HUDStyle) arData.texture = "battle_interface\portraits_csp\face_"+chref.FaceID+".tga";
 		else arData.texture = "battle_interface\portraits\face_"+chref.FaceID+".tga";
@@ -1561,25 +1648,4 @@ void SetCharacterIconData(int chrindex, aref arData)
 			arData.uv = "0.0,0.0,0.5,1.0";
 		}
 	}
-
-	aref chr_ai;
-	makearef(chr_ai, chref.chr_ai);
-	if (CheckAttribute(chref,"chr_ai.charge"))
-	{
-		float gunch = chr_ai.charge;
-		if (gunch > 1.0)
-		{
-			gunch -= makeint(gunch);
-		}
-
-		if (CheckAttribute(chref,"chr_ai.charge_max"))
-		{
-			if (MakeInt(chr_ai.charge) == makeint(chr_ai.charge_max))
-			{
-				gunch = 1.0;
-			}
-		}
-	}
-	arData.UDFVal1 = 1.0;
-	arData.UDFVal2 = gunch;
 }
