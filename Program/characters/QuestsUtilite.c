@@ -2942,19 +2942,71 @@ void OfficerMushketerInit()
 }
 string GetStrSmallRegister(string sBase)
 {
-	int numSimbol;
 	string sResult, Simbol;
-	string LowRegister = XI_ConvertString("alphabet low register");
-	string UpRegister  = XI_ConvertString("alphabet up register");
 	sResult = "";
 	int qty = strlen(sBase);
 	for (int i=0; i<qty; i++)
 	{
 		Simbol = GetSymbol(sBase, i);
-		numSimbol = findsubstr(UpRegister, Simbol , 0);
-  		if (numSimbol != -1)
- 		{
-			Simbol = GetSymbol(LowRegister, numSimbol);
+		switch (Simbol)
+		{
+			case "А": sResult += "а"; continue; break;
+			case "Б": sResult += "б"; continue; break;
+			case "В": sResult += "в"; continue; break;
+			case "Г": sResult += "г"; continue; break;
+			case "Д": sResult += "д"; continue; break;
+			case "Е": sResult += "е"; continue; break;
+			case "Ё": sResult += "ё"; continue; break;
+			case "Ж": sResult += "ж"; continue; break;
+			case "З": sResult += "з"; continue; break;
+			case "И": sResult += "и"; continue; break;
+			case "Й": sResult += "й"; continue; break;
+			case "К": sResult += "к"; continue; break;
+			case "Л": sResult += "л"; continue; break;
+			case "М": sResult += "м"; continue; break;
+			case "Н": sResult += "н"; continue; break;
+			case "О": sResult += "о"; continue; break;
+			case "П": sResult += "п"; continue; break;
+			case "Р": sResult += "р"; continue; break;
+			case "С": sResult += "с"; continue; break;
+			case "Т": sResult += "т"; continue; break;
+			case "У": sResult += "у"; continue; break;
+			case "Ф": sResult += "ф"; continue; break;
+			case "Х": sResult += "х"; continue; break;
+			case "Ц": sResult += "ц"; continue; break;
+			case "Ч": sResult += "ч"; continue; break;
+			case "Ш": sResult += "ш"; continue; break;
+			case "Щ": sResult += "щ"; continue; break;
+			case "Э": sResult += "э"; continue; break;
+			case "Ю": sResult += "ю"; continue; break;
+			case "Я": sResult += "я"; continue; break;
+			
+			case "A": sResult += "a"; continue; break;
+			case "B": sResult += "b"; continue; break;
+			case "C": sResult += "c"; continue; break;
+			case "D": sResult += "d"; continue; break;
+			case "E": sResult += "e"; continue; break;
+			case "F": sResult += "f"; continue; break;
+			case "G": sResult += "g"; continue; break;
+			case "H": sResult += "h"; continue; break;
+			case "I": sResult += "i"; continue; break;
+			case "J": sResult += "j"; continue; break;
+			case "K": sResult += "k"; continue; break;
+			case "L": sResult += "l"; continue; break;
+			case "M": sResult += "m"; continue; break;
+			case "N": sResult += "n"; continue; break;
+			case "O": sResult += "o"; continue; break;
+			case "P": sResult += "p"; continue; break;
+			case "Q": sResult += "q"; continue; break;
+			case "R": sResult += "r"; continue; break;
+			case "S": sResult += "s"; continue; break;
+			case "T": sResult += "t"; continue; break;
+			case "U": sResult += "u"; continue; break;
+			case "V": sResult += "v"; continue; break;
+			case "W": sResult += "w"; continue; break;
+			case "X": sResult += "x"; continue; break;
+			case "Y": sResult += "y"; continue; break;
+			case "Z": sResult += "z"; continue; break;
 		}
 		sResult += Simbol;
 	}
