@@ -91,16 +91,16 @@ void LAi_type_officer_CharacterUpdate(aref chr, float dltTime)
 			}
 		}
 	}
-	// Lugger: Ебьба -->
+	// Lugger: Еда -->
 	string food = "";
 	float dfood;
-	if(LAi_GetCharacterEnergy(chr) < 25)
+	if(LAi_GetCharacterEnergy(chr) < LAi_GetCharacterMaxEnergy(chr) / 2)
 	{
 		dfood = LAi_GetCharacterMaxEnergy(chr) - LAi_GetCharacterEnergy(chr);
 		food = FindFoodForCharacter(chr, dfood);
 		DoCharacterUsedFood(&Characters[sti(chr.index)], food);
 	}
-	// <-- Lugger: Едьба
+	// <-- Lugger: Еда
 	//Дистанция до главного персонажа
 	float dist = 0.0;
 	float dhlt;

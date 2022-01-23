@@ -130,6 +130,21 @@ void ExternControlsInit(bool bFirst, bool standart)
 		CI_CreateAndSetControls("PrimaryLand", "UseAntidote", CI_GetKeyCode("KEY_V"), 0, true);
 		MapControlToGroup("UseAntidote", "FightModeControls");
 
+		// --> Lipsar быстрый переход на горячую клавишу
+		CI_CreateAndSetControls( "PrimaryLand", "AltModificator", CI_GetKeyCode("Alt"), 0, false );// альт модификатор
+		CI_CreateAndSetControls( "PrimaryLand", "AltModificatorOff", CI_GetKeyCode("Alt"), INVERSE_CONTROL, false ); 
+		CI_CreateAndSetControls( "PrimaryLand", "Fast_Port", CI_GetKeyCode("KEY_1"), 0, false );
+		CI_CreateAndSetControls( "PrimaryLand", "Fast_store", CI_GetKeyCode("KEY_2"), 0, false );
+		CI_CreateAndSetControls( "PrimaryLand", "Fast_Shipyard", CI_GetKeyCode("KEY_3"), 0, false );
+		CI_CreateAndSetControls( "PrimaryLand", "Fast_tavern", CI_GetKeyCode("KEY_4"), 0, false );
+		CI_CreateAndSetControls( "PrimaryLand", "Fast_townhall", CI_GetKeyCode("KEY_5"), 0, false );
+		CI_CreateAndSetControls( "PrimaryLand", "Fast_bank", CI_GetKeyCode("KEY_6"), 0, false );
+		CI_CreateAndSetControls( "PrimaryLand", "Fast_church", CI_GetKeyCode("KEY_7"), 0, false );
+		CI_CreateAndSetControls( "PrimaryLand", "Fast_Brothel", CI_GetKeyCode("KEY_8"), 0, false );
+		CI_CreateAndSetControls( "PrimaryLand", "Fast_PortOffice", CI_GetKeyCode("KEY_9"), 0, false );
+		CI_CreateAndSetControls( "PrimaryLand", "Fast_prison", CI_GetKeyCode("KEY_0"), 0, false );
+		// <-- Lipsar							
+		
 		CI_CreateAndSetControls( "PrimaryLand", "BOAL_DeadSearch", CI_GetKeyCode("KEY_1"), 0, true );
 		MapControlToGroup("BOAL_DeadSearch","FightModeControls");
 
@@ -526,6 +541,21 @@ void ExternControlsInit(bool bFirst, bool standart)
 		MapControlToGroup("ChrRun","FightModeControls");
 		MapControlToGroup("ChrRun","BattleInterfaceControls");
 		CI_CreateAndSetControls( "PrimaryLand", "ChrFightMode", CI_GetKeyCode("KEY_E"), 0, true );
+
+		// --> Lipsar быстрый переход на горячую клавишу
+		CI_CreateAndSetControls( "PrimaryLand", "AltModificator", CI_GetKeyCode("Alt"), 0, false );// альт модификатор
+		CI_CreateAndSetControls( "PrimaryLand", "AltModificatorOff", CI_GetKeyCode("Alt"), INVERSE_CONTROL, false ); 
+		CI_CreateAndSetControls( "PrimaryLand", "Fast_Port", CI_GetKeyCode("KEY_1"), 0, false );
+		CI_CreateAndSetControls( "PrimaryLand", "Fast_store", CI_GetKeyCode("KEY_2"), 0, false );
+		CI_CreateAndSetControls( "PrimaryLand", "Fast_Shipyard", CI_GetKeyCode("KEY_3"), 0, false );
+		CI_CreateAndSetControls( "PrimaryLand", "Fast_tavern", CI_GetKeyCode("KEY_4"), 0, false );
+		CI_CreateAndSetControls( "PrimaryLand", "Fast_townhall", CI_GetKeyCode("KEY_5"), 0, false );
+		CI_CreateAndSetControls( "PrimaryLand", "Fast_bank", CI_GetKeyCode("KEY_6"), 0, false );
+		CI_CreateAndSetControls( "PrimaryLand", "Fast_church", CI_GetKeyCode("KEY_7"), 0, false );
+		CI_CreateAndSetControls( "PrimaryLand", "Fast_Brothel", CI_GetKeyCode("KEY_8"), 0, false );
+		CI_CreateAndSetControls( "PrimaryLand", "Fast_PortOffice", CI_GetKeyCode("KEY_9"), 0, false );
+		CI_CreateAndSetControls( "PrimaryLand", "Fast_prison", CI_GetKeyCode("KEY_0"), 0, false );
+		// <-- Lipsar							
 
 		// boal -->
 		CI_CreateAndSetControls( "PrimaryLand", "BOAL_UsePotion", CI_GetKeyCode("KEY_C"), 0, true ); // Warship 13.06.09 Дефолтом перевесил на "C"
@@ -1030,6 +1060,8 @@ void ExternInitKeyCodes()
 	objControlsState.key_codes.VK_CAPSLOCK	    = 20;
 	objControlsState.key_codes.VK_CAPSLOCK.img = "s";
 
+	objControlsState.key_codes.Alt	    = 18; //ALT
+	objControlsState.key_codes.Alt.img = ".";
 	// boal <--
 
 	// Key groups for controls remapping

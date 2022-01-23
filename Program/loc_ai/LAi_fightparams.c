@@ -1738,8 +1738,27 @@ bool LAi_NPC_EnableRecoil()
 	return npc_return_tmpb;
 }
 
+#event_handler("NPC_Event_StunChance","LAi_NPC_StunChance");//Добавлен евент на стан после удара. Шансы расписаны ниже. Lipsar
+float LAi_NPC_StunChance()
+{
+	aref chr = GetEventData();
+	npc_return_tmp = 100;
+	if (CheckAttribute(chr,"cirassid")) npc_return_tmp -= 35;
+	if (IsCharacterPerkOn(chr, "SwordplayProfessional")) return npc_return_tmp -= 50;	
+	if (IsCharacterPerkOn(chr, "AdvancedDefence")) return npc_return_tmp -= 30;
+	if (IsCharacterPerkOn(chr, "BasicDefence")) return npc_return_tmp -= 10;
+	return npc_return_tmp;
+}
 
 //Параметры стрельбы
+
+//Shot through allies
+#event_handler("NPC_Event_ShotOnlyEnemyTest", "LAi_NPC_ShotOnlyEnemyTest");
+bool LAi_NPC_ShotOnlyEnemyTest()
+{
+	return LAi_grp_alarmactive;
+}
+
 //Вероятность желания выстрелить - кубик с такой вероятностью кидается 2 раза в секунду
 #event_handler("NPC_Event_GetFireActive","LAi_NPC_GetFireActive");
 float LAi_NPC_GetFireActive()
