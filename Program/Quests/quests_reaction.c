@@ -11090,7 +11090,6 @@ void Flag_Change(int iNation)
 	UpdateRelations();
 	PChar.GenQuest.VideoAVI = GetNationNameByType(iNation);
 	PChar.GenQuest.VideoAfterQuest = "";
-	DoQuestCheckDelay("PostVideo_Start", 0); 
 	WasteTime(1);
 	if(bSeaActive)
 	{

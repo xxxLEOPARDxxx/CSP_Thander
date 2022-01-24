@@ -921,6 +921,7 @@ void Ship_Add2Sea(int iCharacterIndex, bool bFromCoast, string sFantomType)
 	Ship_CreateStaticSounds(rCharacter);
 
 	SendMessage(&AISea, "liaa", AI_MESSAGE_ADD_SHIP, &Characters[iCharacterIndex], arChar, arShip);
+	//SendMessage(&AISea, "liaal", AI_MESSAGE_ADD_SHIP_LINES, &Characters[iCharacterIndex], arChar, arShip, 2);
 
 	ReloadProgressUpdate();
 
