@@ -2454,6 +2454,7 @@ void SetShipOTHERTableInfo(string _tabName)
 		{
 			row = "tr" + i;
 
+			GameInterface.(_tabName).(row).(std4).str = "";
 			GameInterface.(_tabName).(row).(std1).icon.width = 24;
 			GameInterface.(_tabName).(row).(std1).icon.height = 24;
 			GameInterface.(_tabName).(row).(std1).icon.offset = "2, 1";
