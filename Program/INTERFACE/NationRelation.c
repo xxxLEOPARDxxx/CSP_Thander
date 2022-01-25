@@ -291,7 +291,15 @@ void FlagsProcess()
 	Sea_ClearCheckFlag(); // сбросить всем в море проверку смотрения на флаг.
 	Flag_Change(curNationIdx);
 	pchar.DisableChangeFlagMode = true; //закрываем Флаг
-	DoQuestFunctionDelay("FreeChangeFlagMode", 10.0); // ролик + запас
+	PChar.GenQuest.VideoAVI = GetNationNameByType(curNationIdx);
+	PChar.GenQuest.VideoAfterQuest = "";
+	PChar.quest.FreeChangeFlagMode.win_condition.l1 = "Timer";
+	PChar.quest.FreeChangeFlagMode.win_condition.l1.date.day = GetAddingDataDay(0, 0, 0);
+	PChar.quest.FreeChangeFlagMode.win_condition.l1.date.month = GetAddingDataMonth(0, 0, 0);
+	PChar.quest.FreeChangeFlagMode.win_condition.l1.date.year = GetAddingDataYear(0, 0, 0);
+	PChar.quest.FreeChangeFlagMode.win_condition.l1.date.hour = GetHour() + 1;
+	PChar.quest.FreeChangeFlagMode.function = "FreeChangeFlagMode";
+	DoQuestCheckDelay("PostVideo_Start", 0); 
 	ProcessExitCancel();
 }
 
