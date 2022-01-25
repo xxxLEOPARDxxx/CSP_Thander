@@ -11088,9 +11088,6 @@ void Flag_Change(int iNation)
 	LAi_group_ClearAllTargets();
 	DoQuestCheckDelay("NationUpdate", 3.0);
 	UpdateRelations();
-	PChar.GenQuest.VideoAVI = GetNationNameByType(iNation);
-	PChar.GenQuest.VideoAfterQuest = "";
-	WasteTime(1);
 	if(bSeaActive)
 	{
 	    RefreshBattleInterface();

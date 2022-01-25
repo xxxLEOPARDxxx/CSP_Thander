@@ -291,6 +291,8 @@ void FlagsProcess()
 	Sea_ClearCheckFlag(); // сбросить всем в море проверку смотрения на флаг.
 	Flag_Change(curNationIdx);
 	pchar.DisableChangeFlagMode = true; //закрываем Флаг
+	PChar.GenQuest.VideoAVI = GetNationNameByType(curNationIdx);
+	PChar.GenQuest.VideoAfterQuest = "";
 	PChar.quest.FreeChangeFlagMode.win_condition.l1 = "Timer";
 	PChar.quest.FreeChangeFlagMode.win_condition.l1.date.day = GetAddingDataDay(0, 0, 0);
 	PChar.quest.FreeChangeFlagMode.win_condition.l1.date.month = GetAddingDataMonth(0, 0, 0);
