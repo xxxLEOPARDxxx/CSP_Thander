@@ -359,7 +359,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "Novoe_Zadanie_ZaIspaniu":
-            dialog.text = LinkRandPhrase("За короля!", "За Испанию!", "За нашего капитана!");
+            dialog.text = LinkRandPhrase("Я за вас - в огонь и в воду!", "За Испанию!", "За нашего капитана!");
             link.l1 = LinkRandPhrase("Так держать, солдат!", "Молодец!", "Умница!");
 			link.l1.go = "exit";
 			NextDiag.TempNode = "Novoe_Zadanie_ZaIspaniu";

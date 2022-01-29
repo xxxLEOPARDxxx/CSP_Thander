@@ -9936,11 +9936,11 @@ void QuestComplete(string sQuestName, string qname)
 
 			pchar.GenQuestBox.Havana_TownhallRoom.box2.items.PDM_ONV_Kluch = 1;
 
-			PChar.quest.PDM_ONV_TRUP_1.win_condition.l1 = "locator";
-			PChar.quest.PDM_ONV_TRUP_1.win_condition.l1.location = "Havana_TownhallRoom";
-			PChar.quest.PDM_ONV_TRUP_1.win_condition.l1.locator_group = "reload";
-			PChar.quest.PDM_ONV_TRUP_1.win_condition.l1.locator = "reload2";
-			PChar.quest.PDM_ONV_TRUP_1.win_condition = "PDM_ONV_Vkomnate_Trup";
+			//PChar.quest.PDM_ONV_TRUP_1.win_condition.l1 = "locator";
+			//PChar.quest.PDM_ONV_TRUP_1.win_condition.l1.location = "Havana_TownhallRoom";
+			//PChar.quest.PDM_ONV_TRUP_1.win_condition.l1.locator_group = "reload";
+			//PChar.quest.PDM_ONV_TRUP_1.win_condition.l1.locator = "reload2";
+			//PChar.quest.PDM_ONV_TRUP_1.win_condition = "PDM_ONV_Vkomnate_Trup";
 
 			PChar.quest.PDM_ONV_TRUP_2.win_condition.l1 = "locator";
 			PChar.quest.PDM_ONV_TRUP_2.win_condition.l1.location = "Havana_TownhallRoom";
@@ -9962,7 +9962,7 @@ void QuestComplete(string sQuestName, string qname)
 		break;
 
 		case "PDM_ONV_Vkomnate_Trup":
-			PChar.quest.PDM_ONV_TRUP_1.over = "yes";
+			//PChar.quest.PDM_ONV_TRUP_1.over = "yes";
 			PChar.quest.PDM_ONV_TRUP_2.over = "yes";
 			PChar.quest.PDM_ONV_TRUP_3.over = "yes";
 			PChar.quest.PDM_ONV_TRUP_4.over = "yes";
