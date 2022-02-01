@@ -28,18 +28,7 @@ void CreateCannonsEnvironment()
 
 int GetPowderQuantity(ref chref)
 {
-	switch (GetCannonCaliber(sti(chref.Ship.Cannons.Type)))
-	{
-		case 8: return 1; break;
-		case 12: return 1; break;
-		case 16: return 2; break;
-		case 20: return 2; break;
-		case 24: return 3; break;
-		case 32: return 4; break;
-		case 36: return 5; break;
-		case 42: return 6; break;
-		case 48: return 8; break;
-	}
+	return sti(Cannon[sti(chref.Ship.Cannons.Type)].powder);
 }
 
 bool Cannon_LoadBall()
