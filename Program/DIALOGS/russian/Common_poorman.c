@@ -126,17 +126,20 @@ void ProcessDialogEvent()
 					"Что нового в городе?", "Эх, с удовольствием "+ GetSexPhrase("послушал","послушала") +" бы последние сплетни...");
 				link.l3.go = "rumours_poor";
 				// --------------- линейка ГПК ---------------
-				//нашел письмо в сундуке Виллемстада
-				if (pchar.questTemp.LSC == "CanFoundStuvesantKey" && CheckCharacterItem(pchar, "letter_LSC") && pchar.questTemp.LSC.qtyTalk.headPoormanId == npchar.id)
+				if (CheckCharacterItem(pchar, "letter_LSC") && (pchar.questTemp.LSC.qtyTalk.headPoormanId == npchar.id))
 				{
-					link.l1 = "Послушай, мне кажется, что я "+ GetSexPhrase("нашел","нашла") +" в резиденции Стэвезанта нечто весьма интересное!";
-					link.l1.go = "FoundLetter";
-				}
-				//базар о том, что нашел причину заказа на нищих
-				if (pchar.questTemp.LSC == "readyGoLSC" && pchar.questTemp.LSC.qtyTalk.headPoormanId == npchar.id)
-				{
-					link.l1 = "Ты знаешь, мне удалось распутать этот клубок!";
-					link.l1.go = "GoLSC";
+					//нашел письмо в сундуке Виллемстада
+					if (pchar.questTemp.LSC == "CanFoundStuvesantKey")
+					{
+						link.l1 = "Послушай, мне кажется, что я "+ GetSexPhrase("нашел","нашла") +" в резиденции Стэвезанта нечто весьма интересное!";
+						link.l1.go = "FoundLetter";
+					}
+					//базар о том, что нашел причину заказа на нищих
+					if (pchar.questTemp.LSC == "toOliverTrast")
+					{
+						link.l1 = "Ты знаешь, мне удалось распутать этот клубок!";
+						link.l1.go = "GoLSC";
+					}
 				}
 			}
 			NextDiag.TempNode = "First time";
@@ -474,15 +477,22 @@ void ProcessDialogEvent()
 		break;
 		//базар с основным после завала Оливера Траста
 		case "GoLSC":
-			dialog.text = NPCStringReactionRepeat("Отлично! Ну, расскажи, в чем все дело?",
-				"Мы уже говорили на эту тему.",
-				"Хм, пообщались уже...",
-                "Послушай, долгие расставания - это для женщин.", "block", 0, npchar, Dialog.CurrentNode);
-			link.l1 = HeroStringReactionRepeat("Знаешь, ты оказался прав в предположении, которое "+ GetSexPhrase("высказал","высказала") +" в самом начале нашего общения. Все дело действительно в Тизере Дэне и его Острове.",
-				"Да, верно.",
-                "Точно!",
-				"Хм, ты прав...", npchar, Dialog.CurrentNode);
-			link.l1.go = DialogGoNodeRepeat("GoLSC_1", "", "", "", npchar, Dialog.CurrentNode);
+            AddQuestRecord("ISS_PoorsMurder", "11");
+            AddQuestUserData("ISS_PoorsMurder", "sSex", GetSexPhrase("ся","ась"));
+            AddQuestUserData("ISS_PoorsMurder", "sName", pchar.questTemp.LSC.poorName);
+            pchar.questTemp.LSC = "readyGoLSC";
+            DeleteAttribute(pchar, "questTemp.LSC.poorName");
+            int n = FindIsland("LostShipsCity");
+            Islands[n].visible = true;
+            Islands[n].reload_enable = true;
+            Islands[n].alwaysStorm = true; //живем в штормах
+            Islands[n].MaxSeaHeight = 2.0;
+            Islands[n].storm = true;
+            Islands[n].tornado = true;
+
+            dialog.text = "Отлично! Ну, расскажи, в чем все дело?";
+            link.l1 = "Знаешь, ты оказался прав в предположении, которое "+ GetSexPhrase("высказал","высказала") +" в самом начале нашего общения. Все дело действительно в Тизере Дэне и его Острове.";
+            link.l1.go = "GoLSC_1";
 		break;
 		case "GoLSC_1":
 			dialog.text = "Поясни, пожалуйста!";

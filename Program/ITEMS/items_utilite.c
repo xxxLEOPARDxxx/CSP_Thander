@@ -1146,32 +1146,6 @@ void QuestCheckTakeItem(aref _location, string _itemId)
 		Pchar.quest.PQ7_setBattleShip.win_condition.l1 = "MapEnter";
 	    Pchar.quest.PQ7_setBattleShip.function = "PQ7_setBattleShip";
 	}
-	//линейка ГПК, разборки с представителем в Мариго
-	if (_itemId == "letter_LSC")
-	{
-		AddQuestRecord("ISS_PoorsMurder", "11");
-		AddQuestUserData("ISS_PoorsMurder", "sSex", GetSexPhrase("ся","ась"));
-		AddQuestUserData("ISS_PoorsMurder", "sName", pchar.questTemp.LSC.poorName);
-		pchar.questTemp.LSC = "readyGoLSC";
-		DeleteAttribute(pchar, "questTemp.LSC.poorName");
-		int n = FindIsland("LostShipsCity");
-		Islands[n].visible = true;
-		Islands[n].reload_enable = true;
-		Islands[n].alwaysStorm = true; //живем в штормах
-		Islands[n].MaxSeaHeight = 2.0;
-		Islands[n].storm = true;
-		Islands[n].tornado = true;
-		n = GetCharacterIndex("PoorKillSponsor");
-		if (n != -1 && !LAi_IsDead(&characters[n]))
-		{
-			chrDisableReloadToLocation = true;
-			LAi_LocationFightDisable(loadedLocation, false);
-			LAi_group_Attack(&characters[n], pchar);
-			pchar.quest.PQ8_afterFight.win_condition.l1 = "NPC_Death";
-			pchar.quest.PQ8_afterFight.win_condition.l1.character = "PoorKillSponsor";
-			pchar.quest.PQ8_afterFight.win_condition = "OpenTheDoors";
-		}
-	}
 	//линейка ГПК, квест со скелетом Декстера. найденный ключ адмирала
 	if (_itemId == "keyPanama" && CheckAttribute(pchar, "questTemp.LSC.lostDecster") && pchar.questTemp.LSC.lostDecster == "admiralLostKey")
 	{
