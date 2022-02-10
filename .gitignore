@@ -76,9 +76,7 @@
 *.lnk
 
 # Папки
-*Betta_fix/
-*CSP_v2.2.0_fix
-*Dev_fix/
+*Program/__cache__/
 *SAVE/
 # *RESOURCE/animation/
 *RESOURCE/foam/

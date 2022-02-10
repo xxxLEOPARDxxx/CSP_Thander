@@ -3885,10 +3885,10 @@ void InitShips()
 	refShip.Weight						= Tonnes2CWT(1100);
 	refShip.Capacity        			= 5000;
 	refShip.CannonsQuantity				= 34;
-	refShip.rcannon 							= 13;
-	refShip.lcannon 							= 13;
+	refShip.rcannon 							= 15;
+	refShip.lcannon 							= 15;
 	refShip.fcannon 							= 2;
-	refShip.bcannon 							= 6;
+	refShip.bcannon 							= 2;
 	refShip.MaxCrew         				= 250;
 	refShip.MinCrew         				= 50;
 	refShip.SpeedRate				= 8;
@@ -3908,7 +3908,7 @@ void InitShips()
 	refship.Rocking.y = 0.5;
 	refship.Rocking.az = 0.04;
 
-	refship.WaterLine							= 0.6;
+	refship.WaterLine							= 0.5;
 
 	refship.SpeedDependWeight			= 0.15;
 	refship.SubSeaDependWeight			= 0.3;
@@ -5126,9 +5126,9 @@ void InitShips()
 	refShip.Weight						= Tonnes2CWT(1100);
 	refShip.Capacity        			= 4650;
 	refShip.CannonsQuantity				= 36;
-	refShip.rcannon 							= 16;
-	refShip.lcannon 							= 16;
-	refShip.fcannon 							= 2;
+	refShip.rcannon 							= 17;
+	refShip.lcannon 							= 17;
+	refShip.fcannon 							= 0;
 	refShip.bcannon 							= 2;
 	refShip.MaxCrew         				= 400;
 	refShip.MinCrew         				= 80;
@@ -9666,7 +9666,7 @@ void InitShips()
 	refShip.hullNums = 5; // LEO
 
 	///////////////////////////////////////////////////////////////////////////
-	//// LuggerQuest			Курьерский люггер
+	//// LuggerQuest			Курьерский люггер (Нормандия)
 	///////////////////////////////////////////////////////////////////////////
 	makeref(refShip,ShipsTypes[SHIP_LUGGERQUEST]);
 	refShip.Name            			= "LuggerQuest";
@@ -9677,9 +9677,9 @@ void InitShips()
 	refShip.Weight						= Tonnes2CWT(145);
 	refShip.Capacity        			= 990;
 	refShip.CannonsQuantity				= 12;
-	refShip.rcannon 							= 4;
-	refShip.lcannon 							= 4;
-	refShip.fcannon 							= 2;
+	refShip.rcannon 							= 5;
+	refShip.lcannon 							= 5;
+	refShip.fcannon 							= 0;
 	refShip.bcannon 							= 2;
 	refShip.MaxCrew         				= 96;
 	refShip.MinCrew         				= 18;
@@ -9704,7 +9704,7 @@ void InitShips()
 	refShip.Flags.Mast3.Flag1 = FLAG_ENSIGN;
 	refShip.Flags.Mast5.Flag1 = FLAG_ENSIGN;
 
-	refship.WaterLine							= 0.2;
+	refship.WaterLine							= -1;
 	refship.SpeedDependWeight			= 0.2;
 	refship.SubSeaDependWeight			= 0.6;
 	refship.TurnDependWeight			= 0.2;
