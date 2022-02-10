@@ -562,6 +562,7 @@ void CreateWeatherEnvironment()
 void Whr_UpdateWeather()
 {
 	if (!isEntity(&Weather)) { return; }
+	if (HasSubStr(loadedLocation.id,"Cabin")) return;
 
 //слишком много инитов
 //	WeatherInit();

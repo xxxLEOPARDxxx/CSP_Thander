@@ -77,7 +77,7 @@ void InitInterface_gm(string iniName)
 	SetNewPicture("LOGO", "Interfaces\SL_logo.tga.tx");
 
 
-	if(LAi_IsBoardingProcess())	SetSelectable("MB_RESUME",false);
+	// if(LAi_IsBoardingProcess())	SetSelectable("MB_RESUME",false);
 }
 
 

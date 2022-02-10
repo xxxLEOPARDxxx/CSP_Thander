@@ -71,12 +71,7 @@ bool CharacterIsDead(ref _refCharacter)
 
 bool IsCompanion(ref _refCharacter)
 {
-	int findIdx = 0;
-
-	if (CheckAttribute(_refCharacter,"index")) 
-	{
-   		findIdx = sti(_refCharacter.index);
-	}
+	int findIdx = sti(_refCharacter.index);
 	ref mc = GetMainCharacter();
 	for(int i=0; i<COMPANION_MAX; i++)
 	{
@@ -144,7 +139,7 @@ int RecalculateCargoLoad(ref _refCharacter)
 {
 	int loadSpace = 0;
 	// boal 27/07/06 учет орудий на борту -->
-	if (CheckAttribute(_refCharacter,"Ship.Cannons.Type") && sti(_refCharacter.Ship.Cannons.Type) != CANNON_TYPE_NONECANNON)
+	if (CheckAttribute(_refCharacter,"Ship.Cannons") && sti(_refCharacter.Ship.Cannons.Type) != CANNON_TYPE_NONECANNON)
 	{
 		ref Cannon = GetCannonByType(sti(_refCharacter.Ship.Cannons.Type));
 		loadSpace = GetCannonsNum(_refCharacter) * sti(Cannon.Weight);
@@ -535,7 +530,8 @@ int RemoveCharacterCrew(ref _refCharacter,int num)
 		SetCrewQuantity(_refCharacter,0);
 		return false;
 	}
-	SetCrewQuantityOverMax(_refCharacter,curCrew-num);//fix
+	//SetCrewQuantityOverMax(_refCharacter,curCrew-num);//fix
+	SetCrewQuantity(_refCharacter,curCrew-num);//фикс фикса - Gregg
 	return true;
 }
 float GetSailPercent(ref _refCharacter)
@@ -1333,6 +1329,16 @@ void UnlockAchievement(string ach_name, int level) // Открываем дос�
 
 	Log_Info("Открыто достижение '" + achievement + "' (+" + points + " очков)");
     PlaySound("interface\AchievementComplite.wav");
+
+	if (ach_name == "Nation_quest_E" || ach_name == "Nation_quest_F" || ach_name == "Nation_quest_H" || ach_name == "Nation_quest_S" || ach_name == "Nation_quest_P" )
+	{//какую-то из линеек только что выполнили
+		if (CheckAttribute(pchar, "achievements.Nation_quest_P") && sti(pchar.achievements.Nation_quest_P)!=3) DeleteAttribute(pchar, "achievements.Nation_quest_P");
+		if (CheckAttribute(pchar, "achievements.Nation_quest_E") && sti(pchar.achievements.Nation_quest_E)!=3) DeleteAttribute(pchar, "achievements.Nation_quest_E");
+		if (CheckAttribute(pchar, "achievements.Nation_quest_F") && sti(pchar.achievements.Nation_quest_F)!=3) DeleteAttribute(pchar, "achievements.Nation_quest_F");
+		if (CheckAttribute(pchar, "achievements.Nation_quest_H") && sti(pchar.achievements.Nation_quest_H)!=3) DeleteAttribute(pchar, "achievements.Nation_quest_H");
+		if (CheckAttribute(pchar, "achievements.Nation_quest_S") && sti(pchar.achievements.Nation_quest_S)!=3) DeleteAttribute(pchar, "achievements.Nation_quest_S");
+		pchar.Nation_q_achiev_fixed = true;
+	}//<--Qwerry, St. - скрытие других национальных линеек из таблицы достижений
 
 	pchar.achievements.(ach_name) = level;
 	AddAchievementPoints(points);
@@ -2335,6 +2341,22 @@ string GetCharacterEquipPictureByGroup(ref chref, string groupID)
 
 void RemoveCharacterEquip(ref chref, string groupID)
 {
+	if (groupID == BOOK_ITEM_TYPE && IsMainCharacter(chref)) //Qwerry - запоминаем, какую книгу читал ГГ
+	{
+		string sBookname = chref.bookname;
+		chref.halfreadbook.(sBookname) = 1;
+		chref.halfreadbook.(sBookname).bookname = chref.bookname;
+		chref.halfreadbook.(sBookname).booktime = chref.booktime;
+		chref.halfreadbook.(sBookname).booktime.full = chref.booktime.full;
+		chref.halfreadbook.(sBookname).bookbonus = chref.bookbonus;
+		chref.halfreadbook.(sBookname).booktype = chref.booktype;
+		DeleteAttribute(chref,"booktime");
+		DeleteAttribute(chref,"booktime.full");
+		DeleteAttribute(chref,"bookbonus");
+		DeleteAttribute(chref,"booktime");
+		DeleteAttribute(chref,"booktype");
+		Log_Info("Прервано чтение книги.");
+	}
 	DeleteAttribute(chref,"equip."+groupID);
 	SetEquipedItemToCharacter(chref,groupID,"");
 	SetNewModelToChar(chref);
@@ -2492,6 +2514,7 @@ void SetEquipedItemToCharacter(ref chref, string groupID, string itemID)
 				if(sti(chref.MapsAtlasCount) == MAPS_IN_ATLAS && !CheckCharacterPerk(chref, "MapMaker"))  // даем скрытый перк если собрали все карты островов
 				{
 					SetCharacterPerk(chref, "MapMaker");
+					UnlockAchievement("AchMapMaker", 3);
 				}
 			}
 		}
@@ -2639,6 +2662,53 @@ void EquipCharacterByItem(ref chref, string itemID)
 		FillISpyGlassParameters();
 	}*/
 	// boal <--
+
+	if (groupName == BOOK_ITEM_TYPE && IsMainCharacter(chref)) // Книги, экипировка - Gregg
+	{
+		string sBookname = arItm.name;
+		if (checkattribute(chref, "halfreadbook."+sBookname)) //Qwerry - продолжение чтения книги
+		{
+			chref.booktime = chref.halfreadbook.(sBookname).booktime;
+			chref.booktime.full = chref.halfreadbook.(sBookname).booktime.full;
+			chref.bookname = chref.halfreadbook.(sBookname).bookname;
+			chref.bookbonus = chref.halfreadbook.(sBookname).bookbonus;
+			chref.booktype = chref.halfreadbook.(sBookname).booktype;
+			DeleteAttribute(chref,"halfreadbook."+sBookname);//сразу стираем запомненное
+		}
+		else
+		{
+			chref.booktype = arItm.skill;
+			if(HasSubStr(arItm.id, "book1_"))
+			{
+				chref.booktime = BookTime(chref,1);//таймер
+				chref.booktime.full = sti(chref.booktime);//полное время
+				chref.bookname = arItm.name;//название книги
+				chref.bookbonus = 800;//экспа
+			}
+			if(HasSubStr(arItm.id, "book2_"))
+			{
+				chref.booktime = BookTime(chref,2);
+				chref.booktime.full = sti(chref.booktime);
+				chref.bookname = arItm.name;
+				chref.bookbonus = 1500;
+			}
+			if(HasSubStr(arItm.id, "book3_"))
+			{
+				chref.booktime = BookTime(chref,3);
+				chref.booktime.full = sti(chref.booktime);
+				chref.bookname = arItm.name;
+				chref.bookbonus = 3500;
+			}
+			if(HasSubStr(arItm.id, "book4_"))
+			{
+				chref.booktime = BookTime(chref,4);
+				chref.booktime.full = sti(chref.booktime);
+				chref.bookname = arItm.name;
+				chref.bookbonus = 7500;
+			}
+		}
+		Log_Info("Начато чтение книги. Ориентировочно, это займёт "+chref.booktime+" дней.");
+	}
 }
  // to_do
 void EquipOfficerByItem(ref chref, string itemID)
@@ -3698,7 +3768,7 @@ bool StoreOfficers_Ascold(ref refCh)
 	int i, idx;
 	// сохраним офицеров
 	makearef( arTmp, refCh.Fellows.Old.Officers );
-	for(i = 1; i < MAX_NUM_FIGHTERS; i++ )
+	for(i = 1; i <= MAX_NUM_FIGHTERS; i++ )
 	{
 		idx = GetOfficersIndex(refCh,i);
 		if( idx == -1 ) continue;

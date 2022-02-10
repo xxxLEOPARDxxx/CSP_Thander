@@ -318,7 +318,6 @@ void SetButtonsState()
 			xi_refCharacter = pchar;
 			SetVariable();
 		}
-        
 	}
 }
 

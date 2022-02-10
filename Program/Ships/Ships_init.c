@@ -612,14 +612,15 @@ void InitShips()
 	refship.Track2.Width	= "3.0, 4.5";
 	refship.Track2.Speed	= "0.15, 0.25";
 
-	 //Nation
+	//Nation
     refship.nation.england	= true;
 	refship.nation.france	= true;
 	refship.nation.holland	= true;
 	refship.nation.pirate	= true;
 	refship.nation.spain	= true;
 
-    refShip.hullNums = 4; // LEO
+	refShip.hullNums = 4; // LEO
+
 	///////////////////////////////////////////////////////////////////////////
 	/// Lugger_h	Тяж. Люггер
 	///////////////////////////////////////////////////////////////////////////
@@ -689,8 +690,6 @@ void InitShips()
 	refship.nation.holland	= true;
 	refship.nation.pirate	= true;
 	refship.nation.spain	= true;
-
-	refShip.hullNums = 4; // LEO
 
 	///////////////////////////////////////////////////////////////////////////
 	/// Speedy			Ср. Шлюп
@@ -4560,7 +4559,7 @@ void InitShips()
 	refship.nation.pirate	= true;
 	refship.nation.spain	= true;
 
-	refShip.hullNums = 4; // LEO
+	refShip.hullNums = 7; // LEO
 
 	///////////////////////////////////////////////////////////////////////////
 	/// Frigate_l			Тяж. Корвет
@@ -4952,8 +4951,6 @@ void InitShips()
 	refship.nation.pirate	= true;
 	refship.nation.spain	= true;
 
-	refShip.hullNums = 4; // LEO
-
 	///////////////////////////////////////////////////////////////////////////
 	/// Jamaicaship			Тяж. Пинас
 	///////////////////////////////////////////////////////////////////////////
@@ -5149,7 +5146,7 @@ void InitShips()
 	refship.Rocking.y = 0.4;
 	refship.Rocking.az = 0.02;
 
-	refship.WaterLine							= 1;
+	refship.WaterLine							= -0.5;
 
 	refship.SpeedDependWeight			= 0.15;
 	refship.SubSeaDependWeight			= 0.3;
@@ -5193,6 +5190,8 @@ void InitShips()
 	refship.nation.holland	= true;
 	refship.nation.pirate	= true;
 	refship.nation.spain	= true;
+
+	refShip.hullNums = 27; // LEO
 
 	///////////////////////////////////////////////////////////////////////////
 	/// Galeon1			Исп. Тяж. Галеон
@@ -9740,7 +9739,7 @@ void InitShips()
 	refship.Soundtype			= "lugger";
 	refShip.Class				= 4;
 	refShip.Cannon  			= CANNON_TYPE_CANNON_LBS8;
-	refShip.MaxCaliber  		= 16;
+	refShip.MaxCaliber  		= 20;
 	refShip.Weight				= Tonnes2CWT(380);
 	refShip.Capacity   			= 1800;
 	refShip.CannonsQuantity		= 30;
@@ -9813,7 +9812,7 @@ void InitShips()
 	refship.Soundtype			= "lugger";
 	refShip.Class				= 4;
 	refShip.Cannon  			= CANNON_TYPE_CANNON_LBS8;
-	refShip.MaxCaliber  		= 16;
+	refShip.MaxCaliber  		= 20;
 	refShip.Weight				= Tonnes2CWT(350);
 	refShip.Capacity   			= 2000;
 	refShip.CannonsQuantity		= 26;
@@ -9886,7 +9885,7 @@ void InitShips()
 	refship.Soundtype			= "lugger";
 	refShip.Class				= 4;
 	refShip.Cannon  			= CANNON_TYPE_CANNON_LBS8;
-	refShip.MaxCaliber  		= 16;
+	refShip.MaxCaliber  		= 20;
 	refShip.Weight				= Tonnes2CWT(400);
 	refShip.Capacity   			= 2100;
 	refShip.CannonsQuantity		= 24;

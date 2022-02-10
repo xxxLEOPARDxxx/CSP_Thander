@@ -59,7 +59,7 @@ void ProcessDialogEvent()
 		else
 		{
  	    	Dialog.CurrentNode = "RelationAny_Done";
- 	    	npchar.quest.relation.summ = CalculateRelationSum(sti(npchar.quest.relation));
+ 	    	npchar.quest.relation.summ = CalculateRelationSum(sti(npchar.quest.relation)) * MOD_SKILL_ENEMY_RATE;
  	    }
  	}
 
@@ -227,25 +227,16 @@ void ProcessDialogEvent()
 				link.l3 = "Я хочу помириться с Англией.";
 				link.l3.go = "RelationTo_0";
 			}
-
-
-
 			if (ChangeCharacterNationReputation(pchar, FRANCE, 0) < 0 || bCheck)
 			{
 				link.l1 = "Я хочу помириться с Францией.";
 				link.l1.go = "RelationTo_1";
 			}
-
-
-
 			if (ChangeCharacterNationReputation(pchar, SPAIN, 0) < 0 || bCheck)
 			{
 				link.l2 = "Я хочу помириться с Испанией.";
 				link.l2.go = "RelationTo_2";
 			}
-
-
-
 			if (ChangeCharacterNationReputation(pchar, HOLLAND, 0) < 0 || bCheck)
 			{
 				link.l4 = "Я хочу помириться с Голландией.";
@@ -631,7 +622,7 @@ void ProcessDialogEvent()
 				AddQuestRecord("ISS_PoorsMurder", "10");
 				LocatorReloadEnterDisable("Marigo_town", "houseH2", false);
 				if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("PoorKillSponsor", "smuggler_boss", "man", "spy", 30, PIRATE, -1, true)); // LEO: Страдать превозмогаторам 07.12.2021
-				else sld = GetCharacter(NPC_GenerateCharacter("PoorKillSponsor", "smuggler_boss", "man", "man_fast", 30, PIRATE, -1, true));
+				else sld = GetCharacter(NPC_GenerateCharacter("PoorKillSponsor", "smuggler_boss", "man", "man", 30, PIRATE, -1, true));
 				sld.name = "Оливер";
 				sld.lastname = "Траст";
 				FantomMakeCoolFighter(sld, 40, 90, 90, "blade26", "pistol3", 100);

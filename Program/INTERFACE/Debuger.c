@@ -1029,7 +1029,7 @@ void CalculateInfoDataF6()
 	// mc.Ship.Type = GenerateShipExt(SHIP_CARRACA, true, mc);
 
 	// 2 класс
-	mc.Ship.Type = GenerateShipExt(SHIP_GALEON50, true, mc);
+	// mc.Ship.Type = GenerateShipExt(SHIP_GALEON50, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_FASTFRIGATE, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_FR_ESSEX, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_FRIGATE_H, true, mc);
@@ -1086,7 +1086,7 @@ void CalculateInfoDataF6()
 	// mc.Ship.Type = GenerateShipExt(SHIP_CATHERINE, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_FLYINGDUTCHMAN, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_SANTISIMA, true, mc);
-	// mc.Ship.Type = GenerateShipExt(SHIP_SOLEYRU, true, mc);
+	mc.Ship.Type = GenerateShipExt(SHIP_SOLEYRU, true, mc);
 
 	SetBaseShipData(mc);
 	ref VeryRealShip = GetRealShip(sti(PChar.Ship.Type));
@@ -2567,11 +2567,14 @@ void CalculateInfoDataF52()
 	Statistic_AddValue(PChar, "Cheats.F52", 1);
 }
 
-string descF53 = "Нет назначений";
+string descF53 = "Включить/выключить туман войны на глобальной карте";
 void CalculateInfoDataF53()
 {
 	totalInfo = descF53;
-
+	if (checkattribute(pchar, "cheatGlobalMapView")) 
+			{deleteattribute(pchar, "cheatGlobalMapView"); totalInfo += ". => ВЫКЛЮЧЕНО";}
+		else {pchar.cheatGlobalMapView = true; totalInfo += ". => ВКЛЮЧЕНО";}
+	ApplayNewSkill(pchar, "", 0);
 	totalInfo = totalInfo + NewStr() + NewStr() + "Команда отработала успешно!";
 
 	SetFormatedText("INFO_TEXT", totalInfo);

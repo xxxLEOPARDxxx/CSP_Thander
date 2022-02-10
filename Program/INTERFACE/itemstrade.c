@@ -754,8 +754,8 @@ void TransactionOK()
 
 		TakeNItems(refCharacter, Items[iCurGoodsIdx].id, nTradeQuantity);
 		//#20200218-01
-		if(CheckAttribute(&Items[iCurGoodsIdx], "shown"))
-			Items[iCurGoodsIdx].shown = false;
+		/*if(CheckAttribute(&Items[iCurGoodsIdx], "shown"))
+			Items[iCurGoodsIdx].shown = false;*/
 		moneyback = makeint(iCharPrice*stf(GameInterface.qty_edit.str) + 0.5);
 		pchar.money = sti(pchar.money)  - moneyback;
 		Statistic_AddValue(Pchar, "Money_spend", moneyback);
@@ -769,8 +769,8 @@ void TransactionOK()
 		TakeNItems(refStoreChar, Items[iCurGoodsIdx].id, nTradeQuantity);
 		TakeNItems(refCharacter, Items[iCurGoodsIdx].id, -nTradeQuantity);
 		//#20200218-01
-		if(CheckAttribute(&Items[iCurGoodsIdx], "shown"))
-			Items[iCurGoodsIdx].shown = true;
+		/*if(CheckAttribute(&Items[iCurGoodsIdx], "shown"))
+			Items[iCurGoodsIdx].shown = true;*/
 		moneyback = makeint(iStorePrice*stf(GameInterface.qty_edit.str) + 0.5);
   		pchar.money = sti(pchar.money)  + moneyback;
 		Statistic_AddValue(Pchar, "Money_get", moneyback);

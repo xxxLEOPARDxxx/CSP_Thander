@@ -1530,8 +1530,8 @@ void ProcessDialogEvent()
 			dialog.text = "Ох... Даже жаль с ними расставаться. Я к ним уже как-то привык. Что же - приходите ко мне еще.";
 			Link.l1 = "Если понадобится - приду. Счастливо оставаться.";
 			Link.l1.go = "Exit";
-			DeleteAttribute(Pchar, "quest.Deposits." + (NPC_Area));
 			CheckForAchievement();
+			DeleteAttribute(Pchar, "quest.Deposits." + (NPC_Area));
 		break;
 
 		case "Deposit_return_2":
@@ -1543,6 +1543,7 @@ void ProcessDialogEvent()
 
 		case "Deposit_return_3":
 			iTemp = sti(dialogEditStrings[3]);
+			CheckForAchievement();
 			if (iTemp <= 0 || iTemp > sti(Pchar.Quest.Deposits.(NPC_Area).Sum))
 			{
 				dialog.text = "Шутить изволите?";
@@ -1574,7 +1575,6 @@ void ProcessDialogEvent()
 				}
 				//pchar.questTemp.depositcount = sti(pchar.questTemp.depositcount) - iTemp;
 				//if(sti(pchar.questTemp.depositcount) >= 50000000) UnlockAchievement("bank_money", 3);
-				CheckForAchievement();
 			}
 		break;
 

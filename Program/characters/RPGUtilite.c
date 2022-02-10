@@ -407,6 +407,7 @@ string GetRPGText(string _param)
     string totalInfo;
 
     idLngFile = LanguageOpenFile("RPGDescribe.txt");
+	if (MOD_SKILL_ENEMY_RATE == 10 && _param == "sailing") _param += "Hard10";
     totalInfo = LanguageConvertString(idLngFile, _param);
     LanguageCloseFile(idLngFile);
 
@@ -579,17 +580,19 @@ void AddCharacterSkillDontClearExp(ref _chref, string _skill, int _addValue)
 
 void ApplayNewSkill(ref _chref, string _skill, int _addValue)
 {
-	if (_chref.id == pchar.id)
+	if (_chref == pchar)
 	{
 		float P = makefloat(GetCharacterSPECIALSimple(_chref, SPECIAL_P)*10);
+		float k = 0.0;
+		if (checkattribute(pchar, "cheatGlobalMapView")) k = 2500.0;
 		//Enemy ship
-		worldMap.enemyshipViewDistMin = 60.0+P;		//Растояние на котором корабль начинает исчезать
-		worldMap.enemyshipViewDistMax = 120.0+P;		//Растояние на котором корабль исчезает полностью
+		worldMap.enemyshipViewDistMin = 60.0+P+k;		//Растояние на котором корабль начинает исчезать
+		worldMap.enemyshipViewDistMax = 120.0+P+k;		//Растояние на котором корабль исчезает полностью
 		worldMap.enemyshipBrnDistMin = 80.0+P;		//Минимальное растояние на котором рожается корабль
 		worldMap.enemyshipBrnDistMax = 130.0+P;		//Максимальное растояние на котором рожается корабль
 		//storm
-		worldMap.stormViewDistMin = 90.0+P;			//Растояние на котором шторм начинает исчезать
-		worldMap.stormViewDistMax = 180.0+P;			//Растояние на котором шторм исчезает полностью
+		worldMap.stormViewDistMin = 90.0+P+k;			//Растояние на котором шторм начинает исчезать
+		worldMap.stormViewDistMax = 180.0+P+k;			//Растояние на котором шторм исчезает полностью
 		worldMap.stormDistKill = 190.0+P;				//Расстояние на котором убиваем шторм
 		worldMap.stormBrnDistMin = 100.0+P;			//Минимальное растояние на котором рожается шторм
 		worldMap.stormBrnDistMax = 140.0+P;			//Максимальное растояние на котором рожается шторм
@@ -2526,6 +2529,7 @@ void SetAllAchievements(int level)
 	pchar.achievements.AchSalazar = level; // Тухлый испанец 100 ---
 	pchar.achievements.AchKaskos = level; // Слишком стухший испанец 100 ---
 	pchar.achievements.AchUmSamil = level; // Забытый клон Миклухи-ягуара 100 ---
+	pchar.achievements.AchMapMaker = level; // Атлас собран 100
 	pchar.achievements.LSC_quest = level; // Выполнение квеста "ГПК" 100
 	pchar.achievements.Teno_quest = level; // Выполнение квеста "Теночтитлан" 100
 	pchar.achievements.Ghostship_quest = level; // Выполнение квеста "Корабль-призрак" 100
@@ -2544,10 +2548,10 @@ void SetAllAchievements(int level)
 	pchar.achievements.Nation_quest_S = level; // Выполнение национальной линейки квестов 100 ---
 	pchar.achievements.Nation_quest_P = level; // Выполнение национальной линейки квестов 100 ---
 
-	// Всего очков доступных для получения: 7500 (по 100-175 на каждое достижение) - мне лень пересчитывать (Калькулятор запили, Грегг, блеать! (c) LEOPARD :) )
-	// Гарантированно можно получить 6700 очков достижений, если исключать 4 линейки наций, линейки за персонажей и опционалки
-	// Всего достижений: 46
-	// При пересчёте возможных к получению в 1 партии был максимум в... 5050
+	// Всего очков доступных для получения: 7600 (по 100-175 на каждое достижение) - мне лень пересчитывать (Калькулятор запили, Грегг, блеать! (c) LEOPARD :) )
+	// Гарантированно можно получить 6800 очков достижений, если исключать 4 линейки наций, линейки за персонажей и опционалки
+	// Всего достижений: 47
+	// При пересчёте возможных к получению в 1 партии был максимум в... 5150
 }
 
 void CreateOreModels()
