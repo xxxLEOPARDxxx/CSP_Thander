@@ -212,7 +212,6 @@ void FillOrderShip(int _iShipBaseType)
 	NullCharacterGoods(refNPCShipyard);
 	SetRandomNameToShip(refNPCShipyard);
 	SetCabinTypeEx(RealShips[iShip], sti(RealShips[iShip].Class));//рандом каюты //TODO - добавить в интерфейс выбор?
-	//ещё вес корабля рандомиться может, но пока оставляю стандарт //TODO - добавить в интерфейс выбор?
 }
 
 void FillShipParam()
@@ -232,7 +231,7 @@ void FillShipParam()
 		rRealShip.Capacity = makeint(stf(rBaseShip.Capacity) * (1 + Ship_Sheme[7]/32));
 		rRealShip.OptCrew = stf(rBaseShip.OptCrew) * (1 + Ship_Sheme[8]/32);
 		rRealShip.MaxCrew = stf(rBaseShip.MaxCrew) * (1 + Ship_Sheme[8]/32);
-		rRealShip.MinCrew = stf(rBaseShip.MinCrew) * (1 + Ship_Sheme[8]/32);//верно ли что минимальная команда в пять раз меньше оптимальной?
+		rRealShip.MinCrew = stf(rBaseShip.MinCrew) * (1 + Ship_Sheme[8]/32);
 		rRealShip.MaxCaliber = rBaseShip.MaxCaliber;
 
 		refNPCShipyard.Ship.Cannons.Type = CANNON_TYPE_NONECANNON;
@@ -934,7 +933,7 @@ void CalcTuningPrice()
 	float shipWindAgainst = stf(RealShips[iShipT].WindAgainstSpeed);
 
 	float fQuestShip = 1.0;
-	if(CheckAttribute(&RealShips[sti(Pchar.Ship.Type)], "QuestShip")) fQuestShip = 1.2;
+	if(CheckAttribute(&RealShips[sti(refNPCShipyard.Ship.Type)], "QuestShip")) fQuestShip = 1.2;
 
 	sundukSum = 7-shipClass;
 

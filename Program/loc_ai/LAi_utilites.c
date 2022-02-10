@@ -1281,18 +1281,6 @@ void CreatePearlVillage(aref loc)
 			SetFoodToCharacter(chr, 3, 20);
 		}
 		//<-- перс Алекса
-		//--> главарь грабителей
-		if (loc.id == "Pearl_town_2" && sti(pchar.questTemp.tugs.berglarState) > 6)
-		{
-			pchar.quest.Berglars_Ostin.win_condition.l1 = "location";
-			pchar.quest.Berglars_Ostin.win_condition.l1.location = "PearlTown2_House6";
-			pchar.quest.Berglars_Ostin.win_condition = "Berglars_Ostin";
-			//==> трем базу по квесту
-			DeleteAttribute(pchar, "questTemp.tugs");
-			//==> ставим счетчик, чтобы не глючило по коду
-			pchar.questTemp.tugs.berglarState = 0;
-		}
-		//<-- главарь грабителей
 		//=========================== квесты в поселениях ================================
 		LAi_group_SetLookRadius("PearlGroup_"+iPrefix, 16);
 		LAi_group_SetHearRadius("PearlGroup_"+iPrefix, 10);

@@ -327,7 +327,7 @@ void ProcessDialogEvent()
 			sld = &characters[sti(npchar.quest.choiceIdx)];
 			if (sti(pchar.money) >= sti(sld.quest.price))
 			{
-				if (if (rand(4) == 0 && pchar.sex != "woman" && !CheckAttribute(pchar,"NoPriest") && GetCharacterSPECIALSimple(pchar, SPECIAL_L) >= 8)
+				if (rand(4) == 0 && pchar.sex != "woman" && !CheckAttribute(pchar,"NoPriest") && GetCharacterSPECIALSimple(pchar, SPECIAL_L) >= 8)
 				{
 					dialog.text = "Отлично, дорогой, " + sld.name + " будет ждать тебя в комнате для уединения на втором этаже. Уверена, ты будешь оооочень доволен...");
 					Link.l1 = "Хех, ну я пошел...";

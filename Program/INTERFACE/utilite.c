@@ -722,19 +722,6 @@ bool XI_FindFoldersWithoutNetsave(string sFindTemplate,aref arFoldersList)
 	}
 
 	return bRetVal;
-	/*bool bRetVal = FindFolders(sFindTemplate,arFoldersList);
-
-	int num = GetAttributesNum(arFoldersList);
-	int i = 0;
-	for(i=0; i<num; i++) {
-		if( "NetSaves" == GetAttributeValue(GetAttributeN(arFoldersList,i)) )
-		{
-			DeleteAttribute( arFoldersList, GetAttributeName(GetAttributeN(arFoldersList,i)) );
-			return bRetVal;
-		}
-	}
-
-	return bRetVal;*/
 }
 // boal -->
 void ReadSavedOptionsEx(ref gopt)
@@ -1132,11 +1119,18 @@ string GetItemDescribe(int iGoodIndex)
 	{
 		if(arItm.groupID == BOOK_ITEM_TYPE)
 		{
-			if (CheckAttribute(pchar,"booktype") && pchar.bookname == arItm.name)
+			if (CheckAttribute(pchar,"booktype") && pchar.bookname == arItm.name)//сейчас читаем книгу
 			{
 				float value = ((sti(pchar.booktime)*100)/sti(pchar.booktime.full)-100)*(-1.0);
 				string text = FloatToString(value,1);
 				describeStr += "Прочитано примерно "+text+"%.";
+			}
+			string sBookname = arItm.name;
+			if (checkattribute(pchar,"halfreadbook."+sBookname))//книга, которую сняли недочитав
+			{
+				float value1 = ((sti(pchar.halfreadbook.(sBookname).booktime)*100)/sti(pchar.halfreadbook.(sBookname).booktime.full)-100)*(-1.0);
+				string text1 = FloatToString(value1,1);
+				describeStr += "Прочитано примерно "+text1+"%.";
 			}
 		}
 	}

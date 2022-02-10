@@ -692,6 +692,7 @@ void FillAboardCabinBox(ref _location, ref _npchar)
 		_location.box1.items.jewelry14 = rand(50);
 		_location.box1.items.jewelry15 = rand(10);
 		_location.box1.items.jewelry18 = rand(100);
+		ok = false;
 	}
 	//Квест "Золото не тонет", английский галеон у Доминики, драгоценности
 	if (_npchar.id == "PDM_Lesopilka_Galeon")
@@ -935,7 +936,7 @@ void FantomMakeCoolFighterWRankDepend(ref _Character, int _Rank, int _Fencing, i
 	SetCharacterPerk(_Character, "HardHitter");
 	DeleteAttribute(_Character, "Items");
 	_Character.SuperShooter  = true;
-	string sword = LAi_NPC_EquipBladeSelection(sti(_Character.rank));
+	string sword = LAi_NPC_EquipBladeSelection(sti(_Character.rank),false);
 	sword = GetGeneratedItem(sword);
     GiveItem2Character(_Character, sword);
     EquipCharacterbyItem(_Character, sword);

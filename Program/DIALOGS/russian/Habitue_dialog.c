@@ -615,7 +615,7 @@ void ProcessDialogEvent()
 			}
             if (sti(PChar.GenQuest.GhostShip.KillMe) > 0 || sti(PChar.GenQuest.GhostShip.DeadByMe) > 0)
             {
-                link.l1 = "Да я сам его видел! Еле жив остался. Где его найти?";
+                link.l1 = "Да я сам"+ GetSexPhrase("","а") +" его видел"+ GetSexPhrase("","а") +"! Еле жив"+ GetSexPhrase("","а") +" остал"+ GetSexPhrase("ся","ась") +". Где его найти?";
             }
             else
             {

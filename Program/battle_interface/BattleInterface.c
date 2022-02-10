@@ -2148,7 +2148,7 @@ void SetParameterData()
 		BattleInterface.ShipIcon.xsize = 32;
 		BattleInterface.ShipIcon.ysize = 32;
 
-		BattleInterface.ShipIcon.commandlistverticaloffset =  makeint(-40 * fHtRatio);
+		BattleInterface.ShipIcon.commandlistverticaloffset =  makeint(-33 * fHtRatio);
 
 		BattleInterface.ShipIcon.iconoffset1 = RecalculateHIcon(makeint(70* fHtRatio))+","+RecalculateVIcon(makeint(68* fHtRatio));
 		BattleInterface.ShipIcon.iconoffset2 = RecalculateHIcon(makeint(70* fHtRatio))+","+RecalculateVIcon(makeint(178* fHtRatio));
@@ -2159,11 +2159,20 @@ void SetParameterData()
 		BattleInterface.ShipIcon.iconoffset7 = RecalculateHIcon(makeint(70* fHtRatio))+","+RecalculateVIcon(makeint(728* fHtRatio));
 		BattleInterface.ShipIcon.iconoffset8 = RecalculateHIcon(makeint(70* fHtRatio))+","+RecalculateVIcon(makeint(838* fHtRatio));
 
-		BattleInterface.CommandList.CommandMaxIconQuantity = 15; //boal
+		// BattleInterface.ShipIcon.iconoffset1 = RecalculateHIcon(makeint(70* fHtRatio))+","+RecalculateVIcon(makeint(838* fHtRatio));
+		// BattleInterface.ShipIcon.iconoffset2 = RecalculateHIcon(makeint(170* fHtRatio))+","+RecalculateVIcon(makeint(838* fHtRatio));
+		// BattleInterface.ShipIcon.iconoffset3 = RecalculateHIcon(makeint(270* fHtRatio))+","+RecalculateVIcon(makeint(838* fHtRatio));
+		// BattleInterface.ShipIcon.iconoffset4 = RecalculateHIcon(makeint(370* fHtRatio))+","+RecalculateVIcon(makeint(838* fHtRatio));
+		// BattleInterface.ShipIcon.iconoffset5 = RecalculateHIcon(makeint(470* fHtRatio))+","+RecalculateVIcon(makeint(838* fHtRatio));
+		// BattleInterface.ShipIcon.iconoffset6 = RecalculateHIcon(makeint(570* fHtRatio))+","+RecalculateVIcon(makeint(838* fHtRatio));
+		// BattleInterface.ShipIcon.iconoffset7 = RecalculateHIcon(makeint(670* fHtRatio))+","+RecalculateVIcon(makeint(838* fHtRatio));
+		// BattleInterface.ShipIcon.iconoffset8 = RecalculateHIcon(makeint(770* fHtRatio))+","+RecalculateVIcon(makeint(838* fHtRatio));
+
+		BattleInterface.CommandList.CommandMaxIconQuantity = 12; //boal
 		BattleInterface.CommandList.CommandIconSpace = 1;
 		BattleInterface.CommandList.CommandIconLeft = makeint(150 * fHtRatio);//157;
-		BattleInterface.CommandList.CommandIconWidth = RecalculateHIcon(makeint(54 * fHtRatio));
-		BattleInterface.CommandList.CommandIconHeight = RecalculateVIcon(makeint(54* fHtRatio));
+		BattleInterface.CommandList.CommandIconWidth = RecalculateHIcon(makeint(64 * fHtRatio));
+		BattleInterface.CommandList.CommandIconHeight = RecalculateVIcon(makeint(64* fHtRatio));
 
 		BattleInterface.CommandList.CommandNoteFont = "interface_button";
 		BattleInterface.CommandList.CommandNoteColor = argb(255,255,255,255);
@@ -2236,11 +2245,11 @@ void SetParameterData()
 		BattleInterface.ShipIcon.iconoffset7 = RecalculateHIcon(makeint(70* fHtRatio))+","+RecalculateVIcon(makeint(738* fHtRatio));
 		BattleInterface.ShipIcon.iconoffset8 = RecalculateHIcon(makeint(70* fHtRatio))+","+RecalculateVIcon(makeint(850* fHtRatio));
 
-		BattleInterface.CommandList.CommandMaxIconQuantity = 15; //boal
+		BattleInterface.CommandList.CommandMaxIconQuantity = 12; //boal
 		BattleInterface.CommandList.CommandIconSpace = 1;
 		BattleInterface.CommandList.CommandIconLeft = makeint(150 * fHtRatio);//157;
-		BattleInterface.CommandList.CommandIconWidth = RecalculateHIcon(makeint(54 * fHtRatio));
-		BattleInterface.CommandList.CommandIconHeight = RecalculateVIcon(makeint(54 * fHtRatio));
+		BattleInterface.CommandList.CommandIconWidth = RecalculateHIcon(makeint(64 * fHtRatio));
+		BattleInterface.CommandList.CommandIconHeight = RecalculateVIcon(makeint(64 * fHtRatio));
 
 		BattleInterface.CommandList.CommandNoteFont = "interface_button";
 		BattleInterface.CommandList.CommandNoteColor = argb(255,255,255,255);
