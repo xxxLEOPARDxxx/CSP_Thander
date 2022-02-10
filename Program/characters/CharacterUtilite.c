@@ -71,7 +71,12 @@ bool CharacterIsDead(ref _refCharacter)
 
 bool IsCompanion(ref _refCharacter)
 {
-	int findIdx = sti(_refCharacter.index);
+	int findIdx = 0;
+
+	if (CheckAttribute(_refCharacter,"index")) 
+	{
+   		findIdx = sti(_refCharacter.index);
+	}
 	ref mc = GetMainCharacter();
 	for(int i=0; i<COMPANION_MAX; i++)
 	{
