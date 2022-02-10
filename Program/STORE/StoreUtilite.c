@@ -884,13 +884,13 @@ void ChangeImport()
 												pRef.Goods.(goodName).TradeType = 2;
 												//iImport--;
 											}
-											else
+											else 
+											{
 												if(pRef.Colony != "Caiman")//неконтрабандность Каймана
 												{
 													pRef.Goods.(goodName).TradeType = 3;
 													contraband++;
 												}
-
 											}
 										}
 									}
