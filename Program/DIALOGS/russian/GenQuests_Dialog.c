@@ -5867,7 +5867,7 @@ void ProcessDialogEvent()
 		case "Greedy_end":
 			LAi_group_SetRelation("greedybastard", LAI_GROUP_PLAYER, LAI_GROUP_ENEMY);
 			LAi_group_FightGroups("greedybastard", LAI_GROUP_PLAYER, true);
-			LAi_SetFightMode(pchar, true);
+			AddDialogExitQuest("MainHeroFightModeOn");
 			LAi_SetFightMode(npchar, true);
 			for(i = 0; i < sti(npchar.quant); i++)
 			{

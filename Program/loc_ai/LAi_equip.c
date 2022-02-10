@@ -47,10 +47,10 @@ void LAi_NPC_Equip(ref chr, int rank, bool isWeapons, bool isGun)
 		{
 			if (CheckAttribute(chr,"officerequip"))
 			{
-				if (sti(pchar.rank) >= 25) blade = LAi_NPC_EquipBladeSelection(15);
-				else blade = LAi_NPC_EquipBladeSelection(4);
+				if (sti(pchar.rank) >= 25) blade = LAi_NPC_EquipBladeSelection(15,false);
+				else blade = LAi_NPC_EquipBladeSelection(4,false);
 			}
-            else blade = LAi_NPC_EquipBladeSelection(sti(chr.rank));
+            else blade = LAi_NPC_EquipBladeSelection(sti(chr.rank),true);
 		}
 
 		DeleteAttribute(chr, "items"); // это можно не делать, но так наверняка (идет проверка на колво предметов, и сабель может стать вагон)
@@ -186,26 +186,26 @@ void LAi_NPC_MushketerEquip(ref chr)
 	if (!CheckAttribute(chr, "MusketerDistance")) chr.MusketerDistance = 10.0 + frand(10.0);
 }
 
-string LAi_NPC_EquipBladeSelection(int rank)
+string LAi_NPC_EquipBladeSelection(int rank, bool notuseinput)
 {
-	int prank = sti(pchar.rank);
+	if (notuseinput) rank = sti(pchar.rank);
 	int max,min;
-	if (prank < 4) // ранг ГГ <5 (ржавое)
+	if (rank < 4) // ранг ГГ <5 (ржавое)
 	{
 		min = 0;
 		max = 12;
 	}
-	if (prank >= 4) // ранг ГГ <5 (обычное)
+	if (rank >= 4) // ранг ГГ <5 (обычное)
 	{
 		min = 10;
 		max = 17;
 	}
-	if (prank >= (15 - MOD_SKILL_ENEMY_RATE)) // ранг ГГ 15+ (синее сплошняком) - минусуются ранги, в зависимости от сложности. Чем выше сложность, тем раньше начнут появляться бесы с ёбо-пушками.
+	if (rank >= (15 - MOD_SKILL_ENEMY_RATE)) // ранг ГГ 15+ (синее сплошняком) - минусуются ранги, в зависимости от сложности. Чем выше сложность, тем раньше начнут появляться бесы с ёбо-пушками.
 	{
 		min = 18;
 		max = 31;
 	}
-	if (prank >= (25 - MOD_SKILL_ENEMY_RATE)) // ранг ГГ 25+ (синее+красное, примерно поровну) LEO: Не, я имел ввиду именно с 25 ранга ГГ, а не с 30. Там имелось ввиду, что к 30 рангу уже лейт гейм, а ставить жёска надо именно с 25 :)
+	if (rank >= (25 - MOD_SKILL_ENEMY_RATE)) // ранг ГГ 25+ (синее+красное, примерно поровну) LEO: Не, я имел ввиду именно с 25 ранга ГГ, а не с 30. Там имелось ввиду, что к 30 рангу уже лейт гейм, а ставить жёска надо именно с 25 :)
 	{
 		min = 18;
 		max = 39;

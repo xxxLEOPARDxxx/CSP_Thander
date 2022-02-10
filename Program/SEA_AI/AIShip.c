@@ -509,7 +509,7 @@ float Ship_MastDamage()
 			}
 			else
 			{
-				iResist = 1 + 1.0/(iClass-iXmark);
+				iResist = 1.0/(iClass-iXmark);
 			}
 		//<---- Lipsar резист урона мачтам от калибра и класса
             float nDirect = 0.35; //Glancing
@@ -1092,14 +1092,17 @@ void Ship_ChangeChargeEvent() // нигде не используется???
 
 void Ship_ChangeCharge(ref rCharacter, int iNewChargeType)
 {
-	SendMessage(&AISea, "la", AI_MESSAGE_CANNON_RELOAD, rCharacter);
+	if( rCharacter == Pchar) SendMessage(&AISea, "la", AI_MESSAGE_CANNON_RELOAD, rCharacter);
+
 	ref rGood = GetGoodByType(iNewChargeType);
-	rCharacter.Ship.Cannons.Charge = rGood.name;
-	rCharacter.Ship.Cannons.Charge.Type = iNewChargeType;
+	if (rGood) {
+		rCharacter.Ship.Cannons.Charge = rGood.name;
+		rCharacter.Ship.Cannons.Charge.Type = iNewChargeType;
+	}
 
 	Cannon_RecalculateParameters(sti(rCharacter.index));
-	
 	LetCharge = LetRecharge();
+ // чтоб пока не стрельнул не выпендривал (нужно для приказа компаньону)
 	//fix Ship_PlaySound3D(rCharacter, "reloadstart_" + rGood.name, 1.0);
 
 	Ship_ClearBortsReloadedEvent(rCharacter);
@@ -2123,7 +2126,7 @@ void Ship_ApplyCrewHitpoints(ref rOurCharacter, float fCrewHP)
 	// boal fix утопленников   <--
 }
 
-void Ship_ApplyCrewHitpointsWithCannon(ref rOurCharacter, float fCrewHP, float fCannonDamageMultiply)
+void Ship_ApplyCrewHitpointsWithCannon(ref rOurCharacter, float fCrewHP, float fCannonDamageMultiply, int iBallType)
 {         // че-то распук метод "неподецки" - переделал 29.07.06 boal
 	if (LAi_IsImmortal(rOurCharacter))
 	{
@@ -2141,7 +2144,11 @@ void Ship_ApplyCrewHitpointsWithCannon(ref rOurCharacter, float fCrewHP, float f
 	if (fMinusC < 0.0) fMinusC = 0.0;
 	float fDamage = fCrewHP - fMinusC;
 	//Log_Info("fDamage "+fDamage);
-	if(fDamage < 1) fDamage = 1;//имитация огня по палубе/в пушки - а то совсем жирно будет
+	if (iBallType == GOOD_GRAPES)
+	{
+		if(fDamage < 1)
+			fDamage = 1;//имитация огня по палубе/в пушки - а то совсем жирно будет
+	}
 	float fMultiply = 1.0 - (0.5 * stf(rOurCharacter.TmpSkill.Defence)); // было 0.05 - что полная хрень, тк скил 0..1
 
 	if(CheckOfficersPerk(rOurCharacter, "Doctor2"))
@@ -2848,7 +2855,7 @@ void Ship_HullHitEvent()
 	fDistanceDamageMultiply = Bring2Range(1.0, 0.66, 0.0, stf(AIBalls.CurrentMaxBallDistance), stf(AIBalls.CurrentBallDistance));
 	fCrewDamage *= fDistanceDamageMultiply;//добавлено НЕБОЛЬШОЕ влияние дистанции для нормального урона
 	//Log_Info("fDistanceDamageMultiply "+fDistanceDamageMultiply);
-	Ship_ApplyCrewHitpointsWithCannon(rOurCharacter, fCrewDamage, fCannonDamageMultiply);
+	Ship_ApplyCrewHitpointsWithCannon(rOurCharacter, fCrewDamage, fCannonDamageMultiply, iBallType);
 
 	if (bInflame == true && fFirePlaceDistance < 4.0 && iFirePlaceIndex >= 0)
 	{
@@ -3981,7 +3988,7 @@ void Ship_UpdateParameters()
 										if (fRatio > 1.2)
 										{
 											iAbordageShipEnemyCharacter = sti(rCharacter.index);
-											Sea_AbordageLoad(SHIP_ABORDAGE, false);
+											if (!CheckAttribute(rCharacter, "CantBoardEnemies"))	Sea_AbordageLoad(SHIP_ABORDAGE, false);
 										}
 										else
 										{

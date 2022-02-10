@@ -475,7 +475,6 @@ void ProcessFrame()
 		}
 	}
 }
-
 void FillShipParam(ref _chr)
 {
     int iShip = sti(_chr.ship.type);
@@ -1032,56 +1031,6 @@ void HideCannonsMenu()
 
 	SetCurrentNode("TABLE_OTHER");
 	sMessageMode = "";
-}
-
-////////////// ценообразование
-
-int GetBuyPrice(int iType)
-{
-	// boal учет скилов торговли 22.01.2004 -->
-	float nCommerce   = GetSummonSkillFromNameToOld(GetMainCharacter(), SKILL_COMMERCE);
-
-	if(CheckOfficersPerk(pchar,"Trader")) { nCommerce += 2; }
-    if(CheckOfficersPerk(pchar,"AdvancedCommerce"))	{ nCommerce += 4; }
-	else
-	{
-		if(CheckOfficersPerk(pchar,"BasicCommerce"))	{ nCommerce += 2; }
-	}
-
-    return makeint(GetShipPriceByType(iType) + GetShipPriceByType(iType)/(nCommerce*10));
-    // boal 22.01.2004 <--
-}
-
-int GetSellPrice(ref _chr)
-{
-	int st = GetCharacterShipType(_chr);
-	int price = GetShipPriceByType(st);
-	price = makeint(price - 1.5*GetSailRepairCost(st, GetSailDamagePercent(_chr)));
-	price = makeint(price - 1.5*GetHullRepairCost(st, GetHullDamagePercent(_chr)));
-
-	float nCommerce   = GetSummonSkillFromNameToOld(GetMainCharacter(), SKILL_COMMERCE) + 0.001;
-
-	if(CheckOfficersPerk(pchar,"Trader")) { nCommerce += 2; }
-	if(CheckOfficersPerk(pchar,"AdvancedCommerce"))	{ nCommerce += 4; }
-	else
-	{
-		if(CheckOfficersPerk(pchar,"BasicCommerce"))	{ nCommerce += 2; }
-	}
-
-	price = price - price / (nCommerce*10.5);
-
-	ref rRealShip = GetRealShip(st);
-
-	if (sti(rRealShip.Stolen) == true) //проверка на ворованный
-	{
-    	price = makeint(price/3);
-    }
-    if (price < 0 && sti(_chr.Ship.Type) != SHIP_NOTUSED)
-	{
-	   price = 0;
-	}
-
-	return price;
 }
 
 void FillShipyardTable()
@@ -2291,14 +2240,17 @@ void CloseShipUp()
 	SetNodeUsing("MAIN_WINDOW", true);
 	SetNodeUsing("SHIPSUP_WINDOW", false);
 	SetShipOTHERTable("TABLE_OTHER",xi_refCharacter);
+
+	string attributeName = "pic" + (nCurScrollNum+1);
+	GameInterface.SHIPS_SCROLL.(attributeName).str3 = "#" + MakeMoneyShow(GetShipSellPrice(&characters[sti(GameInterface.SHIPS_SCROLL.(attributeName).character)], refNPCShipyard), MONEY_SIGN,MONEY_DELIVER);
+   	SendMessage(&GameInterface,"lsl",MSG_INTERFACE_SCROLL_CHANGE,"SHIPS_SCROLL",-1);
 }
 
 void OpenShipUp()
 {
 	int upsq = 0;
-	XI_WindowShow("MAIN_WINDOW", false);
-	XI_WindowDisable("MAIN_WINDOW", true);
 	XI_WindowShow("SHIPSUP_WINDOW", true);
+	XI_WindowDisable("MAIN_WINDOW", true);
 	XI_WindowDisable("SHIPSUP_WINDOW", false);
 	SetNodeUsing("MAIN_WINDOW", false);
 	SetNodeUsing("SHIPSUP_WINDOW", true);
