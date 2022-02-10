@@ -10524,6 +10524,11 @@ void PDM_Zoloto_ne_tonet_BITVA_na_sushe(string qName)
 //Sinistra Золото не тонет <--
 
 //Sinistra Охота на ведьму -->
+void PDM_ONV_NaRabotu(string qName)
+{
+	LAi_SetPlayerType(pchar);
+	StartInstantDialogNoType("PDM_ONV_Glavny_Guber_KLON", "RazgovorSGuberom_7", "Quest/PDM/Ohota_na_vedmu.c");	
+}
 void PDM_ONV_Kazn(string qName)
 {
 	sld = CharacterFromID("PDM_ONV_Podjigatel")

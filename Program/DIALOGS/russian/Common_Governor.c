@@ -65,16 +65,16 @@ void ProcessDialogEvent()
 		break;
 
 		case "arest":
-			dialog.text = "Стража! Взять е"+ GetSexPhrase("го","е") +"!";
-			link.l1 = "Ну, уж нет! Просто так вы меня не возьмете!";
+			dialog.text = "Стража! Взять е"+ GetSexPhrase("го","ё") +"!";
+			link.l1 = "Ну, уж нет! Просто так вы меня не возьмёте!";
 		    link.l1.go = "fight";
 		break;
 
 		case "Patent_Doubt":
-			dialog.text = "Гладко стелите... Мне стоило бы вас повесить за одну лишь дерзость. Таким отъявленным пиратам веры нет, однако сейчас на нашем архипелаге тяжелые времена и пригодится любая помощь. Так и быть, я подпишу вам патент, и помилование. Только не заставляйте меня жалеть об этом.";
+			dialog.text = "Гладко стелите... Мне стоило бы вас повесить за одну лишь дерзость. Таким отъявленным пиратам веры нет, однако сейчас на нашем архипелаге тяжёлые времена и пригодится любая помощь. Так и быть, я подпишу вам патент, и помилование. Только не заставляйте меня жалеть об этом.";
 			link.l1 = "Вы не пожалеете, " + GetAddress_FormToNPC(NPChar) + "!";
 			link.l1.go = "Patent_Give";
-			link.l2 = "Ха! Повелись! Это была лишь шутка, я не хочу иметь ничего общего с вашим никчемным государством.";
+			link.l2 = "Ха! Повелись! Это была лишь шутка, я не хочу иметь ничего общего с вашим никчёмным государством.";
 			link.l2.go = "arest_3";
 		break;
 		case "Patent_Give":
@@ -93,7 +93,7 @@ void ProcessDialogEvent()
 			{
        			dialog.text = NPCharRepPhrase(pchar,
 					LinkRandPhrase("Вы посмели явиться к генерал-губернатору?! Смелый шаг...", "Как эти бездельники допустили, чтобы ко мне ворвался враг?! Уму непостижимо...", "Да уж, моя охрана немногого стоит, раз "+ GetSexPhrase("какой-то бездельник","какая-то бездельница") +" бегает в моей резиденции..."),
-					LinkRandPhrase("Что тебе нужно, "+ GetSexPhrase("негодяй","негодяйка") +"?! Мои солдаты уже взяла твой след, далеко тебе не уйти, "+ GetSexPhrase("грязный пират","мерзавка") +"!", ""+ GetSexPhrase("Грязный","Грязная") +" убийца, вон из моей резиденции! Стража!!", "Я не боюсь тебя, "+ GetSexPhrase("мерзавец","мерзавка") +"! Скоро тебя повесят в форте, далеко тебе не уйти..."));
+					LinkRandPhrase("Что тебе нужно, "+ GetSexPhrase("негодяй","негодяйка") +"?! Мои солдаты уже взяли твой след, далеко тебе не уйти, "+ GetSexPhrase("грязный пират","мерзавка") +"!", ""+ GetSexPhrase("Грязный","Грязная") +" убийца, вон из моей резиденции! Стража!!", "Я не боюсь тебя, "+ GetSexPhrase("мерзавец","мерзавка") +"! Скоро тебя повесят в форте, далеко тебе не уйти..."));
 				link.l1 = NPCharRepPhrase(pchar,
 					RandPhraseSimple("Солдатня мало чего стоит...", "Им меня ни за что не поймать."),
 					RandPhraseSimple("Заткни свою пасть, приятель, а не то вырву твой поганый язык!", "Вот что я тебе скажу, приятель: сиди тихо, и будешь жить..."));
@@ -102,7 +102,7 @@ void ProcessDialogEvent()
 			}
 			if (sti(NPChar.nation) != PIRATE && ChangeCharacterHunterScore(Pchar, NationShortName(sti(NPChar.nation)) + "hunter", 0) > 15)
             {
-                dialog.text = "О! Кто пришел! Это же сам"+ GetSexPhrase("","а") +" " + GetFullName(pchar) + ". Мы как раз недавно высылали охотников за головами, чтобы они привели вас сюда. И знаете, это уже встало нам в кругленькую сумму.";
+                dialog.text = "О! Кто пришёл! Это же сам"+ GetSexPhrase("","а") +" " + GetFullName(pchar) + ". Мы как раз недавно высылали охотников за головами, чтобы они привели вас сюда. И знаете, это уже встало нам в кругленькую сумму.";
                 if (sti(NPChar.nation) != PIRATE && ChangeCharacterHunterScore(Pchar, NationShortName(sti(NPChar.nation)) + "hunter", 0) == 100 && !isMainCharacterPatented())
 				{
 				link.l3 = "Вы видели на что я способ"+ GetSexPhrase("ен","на") +" будучи врагом, а теперь представьте какую пользу я смогу принести вашей державе в качестве союзника. Предлагаю всего раз, здесь и сейчас: выдайте мне патент и все ваши враги станут моими.";
@@ -125,7 +125,7 @@ void ProcessDialogEvent()
 				dialog.text = "Я слышал, что вы очень настойчиво просили аудиенции. Меня зовут " + GetFullName(npchar) +
                               ". Я генерал-губернатор колоний " + NationNameGenitive(sti(NPChar.nation))+ ", наместник короны " + NationKingsName(npchar)+
                               " в этих водах. А теперь соблаговолите сообщить цель вашего визита, " + GetAddress_Form(NPChar) + ".";
-				link.l1 = "Мое имя " + GetFullName(pchar) + ".";
+				link.l1 = "Моё имя " + GetFullName(pchar) + ".";
 				link.l1.go = "node_1";
 				npchar.quest.meeting = "1";
 			}
@@ -158,7 +158,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "build_ship":
-			dialog.Text = "Это отличная идея! Однако в казне нет ресурсов для ее осуществения... Если хотите, вы можете привезти собственный материал и оплатить работу инженеров и рабочих. Я все организую.";
+			dialog.Text = "Это отличная идея! Однако в казне нет ресурсов для её осуществления... Если хотите, вы можете привезти собственный материал и оплатить работу инженеров и рабочих. Я всё организую.";
 			Link.l1 = "Я " + GetSexPhrase("согласен","согласна")+ ". Что и в каком объеме нужно будет доставить?";
 			Link.l1.go = "build_ship_1"
 			Link.l2 = "Простите, но на такое у меня нет ни времени, ни денег.";
@@ -166,20 +166,20 @@ void ProcessDialogEvent()
 		break;
 
 		case "build_ship_1":
-			dialog.Text = "Итак, для постройки королевского мановара понадобятся: "+Matheria2+" единиц красного дерева, "+Matheria3+" черного дерева, "+Matheria1+" шелка, прочие материалы вроде парусины и досок мы сами сможем произвести в наших колониях. Однако вы должны заплатить "+BuildPrice+" золотых вперед на их закупку, а также чтобы я смог начать найм рабочей силы и прочую организационную деятельность.";
+			dialog.Text = "Итак, для постройки королевского мановара понадобятся: "+Matheria2+" единиц красного дерева, "+Matheria3+" чёрного дерева, "+Matheria1+" шёлка, прочие материалы вроде парусины и досок мы сами сможем произвести в наших колониях. Однако вы должны заплатить "+BuildPrice+" золотых вперёд на их закупку, а также чтобы я смог начать найм рабочей силы и прочую организационную деятельность.";
 
 			if(makeint(Pchar.money) >= BuildPrice)
 			{
-				Link.l1 = "Договорились, вот деньги. Скоро привезу вам все остальное.";
+				Link.l1 = "Договорились, вот деньги. Скоро привезу вам всё остальное.";
 				Link.l1.go = "build_ship_2"
 			}
-			Link.l2 = "Недешего, пожалуй обойдусь...";
+			Link.l2 = "Недёшево, пожалуй обойдусь...";
 			Link.l2.go = "exit";
 		break;
 
 		case "build_ship_2":
 			AddMoneyToCharacter(Pchar, -BuildPrice);
-			dialog.Text = "Ждем с нетерпением.";
+			dialog.Text = "Ждём с нетерпением.";
 			npchar.quest.answer_1 = "true";
 
 			NPChar.Tuning.Matherial1 = Matheria1;
@@ -192,14 +192,14 @@ void ProcessDialogEvent()
 
 		case "check_material":
 
-				dialog.Text = "Работа ждет. Принес"+ GetSexPhrase("","ла") +", что я просил?";
+				dialog.Text = "Работа ждёт. Прин"+ GetSexPhrase("ёс","есла") +", что я просил?";
 
 				NextDiag.TempNode = "check_material";
 
 
 			    Link.l1 = "Да. Кое-что удалось достать.";
 			    Link.l1.go = "check_material_1";
-			    Link.l2 = "Нет. Еще добываю.";
+			    Link.l2 = "Нет. Ещё добываю.";
 			    Link.l2.go = "Exit";
 		break;
 
@@ -211,7 +211,7 @@ void ProcessDialogEvent()
 			{
 				DeleteAttribute(NPChar, "Tuning");
 
-                dialog.text = "Вы все привезли. Отлично! Возвращайтесь через пару месяцев, думаю к тому времени постройка уже будет завершена...";
+                dialog.text = "Вы всё привезли. Отлично! Возвращайтесь через пару месяцев, думаю к тому времени постройка уже будет завершена...";
 				SaveCurrentQuestDateParam("pchar.questTemp.buildSoley");
 				NextDiag.TempNode = "First time";
 			    link.l1 = "Жду.";
@@ -220,14 +220,14 @@ void ProcessDialogEvent()
 			}
 			else
 			{
-				dialog.Text = "Тебе осталось привезти:" + ", красного дерева - "+ sti(NPChar.Tuning.Matherial2) + ", черного дерева - "+ sti(NPChar.Tuning.Matherial3) + ", шелка - "+ sti(NPChar.Tuning.Matherial1)".";
+				dialog.Text = "Тебе осталось привезти:" + ", красного дерева - "+ sti(NPChar.Tuning.Matherial2) + ", чёрного дерева - "+ sti(NPChar.Tuning.Matherial3) + ", шёлка - "+ sti(NPChar.Tuning.Matherial1)".";
 				link.l1 = "Хорошо.";
 				link.l1.go = "Exit";
 			}
 		break;
 
 		case "get_ship":
-			dialog.text = "А как же! Можете забирать его в порту. Мы уже успели немного опробовать его на одной пиратской эскадре. Должен признаться, что немного вам завидую, этот корабль уникален во всех смыслах этого слова. В довесок к мановару я передаю вам в службу отличного офицера, надеюсь вы найдете ему применение.";
+			dialog.text = "А как же! Можете забирать его в порту. Мы уже успели немного опробовать его на одной пиратской эскадре. Должен признаться, что немного вам завидую, этот корабль уникален во всех смыслах этого слова. В довесок к мановару я передаю вам в службу отличного офицера, надеюсь вы найдёте ему применение.";
 			NextDiag.TempNode = "First time";
 			npchar.quest.Gave_Ship = "true";
 			sld = GetCharacter(NPC_GenerateCharacter("SoleiRoyalCaptain1", "off_fra_2", "man", "man", 35, FRANCE, -1, true));
@@ -366,7 +366,7 @@ void ProcessDialogEvent()
 
 		/////Награда за захваченную колонию.
 		case "colony_capture":
-   			dialog.text = "О каком городе идет речь?";
+   			dialog.text = "О каком городе идёт речь?";
    			for (i=0; i<MAX_COLONIES; i++)
 			{
 				if (sti(colonies[i].HeroOwn) == true)
@@ -387,7 +387,7 @@ void ProcessDialogEvent()
             colony_money = TWN_CityCost(colonies[i].id) / 50;  // те *1000 в итоге
             TWN_RealeseForMoney(colonies[i].id, false);
             dialog.text = "Отличные новости, "+GetAddress_FormTitle(sti(NPChar.nation), sti(Items[sti(pchar.EquipedPatentId)].TitulCur))+
-                          "! Ваше усердие не останется незамеченным, и, разумеется, вас ждет награда. Вот вам " + colony_money +
+                          "! Ваше усердие не останется незамеченным, и, разумеется, вас ждёт награда. Вот вам " + colony_money +
                           " золотых в качестве вознаграждения за ваши заслуги перед "+NationNameAblative(sti(NPChar.nation))+
                           ". А теперь прошу меня извинить, у меня очень много дел.";
             link.l1 = "В таком случае, " + GetAddress_FormToNPC(NPChar) + ", не смею вас больше задерживать. Всего наилучшего.";
@@ -440,7 +440,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "Andre_Abel_Quest_Hol_Gov_Node_4":
-			dialog.text = "Ты человек Моргана, и ты "+ GetSexPhrase("англичанин","англичанка") +". Этого достаточно!.. В каземат "+ GetSexPhrase("его","ее") +"!";
+			dialog.text = "Ты человек Моргана, и ты "+ GetSexPhrase("англичанин","англичанка") +". Этого достаточно!.. В каземат "+ GetSexPhrase("его","её") +"!";
 			link.l1 = "Да вам нервы лечить нужно!!!";
 			link.l1.go = "Andre_Abel_Quest_Hol_Gov_Node_5";
 			link.l2 = "Что ж, я вынужден"+ GetSexPhrase("","а") +" подчиниться властям! Но повторяю, - моя совесть чиста, и я не совершал"+ GetSexPhrase("","а") +" и не замышлял"+ GetSexPhrase("","а") +" против Голландии ничего, за что меня можно было бы преследовать!";
@@ -450,7 +450,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "Andre_Abel_Quest_Hol_Gov_Node_5":
-			dialog.text = "Как ты смеешь, "+ GetSexPhrase("мерзавец","мерзавка") +"! Убейте "+ GetSexPhrase("его","ее") +" немедленно!!!";
+			dialog.text = "Как ты смеешь, "+ GetSexPhrase("мерзавец","мерзавка") +"! Убейте "+ GetSexPhrase("его","её") +" немедленно!!!";
 			link.l1 = "Ну, гвардейцы, держитесь!..";
 			link.l1.go = "Andre_Abel_Quest_Hol_Gov_Node_6";
 		break;
@@ -473,7 +473,7 @@ void ProcessDialogEvent()
 
 		case "Andre_Abel_Quest_Hol_Gov_Node_7":
 			//pchar.questTemp.OrionCity = GetCityNameByIsland(Pchar.curIslandId);
-			dialog.text = "Чиста твоя совесть или нет - это мы еще выясним... Увести "+ GetSexPhrase("его","ее") +"!";
+			dialog.text = "Чиста твоя совесть или нет - это мы ещё выясним... Увести "+ GetSexPhrase("его","её") +"!";
 			link.l1 = "Выясняйте, только не тяните. У меня мало времени...";
 			link.l1.go = "Andre_Abel_Quest_Hol_Gov_Node_8";
 		break;
