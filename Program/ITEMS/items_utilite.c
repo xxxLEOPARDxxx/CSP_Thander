@@ -952,6 +952,9 @@ void QuestCheckEnterLocItem(aref _location, string _locator) /// <<<провер
 				bDisableFastReload = true;
 				i = FindLocation("FenixPlatform");
 				Locations[i].models.always.inside = "FenixPlatform_wout";
+				if (findsubstr(pchar.model.animation, "mushketer" , 0) != -1) SetMainCharacterToMushketer("", false);
+				pchar.questTemp.LSC.immersions.model = pchar.model;
+				pchar.questTemp.LSC.immersions.animation = pchar.model.animation;
 				pchar.model = "protocusto";
 				pchar.model.animation = "armor";
 				LocatorReloadEnterDisable("LostShipsCity_town", "reload58", true);

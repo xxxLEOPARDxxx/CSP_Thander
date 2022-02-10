@@ -377,7 +377,8 @@ void ProcessDialogEvent()
 			for (int i = 1; i <= 2; i++)
 			{
 				ref sld = SetFantomOfficer("reload", "reload1", HOLLAND, "");
-				FantomMakeCoolFighter(sld, 40, 100, 100, "blade28", "pistol4", 200 + 10 * MOD_SKILL_ENEMY_RATE);
+				// FantomMakeCoolFighter(sld, 40, 100, 100, "blade28", "pistol4", 200 + 10 * MOD_SKILL_ENEMY_RATE); // annoer, я всё понимаю, но это ебля без вазелина уже (LEO)
+				FantomMakeCoolFighter(sld, sti(Pchar.rank), 25+drand(50), 25+drand(50), "blade39", "pistol2", 20/*  + 10 * MOD_SKILL_ENEMY_RATE */);
 				LAi_SetWarriorType(sld);
 				LAi_group_MoveCharacter(sld, "OliverTrust");
 			}

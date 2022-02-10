@@ -1770,6 +1770,7 @@ void ProcessControls()
             		UnloadSegment("Debuger.c");
             	}
 		    }
+			else LaunchPsHeroScreen();
 		break;
         case "BOAL_Control":
 		    // по F11 вызывает окно отладчика

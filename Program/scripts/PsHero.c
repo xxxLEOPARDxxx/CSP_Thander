@@ -1211,7 +1211,7 @@ void PGG_UpdateEquip(ref chr)
 			blade = FindCharacterItemByGroup(chr, BLADE_ITEM_TYPE);
 		}
 
-		blade = LAi_NPC_EquipBladeSelection(sti(chr.rank));
+		blade = LAi_NPC_EquipBladeSelection(sti(chr.rank),false);
 		GiveItem2Character(chr, blade);
 		EquipCharacterByItem(chr, blade);
 
@@ -2687,11 +2687,10 @@ void PGG_Q1AfterShoreFight()
 	string sGroup;
 	sGroup = PChar.GenQuest.PGG_Quest.GrpID;
 
-
-
 	//даю немного целевого товара в любом случае, даже если места нет... пусть разбираются :)
 	PChar.GenQuest.PGG_Quest.Goods.Taken = 500 + drand(500) + MakeInt(GetSquadronFreeSpace(PChar, sti(PChar.GenQuest.PGG_Quest.Goods)) / (3 + drand(2)))
 	chr = CharacterFromID(PChar.GenQuest.PGG_Quest.PGGid);
+	LAi_RemoveCheckMinHP(chr); //fix
 	if(!CheckAttribute(PChar,"PGG_EnemyPP"))
 	{
 	if (!CheckAttribute(PChar, "Quest.PGGQuest1_PGGDead.PGG_Dead"))

@@ -3458,7 +3458,7 @@ void CreateSmallColonyCaiman()
 
 	RenamedColonyCaiman();
 
-	AddSimpleRumourToAllNations(LinkRandPhrase("Поговаривают", "Говорят", "Ходят слухи") + ", что капитан " + GetNameLugger(PChar, "f") + " построил свою колонию, и назвал её ''"+PChar.ColonyBuilding.ColonyName+"''.", 5, 1);
+	AddSimpleRumourToAllNations(LinkRandPhrase("Поговаривают", "Говорят", "Ходят слухи") + ", что капитан " + GetNameLugger(PChar, "f") + " построил" + GetSexPhrase("","а") + " свою колонию на острове Кайман.", 5, 1);
 }
 
 void CreateModificyColonyCaiman()
@@ -3735,7 +3735,7 @@ void CreateModificyColonyCaiman()
 
 	Stores[Caiman_STORE].StoreSize = "large";
 
-	AddSimpleRumourToAllNations(LinkRandPhrase("Поговаривают", "Говорят", "Ходят слухи") + ", что недавно капитан " + GetNameLugger(PChar, "f") + " расширил свою колонию, которая называется ''"+PChar.ColonyBuilding.ColonyName+"''.", 5, 1);
+	AddSimpleRumourToAllNations(LinkRandPhrase("Поговаривают", "Говорят", "Ходят слухи") + ", что недавно капитан " + GetNameLugger(PChar, "f") + " расширил"+ GetSexPhrase("","а") +" свою колонию, которая называется ''"+PChar.ColonyBuilding.ColonyName+"''.", 5, 1);
 }
 
 void CreatePlantationInCaiman()

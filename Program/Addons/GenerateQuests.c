@@ -150,7 +150,7 @@ void QuestDuelGenerateCharacters()
 
 				sSex = "man";
 				if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sAnimation = "spy";
-				else sAnimation = "man_fast";
+				else sAnimation = "man";
 				bEquip = true;
 			break;
 
@@ -168,7 +168,7 @@ void QuestDuelGenerateCharacters()
 
 				sSex = "man";
 				if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sAnimation = "spy";
-				else sAnimation = "man_fast";
+				else sAnimation = "man";
 				bEquip = true;
 			break;
 
@@ -178,7 +178,7 @@ void QuestDuelGenerateCharacters()
 				sModel = GetModelForQuestDuel(19, "officer");
 				sSex = "man";
 				if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sAnimation = "spy";
-				else sAnimation = "man_fast";
+				else sAnimation = "man";
 				bEquip = true;
 			break;
 
@@ -197,7 +197,7 @@ void QuestDuelGenerateCharacters()
 				sModel = GetModelForQuestDuel(11, "citiz");
 				sSex = "man";
 				if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sAnimation = "spy";
-				else sAnimation = "man_fast";
+				else sAnimation = "man";
 				bEquip = true;
 			break;
 
@@ -208,7 +208,7 @@ void QuestDuelGenerateCharacters()
 				sModel = GetModelForQuestDuel(11, "citiz");
 				sSex = "man";
 				if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sAnimation = "spy";
-				else sAnimation = "man_fast";
+				else sAnimation = "man";
 				bEquip = true;
 			break;
 

@@ -124,8 +124,8 @@ void LAi_GenerateFantomFromMe(aref chr)
 int LAi_CalculateRaidersQuantity(int iBase)
 {
     int iOfficer = GetOfficersQuantity(pchar);
-    float fMod = makefloat(MOD_SKILL_ENEMY_RATE  * 0.5); // 1.0 уровень сложности = (+ 1 бандит), т.е. на невозможке будет 5.0 = +5 бандитов *** (База - 4) + (назначенные абордажники) + (сложность * 0.5) ***
-    int iQty = iBase + iOfficer/*  + makeint(fMod) */; // LEO: Заебали нытики хуевы, убрал скейлинг сложности 14.12.2021
+    // float fMod = makefloat(MOD_SKILL_ENEMY_RATE  * 0.5); // 1.0 уровень сложности = (+ 1 бандит), т.е. на невозможке будет 5.0 = +5 бандитов *** (База - 4) + (назначенные абордажники) + (сложность * 0.5) ***
+    int iQty = iBase + iOfficer/*   + makeint(fMod) */;
     return iQty;
 }
 

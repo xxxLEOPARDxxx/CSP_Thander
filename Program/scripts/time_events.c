@@ -443,6 +443,7 @@ void CheckOfficersHPMinus()
 					DeleteAttribute(sld, "HPminusDays");
 					//DeleteAttribute(sld, "HPminus");
 					DeleteAttribute(sld, "HPminusDaysNeedtoRestore");
+					DeleteAttribute(sld, "Doctored");
 					//LAi_SetHP(sld, ihpm, ihpm);
 					Log_Info("Офицер " + GetFullName(sld) + " выздоровел.");
 				}
@@ -466,6 +467,7 @@ void CheckOfficersHPMinus()
 				DeleteAttribute(sld, "HPminusDays");
 				//DeleteAttribute(sld, "HPminus");
 				DeleteAttribute(sld, "HPminusDaysNeedtoRestore");
+				DeleteAttribute(sld, "Doctored");
 				//LAi_SetHP(sld, ihpm, ihpm);
 				Log_Info("Офицер " + GetFullName(sld) + " выздоровел.");
 			}
@@ -519,7 +521,7 @@ void CheckBook()//Проверка книги только на глобалке
 			if (sti(pchar.booktime) <= 0)
 			{
 				if (pchar.booktype == "Defense") pchar.booktype = "Defence";
-				if (pchar.booktype == "Defenсe") pchar.booktype = "Defence";
+				if (pchar.booktype == "Defenсe") pchar.booktype = "Defence";//Whut?
 				AddCharacterExpToSkill(pchar, pchar.booktype, sti(pchar.bookbonus));
 				int idLngFile = LanguageOpenFile("ItemsDescribe.txt");
 				Log_Info(GetFullName(pchar) + " изучил книгу ''"+LanguageConvertString(idLngFile, pchar.bookname)+"'' и увеличил навык ''"+XI_ConvertString(pchar.booktype)+"''");
@@ -527,7 +529,6 @@ void CheckBook()//Проверка книги только на глобалке
 				DeleteAttribute(pchar,"booktime");
 				DeleteAttribute(pchar,"booktime.full");
 				DeleteAttribute(pchar,"bookbonus");
-				DeleteAttribute(pchar,"booktime");
 				DeleteAttribute(pchar,"booktype");
 				DeleteAttribute(pchar,"bookreadtoday");
 				string sEquipItem = GetCharacterEquipByGroup(pchar, BOOK_ITEM_TYPE);

@@ -250,6 +250,10 @@ AchUmSamil_3{Древнее зло}
 AchUmSamil_3_descr{Завершить ивент 'Юм Самиля'}
 AchUmSamil_icon{AchUmSamil}
 
+AchMapMaker_3{Картограф}
+AchMapMaker_3_descr{Собрать все карты в Картографический Атлас}
+AchMapMaker_icon{AchMapMaker}
+
 gen_quests_1{На правильном пути}
 gen_quests_1_descr{Выполнить 10 генераторных квестов жителей городов}
 gen_quests_icon{AchGenQuestComlite}

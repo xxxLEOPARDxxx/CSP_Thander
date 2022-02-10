@@ -726,11 +726,39 @@ void LAi_ReloadEndFade()
 			{  //растет, если потерь мало
 				AddCrewMorale(mchar, sti(leaderSkill));
 			}
-
-			// boal 22.01.2004 <--
-			//SetCrewQuantityOverMax(GetMainCharacter(), MakeInt(crew + 0.3)); // десант весь ГГ как перегруз команды
-			SetCrewQuantity(GetMainCharacter(), MakeInt(crew + 0.3)); // фикс после переделки оверкоманды БМС
 			Log_TestInfo("----- в конце стало " + crew +" матросов ---");
+			// boal 22.01.2004 <--
+
+			if(IsFort)
+			{
+				int cn;
+				ref officer;
+	    		for (int j=1; j<COMPANION_MAX; j++)
+	   	 		{
+	        		cn = GetCompanionIndex(pchar, j);
+	        		if (cn>0)
+	        	{
+		    	    officer = GetCharacter(cn);
+		    	    if (!GetRemovable(officer)) continue;
+
+            	    	if (GetMaxCrewQuantity(officer) <= crew)
+            	    	{
+            	        	SetCrewQuantity(officer, GetMaxCrewQuantity(officer));
+							crew -= GetMaxCrewQuantity(officer) + GetMinCrewQuantity(officer);
+            	    	}
+            	    	else
+            			{
+            	        	AddCharacterCrew(officer,crew);
+							crew = 0;
+            	    	}
+		    		}
+					if (crew == 0) break;
+				}
+			}
+			else
+			{
+				SetCrewQuantity(GetMainCharacter(),Makeint(crew + 0.3));
+			}
 			//Пересчитываем команду соперника
 			crew = 0;// какие еще люди? все трупы! boarding_enemy_base_crew*(0.1 + rand(20)*0.01);
 			if (boarding_echr_index >= 0)
@@ -878,6 +906,7 @@ void LAi_EnableReload()
 			case 4: Locations[boarding_location].boarding.nextdeck = "Boarding_Campus"; break;
 			case 5: Locations[boarding_location].boarding.nextdeck = "Boarding_Cargohold"; break;
 			case 6: Locations[boarding_location].boarding.nextdeck = ""; break;
+			case 7: Locations[boarding_location].boarding.nextdeck = ""; break;
 		}
 	}
 	if (IsFort && Locations[boarding_location].boarding.nextdeck == "Boarding_bastion")
@@ -1133,12 +1162,20 @@ void LAi_SetBoardingActors(string locID)
 				Log_TestInfo("На капитане кираса " + model);
 		    }
 			//}
+			if(CheckAttribute(pchar, "CabinHelp") && pchar.CabinHelp == true)	BSHangover_FlintFight_3("");
 		}
 		SetNewModelToChar(chr); //иначе сабли не те, что реально
 		string weaponID = GetCharacterEquipByGroup(chr, BLADE_ITEM_TYPE);
 		aref weapon;
 		Items_FindItem(weaponID, &weapon);
 		chr.chr_ai.fencingtype = weapon.FencingType;
+		weaponID = GetCharacterEquipByGroup(chr, GUN_ITEM_TYPE);
+		if (weaponID != "")
+		{
+			EquipCharacterByItem(chr,weaponID);
+			Items_FindItem(weaponID, &weapon);
+			chr.chr_ai.charge = makefloat(weapon.chargeQ);
+		}
 		chr.AboardFantom = true;
 		AddCharHP(chr, boarding_enemy_hp); // влияение опыта и морали в НР
 		if (IsCharacterPerkOn(chr, "Ciras") && rand(4)==0)
