@@ -917,7 +917,7 @@ bool LocLoadModel(aref loc, string sat, string addition)
     attr = sat + ".lights";
 
 	int dynamicLightsOn = 0;
-	
+
 	if (isDynamicLightsEnabled(loc.filespath.models)) {
 		dynamicLightsOn = 1
 	}
@@ -1540,13 +1540,13 @@ bool CheckFP(ref loc)
 bool isDynamicLightsEnabled(string modelPath)
 {
 	// Костылики из-за того, что движок не воспринимает иначе
-	bool isDisabled = HasSubstr(modelPath, "decks") || 
-		HasSubstr(modelPath, "EstateRooms") || 
-		HasSubstr(modelPath, "Fort_Inside") || 
-		HasSubstr(modelPath, "Incas Temple") || 
-		HasSubstr(modelPath, "Inside") || 
-		HasSubstr(modelPath, "LostShipsCityInsides") || 
-		HasSubstr(modelPath, "TenochtitlanInside") || 
+	bool isDisabled = HasSubstr(modelPath, "decks") ||
+		HasSubstr(modelPath, "EstateRooms") ||
+		HasSubstr(modelPath, "Fort_Inside") ||
+		HasSubstr(modelPath, "Incas Temple") ||
+		HasSubstr(modelPath, "Inside") ||
+		HasSubstr(modelPath, "LostShipsCityInsides") ||
+		HasSubstr(modelPath, "TenochtitlanInside") ||
 		HasSubstr(modelPath, "UnderWater");
 	return !isDisabled;
 }

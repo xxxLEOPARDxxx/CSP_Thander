@@ -73,7 +73,7 @@ bool IsCompanion(ref _refCharacter)
 {
 	int findIdx = 0;
 
-	if (CheckAttribute(_refCharacter,"index")) 
+	if (CheckAttribute(_refCharacter,"index"))
 	{
    		findIdx = sti(_refCharacter.index);
 	}

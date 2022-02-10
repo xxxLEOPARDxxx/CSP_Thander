@@ -299,7 +299,7 @@ void FlagsProcess()
 	PChar.quest.FreeChangeFlagMode.win_condition.l1.date.year = GetAddingDataYear(0, 0, 0);
 	PChar.quest.FreeChangeFlagMode.win_condition.l1.date.hour = GetHour() + 1;
 	PChar.quest.FreeChangeFlagMode.function = "FreeChangeFlagMode";
-	DoQuestCheckDelay("PostVideo_Start", 0); 
+	DoQuestCheckDelay("PostVideo_Start", 0);
 	ProcessExitCancel();
 }
 

@@ -2571,7 +2571,7 @@ string descF53 = "Включить/выключить туман войны на
 void CalculateInfoDataF53()
 {
 	totalInfo = descF53;
-	if (checkattribute(pchar, "cheatGlobalMapView")) 
+	if (checkattribute(pchar, "cheatGlobalMapView"))
 			{deleteattribute(pchar, "cheatGlobalMapView"); totalInfo += ". => ВЫКЛЮЧЕНО";}
 		else {pchar.cheatGlobalMapView = true; totalInfo += ". => ВКЛЮЧЕНО";}
 	ApplayNewSkill(pchar, "", 0);

@@ -647,7 +647,7 @@ float LAi_GetGunChargeProgress(aref chr)
 	{
 		float charge = chr.chr_ai.charge;
 		if(charge > 1) charge -= MakeInt(chr.chr_ai.charge);
-		if(CheckAttribute(chr, "chr_ai.charge_max") && MakeInt(chr.chr_ai.charge_max) == MakeInt(chr.chr_ai.charge)) 
+		if(CheckAttribute(chr, "chr_ai.charge_max") && MakeInt(chr.chr_ai.charge_max) == MakeInt(chr.chr_ai.charge))
 			charge = 1.0;
 	}
 

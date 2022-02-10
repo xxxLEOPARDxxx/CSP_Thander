@@ -2981,7 +2981,7 @@ string GetStrSmallRegister(string sBase)
 			case "Э": sResult += "э"; continue; break;
 			case "Ю": sResult += "ю"; continue; break;
 			case "Я": sResult += "я"; continue; break;
-			
+
 			case "A": sResult += "a"; continue; break;
 			case "B": sResult += "b"; continue; break;
 			case "C": sResult += "c"; continue; break;
