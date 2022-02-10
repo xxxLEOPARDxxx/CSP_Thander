@@ -1939,7 +1939,7 @@ void Ship_NotEnoughBalls()
 	// boal -->
 	if (!bNotEnoughBalls)
 	{
-	    if (GetCargoGoods(pchar, GOOD_POWDER) < 1)
+	    if (GetCargoGoods(pchar, GOOD_POWDER) < GetPowderQuantity(pchar))
 	    {
 	        bNotEnoughBalls = true;
 	    }

@@ -362,17 +362,31 @@ void ProcessDialogEvent()
 			link.l1.go = "PKInMarigo_8";
 		break;
 		case "PKInMarigo_8":
-			dialog.text = "Убью. Причем прямо сейчас!";
+			dialog.text = "Убью. Причем прямо сейчас! Охрана!!!";
 			link.l1 = "Панталоны не потеряй, когда убивать будешь...";
 			link.l1.go = "PKInMarigo_9";
 		break;
 		case "PKInMarigo_9":
 			chrDisableReloadToLocation = true;
 			LAi_LocationFightDisable(loadedLocation, false);
-			LAi_group_Attack(npchar, pchar);
-			pchar.quest.PQ8_afterFight.win_condition.l1 = "NPC_Death";
-			pchar.quest.PQ8_afterFight.win_condition.l1.character = "PoorKillSponsor";
-			pchar.quest.PQ8_afterFight.win_condition = "OpenTheDoors";
+
+			TeleportCharacterToLocator(npchar, "goto", "goto3");
+			LAi_group_Delete("OliverTrust");
+			LAi_group_MoveCharacter(npchar, "OliverTrust");
+
+			for (int i = 1; i <= 2; i++)
+			{
+				ref sld = SetFantomOfficer("reload", "reload1", HOLLAND, "");
+				FantomMakeCoolFighter(sld, 40, 100, 100, "blade28", "pistol4", 200 + 10 * MOD_SKILL_ENEMY_RATE);
+				LAi_SetWarriorType(sld);
+				LAi_group_MoveCharacter(sld, "OliverTrust");
+			}
+
+			LAi_group_SetHearRadius("OliverTrust", 100.0);
+			LAi_group_SetRelation("OliverTrust", LAI_GROUP_PLAYER, LAI_GROUP_ENEMY);
+			LAi_group_FightGroups("OliverTrust", LAI_GROUP_PLAYER, true);
+            LAi_group_SetCheck("OliverTrust", "OpenTheDoors");
+
             DialogExit();
 			AddDialogExitQuest("MainHeroFightModeOn");
 		break;

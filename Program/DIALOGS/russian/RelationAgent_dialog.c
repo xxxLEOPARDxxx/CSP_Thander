@@ -645,20 +645,14 @@ void ProcessDialogEvent()
 				sld.location.group = "sit";
 				sld.location.locator = "sit1";
 				sld.dialog.currentnode = "PKInMarigo";
+				sld.items.letter_LSC = 1;
 				LAi_CharacterEnableDialog(sld);
 				LAi_RemoveLoginTime(sld);
 				sld.standUp = true; //вставать и нападать на врага
 				LAi_SetHuberType(sld);
-				LAi_group_MoveCharacter(sld, "OlivaTrust");
-				//ложим второе письмо
 				ChangeItemName("letter_LSC", "itmname_letter_LSC_1");
 				ChangeItemDescribe("letter_LSC", "itmdescr_letter_LSC_1");
-				ref sldd = ItemsFromID("letter_LSC");
-				sldd.shown = true;
-				//Boyer change #20170418-01
                 pchar.restoreLSCTrustLetter = "letter_LSC";
-				sldd.startLocation = "Marigo_houseH2";
-				sldd.startLocator = "item1";
 			}
 			else
 			{

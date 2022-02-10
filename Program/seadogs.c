@@ -2137,10 +2137,6 @@ void restoreQuestItems()
         //From RelationAgent_dialog.c
         ChangeItemName(pchar.restoreLSCTrustLetter, "itmname_letter_LSC_1");
         ChangeItemDescribe(pchar.restoreLSCTrustLetter, "itmdescr_letter_LSC_1");
-        rItemRef =  ItemsFromID(pchar.restoreLSCTrustLetter);
-        rItemRef.shown = true;
-        rItemRef.startLocation = "Marigo_houseH2";
-        rItemRef.startLocator = "item1";
     }
 	if(CheckAttribute(pchar, "HugtorpQuestStart") && !CheckAttribute(pchar, "HugtorpQuestFinish"))
 	{
