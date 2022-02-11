@@ -151,7 +151,7 @@ bool chrCheckReloadLocatorSkip(aref loc,string locator)
 		if(CheckAttribute(at,"name"))
 		{
 			if( at.name == locator ) break;
-			if( at.name == locator+"_back" ) break; 
+			if( at.name == locator+"_back" ) break;
 		}
 	}
 	// такого локатора нет в реале - значит скипаем его

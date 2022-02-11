@@ -2401,10 +2401,10 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			switch(iCaliber)
 			{
 				case 5:
-					iCaliber = 36;
+					iCaliber = 32;
 				break;
 				case 6:
-					iCaliber = 42;
+					iCaliber = 36;
 				break;
 			}
 			shTo.MaxCaliber = iCaliber;

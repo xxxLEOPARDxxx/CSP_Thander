@@ -259,6 +259,22 @@ void QuestComplete(string sQuestName, string qname)
 		// офицеры выживают!
         case "Survive_In_SeaOfficer":
 			sld = GetCharacter(sti(Pchar.GenQuest.Survive_In_SeaOfficerIdx));
+
+			if(CheckAttribute(pchar, "WoundedOfficers"))
+			{
+				for (i = 1; i <= 20; i++)
+				{
+					string offNum = "WoundedOfficers.Officer"+i;
+					if (CheckAttribute(pchar, offNum))
+					{
+						if(pchar.(offNum) == sld.id)
+						{
+							Log_Info(sld.id);
+							DeleteAttribute(pchar, offNum);
+						}
+					}
+				}
+			}
             iTemp = NPC_GeneratePhantomCharacter("citizen", sti(sld.Nation), MAN, -1);  // создать клон
 			if (iTemp != -1)
 			{
@@ -2348,7 +2364,7 @@ void QuestComplete(string sQuestName, string qname)
 					//<-- генерим ранг
 					// sld = GetCharacter(NPC_GenerateCharacter("MayorQuestSpy", "citiz_"+(rand(11)+1), "spy", "spy", Rank, PIRATE, 0, true)); // LEO: Убрал от бугуртов недовольных - Gregg :)
 					if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("MayorQuestSpy", "citiz_"+(rand(11)+1), "man", "spy", Rank, PIRATE, 0, true)); // LEO: Пизда превозмогаторам 08.12.2021
-					else sld = GetCharacter(NPC_GenerateCharacter("MayorQuestSpy", "citiz_"+(rand(11)+1), "man", "man_fast", Rank, PIRATE, 0, true));
+					else sld = GetCharacter(NPC_GenerateCharacter("MayorQuestSpy", "citiz_"+(rand(11)+1), "man", "man", Rank, PIRATE, 0, true));
 					sld.dialog.filename = "MayorQuests_dialog.c";
 					sld.dialog.currentnode = "SeekSpy_house";
 					sld.greeting = "cit_common";
@@ -2933,7 +2949,7 @@ void QuestComplete(string sQuestName, string qname)
 		case "Berglars_Ostin":
 			chrDisableReloadToLocation = true;
 			if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations)sld = GetCharacter(NPC_GenerateCharacter("Ostin", "Ostin", "man", "spy", 30, SPAIN, -1, false)); //LEO: Превозмогаторам страдать 08.12.2021
-			else sld = GetCharacter(NPC_GenerateCharacter("Ostin", "Ostin", "man", "man_fast", 30, SPAIN, -1, false));
+			else sld = GetCharacter(NPC_GenerateCharacter("Ostin", "Ostin", "man", "man", 30, SPAIN, -1, false));
 			FantomMakeCoolFighter(sld, 30, 100, 70, "blade32", "pistol5", 50);
 			sld.name 	= "Альберто";
 			sld.lastname = "Гаодио";
@@ -7822,7 +7838,7 @@ void QuestComplete(string sQuestName, string qname)
 			pchar.questTemp.Ascold = "Ascold_MummyIsLive";
 		    LAi_LocationFightDisable(&Locations[FindLocation("Guadeloupe_Cave")], true);
 			if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) sld = GetCharacter(NPC_GenerateCharacter("LeifEricson", "Mummy", "skeleton", "spy", 100, PIRATE, -1, true)); // LEO: Превозмогаторам страдать 08.12.2021
-			else sld = GetCharacter(NPC_GenerateCharacter("LeifEricson", "Mummy", "skeleton", "man_fast", 100, PIRATE, -1, true));
+			else sld = GetCharacter(NPC_GenerateCharacter("LeifEricson", "Mummy", "skeleton", "man", 100, PIRATE, -1, true));
 			FantomMakeCoolFighter(sld, 100, 100, 100, "blade28", "", 3000);
 			sld.name = "Лейф";
 			sld.lastname = "Эриксон";
@@ -8448,6 +8464,7 @@ void QuestComplete(string sQuestName, string qname)
 
 		case "ColonyBuilding_1":
 			AddQuestRecord("ColonyBuilding", "5");
+			AddQuestUserData("ColonyBuilding", "sSex", GetSexPhrase("","а"));
 			PChar.ColonyBuilding.Stage.FirstStage = "2";
 			int iColonyBuildingTime = sti(PChar.BuildingColony.ColonyTime);
             		SetTimerCondition("ColonyBuilding_2", 0, 0, iColonyBuildingTime, false);
@@ -8565,6 +8582,7 @@ void QuestComplete(string sQuestName, string qname)
 
 		case "ColonyModification_2":
 			AddQuestRecord("ColonyBuilding", "9");
+			AddQuestUserData("ColonyBuilding", "sSex", GetSexPhrase("","а"));
 			PChar.ColonyBuilding.Stage.SecondStage = "2";
 			LAi_SetCitizenType(CharacterFromID("Builder"));
 			LAi_group_MoveCharacter(&Characters[GetCharacterIndex("Builder")], LAI_GROUP_PLAYER);
@@ -9936,11 +9954,11 @@ void QuestComplete(string sQuestName, string qname)
 
 			pchar.GenQuestBox.Havana_TownhallRoom.box2.items.PDM_ONV_Kluch = 1;
 
-			PChar.quest.PDM_ONV_TRUP_1.win_condition.l1 = "locator";
-			PChar.quest.PDM_ONV_TRUP_1.win_condition.l1.location = "Havana_TownhallRoom";
-			PChar.quest.PDM_ONV_TRUP_1.win_condition.l1.locator_group = "reload";
-			PChar.quest.PDM_ONV_TRUP_1.win_condition.l1.locator = "reload2";
-			PChar.quest.PDM_ONV_TRUP_1.win_condition = "PDM_ONV_Vkomnate_Trup";
+			//PChar.quest.PDM_ONV_TRUP_1.win_condition.l1 = "locator";
+			//PChar.quest.PDM_ONV_TRUP_1.win_condition.l1.location = "Havana_TownhallRoom";
+			//PChar.quest.PDM_ONV_TRUP_1.win_condition.l1.locator_group = "reload";
+			//PChar.quest.PDM_ONV_TRUP_1.win_condition.l1.locator = "reload2";
+			//PChar.quest.PDM_ONV_TRUP_1.win_condition = "PDM_ONV_Vkomnate_Trup";
 
 			PChar.quest.PDM_ONV_TRUP_2.win_condition.l1 = "locator";
 			PChar.quest.PDM_ONV_TRUP_2.win_condition.l1.location = "Havana_TownhallRoom";
@@ -9962,7 +9980,7 @@ void QuestComplete(string sQuestName, string qname)
 		break;
 
 		case "PDM_ONV_Vkomnate_Trup":
-			PChar.quest.PDM_ONV_TRUP_1.over = "yes";
+			//PChar.quest.PDM_ONV_TRUP_1.over = "yes";
 			PChar.quest.PDM_ONV_TRUP_2.over = "yes";
 			PChar.quest.PDM_ONV_TRUP_3.over = "yes";
 			PChar.quest.PDM_ONV_TRUP_4.over = "yes";

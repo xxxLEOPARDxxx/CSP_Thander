@@ -113,14 +113,14 @@ void FillCharactersScroll()
 		for(int x=MAX_NUM_FIGHTERS; x>=1; x--)
 		{
 			_curCharIdx = GetOfficersIndex(pchar, x);
-			if(_curCharIdx!=-1) 
+			if(_curCharIdx!=-1)
 			{
 				if (x > z) z = x; break;
 			}
 		}
 	}
 	if (z < MAX_NUM_FIGHTERS) z = z + 1;
-	
+
 	for(int k=1; k<=z; k++)
 	{
 		attributeName = "pic" + (m+1);

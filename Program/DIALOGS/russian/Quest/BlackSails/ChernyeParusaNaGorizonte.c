@@ -435,6 +435,7 @@ void ProcessDialogEvent()
 			Flag_Change(PIRATE);
 			BSRepairShip(npchar);
 			SetShipRemovable(npchar, false);
+			SetCharacterRemovable(npchar, false);
 			Fantom_SetBalls(npchar, "war");
 			SetCharacterGoods(npchar,GOOD_FOOD,1000);
             dialog.text = "Успокойся Элеонора. Мистер Сильвер, где вы виделись с Вейном в последний раз?";

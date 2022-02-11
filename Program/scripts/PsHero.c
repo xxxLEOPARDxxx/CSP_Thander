@@ -1211,7 +1211,7 @@ void PGG_UpdateEquip(ref chr)
 			blade = FindCharacterItemByGroup(chr, BLADE_ITEM_TYPE);
 		}
 
-		blade = LAi_NPC_EquipBladeSelection(sti(chr.rank));
+		blade = LAi_NPC_EquipBladeSelection(sti(chr.rank),false);
 		GiveItem2Character(chr, blade);
 		EquipCharacterByItem(chr, blade);
 
@@ -2372,43 +2372,19 @@ void PGG_Q1AfterBattle(string qName)
 
 	if (!bLater)
 	{
-		/*//Boyer change
-		for(i=1; i<COMPANION_MAX; i++)
-		{
-			cn = GetCompanionIndex(pchar,i);
-			if(cn!=-1)
-			{
-				nNumShips++;
-			}
-		}
-		nNumShips--; //Deduct one for temp companion going away
-		//#20190906-01
-		if(CheckAttribute(loadedLocation, "type")) {
-            string sLType = loadedLocation.type;
-            if(sLType == "boarding_cabine" || sLType == "ship_cabin" || sLType == "gun_deck" || sLType == "cargo_hold" || sLType == "residence")
-                UnloadLocation(loadedLocation);
-        }
-		if (isLocationFreeForQuests(sLoc) && nNumShips < 4)*/
-		//Trouble loading some locations with more than 4 companions
 		if (isLocationFreeForQuests(sLoc))
 		{
 			PChar.location.from_sea = sLoc;
 			Locations[FindLocation(sLoc)].DisableEncounters = true;
-			//DoReloadFromSeaToLocation(sLoc, "reload", "sea");
-			//PChar.DisableBIFace = true;
-			int nLablesFileID = LanguageOpenFile("LocLables.txt");
-			log_info("Необходимо причалить к "+LanguageConvertString(nLablesFileID, sLoc)+" для дележа добычи.");
-			LanguageCloseFile(nLablesFileID);
+			DoReloadFromSeaToLocation(sLoc, "reload", "sea");
 		}
-		/*else
+		else
 		{
 			MakeCloneShipDeck(pchar, true); // подмена палубы
 			DoReloadFromSeaToLocation("Ship_deck", "goto", "goto5");
    			pchar.quest.Munity = "";
 			sLoc = "Ship_deck";
-			if(!CheckAttribute(AISea,"Island"))
-				PChar.DisableBIFace = true;
-		}*/
+		}
 	}
 	else
 	{
@@ -2711,11 +2687,10 @@ void PGG_Q1AfterShoreFight()
 	string sGroup;
 	sGroup = PChar.GenQuest.PGG_Quest.GrpID;
 
-
-
 	//даю немного целевого товара в любом случае, даже если места нет... пусть разбираются :)
 	PChar.GenQuest.PGG_Quest.Goods.Taken = 500 + drand(500) + MakeInt(GetSquadronFreeSpace(PChar, sti(PChar.GenQuest.PGG_Quest.Goods)) / (3 + drand(2)))
 	chr = CharacterFromID(PChar.GenQuest.PGG_Quest.PGGid);
+	LAi_RemoveCheckMinHP(chr); //fix
 	if(!CheckAttribute(PChar,"PGG_EnemyPP"))
 	{
 	if (!CheckAttribute(PChar, "Quest.PGGQuest1_PGGDead.PGG_Dead"))

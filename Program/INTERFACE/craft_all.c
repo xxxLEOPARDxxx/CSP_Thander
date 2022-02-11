@@ -3,6 +3,7 @@ aref craft, draw;
 
 int lngFileID;
 int qnt, qntMAX;
+int SelectedLine = 0;
 
 void InitInterface_gm(string iniName)
 {
@@ -205,7 +206,8 @@ void CreateItem()
 	if(sti(pchar.questTemp.craftcount) >= 500) UnlockAchievement("craft", 2);
 	if(sti(pchar.questTemp.craftcount) >= 1000) UnlockAchievement("craft", 3);
 
-	ProcessCancelExit();
+	SetCraftInfo(SelectedLine);
+	//ProcessCancelExit();
 }
 
 void SelectTable()
@@ -215,7 +217,7 @@ void SelectTable()
     string CurTable = sControl;
     string CurRow   =  "tr" + (iSelected);
 
-	int SelectedLine = iSelected - 1;
+	SelectedLine = iSelected - 1;
 
 	// Fill components table
 	SetCraftInfo(SelectedLine);
@@ -230,6 +232,7 @@ int GetCharacterItemWithCabin(ref _refCharacter,string itemName)
 	}
 
 	aref chests;
+	if (Get_My_Cabin() == "") return qty;
 	if (!CheckAttribute(locations[FindLocation(Get_My_Cabin())],"locators.box")) return qty;
 	makearef(chests,locations[FindLocation(Get_My_Cabin())].locators.box);
 	int chestsnum = GetAttributesNum(chests);

@@ -1785,7 +1785,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "BS_16_WhisperIsHere":
-			dialog.text = "А вот и корабль. Похоже, что бы был"+ GetSexPhrase("","а") +" прав"+ GetSexPhrase("","а") +".";
+			dialog.text = "А вот и корабль. Похоже, что ты был"+ GetSexPhrase("","а") +" прав"+ GetSexPhrase("","а") +".";
 			Link.l1 = "Я всегда прав"+ GetSexPhrase("","а") +".";
 			Link.l1.go = "BS_16_WhisperIsHere_1";
 		break;

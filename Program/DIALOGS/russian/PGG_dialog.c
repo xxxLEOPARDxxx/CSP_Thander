@@ -142,14 +142,6 @@ void ProcessDialogEvent()
 			break;
 		}
 
-		if (CheckAttribute(NPChar, "QuestTalk") && GetNpcQuestPastDayParam(NPChar, "QuestTalk") < 1)
-		{
-			Dialog.Text = "Я тебе уже все сказал на сегодня!";
-			link.l1 = "Ах да...";
-			link.l1.go = "exit";
-			break;
-		}
-
 		Dialog.text = RandPhraseSimple("Что тебе надо " + GetFullName(pchar) + "?", "Кто это? А, ты... Проваливай, я не в настроении...");
 		link.l1 = RandPhraseSimple("Как на счет дельца?", "У меня к тебе разговор...");
 		link.l1.go = "quest";
@@ -497,13 +489,6 @@ void ProcessDialogEvent()
 
 	case "quest":
 		chrDisableReloadToLocation = false;
-		if (CheckAttribute(NPChar, "QuestTalk") && GetNpcQuestPastDayParam(NPChar, "QuestTalk") < 1)
-		{
-			Dialog.Text = "Я тебе уже все сказал!";
-			link.l1 = "Ах да...";
-			link.l1.go = "exit";
-			break;
-		}
 		int iDays = GetQuestPastDayParam("QuestTalk");
 		if (CheckAttribute(NPChar, "PGGAi.Task.SetSail"))
 		{
@@ -654,7 +639,7 @@ void ProcessDialogEvent()
 		PChar.GenQuest.PGG_Quest.Island.Town = FindTownOnIsland(PChar.GenQuest.PGG_Quest.Island);
 		PChar.GenQuest.PGG_Quest.Days = GetMaxDaysFromIsland2Island(Islands[GetCharacterCurrentIsland(pchar)].id, PChar.GenQuest.PGG_Quest.Island)/2 + 1;
 		PChar.GenQuest.PGG_Quest.Goods = GOOD_SLAVES + drand(2);
-		if(CheckAttribute(pchar, "BSStart") && CheckAttribute(pchar, "BSInProgress"))	PChar.GenQuest.PGG_Quest.Goods = GOOD_GOLD;
+		if(CheckAttribute(pchar, "BSStart") && !CheckAttribute(pchar, "BSInProgress"))	PChar.GenQuest.PGG_Quest.Goods = GOOD_GOLD;
 		if (CheckAttribute(NPChar, "PGGAi.ActiveQuest"))
 		{
 //			Dialog.Text = "Дело у меня к тебе, "+ GetSexPhrase("приятель","подруга") +". Знаю, можно тебе довериться, но в таверне обсуждать не возьмусь, ушей много лишних. Жду тебя у меня на борту. Помнишь, моя посудина зовется '" + NPChar.Ship.Name + "'.";
@@ -800,7 +785,7 @@ void ProcessDialogEvent()
 					PChar.GenQuest.PGG_Quest.Island.Town = FindTownOnIsland(PChar.GenQuest.PGG_Quest.Island);
 					PChar.GenQuest.PGG_Quest.Days = rand (4) + 5;
 					PChar.GenQuest.PGG_Quest.Goods = GOOD_SLAVES + drand(2);
-					if(CheckAttribute(pchar, "BSStart") && CheckAttribute(pchar, "BSInProgress"))	PChar.GenQuest.PGG_Quest.Goods = GOOD_GOLD;
+					if(CheckAttribute(pchar, "BSStart") && !CheckAttribute(pchar, "BSInProgress"))	PChar.GenQuest.PGG_Quest.Goods = GOOD_GOLD;
 					PChar.GenQuest.PGG_Quest.PGGid = npchar.id;
 					NPChar.Nation.Bak = NPChar.Nation;
 
@@ -1093,6 +1078,7 @@ void ProcessDialogEvent()
 	case "Quest_1_Time2Late":
 		DeleteAttribute(&Locations[FindLocation(PChar.GenQuest.PGG_Quest.Island.Shore)],"DisableEncounters");
 		chrDisableReloadToLocation = false;
+		SaveCurrentQuestDateParam("QuestTalk");
 
 		//перенес сюда.. х.з. вроде будет лучше (Баг Изгоя.)
 		PChar.Quest.PGGQuest1_PGGDead.Over = "Yes";
@@ -1152,6 +1138,7 @@ void ProcessDialogEvent()
 			PChar.quest.Munity = "Deads";
 		}
 		chrDisableReloadToLocation = false;
+		SaveCurrentQuestDateParam("QuestTalk");
 
 		//не взяли груз...
 		if (CheckAttribute(NPChar, "PGGAi.ActiveQuest"))
@@ -1280,8 +1267,8 @@ void ProcessDialogEvent()
 		{
 			AddMoneyToCharacter(PChar, -(sti(PChar.GenQuest.PGG_Quest.FailedPaySum)));
 			AddQuestRecord("Gen_PGGQuest1", "q1_FailPay");
-		AddQuestUserData("Gen_PGGQuest1", "sSex", GetSexPhrase("","а"));
-		AddQuestUserData("Gen_PGGQuest1", "sSex1", GetSexPhrase("ен","на"));
+			AddQuestUserData("Gen_PGGQuest1", "sSex", GetSexPhrase("","а"));
+			AddQuestUserData("Gen_PGGQuest1", "sSex1", GetSexPhrase("ен","на"));
 		}
 		ChangeCharacterReputation(NPChar, 10);
 		CloseQuestHeader("Gen_PGGQuest1");
@@ -1421,6 +1408,7 @@ void ProcessDialogEvent()
 
 	case "Quest_1_SharePrise":
 		chrDisableReloadToLocation = false;
+		SaveCurrentQuestDateParam("QuestTalk");
 		Dialog.Text = PCharRepPhrase("Настоящее побоище, жаль, девок с ними не было! Добыча составила " + PChar.GenQuest.PGG_Quest.Goods.Taken + " " + PChar.GenQuest.PGG_Quest.Goods.Text + ".", "Неплохо, капитан! Добыча составила " + PChar.GenQuest.PGG_Quest.Goods.Taken + " " + PChar.GenQuest.PGG_Quest.Goods.Text + ".");
 
 		pchar.PGGShoreQuest = true;

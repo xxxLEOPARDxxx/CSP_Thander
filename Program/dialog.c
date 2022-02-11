@@ -66,6 +66,19 @@ bool DialogMain(ref Character)
 		}
 	}
 	//Можем начинать диалог
+	string sProf = "";
+	if (IsCompanion(Character)) sProf += " (компаньон)";
+	if (IsOfficer(Character)) sProf += " (абордажник)";
+	if (sti(pchar.Fellows.Passengers.navigator) == sti(Character.index)) sProf += " (штурман)";
+	if (sti(pchar.Fellows.Passengers.boatswain) == sti(Character.index)) sProf += " (боцман)";
+	if (sti(pchar.Fellows.Passengers.cannoner) == sti(Character.index)) sProf += " (канонир)";
+	if (sti(pchar.Fellows.Passengers.doctor) == sti(Character.index)) sProf += " (врач)";
+	if (sti(pchar.Fellows.Passengers.carpenter) == sti(Character.index)) sProf += " (плотник)";
+    if (sti(pchar.Fellows.Passengers.treasurer) == sti(Character.index)) sProf += " (казначей)";
+	//if (CheckAttribute(Character, "prisoned") && sti(Character.prisoned) == true) sProf = " (пленник)";
+	Character.lastnamesave = Character.lastname;
+	Character.lastname = Character.lastname + sProf;
+
 	dialogRun = true;
 	dialogSelf = false;
 	LAi_Character_StartDialog(mainChr, Character);
@@ -214,6 +227,8 @@ void DialogExit()
 {
 	//Если диалога уже не ведётся, выйдем
 	if(dialogRun == false) return;
+	if (checkattribute(CharacterRef, "lastnamesave")) CharacterRef.lastname = CharacterRef.lastnamesave;
+
 	DelEventHandler("frame", "DialogPlayGreeting");
 	//Освобождаем ресурсы
 	DeleteClass(&Dialog);

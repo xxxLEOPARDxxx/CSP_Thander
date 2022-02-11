@@ -647,7 +647,7 @@ float LAi_GetGunChargeProgress(aref chr)
 	{
 		float charge = chr.chr_ai.charge;
 		if(charge > 1) charge -= MakeInt(chr.chr_ai.charge);
-		if(CheckAttribute(chr, "chr_ai.charge_max") && MakeInt(chr.chr_ai.charge_max) == MakeInt(chr.chr_ai.charge)) 
+		if(CheckAttribute(chr, "chr_ai.charge_max") && MakeInt(chr.chr_ai.charge_max) == MakeInt(chr.chr_ai.charge))
 			charge = 1.0;
 	}
 
@@ -928,32 +928,44 @@ void LAi_AllCharactersUpdate(float dltTime)
 			//Востоновление жизни
 			float dlthp = LAI_DEFAULT_DLTHP;
 			if(CheckAttribute(chr_ai, "hp_dlt")) dlthp = stf(chr_ai.hp_dlt);
+			float maxhp = stf(chr_ai.hp_max);
 			float hp = stf(chr_ai.hp) + dlthp*dltTime;
 			float oldhp = hp;
-			if(CheckAttribute(chr_ai, "hp_bottle"))
+			if(hp <= maxhp)
 			{
-				float bottle = stf(chr_ai.hp_bottle);
-				if(bottle > 0)
+				if(CheckAttribute(chr_ai, "hp_bottle"))
 				{
-					//Скорость высасывания из бутылки
-					float bottledlthp = LAI_DEFAULT_DLTBLTHP;
-					if(CheckAttribute(chr_ai, "hp_dlt_bottle"))
+					float bottle = stf(chr_ai.hp_bottle);
+					if(bottle > 0)
 					{
-						bottledlthp = stf(chr_ai.hp_dlt_bottle);
+						//Скорость высасывания из бутылки
+						float bottledlthp = LAI_DEFAULT_DLTBLTHP;
+						if(CheckAttribute(chr_ai, "hp_dlt_bottle"))
+						{
+							bottledlthp = stf(chr_ai.hp_dlt_bottle);
+						}
+						//Количество вытянутых хп за текущий период времени
+						bottledlthp = bottledlthp*dltTime;
+						if(bottledlthp > bottle)
+						{
+							bottledlthp = bottle;
+						}
+						bottle = bottle - bottledlthp;
+						hp = hp + bottledlthp;
+						chr_ai.hp_bottle = bottle;
+					}else{
+						//Нет больше бутылки
+						DeleteAttribute(chr_ai, "hp_bottle");
+						DeleteAttribute(chr_ai, "hp_dlt_bottle");//fix
 					}
-					//Количество вытянутых хп за текущий период времени
-					bottledlthp = bottledlthp*dltTime;
-					if(bottledlthp > bottle)
-					{
-						bottledlthp = bottle;
-					}
-					bottle = bottle - bottledlthp;
-					hp = hp + bottledlthp;
-					chr_ai.hp_bottle = bottle;
-				}else{
-					//Нет больше бутылки
+				}
+			}
+			else
+			{
+				if (!LAi_IsFightMode(pchar))
+				{
 					DeleteAttribute(chr_ai, "hp_bottle");
-					DeleteAttribute(chr_ai, "hp_dlt_bottle");//fix
+					DeleteAttribute(chr_ai, "hp_dlt_bottle");
 				}
 			}
 			if(CheckAttribute(chr_ai, "poison"))
@@ -975,7 +987,8 @@ void LAi_AllCharactersUpdate(float dltTime)
 			//navy --> время действия бутылки
 			if(CheckAttribute(chr_ai, "drunk"))
 			{
-				chr_ai.drunk = sti(chr_ai.drunk) - 1;
+				//Log_Info(chr_ai.drunk);
+				chr_ai.drunk = sti(chr_ai.drunk) - dltTime*60;//было раз в фрейм, стало раз в 1/60с
 				if(sti(chr_ai.drunk) < 1) LAi_SetAlcoholNormal(chr);
 			}
 			//<--
@@ -1078,16 +1091,14 @@ void LAi_AllCharactersUpdate(float dltTime)
 
 			if(CheckAttribute(chr_ai, "noeat"))
 			{
-				if(CheckAttribute(pchar,"query_delay")) 
-				{
-					pchar.query_delay = stf(pchar.query_delay) - dltTime;
-					if (stf(pchar.query_delay) <= 0.0)
-					{
-						DeleteAttribute(pchar, "query_delay");
-					}
-				}
 				chr_ai.noeat = stf(chr_ai.noeat) - dltTime;
-				
+				pchar.query_delay = stf(pchar.query_delay) - dltTime;
+				if (stf(pchar.query_delay) <= 0.0)
+				{
+					DeleteAttribute(pchar, "query_delay");
+				}
+
+
 				if(stf(chr_ai.noeat) <= 0.0 )
 				{
 					DeleteAttribute(chr_ai, "noeat");
@@ -1140,12 +1151,13 @@ void LAi_AllCharactersUpdate(float dltTime)
 			{
 				if(hp < oldhp) hp = oldhp;
 			}
+			/*//отключение бутылки когда хп фулл - партия набутыльников против
 			float maxhp = stf(chr_ai.hp_max);
 			if(hp > maxhp)
 			{
 				hp = maxhp;
 				DeleteAttribute(chr_ai, "bottle");
-			}
+			}*/
 			chr_ai.hp = hp;
 			//Проверка квеста на hp
 			LAi_ProcessCheckMinHP(chr);

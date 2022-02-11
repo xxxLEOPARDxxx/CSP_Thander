@@ -1,9 +1,9 @@
 void HKT_Button(string sHKB) // быстрый переход
 {
-	int curLocIdx, i; 
+	int curLocIdx, i;
 	String locID, sCityID;
 	bool bOk;
-	
+
 	curLocIdx = FindLoadedLocation();
 	sCityID = Locations[curLocIdx].fastreload;
 	locID = strcut(sHKB, 4 , strlen(sHKB)-1);
@@ -42,17 +42,17 @@ void HKT_Button(string sHKB) // быстрый переход
 	}
 	else
 	{
-		Log_info(XI_ConvertString("Вы во враждебном городе!")); 
-		PlaySound("interface\knock.wav");
-	}	
-	if(pchar.location == sCityID + locID) 
-	{
-		Log_info(XI_ConvertString("You are already there")); 
+		Log_info(XI_ConvertString("Вы во враждебном городе!"));
 		PlaySound("interface\knock.wav");
 	}
-	if (sHKB == "Fast_port" && pchar.location == pchar.location.from_sea) 
+	if(pchar.location == sCityID + locID)
 	{
-		Log_info(XI_ConvertString("You are already there")); 
+		Log_info(XI_ConvertString("You are already there"));
 		PlaySound("interface\knock.wav");
 	}
-}	
+	if (sHKB == "Fast_port" && pchar.location == pchar.location.from_sea)
+	{
+		Log_info(XI_ConvertString("You are already there"));
+		PlaySound("interface\knock.wav");
+	}
+}

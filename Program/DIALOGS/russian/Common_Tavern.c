@@ -398,6 +398,7 @@ void ProcessDialogEvent()
 
 		case "crew hire":
 			ok = (rColony.from_sea == "") || (Pchar.location.from_sea == rColony.from_sea);
+			if (NPChar.id == "Caiman_tavernkeeper") ok = true;
 			ok = sti(Pchar.Ship.Type) != SHIP_NOTUSED && ok;
 
 			// здесь убираю условие
@@ -661,6 +662,8 @@ void ProcessDialogEvent()
 				cost1 = makeint(cost1/2);
 			}
 			AddMoneyToCharacter(pchar, -cost1);
+			pchar.buyPGGinfo = 1;//купили инфо
+			SaveCurrentQuestDateParam("buy_PGG_info");
 			AddDialogExitQuestFunction("OpenPGGInformation");
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
@@ -1294,44 +1297,44 @@ void ProcessDialogEvent()
 		break;
 
 		case "room_day":
-			dialog.text = "Это обойдется вам в 5 золотых.";
+			dialog.text = "Это обойдётся вам в 5 золотых.";
 			if (makeint(pchar.money) >= 5)
 			{
-				link.l1 = "Идет. Вот твои деньги.";
+				link.l1 = "Идёт. Вот твои деньги.";
 				link.l1.go = "room_day_wait";
 			}
-			link.l2 = pcharrepphrase("Ты сдаешь королевские покои? Нет уж, за такую цену я лучше посижу в общей зале.",
+			link.l2 = pcharrepphrase("Ты сдаешь королевские покои? Нет уж, за такую цену я лучше посижу в общем зале.",
             "Увы, видимо, такая роскошь, как сон на кровати, не для моего кошелька. Я переночую в общей зале.");
 			link.l2.go = "hall_day_wait";
-			link.l3 = "Не сейчас. Давай поговорим о чем-нибудь другом.";
+			link.l3 = "Не сейчас. Давай поговорим о чём-нибудь другом.";
 			link.l3.go = "int_quests";
 		break;
 
 		case "room_day_next":
-			dialog.text = "Это обойдется вам в 10 золотых.";
+			dialog.text = "Это обойдётся вам в 10 золотых.";
 			if (makeint(pchar.money) >= 10)
 			{
-				link.l1 = "Идет. Вот твои деньги.";
+				link.l1 = "Идёт. Вот твои деньги.";
 				link.l1.go = "room_day_wait_next";
 			}
-			link.l2 = pcharrepphrase("Ты сдаешь королевские покои? Нет уж, за такую цену я лучше посижу в общей зале.",
+			link.l2 = pcharrepphrase("Ты сдаешь королевские покои? Нет уж, за такую цену я лучше посижу в общем зале.",
             "Увы, видимо, такая роскошь, как сон на кровати, не для моего кошелька. Я переночую в общей зале.");
 			link.l2.go = "hall_day_wait";
-			link.l3 = "Не сейчас. Давай поговорим о чем-нибудь другом.";
+			link.l3 = "Не сейчас. Давай поговорим о чём-нибудь другом.";
 			link.l3.go = "int_quests";
 		break;
 
 		case "room_night":
-			dialog.text = "Это обойдется вам в 5 золотых.";
+			dialog.text = "Это обойдётся вам в 5 золотых.";
 			if (makeint(pchar.money) >= 5)
 			{
-				link.l1 = "Идет. Вот твои деньги.";
+				link.l1 = "Идёт. Вот твои деньги.";
 				link.l1.go = "room_night_wait";
 			}
-			link.l2 = pcharrepphrase("Ты сдаешь королевские покои? Нет уж, за такую цену я лучше посижу в общей зале.",
+			link.l2 = pcharrepphrase("Ты сдаешь королевские покои? Нет уж, за такую цену я лучше посижу в общем зале.",
             "Увы, видимо, такая роскошь, как сон на кровати не для моего кошелька. Я переночую в общей зале.");
 			link.l2.go = "hall_night_wait";
-			link.l3 = "Не сейчас. Давай поговорим о чем-нибудь другом.";
+			link.l3 = "Не сейчас. Давай поговорим о чём-нибудь другом.";
 			link.l3.go = "int_quests";
 		break;
 

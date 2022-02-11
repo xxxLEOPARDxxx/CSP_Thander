@@ -562,6 +562,7 @@ void CreateWeatherEnvironment()
 void Whr_UpdateWeather()
 {
 	if (!isEntity(&Weather)) { return; }
+	if (HasSubStr(loadedLocation.id,"Cabin")) return;
 
 //слишком много инитов
 //	WeatherInit();
@@ -963,7 +964,7 @@ void doShipLightChange(ref aCurWeather)
 
     ref rChar;
     Sea.Lights = aCurWeather.Lights;
-    for(j = 0; j < iNumShips; j++) 
+    for(j = 0; j < iNumShips; j++)
 	{
         iCharIdx = Ships[j];
         if (iCharIdx < 0 || iCharIdx >= TOTAL_CHARACTERS) continue;

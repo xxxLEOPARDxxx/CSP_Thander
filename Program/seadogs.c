@@ -1263,56 +1263,56 @@ void ProcessControls()
 				bAltInfo = false;
 				ModifyTextInfo();
 			break;
-			
+
 			case "AltModificator":
 				if (!IsEntity(&ILogAndActions)) return;
 				if(loadedLocation.type == "Underwater") return;
 				bAltInfo = true;
 				SendMessage(&ILogAndActions,"l",LI_CLEAR_STRINGS);
 				ModifyTextInfo();
-			break; 
+			break;
 
 			case "Fast_port":
-				if(bAltInfo)  HKT_Button(ControlName); 
+				if(bAltInfo)  HKT_Button(ControlName);
 			break;
-			
+
 			case "Fast_store":
 				if(bAltInfo) HKT_Button(ControlName);
-					
+
 			break;
-			
+
 			case "Fast_Shipyard":
 				 if(bAltInfo) HKT_Button(ControlName);
 			break;
-			
+
 			case "Fast_tavern":
 				if(bAltInfo) HKT_Button(ControlName);
 			break;
-			
+
 			case "Fast_townhall":
 				if(bAltInfo) HKT_Button(ControlName);
 			break;
-			
+
 			case "Fast_bank":
 				if(bAltInfo) HKT_Button(ControlName);
 			break;
-			
+
 			case "Fast_church":
 				if(bAltInfo) HKT_Button(ControlName);
 			break;
-			
+
 			case "Fast_Brothel":
 				if(bAltInfo) HKT_Button(ControlName);
 			break;
-			
+
 			case "Fast_PortOffice":
 				if(bAltInfo) HKT_Button(ControlName);
 			break;
-			
+
 			case "Fast_prison":
 				if(bAltInfo) HKT_Button(ControlName);
 			break;
-			
+
             case "OfficersCharge":
                 pchar.OfficerAttRange = 35.0;
                 OfficersFollow();
@@ -1770,6 +1770,7 @@ void ProcessControls()
             		UnloadSegment("Debuger.c");
             	}
 		    }
+			else LaunchPsHeroScreen();
 		break;
         case "BOAL_Control":
 		    // по F11 вызывает окно отладчика
@@ -2137,10 +2138,6 @@ void restoreQuestItems()
         //From RelationAgent_dialog.c
         ChangeItemName(pchar.restoreLSCTrustLetter, "itmname_letter_LSC_1");
         ChangeItemDescribe(pchar.restoreLSCTrustLetter, "itmdescr_letter_LSC_1");
-        rItemRef =  ItemsFromID(pchar.restoreLSCTrustLetter);
-        rItemRef.shown = true;
-        rItemRef.startLocation = "Marigo_houseH2";
-        rItemRef.startLocator = "item1";
     }
 	if(CheckAttribute(pchar, "HugtorpQuestStart") && !CheckAttribute(pchar, "HugtorpQuestFinish"))
 	{

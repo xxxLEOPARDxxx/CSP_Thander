@@ -150,14 +150,6 @@ void ProcessDialogEvent()
 			break;
 		}
 
-		if (CheckAttribute(NPChar, "QuestTalk") && GetNpcQuestPastDayParam(NPChar, "QuestTalk") < 1)
-		{
-			Dialog.Text = "По-моему я уже все сказала тебе!";
-			link.l1 = "Ах да...";
-			link.l1.go = "exit";
-			break;
-		}
-
 		Dialog.text = RandPhraseSimple("Что тебе надо " + GetFullName(pchar) + "?", "А, это ты... Гуляй мимо, я не в настроении...");
 		link.l1 = RandPhraseSimple("Как на счет дельца?", "У меня к тебе разговор...");
 		link.l1.go = "quest";
@@ -510,18 +502,11 @@ void ProcessDialogEvent()
 	case "quest":
 		chrDisableReloadToLocation = false;
 
-		if (CheckAttribute(NPChar, "QuestTalk") && GetNpcQuestPastDayParam(NPChar, "QuestTalk") < 1)
-		{
-			Dialog.Text = "Я уже все тебе сказала!";
-			link.l1 = "Ах да...";
-			link.l1.go = "exit";
-			break;
-		}
-
 		if (npchar.name == "Виспер" && !CheckAttribute(npchar, "PGGWhisperQuestStart") && !CheckAttribute(pchar,"GiantEvilSkeleton"))
 		{
 			if (GetCharacterShipClass(PChar) <= 4 && sti(npchar.Ship.Type) != SHIP_NOTUSED)
 			{
+				NPChar.PGGWhisperQuestStart = true;
 				Dialog.Text = "Знаешь? Ты как нельзя вовремя, есть одно дело.";
 				link.l1 = "Хм. Ты о чем?";
 				link.l1.go = "Quest_Whisper";
@@ -682,7 +667,7 @@ void ProcessDialogEvent()
 		PChar.GenQuest.PGG_Quest.Island.Town = FindTownOnIsland(PChar.GenQuest.PGG_Quest.Island);
 		PChar.GenQuest.PGG_Quest.Days = GetMaxDaysFromIsland2Island(Islands[GetCharacterCurrentIsland(pchar)].id, PChar.GenQuest.PGG_Quest.Island)/2 + 1;
 		PChar.GenQuest.PGG_Quest.Goods = GOOD_SLAVES + drand(2);
-		if(CheckAttribute(pchar, "BSStart") && CheckAttribute(pchar, "BSInProgress"))	PChar.GenQuest.PGG_Quest.Goods = GOOD_GOLD;
+		if(CheckAttribute(pchar, "BSStart") && !CheckAttribute(pchar, "BSInProgress"))	PChar.GenQuest.PGG_Quest.Goods = GOOD_GOLD;
 		if (CheckAttribute(NPChar, "PGGAi.ActiveQuest"))
 		{
 //			Dialog.Text = "Дело у меня к тебе, приятель. Знаю, можно тебе довериться, но в таверне обсуждать не возьмусь, ушей много лишних. Жду тебя у меня на борту. Помнишь, моя посудина зовется '" + NPChar.Ship.Name + "'.";
@@ -835,7 +820,7 @@ void ProcessDialogEvent()
 					PChar.GenQuest.PGG_Quest.Island.Town = FindTownOnIsland(PChar.GenQuest.PGG_Quest.Island);
 					PChar.GenQuest.PGG_Quest.Days = rand (4) + 5;
 					PChar.GenQuest.PGG_Quest.Goods = GOOD_SLAVES + drand(2);
-					if(CheckAttribute(pchar, "BSStart") && CheckAttribute(pchar, "BSInProgress"))	PChar.GenQuest.PGG_Quest.Goods = GOOD_GOLD;
+					if(CheckAttribute(pchar, "BSStart") && !CheckAttribute(pchar, "BSInProgress"))	PChar.GenQuest.PGG_Quest.Goods = GOOD_GOLD;
 					PChar.GenQuest.PGG_Quest.PGGid = npchar.id;
 					NPChar.Nation.Bak = NPChar.Nation;
 
@@ -1127,6 +1112,7 @@ void ProcessDialogEvent()
 	case "Quest_1_Time2Late":
 		DeleteAttribute(&Locations[FindLocation(PChar.GenQuest.PGG_Quest.Island.Shore)],"DisableEncounters");
 		chrDisableReloadToLocation = false;
+		SaveCurrentQuestDateParam("QuestTalk");
 
 		//перенес сюда.. х.з. вроде будет лучше (Баг Изгоя.)
 		PChar.Quest.PGGQuest1_PGGDead.Over = "Yes";
@@ -1186,6 +1172,7 @@ void ProcessDialogEvent()
 			PChar.quest.Munity = "Deads";
 		}
 		chrDisableReloadToLocation = false;
+		SaveCurrentQuestDateParam("QuestTalk");
 
 		//не взяли груз...
 		if (CheckAttribute(NPChar, "PGGAi.ActiveQuest"))
@@ -1430,6 +1417,7 @@ void ProcessDialogEvent()
 
 	case "Quest_1_SharePrise":
 		chrDisableReloadToLocation = false;
+		SaveCurrentQuestDateParam("QuestTalk");
 		Dialog.Text = PCharRepPhrase("Настоящая бойня, книпель мне в зад!, жаль, кончилось быстро! Добыча составила " + PChar.GenQuest.PGG_Quest.Goods.Taken + " " + PChar.GenQuest.PGG_Quest.Goods.Text + ".", "Неплохо, капитан, угря мне в ущелье! Добыча составила " + PChar.GenQuest.PGG_Quest.Goods.Taken + " " + PChar.GenQuest.PGG_Quest.Goods.Text + ".");
 
 		pchar.PGGShoreQuest = true;

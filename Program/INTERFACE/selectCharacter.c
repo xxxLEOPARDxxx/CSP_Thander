@@ -8,6 +8,7 @@ string sCharacterName;
 
 bool g_bToolTipStarted = false;
 int heroQty = 0;
+int descWrong = 0;
 string totalInfo;
 string totalInfoChar;
 
@@ -23,7 +24,7 @@ void InitInterface(string iniName)
 	SetNewGroupPicture("SPAIN", "NATIONS", "Spain");
 	SetNewGroupPicture("HOLLAND", "NATIONS", "Holland");
 	SetNewGroupPicture("PIRATE", "NATIONS", "Pirate");
-	SetNewPicture("NOOB_HINT_STR", "INTERFACES\FaqPictures\NOOB.png");
+	// SetNewPicture("NOOB_HINT_STR", "INTERFACES\FaqPictures\NOOB.png");
 
 	SetMainCharacterIndex(1);
 
@@ -76,6 +77,8 @@ void InitInterface(string iniName)
 	SetFormatedText("EXP_SLIDE_MIN", "Min");
 	SetFormatedText("EXP_SLIDE_MAX", "Max");
 
+	SetFormatedText("DESC_TITLE", "Дополнительное соглашение");
+	SetFormatedText("DESC_TEXT", "Привет, бравый корсар! \nКоманда CSP приветствует тебя! Наверняка, ты уже опытный, отважный, знаешь всю игру вдоль и поперёк. Но не всё так просто, как кажется. \nДело в том, что этот аддон очень сильно отличается от оригинала ГПК и последней активно разрабатываемой версией ККС. \nМногие, уже привычные элементы геймплея, а так же, казалось бы очевидные вещи, тут работают иначе. Если ты не следил за этапами разработки и тестирования аддона в Дискорде, очень многое тут, будет непонятным или вообще будет казаться багом. \nСпециально для пояснения некоторых аспектов, связанных с началом Новой Игры, мы подготовили это соглашение. Начало Новой Игры - это важный этап, это не просто выбор Героя и Йо-хо-хо, на абордаж! Это тонкая и гибкая настройка многих элементов геймплея. Поставив не ту 'галочку' или наоборот, не включив - можно серьёзно усложнить себе игру. Для каждой такой опции есть описание, достаточно просто нажать на опции ПРАВОЙ кнопкой мыши.  Теперь ВНИМАНИЕ! Чтобы начать игру, тебе просто нужно нажать Правой кнопкой мыши по кнопке 'Соглашаюсь!' или 'Давай, поехали уже!'. По любой из них. После всего прочитанного, надеемся, у тебя не возникнет вопросов: ''почему у меня не работают те или эти элементы геймплея''. \nА теперь, можешь продолжить создавать своего героя и покорять архипелаг. Не забыл, что нужно и чем нажать? \nУдачи, корсар, попутного ветра!");
 	if (!CheckAttribute(&GameInterface, "SavePath"))
 		GameInterface.SavePath = "SAVE";
 
@@ -708,8 +711,53 @@ void ProcessCommandExecute()
 				SetInfoText();
     		}
     	break;
+
+		case "DESC_LEFT_BUTTON":
+    		if(comName=="click")
+    		{
+          		descWrong++;
+				SetTextForLulz();
+    		}
+			if(comName=="rclick")
+    		{
+          		XI_WindowShow("DESCRIPTION",false);
+				XI_WindowDisable("DESCRIPTION",true);
+    		}
+    	break;
+
+		case "DESC_RIGHT_BUTTON":
+    		if(comName=="click")
+    		{
+          		descWrong++;
+				SetTextForLulz();
+    		}
+			if(comName=="rclick")
+    		{
+          		XI_WindowShow("DESCRIPTION",false);
+				XI_WindowDisable("DESCRIPTION",true);
+    		}
+    	break;
 	}
 
+}
+
+void SetTextForLulz()
+{
+	switch (makeint(descWrong/10))
+	{
+		case 0: SetFormatedText("DESC_TEXT2","Число неверных нажатий: "+descWrong+"\n\n..."); break;
+		case 1: SetFormatedText("DESC_TEXT2","Число неверных нажатий: "+descWrong+"\n\nОй, слишком много вопросов будет, 10 раз неправильно"); break;
+		case 2: SetFormatedText("DESC_TEXT2","Число неверных нажатий: "+descWrong+"\n\nБяда, читать так и не научились, уже в 20 раз"); break;
+		case 3: SetFormatedText("DESC_TEXT2","Число неверных нажатий: "+descWrong+"\n\nДавай еще раз прочитаем, 30 раз не пид...."); break;
+		case 4: SetFormatedText("DESC_TEXT2","Число неверных нажатий: "+descWrong+"\n\nНе, так не пойдёт, мы же не поняли, что тут написано уже в 40 раз"); break;
+		case 5: SetFormatedText("DESC_TEXT2","Число неверных нажатий: "+descWrong+"\n\nАга, прочитай еще раз, уже раз 50 неверно жмакнул"); break;
+		case 6: SetFormatedText("DESC_TEXT2","Число неверных нажатий: "+descWrong+"\n\nНе, ваши вопросы сильно утомляют по 60 раз на дню писать"); break;
+		case 7: SetFormatedText("DESC_TEXT2","Число неверных нажатий: "+descWrong+"\n\nНу ладно... Так и быть, дам еще одну попытку - прочитать внимательно еще 70 раз"); break;
+		case 8: SetFormatedText("DESC_TEXT2","Число неверных нажатий: "+descWrong+"\n\nЧитать - значит быть умным, прочитать 80 раз"); break;
+		case 9: SetFormatedText("DESC_TEXT2","Число неверных нажатий: "+descWrong+"\n\nВсё херня, Миша, давай по новой 90 раз"); break;
+		case 10: SetFormatedText("DESC_TEXT2","Число неверных нажатий: "+descWrong+"\n\nВот если бы ты прочитал всё внимательно, уже бы начал играть в СОТЫЙ РАЗ, МАТЬ ТВОЮ!"); break;
+		else SetFormatedText("DESC_TEXT2","Число неверных нажатий: "+descWrong+"\n\nМожет не стоит и начинать, а? У тебя явно беда с башкой, если счётчик показывает такие цифры.");
+	}
 }
 
 void ShowConfirmWindow(bool show)
@@ -890,7 +938,8 @@ void IDoExit(int exitCode, bool bCode)
         MOD_EXP_RATE = makeint(5 + 10.0 * (1.0 - stf(GameInterface.nodes.EXP_SLIDE.value)));  // 0т 5 до 15
 		trace("MOD_EXP_RATE = " + MOD_EXP_RATE);
 
-		MOD_OFFICERS_RATE = makeint(9 - 6.0 * (1.0 - stf(GameInterface.nodes.OFF_SLIDE.value)));  // 0т 3 до 9
+		// MOD_OFFICERS_RATE = makeint(9 - 6.0 * (1.0 - stf(GameInterface.nodes.OFF_SLIDE.value)));  // 0т 3 до 9
+		MOD_OFFICERS_RATE = 9;
 		trace("MOD_OFFICERS_RATE = " + MOD_OFFICERS_RATE);
 
 		MOD_DEAD_CLEAR_TIME = makeint(500 - 400.0 * (1.0 - stf(GameInterface.nodes.DEAD_SLIDE.value)));  // 0т 100 до 500

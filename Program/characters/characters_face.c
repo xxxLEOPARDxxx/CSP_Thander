@@ -307,12 +307,12 @@ void FaceMaker(aref rCharacter)
 		case "sold_spa_7":		rCharacter.FaceId = 138; break;
 		case "sold_spa_8":		rCharacter.FaceId = 139; break;
 
-		case "trader_1":		rCharacter.FaceId = 140; break;
+		case "trader_1":		rCharacter.FaceId = 154; break;
 		case "trader_2":		rCharacter.FaceId = 141; break;
 		case "trader_3":		rCharacter.FaceId = 142; break;
 		case "trader_4":		rCharacter.FaceId = 143; break;
 		case "trader_5":		rCharacter.FaceId = 144; break;
-		case "trader_6":		rCharacter.FaceId = 145; break;
+		case "trader_6":		rCharacter.FaceId = 155; break;
 		case "trader_7":		rCharacter.FaceId = 146; break;
 		case "trader_8":		rCharacter.FaceId = 147; break;
 		case "trader_9":		rCharacter.FaceId = 148; break;

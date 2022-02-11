@@ -1115,6 +1115,9 @@ void FillATableInfo() // Заполним таблицу достижений и
 	int num = GetAttributesNum(aroot);
 	int z = num;
 
+	string attrname;
+	int i;
+
     for(n = 1; n < z+1; n++)
     {
     	row = "tr" + n;
@@ -1129,14 +1132,10 @@ void FillATableInfo() // Заполним таблицу достижений и
 		GameInterface.TABLE_ACHIEVEMENTS.(row).td1.str = "-";
 	}
 
-	string attrname;
-	int i;
-
 	// Сортировка по уровню выполненных достижений
 	for(i=0; i<z; i++)
 	{
 		arcur = GetAttributeN(aroot,i);
-
 		attrname = GetAttributeName(arcur);
 		if(sti(pchar.achievements.(attrname)) == 3) SetTableRowByAchievement(attrname, sti(pchar.achievements.(attrname)));
 	}
@@ -1172,7 +1171,7 @@ void SetTableRowByAchievement(string ach_id, int level)
 {
 	string row;
 
-	rownumberach++
+	rownumberach++;
 	row = "tr" + rownumberach;
 
 	GameInterface.TABLE_ACHIEVEMENTS.(row).td1.icon.width = 64;
@@ -1216,7 +1215,7 @@ void SetTableRowByAchievement(string ach_id, int level)
 		if(ach_id == "Nation_quest_E" || ach_id == "Nation_quest_F" || ach_id == "Nation_quest_H" || ach_id == "Nation_quest_S" || ach_id == "Nation_quest_P" || ach_id == "Isabella_quest" || ach_id == "LSC_quest" || ach_id == "Teno_quest" || ach_id == "Killbeggars_quest"
 		|| ach_id == "Ghostship_quest" || ach_id == "Bluebird_quest" || ach_id == "Berglarsgang_quest" || ach_id == "Mummydust_quest" || ach_id == "Enchantcity_quest"
 		|| ach_id == "ships" || ach_id == "bank_money" || ach_id == "CapBladLine" || ach_id == "WhisperLine" || ach_id == "AchShipSearch" || ach_id == "AchOrion" || ach_id == "AchRabotorg" || ach_id == "AchKondotier"
-		|| ach_id == "AchTich" || ach_id == "AchRagnar" || ach_id == "AchSalazar" || ach_id == "AchKaskos" || ach_id == "AchUmSamil")
+		|| ach_id == "AchTich" || ach_id == "AchRagnar" || ach_id == "AchSalazar" || ach_id == "AchKaskos" || ach_id == "AchUmSamil" || ach_id == "AchMapMaker")
 		{
 			// GameInterface.TABLE_ACHIEVEMENTS.(row).td1.str = "1 ур.";
 			GameInterface.TABLE_ACHIEVEMENTS.(row).td1.str = "1";
@@ -1293,6 +1292,7 @@ void SetTableRowByAchievement(string ach_id, int level)
 			if(ach_id == "AchShipSearch") strprogress = "Исследовано кораблей:";
 			if(ach_id == "AchGoldFleet") strprogress = "Золотых флотов потоплено:";
 			if(ach_id == "AchSityRobbery") strprogress = "Городов разграблено:";
+			if(ach_id == "AchMapMaker") strprogress = "Собрано карт:";
 
 			strprogress = strprogress + "\n";
 		}
@@ -1431,6 +1431,7 @@ void SetTableRowByAchievement(string ach_id, int level)
 			 Statistic_AddValue(PChar, "spa_GrabbingTown", 0) +
 			 Statistic_AddValue(PChar, "hol_GrabbingTown", 0)) + " / 5";
 			GameInterface.TABLE_ACHIEVEMENTS.(row).td4.str = strprogress;
+			if(ach_id == "AchMapMaker") strprogress = strprogress + sti(pchar.MapsAtlasCount) + " / "+MAPS_IN_ATLAS;
 		}
 
 		GameInterface.TABLE_ACHIEVEMENTS.(row).td4.str = strprogress;
@@ -2715,7 +2716,8 @@ void AddToTable(string _tabName, string type)
 				GameInterface.(_tabName).(row).td5.str = GetSpecialStrings(Items[i]);
 				break;
 				case "gun":
-				GameInterface.(_tabName).(row).td2.str = GetGunDamage(Items[i]);
+				if (HasSubStr(Items[i].id,"mushket")) GameInterface.(_tabName).(row).td2.str = GetGunDamage(Items[i])+"\n"+"приклад "+sti(Items[i].melee_dmg_min)+"/"+sti(Items[i].melee_dmg_max);
+				else GameInterface.(_tabName).(row).td2.str = GetGunDamage(Items[i]);
 				GameInterface.(_tabName).(row).td3.scale = 0.9;
 				GameInterface.(_tabName).(row).td3.str = GetAmmoTypes(Items[i])+"\n"+GetPerkInfo(Items[i]);
 				GameInterface.(_tabName).(row).td4.str = GetAccuracy(Items[i]);

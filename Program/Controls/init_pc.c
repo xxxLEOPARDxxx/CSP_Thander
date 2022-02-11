@@ -132,7 +132,7 @@ void ExternControlsInit(bool bFirst, bool standart)
 
 		// --> Lipsar быстрый переход на горячую клавишу
 		CI_CreateAndSetControls( "PrimaryLand", "AltModificator", CI_GetKeyCode("Alt"), 0, false );// альт модификатор
-		CI_CreateAndSetControls( "PrimaryLand", "AltModificatorOff", CI_GetKeyCode("Alt"), INVERSE_CONTROL, false ); 
+		CI_CreateAndSetControls( "PrimaryLand", "AltModificatorOff", CI_GetKeyCode("Alt"), INVERSE_CONTROL, false );
 		CI_CreateAndSetControls( "PrimaryLand", "Fast_Port", CI_GetKeyCode("KEY_1"), 0, false );
 		CI_CreateAndSetControls( "PrimaryLand", "Fast_store", CI_GetKeyCode("KEY_2"), 0, false );
 		CI_CreateAndSetControls( "PrimaryLand", "Fast_Shipyard", CI_GetKeyCode("KEY_3"), 0, false );
@@ -143,8 +143,8 @@ void ExternControlsInit(bool bFirst, bool standart)
 		CI_CreateAndSetControls( "PrimaryLand", "Fast_Brothel", CI_GetKeyCode("KEY_8"), 0, false );
 		CI_CreateAndSetControls( "PrimaryLand", "Fast_PortOffice", CI_GetKeyCode("KEY_9"), 0, false );
 		CI_CreateAndSetControls( "PrimaryLand", "Fast_prison", CI_GetKeyCode("KEY_0"), 0, false );
-		// <-- Lipsar							
-		
+		// <-- Lipsar
+
 		CI_CreateAndSetControls( "PrimaryLand", "BOAL_DeadSearch", CI_GetKeyCode("KEY_1"), 0, true );
 		MapControlToGroup("BOAL_DeadSearch","FightModeControls");
 
@@ -544,7 +544,7 @@ void ExternControlsInit(bool bFirst, bool standart)
 
 		// --> Lipsar быстрый переход на горячую клавишу
 		CI_CreateAndSetControls( "PrimaryLand", "AltModificator", CI_GetKeyCode("Alt"), 0, false );// альт модификатор
-		CI_CreateAndSetControls( "PrimaryLand", "AltModificatorOff", CI_GetKeyCode("Alt"), INVERSE_CONTROL, false ); 
+		CI_CreateAndSetControls( "PrimaryLand", "AltModificatorOff", CI_GetKeyCode("Alt"), INVERSE_CONTROL, false );
 		CI_CreateAndSetControls( "PrimaryLand", "Fast_Port", CI_GetKeyCode("KEY_1"), 0, false );
 		CI_CreateAndSetControls( "PrimaryLand", "Fast_store", CI_GetKeyCode("KEY_2"), 0, false );
 		CI_CreateAndSetControls( "PrimaryLand", "Fast_Shipyard", CI_GetKeyCode("KEY_3"), 0, false );
@@ -555,7 +555,7 @@ void ExternControlsInit(bool bFirst, bool standart)
 		CI_CreateAndSetControls( "PrimaryLand", "Fast_Brothel", CI_GetKeyCode("KEY_8"), 0, false );
 		CI_CreateAndSetControls( "PrimaryLand", "Fast_PortOffice", CI_GetKeyCode("KEY_9"), 0, false );
 		CI_CreateAndSetControls( "PrimaryLand", "Fast_prison", CI_GetKeyCode("KEY_0"), 0, false );
-		// <-- Lipsar							
+		// <-- Lipsar
 
 		// boal -->
 		CI_CreateAndSetControls( "PrimaryLand", "BOAL_UsePotion", CI_GetKeyCode("KEY_C"), 0, true ); // Warship 13.06.09 Дефолтом перевесил на "C"

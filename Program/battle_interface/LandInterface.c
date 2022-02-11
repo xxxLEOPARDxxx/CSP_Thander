@@ -867,25 +867,25 @@ void BLI_SetObjectData()
 		objLandInterface.textinfo.AltInfo.font = "interface_normal";
 		objLandInterface.textinfo.AltInfo.color = argb(243,254,252,169);
 		objLandInterface.textinfo.AltInfo.scale = 1.1 * fHtRatio;
-		objLandInterface.textinfo.AltInfo.pos.x = sti(showWindow.left) + RecalculateHIcon(300 * fHtRatio); 
+		objLandInterface.textinfo.AltInfo.pos.x = sti(showWindow.left) + RecalculateHIcon(300 * fHtRatio);
 		objLandInterface.textinfo.AltInfo.pos.y = RecalculateVIcon(20 * fHtRatio);
 		objLandInterface.textinfo.AltInfo.refreshable = true;
-		
+
 		objLandInterface.textinfo.AltInfo1.font = "interface_normal";
 		objLandInterface.textinfo.AltInfo1.scale = 1.1 * fHtRatio;
-		objLandInterface.textinfo.AltInfo1.pos.x = sti(showWindow.left) + RecalculateHIcon(285 * fHtRatio); 
+		objLandInterface.textinfo.AltInfo1.pos.x = sti(showWindow.left) + RecalculateHIcon(285 * fHtRatio);
 		objLandInterface.textinfo.AltInfo1.pos.y = RecalculateVIcon(40 * fHtRatio);
 		objLandInterface.textinfo.AltInfo1.refreshable = true;
-		
+
 		objLandInterface.textinfo.AltInfo2.font = "interface_normal";
 		objLandInterface.textinfo.AltInfo2.scale = 1.1 * fHtRatio;
-		objLandInterface.textinfo.AltInfo2.pos.x = sti(showWindow.left) + RecalculateHIcon(285 * fHtRatio); 
+		objLandInterface.textinfo.AltInfo2.pos.x = sti(showWindow.left) + RecalculateHIcon(285 * fHtRatio);
 		objLandInterface.textinfo.AltInfo2.pos.y = RecalculateVIcon(60 * fHtRatio);
 		objLandInterface.textinfo.AltInfo2.refreshable = true;
 
 		objLandInterface.textinfo.AltInfo3.font = "interface_normal";
 		objLandInterface.textinfo.AltInfo3.scale = 1.1 * fHtRatio;
-		objLandInterface.textinfo.AltInfo3.pos.x = sti(showWindow.left) + RecalculateHIcon(306 * fHtRatio); 
+		objLandInterface.textinfo.AltInfo3.pos.x = sti(showWindow.left) + RecalculateHIcon(306 * fHtRatio);
 		objLandInterface.textinfo.AltInfo3.pos.y = RecalculateVIcon(80 * fHtRatio);
 		objLandInterface.textinfo.AltInfo3.refreshable = true;
 	}
@@ -926,26 +926,26 @@ void ModifyTextInfo()
 		objLandInterface.textinfo.AltInfo4.text = "";
 		if(CheckAttribute(loadedLocation,"fastreload"))
 		{
-			objLandInterface.textinfo.AltInfo.text  = "Для быстрого перехода используйте кнопки:"; 
+			objLandInterface.textinfo.AltInfo.text  = "Для быстрого перехода используйте кнопки:";
 			objLandInterface.textinfo.AltInfo1.text = "1-Порт, 2-Магазин, 3-Верфь, 4-Таверна ";
 			objLandInterface.textinfo.AltInfo2.text = "5-Резиденция, 6-Ростовщик, 7-Церковь ";
-			objLandInterface.textinfo.AltInfo3.text = "8-Бордель, 9-Портовое управление, 0-Тюрьма"; 
+			objLandInterface.textinfo.AltInfo3.text = "8-Бордель, 9-Портовое управление, 0-Тюрьма";
 
 		}
 		else
 		{
-			objLandInterface.textinfo.AltInfo.text  = " "; 
+			objLandInterface.textinfo.AltInfo.text  = " ";
 			objLandInterface.textinfo.AltInfo1.text = " ";
 			objLandInterface.textinfo.AltInfo2.text = " ";
-			objLandInterface.textinfo.AltInfo3.text = " "; 
+			objLandInterface.textinfo.AltInfo3.text = " ";
 		}
 	}
 	else
 	{
-		objLandInterface.textinfo.AltInfo.text  =  " "; 
+		objLandInterface.textinfo.AltInfo.text  =  " ";
 		objLandInterface.textinfo.AltInfo1.text =  " ";
 		objLandInterface.textinfo.AltInfo2.text =  " ";
-		objLandInterface.textinfo.AltInfo3.text = " "; 
+		objLandInterface.textinfo.AltInfo3.text = " ";
 	}
 }
 
@@ -1604,12 +1604,12 @@ void LI_ProcessControlPress()
 		break;
 
 		case "LICommandsActivate":
-			PlaySound("interface\ok.wav"); // boal даешь звуки! 
+			PlaySound("interface\ok.wav"); // boal даешь звуки!
 			if(bAltInfo)
 			{
 				bAltInfo = false;
 				ModifyTextInfo();
-			}				
+			}
 		break;
 	}
 }

@@ -31,8 +31,8 @@ float LAi_CalcDamageForBlade(aref attack, aref enemy, string attackType, bool is
 	//float bladeDmg = min + frand((max - min));//*(rand(10)*0.1);
 	if (findsubstr(attack.model.animation, "mushketer" , 0) != -1)
 	{
-		min = 10.0;
-		max = 20.0;
+		min = stf(Items[GetItemIndex(attack.equip.gun)].melee_dmg_min);
+		max = stf(Items[GetItemIndex(attack.equip.gun)].melee_dmg_max);
 	}
 
 	float atSkill = LAi_GetCharacterFightLevel(attack);
@@ -93,7 +93,7 @@ float LAi_CalcDamageForBlade(aref attack, aref enemy, string attackType, bool is
 				{
 					kAttackDmg = 0.7;
 				}
-				if (fencing_type != "Fencing") kAttackDmg *= 0.6;
+				if (fencing_type != "Fencing") kAttackDmg *= 0.7;
 			break;
 			case "force": // обычная атака
 				if(isBlocked)
@@ -111,7 +111,7 @@ float LAi_CalcDamageForBlade(aref attack, aref enemy, string attackType, bool is
 				{
 					kAttackDmg = 1.0;
 				}
-				if (fencing_type != "FencingLight") kAttackDmg *= 0.6;
+				if (fencing_type != "FencingLight") kAttackDmg *= 0.7;
 			break;
 			case "round": // круговая атака
 				if(isBlocked)
@@ -133,7 +133,7 @@ float LAi_CalcDamageForBlade(aref attack, aref enemy, string attackType, bool is
 				{
 					kAttackDmg = kAttackDmg * 1.3;
 				}
-				if (fencing_type != "Fencing") kAttackDmg *= 0.6;
+				if (fencing_type != "Fencing") kAttackDmg *= 0.7;
 				break;
 			case "break": // пробивающая блок
 				if(isBlocked)
@@ -151,7 +151,7 @@ float LAi_CalcDamageForBlade(aref attack, aref enemy, string attackType, bool is
 				{
 					kAttackDmg = 3.0;
 				}
-				if (fencing_type != "FencingHeavy") kAttackDmg *= 0.6;
+				if (fencing_type != "FencingHeavy") kAttackDmg *= 0.7;
 			break;
 
 			case "feintc":  // фикс после изучения ядра //Атакующие продолжение финта
@@ -163,7 +163,7 @@ float LAi_CalcDamageForBlade(aref attack, aref enemy, string attackType, bool is
 				{
 					kAttackDmg = 0.8;
 				}
-				if (fencing_type != "FencingLight") kAttackDmg *= 0.6;
+				if (fencing_type != "FencingLight") kAttackDmg *= 0.7;
 			break;
 
 			case "feint":
@@ -313,7 +313,7 @@ float LAi_CalcDamageForBlade(aref attack, aref enemy, string attackType, bool is
 
 		//Boyer mod #20170318-33 difficulty level rebalancing
 		//if (MOD_SKILL_ENEMY_RATE < 5 && sti(enemy.index) == GetMainCharacterIndex())
-		if (MOD_SKILL_ENEMY_RATE < 10 && sti(enemy.index) == GetMainCharacterIndex())
+		if (MOD_SKILL_ENEMY_RATE < 11 && sti(enemy.index) == GetMainCharacterIndex())
 		{
 			dmg = dmg * (4.0 + MOD_SKILL_ENEMY_RATE) / 10.0;
 		}
@@ -400,9 +400,19 @@ float LAi_CalcUseEnergyForBlade(aref character, string actionType)
 	{
 		float fSkill = LAi_GetCharacterFightLevel(character);  // stf(character.skill.fencing) - не так это далеют!!
 		fSkill = (1.0 - (0.3 * fSkill));
-		energy = energy * fSkill * LAi_GetBladeEnergyType(character);  // энергоемкость от веса
+		if (findsubstr(character.model.animation, "mushketer" , 0) != -1)
+		{
+			energy = energy * fSkill * GetMushketEnergyDrain(character);
+		}
+		else energy = energy * fSkill * LAi_GetBladeEnergyType(character);  // энергоемкость от веса
 	}
 	return energy;
+}
+
+float GetMushketEnergyDrain(ref character)
+{
+	if (!CheckAttribute(character,"equip")) return 0.0;
+	return stf(Items[GetItemIndex(character.equip.gun)].weight)/10.0 + 0.2;
 }
 
 float Lai_UpdateEnergyPerDltTime(aref chr, float curEnergy, float dltTime)
@@ -417,7 +427,7 @@ float Lai_UpdateEnergyPerDltTime(aref chr, float curEnergy, float dltTime)
 	{
 		fMultiplier = fMultiplier * 1.15;
 	}
-	if(CheckAttribute(chr, "bonusEnergy") && chr.index != nMainCharacterIndex)
+	if(CheckAttribute(chr, "bonusEnergy"))
 	{
 		fMultiplier = fMultiplier * 2;
 	}
@@ -536,7 +546,7 @@ float LAi_GunCalcDamage(aref attack, aref enemy)
 	}
 	//Boyer mod #20170318-33 Fight/difficulty level rebalancing
 	//if (MOD_SKILL_ENEMY_RATE < 5 && sti(enemy.index) == GetMainCharacterIndex())
-	if (MOD_SKILL_ENEMY_RATE < 10 && sti(enemy.index) == GetMainCharacterIndex())
+	if (MOD_SKILL_ENEMY_RATE < 11 && sti(enemy.index) == GetMainCharacterIndex())
 	{
 		dmg = dmg * (4.0 + MOD_SKILL_ENEMY_RATE) / 10.0;
 	}
@@ -677,12 +687,14 @@ void LAi_ApplyCharacterAttackDamage(aref attack, aref enemy, string attackType, 
 	if (IsCharacterPerkOn(attack, "SwordplayProfessional")) critchance += 10;
 	if (IsCharacterPerkOn(attack, "CriticalHit")) critchance += 5;
 	if (IsCharacterPerkOn(attack, "Fencer")) critchance += 5;
-	if (valueCrB != 0) critchance += valueCrB;//доп крит
-	if(IsCharacterPerkOn(attack, "Agent") && attackType == "feint")
+	if (attackType == "feint" && IsCharacterPerkOn(attack, "Agent")) critchance += 33;
+	if(critchance >= 0)
 	{
-		if (rand(99 - GetCharacterSPECIALSimple(attack, SPECIAL_L)) <= critchance+33) critical = 1.0;
+		critchance += GetCharacterSPECIALSimple(attack, SPECIAL_L);
+		critchance += valueCrB;//доп крит
 	}
-	if (critchance > 0 && rand(99 - GetCharacterSPECIALSimple(attack, SPECIAL_L)) <= critchance) critical = 1.0;
+	if (rand(99) < critchance)//"<=" не нужно
+		critical = 1.0;
 	/*if(IsCharacterPerkOn(attack, "SwordplayProfessional"))
 	{
 		if(IsCharacterPerkOn(attack, "Fencer"))
@@ -858,9 +870,19 @@ void LAi_ApplyCharacterAttackDamage(aref attack, aref enemy, string attackType, 
 		}
 	}
 	kDmg = 1.0;
-	if(IsCharacterPerkOn(enemy, "BasicDefense")) kDmg = 0.9;
-	if(IsCharacterPerkOn(enemy, "AdvancedDefense")) kDmg = 0.8;
-	if(IsCharacterPerkOn(enemy, "SwordplayProfessional")) kDmg = 0.7;
+	if(IsCharacterPerkOn(enemy, "SwordplayProfessional"))
+		kDmg = 0.7;
+	else
+	{
+		if(IsCharacterPerkOn(enemy, "AdvancedDefense"))
+			kDmg = 0.8;
+		else
+		{
+			if(IsCharacterPerkOn(enemy, "BasicDefense"))
+				kDmg = 0.9;
+		}
+
+	}
 	if(IsEquipCharacterByArtefact(enemy, "talisman9") && CheckAttribute(attack,"sex") && attack.sex == "skeleton") kDmg -= 0.33;
 
 	// ГПК 1.2.3
@@ -1688,6 +1710,28 @@ float LAi_NPC_GetAttackWeightFeint()
 float LAi_NPC_GetAttackDefence()
 {
 	aref chr = GetEventData();
+	string fencing_type = LAi_GetBladeFencingType(chr);
+	string sAction;
+	float level = LAi_GetCharacterFightLevel(chr);
+	switch (fencing_type)
+
+	{
+		case "fencing":
+			sAction = "fast";
+		break;
+		case "fencing_heavy":
+			sAction = "break";
+		break;
+	}
+	if(Lai_CharacterGetEnergy(chr) < LAi_CalcUseEnergyForBlade(chr,sAction)) npc_return_tmp = 40.0;
+	else  npc_return_tmp = 20.0;
+
+	return npc_return_tmp;
+
+}/*old reaction
+float LAi_NPC_GetAttackDefence()
+{
+	aref chr = GetEventData();
 	float level = LAi_GetCharacterFightLevel(chr);
 	if (LAi_GetBladeFencingType(pchar) == "FencingHeavy")
 
@@ -1700,7 +1744,7 @@ float LAi_NPC_GetAttackDefence()
 		npc_return_tmp = 0.35 + level * 0.35;
 		return npc_return_tmp;
 	}
-}
+}*/
 
 // boal 20.01.08 коммент - забавно, что спустя два года, понал как и что с вероятностями. Они все приводятся к 0-1 от веса общей суммы, то есть фактически умножение на сложность или цифры распределяют сумму по другим акшенам, а не усиливают этот
 // Экшены идут парами - все атаки и защита (блок + пари)
@@ -1744,7 +1788,7 @@ float LAi_NPC_StunChance()
 	aref chr = GetEventData();
 	npc_return_tmp = 100;
 	if (CheckAttribute(chr,"cirassid")) npc_return_tmp -= 35;
-	if (IsCharacterPerkOn(chr, "SwordplayProfessional")) return npc_return_tmp -= 50;	
+	if (IsCharacterPerkOn(chr, "SwordplayProfessional")) return npc_return_tmp -= 50;
 	if (IsCharacterPerkOn(chr, "AdvancedDefence")) return npc_return_tmp -= 30;
 	if (IsCharacterPerkOn(chr, "BasicDefence")) return npc_return_tmp -= 10;
 	return npc_return_tmp;

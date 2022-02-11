@@ -507,7 +507,7 @@ void ProcessDialogEvent()
 			LAi_Fade("", "");
 			WaitDate("",0,0,0, 0, 60);
 			int plusdays = makeint(sti(chref.HPminusDaysNeedtoRestore)/4*3);
-			if (plusdays > 30) plusdays = 39;
+			if (plusdays > 30) plusdays = 30;
 			chref.HPminusDays = sti(chref.HPminusDays) + plusdays;
 			if(sti(chref.HPminusDays) >= sti(chref.HPminusDaysNeedtoRestore))
 			{

@@ -2866,6 +2866,8 @@ int InitItems()
 	itm.ItemType = "WEAPON";
 	itm.points_shop = 500;
 	itm.fromHip = true;//для выбора другой анимации
+	itm.melee_dmg_min = 15.0;
+	itm.melee_dmg_max = 25.0;
 	n++;
 
 	makeref(itm,Items[n]);
@@ -2893,6 +2895,8 @@ int InitItems()
 	itm.ItemType = "WEAPON";
 	itm.points_shop = 800; //атрибут для ачивок
 	itm.fromHip = true;//для выбора другой анимации
+	itm.melee_dmg_min = 16.0;
+	itm.melee_dmg_max = 28.0;
 	n++;
 
     makeref(itm,Items[n]);
@@ -2918,6 +2922,8 @@ int InitItems()
 	itm.ReqPerk = "Gunman";
 	itm.quality = "good";
 	itm.ItemType = "WEAPON";
+	itm.melee_dmg_min = 14.0;
+	itm.melee_dmg_max = 24.0;
 	n++;
 
 	makeref(itm,Items[n]);
@@ -2943,6 +2949,8 @@ int InitItems()
 	itm.ReqPerk = "GunProfessional";
 	itm.quality = "excellent";
 	itm.ItemType = "WEAPON";
+	itm.melee_dmg_min = 18.0;
+	itm.melee_dmg_max = 30.0;
 	n++;
 
 	makeref(itm,Items[n]);
@@ -2969,6 +2977,8 @@ int InitItems()
 	itm.quality = "excellent";
 	itm.ItemType = "WEAPON";
 	itm.fromHip = true;//для выбора другой анимации
+	itm.melee_dmg_min = 15.0;
+	itm.melee_dmg_max = 25.0;
 	n++;
 
     makeref(itm,Items[n]);
@@ -2995,6 +3005,8 @@ int InitItems()
 	itm.quality = "excellent";
 	itm.ItemType = "WEAPON";
 	itm.fromHip = true;//для выбора другой анимации
+	itm.melee_dmg_min = 15.0;
+	itm.melee_dmg_max = 25.0;
 	n++;
 
     makeref(itm,Items[n]);
@@ -3021,6 +3033,8 @@ int InitItems()
 	itm.quality = "excellent";
 	itm.ItemType = "WEAPON";
 	itm.fromHip = true;//для выбора другой анимации
+	itm.melee_dmg_min = 15.0;
+	itm.melee_dmg_max = 25.0;
 	n++;
 
     makeref(itm,Items[n]);
@@ -3047,6 +3061,8 @@ int InitItems()
 	itm.quality = "excellent";
 	itm.ItemType = "WEAPON";
 	itm.fromHip = true;//для выбора другой анимации
+	itm.melee_dmg_min = 15.0;
+	itm.melee_dmg_max = 25.0;
 	n++;
 
 	makeref(itm,Items[n]);
@@ -3072,6 +3088,8 @@ int InitItems()
 	itm.quality = "good";
 	itm.ItemType = "WEAPON";
 	itm.fromHip = true;//для выбора другой анимации
+	itm.melee_dmg_min = 10.0;
+	itm.melee_dmg_max = 20.0;
 	n++;
 
 	makeref(itm,Items[n]);
@@ -3097,6 +3115,8 @@ int InitItems()
 	itm.ReqPerk = "Gunman";
 	itm.quality = "excellent";
 	itm.ItemType = "WEAPON";
+	itm.melee_dmg_min = 18.0;
+	itm.melee_dmg_max = 28.0;
 	n++;
 
     makeref(itm,Items[n]);
@@ -3122,6 +3142,8 @@ int InitItems()
 	itm.ReqPerk = "GunProfessional";
 	itm.quality = "excellent";
 	itm.ItemType = "WEAPON";
+	itm.melee_dmg_min = 17.0;
+	itm.melee_dmg_max = 27.0;
 	n++;
 
 	////////////////////////////////////////////////////////////////////////////////////////////
@@ -3673,6 +3695,8 @@ int InitItems()
 	itm.ItemType = "WEAPON";
 	itm.quality = "excellent";
 	itm.fromHip = true;//для выбора другой анимации
+	itm.melee_dmg_min = 18.0;
+	itm.melee_dmg_max = 28.0;
 	n++;
 
 	makeref(itm,Items[n]);
@@ -4092,6 +4116,8 @@ int InitItems()
 	itm.quality = "excellent";
 	itm.ItemType = "WEAPON";
 	//itm.fromHip = true;//для выбора другой анимации
+	itm.melee_dmg_min = 20.0;
+	itm.melee_dmg_max = 30.0;
 	n++;
 
     makeref(itm,Items[n]);

@@ -867,6 +867,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "Titch_3":
+			if (!CheckAttribute(pchar,"ShipsSurr")) pchar.ShipsSurr = 0;
 			Dialog.text = "Тебе предстоит взять на абордаж 5 торговых кораблей и заставить их сдаться, чтобы капитаны умоляли тебя пощадить их. Едва завидев мой вымпел, противники обычно сдавались без боя. Во всяком случае после того, как я стал более известен в этих водах.";
 			link.l1 = "Это будет быстро, или очень непросто. Тем не менее, я заставлю толстосумов молить о пощаде! Вот увидишь!";
 			link.l1.go = "Titch_4";
@@ -892,7 +893,6 @@ void ProcessDialogEvent()
 
 		case "Titch_7":
 			npchar.met = true;
-			if (!CheckAttribute(pchar,"ShipsSurr")) pchar.ShipsSurr = 0;
 			Dialog.text = "Ну?! И что скажешь?";
 			if (!CheckAttribute(npchar,"Duel"))
 			{

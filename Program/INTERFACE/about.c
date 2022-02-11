@@ -90,7 +90,7 @@ string STR_TEXT[MAX_LINE] = {
 "Konstrush за его описание для героев и за сочный, крутой HUD",
 "Etienne и Narve за шикарных персонажей из Чёрныйх парусов и не только",
 "karlik-nos за моделирование многих вещей и за город Мариго",
-"johnny88 за классный худ и переделку кучи портретов",
+"johnny88 за классный худ и переделку всех портретов",
 "johnny88 а также за кучу переделок по графике",
 "Kormach за переделку множества персонажей",
 "EvgAnt за шикарную озвучку боссов-нежить",
@@ -223,7 +223,7 @@ string STR_COLOR[MAX_LINE] = {
 void InitInterface(string iniName)
 {
 	GameInterface.title = "";
-	
+
 	SendMessage(&GameInterface, "ls", MSG_INTERFACE_INIT,iniName);
 
 	SetEventHandler("InterfaceBreak", "ProcessCancelExit", 0);
@@ -232,11 +232,11 @@ void InitInterface(string iniName)
 
 	SetFormatedText("INFO_TEXT", "");
 	int i, k;
-	
+
 	for(i = 0; i < MAX_LINE; i++)
 	{
 		SendMessage(&GameInterface, "lsle", MSG_INTERFACE_MSG_TO_NODE, "INFO_TEXT", 0, STR_TEXT[i] + "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-	
+
 		if(STR_COLOR[i] != "")
 		{
 			switch (STR_COLOR[i])
@@ -276,7 +276,7 @@ void IDoExit(int exitCode)
  	DelEventHandler("InterfaceBreak","ProcessCancelExit");
 	DelEventHandler("exitCancel","ProcessCancelExit");
 	DelEventHandler("My_MoveText","MoveText");
-    
+
 	interfaceResultCommand = exitCode;
 	if(CheckAttribute(&InterfaceStates,"InstantExit") && sti(InterfaceStates.InstantExit) == true)
 		EndCancelInterface(true);

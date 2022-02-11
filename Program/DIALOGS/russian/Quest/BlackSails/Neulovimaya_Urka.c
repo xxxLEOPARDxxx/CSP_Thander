@@ -366,7 +366,7 @@ void ProcessDialogEvent()
 			LAi_SetImmortal(npchar, false);
 
 			SetShipRemovable(npchar, false);
-
+			SetCharacterRemovable(npchar, false);
             dialog.text = "";
             link.l1 = "Последний рывок?";
 			link.l1.go = "BS_NU_29_Ya_Ne_Krisa";
@@ -432,6 +432,7 @@ void ProcessDialogEvent()
 			SetCompanionIndex(PChar, -1, GetCharacterIndex(npchar.id));//вейн присоединяется к эскадре
 			BSRepairShip(npchar);
 			SetShipRemovable(npchar, false);
+			SetCharacterRemovable(npchar, false);
 			Fantom_SetBalls(npchar, "war");
 			SetCharacterGoods(npchar,GOOD_FOOD,1000);
 			chrDisableReloadToLocation = false;

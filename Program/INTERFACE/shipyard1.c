@@ -206,7 +206,6 @@ void FillOrderShip(int _iShipBaseType)
 	NullCharacterGoods(refNPCShipyard);
 	SetRandomNameToShip(refNPCShipyard);
 	SetCabinTypeEx(RealShips[iShip], sti(RealShips[iShip].Class));//рандом каюты //TODO - добавить в интерфейс выбор?
-	//ещё вес корабля рандомиться может, но пока оставляю стандарт //TODO - добавить в интерфейс выбор?
 }
 
 void FillShipParam()
@@ -214,6 +213,8 @@ void FillShipParam()
 	int iShip = sti(refNPCShipyard.ship.type);
 	if (iShip != SHIP_NOTUSED)
 	{
+	log_info("__| " + iShip);
+
 		ref rRealShip = &RealShips[iShip];
 		ref rBaseShip = GetShipByType(sti(rRealShip.BaseType));
 		DeleteAttribute(rRealShip, "Tuning");//просто затираем записи об апгрейдах
@@ -226,7 +227,7 @@ void FillShipParam()
 		rRealShip.Capacity = makeint(stf(rBaseShip.Capacity) * (1 + Ship_Sheme[7]/80));
 		rRealShip.OptCrew = stf(rBaseShip.OptCrew) * (1 + Ship_Sheme[8]/60);
 		rRealShip.MaxCrew = stf(rBaseShip.MaxCrew) * (1 + Ship_Sheme[8]/60);
-		rRealShip.MinCrew = stf(rBaseShip.MinCrew) * (1 + Ship_Sheme[8]/60);//верно ли что минимальная команда в пять раз меньше оптимальной?
+		rRealShip.MinCrew = stf(rBaseShip.MinCrew) * (1 + Ship_Sheme[8]/60);
 		rRealShip.MaxCaliber = rBaseShip.MaxCaliber;
 		rRealShip.CannonsQuantityMax = sti(rRealShip.CannonsQuantity);
 
@@ -234,7 +235,7 @@ void FillShipParam()
 		rRealShip.Price	= GetShipPriceByTTH(iShip, refNPCShipyard);//цена без пушек
 		CalcTuningPrice();//стоимость апгрейда до применения апгрейдов считаем
 
-		SetTuningStates2Ship(refNPCShipyard, 0, Tune_Sheme[7], Tune_Sheme[4], Tune_Sheme[8], Tune_Sheme[5], Tune_Sheme[1], Tune_Sheme[3]);//калибр тюнингуем отдельно, иначе несколько раз до 36 можно поднимать
+		SetTuningStates2Ship(refNPCShipyard, 0, Tune_Sheme[7], Tune_Sheme[4], Tune_Sheme[8], Tune_Sheme[5], Tune_Sheme[1], Tune_Sheme[3]);//калибр отдельно, иначе несколько раз до 36 можно поднимать
 		//void SetTuningStates2Ship(ref chr, bool MaxCaliber, bool Capacity, bool SpeedRate, bool MaxCrew, bool TurnRate, bool HP, bool MastMulti)
 		SetShipWASTuning(refNPCShipyard, Tune_Sheme[6]);//бейдевинд
 
@@ -966,7 +967,7 @@ void CalcTuningPrice()
 	float shipWindAgainst = stf(RealShips[iShipT].WindAgainstSpeed);
 
 	float fQuestShip = 1.0;
-	if(CheckAttribute(&RealShips[sti(Pchar.Ship.Type)], "QuestShip")) fQuestShip = 1.2;
+	if(CheckAttribute(&RealShips[sti(refNPCShipyard.Ship.Type)], "QuestShip")) fQuestShip = 1.2;
 
 	sundukSum = 7-shipClass;
 

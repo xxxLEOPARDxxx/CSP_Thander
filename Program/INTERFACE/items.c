@@ -644,7 +644,6 @@ void SetButtonsState()
 			isPassenger = 0;
 			SetVariable();
 		}
-		
 	}
 }
 
@@ -1457,57 +1456,11 @@ void EquipPress()
 					if(IsEquipCharacterByItem(xi_refCharacter, itmRef.id))
 					{
 						RemoveCharacterEquip(xi_refCharacter, itmGroup);
-						if (CheckAttribute(itmRef, "HeadAccessory"))
-						{
-							SetNewModelToChar(xi_refCharacter);
-						}
-						if (itmGroup == BOOK_ITEM_TYPE && IsMainCharacter(xi_refCharacter)) // Книги, снятие - Gregg
-						{
-							DeleteAttribute(xi_refCharacter,"booktime");
-							DeleteAttribute(xi_refCharacter,"booktime.full");
-							DeleteAttribute(xi_refCharacter,"bookbonus");
-							DeleteAttribute(xi_refCharacter,"booktime");
-							DeleteAttribute(xi_refCharacter,"booktype");
-							DeleteAttribute(xi_refCharacter,"bookreadtoday");
-							Log_Info("Прервано чтение книги.");
-						}
+						if (CheckAttribute(itmRef, "HeadAccessory")) SetNewModelToChar(xi_refCharacter);
 					}
 					else
 					{
 						EquipCharacterByItem(xi_refCharacter, itmRef.id);
-						if (itmGroup == BOOK_ITEM_TYPE && IsMainCharacter(xi_refCharacter)) // Книги, экипировка - Gregg
-						{
-							xi_refCharacter.booktype = itmRef.skill;
-							if(HasSubStr(itmRef.id, "book1_"))
-							{
-								xi_refCharacter.booktime = BookTime(xi_refCharacter,1);//таймер
-								xi_refCharacter.booktime.full = sti(xi_refCharacter.booktime);//полное время
-								xi_refCharacter.bookname = itmRef.name;//название книги
-								xi_refCharacter.bookbonus = 800;//экспа
-							}
-							if(HasSubStr(itmRef.id, "book2_"))
-							{
-								xi_refCharacter.booktime = BookTime(xi_refCharacter,2);
-								xi_refCharacter.booktime.full = sti(xi_refCharacter.booktime);
-								xi_refCharacter.bookname = itmRef.name;
-								xi_refCharacter.bookbonus = 1500;
-							}
-							if(HasSubStr(itmRef.id, "book3_"))
-							{
-								xi_refCharacter.booktime = BookTime(xi_refCharacter,3);
-								xi_refCharacter.booktime.full = sti(xi_refCharacter.booktime);
-								xi_refCharacter.bookname = itmRef.name;
-								xi_refCharacter.bookbonus = 3500;
-							}
-							if(HasSubStr(itmRef.id, "book4_"))
-							{
-								xi_refCharacter.booktime = BookTime(xi_refCharacter,4);
-								xi_refCharacter.booktime.full = sti(xi_refCharacter.booktime);
-								xi_refCharacter.bookname = itmRef.name;
-								xi_refCharacter.bookbonus = 7500;
-							}
-							Log_Info("Начато чтение книги. Ориентировочно, это займёт "+xi_refCharacter.booktime+" дней.");
-						}
 					}
 					else
 					{

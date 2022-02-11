@@ -309,6 +309,8 @@ float LAi_GetCharacterLuckLevel(aref character)
 //Применить повреждение к персонажу
 void LAi_ApplyCharacterDamage(aref chr, int dmg)
 {
+	if(CheckAttribute(chr, "chr_ai.type.bottle"))
+		chr.chr_ai.type.bottle = 0;
 	float damage    = MakeFloat(dmg);
 	bool  bIsOfficer = false;
 	//Офицерам ослабляем поврежрение
@@ -1537,9 +1539,9 @@ void MakeSwiftAttack(aref enemy, aref attacked, float coeff) // Резкий у�
 		Swift = stf(enemy.chr_ai.Swift);
 		if(Swift < 1.0) Swift = 1.0;
 	}
-	 // Продолжительность 1+(от 0 до 4)+коэфф
-	enemy.chr_ai.Swift = Swift + (1+rand(4)+coeff);
+	enemy.chr_ai.Swift = Swift + (1+rand(4)+coeff); // Продолжительность 1+(от 0 до 4)+коэфф
 	FXMarkCharacter(enemy,"FX_StanS");
+
 	//if(stf(enemy.chr_ai.Swift) > 200.0) enemy.chr_ai.Swift = 200.0;
 }
 

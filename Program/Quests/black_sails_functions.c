@@ -591,6 +591,7 @@ void BSCourtlyPassions_fleeng_4(string _quest)
 
 void BSCourtlyPassions_fleeng_5(string _quest)
 {
+	UnLockWeapons("");
 	chrDisableReloadToLocation = true;
 	sld = CharacterFromID("BS_Vein");
 	LAi_SetActorType(sld);
