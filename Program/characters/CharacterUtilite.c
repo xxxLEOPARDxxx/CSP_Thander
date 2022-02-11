@@ -1070,6 +1070,32 @@ int SetCompanionIndex(ref _refCharacter,int _CompanionNum, int _CompanionIdx)
 	Event(EVENT_CHANGE_COMPANIONS,"");
 	return _CompanionIdx;
 }
+// работа с компаньонами
+int CheckCompanionIndex(ref _refCharacter,int _CompanionNum, int _CompanionIdx)
+{
+  if(_CompanionNum == -1)
+	{
+		for(int i = 1; i < COMPANION_MAX; i++)
+		{
+			if (GetCompanionIndex(_refCharacter, i) == -1)
+			{
+				_CompanionNum = i;
+				break;
+			}
+		}
+	}
+	if(_CompanionNum < 1) return _CompanionIdx;
+	if(_CompanionNum > COMPANION_MAX - 1) return _CompanionIdx;
+
+	if(_CompanionIdx!=-1)
+	{
+		for(i=0;i<COMPANION_MAX;i++)
+		{
+			if(GetCompanionIndex(_refCharacter,i)==_CompanionIdx) return -1;
+		}
+	}
+	return _CompanionIdx;
+}
 int RemoveCharacterCompanion(ref _refCharacter, ref refCompanion)
 {
 	string compName;
