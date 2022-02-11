@@ -1039,8 +1039,8 @@ int SetCompanionIndex(ref _refCharacter,int _CompanionNum, int _CompanionIdx)
 			}
 		}
 	}
-	if(_CompanionNum < 1) return _CompanionIdx;
-	if(_CompanionNum > COMPANION_MAX - 1) return _CompanionIdx;
+	if(_CompanionNum < 1) return -1;
+	if(_CompanionNum > COMPANION_MAX - 1) return -1;
 
 	if(_CompanionIdx!=-1)
 	{
@@ -1084,8 +1084,8 @@ int CheckCompanionIndex(ref _refCharacter,int _CompanionNum, int _CompanionIdx)
 			}
 		}
 	}
-	if(_CompanionNum < 1) return _CompanionIdx;
-	if(_CompanionNum > COMPANION_MAX - 1) return _CompanionIdx;
+	if(_CompanionNum < 1) return -1;
+	if(_CompanionNum > COMPANION_MAX - 1) return -1;
 
 	if(_CompanionIdx!=-1)
 	{
