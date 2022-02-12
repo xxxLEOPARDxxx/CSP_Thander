@@ -182,7 +182,7 @@ void ProcessDialogEvent()
 			dialog.text = "С радостью приму ваше пожертвование. Раз уж вы занимаетесь благотворительностью.";
 			Link.l1 = "Всегда к вашим услугам.";
 			Link.l1.go = "GettingLostFromHere_exit";
-			AddMoneyToCharacter(pchar, -makeint(sti(Pchar.contratradedmoney)*(0.9-(0.01*MOD_SKILL_ENEMY_RATE))));
+			AddMoneyToCharacter(pchar, -makeint(sti(Pchar.contratradedmoney)*(0.1+(0.01*MOD_SKILL_ENEMY_RATE))));
 		break;
 
 		case "MoneyAccepted5":
