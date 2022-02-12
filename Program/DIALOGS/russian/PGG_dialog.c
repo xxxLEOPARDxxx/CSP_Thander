@@ -366,12 +366,21 @@ void ProcessDialogEvent()
 	case "companion_pay":
 		if (sti(pchar.money) >= sti(npchar.HiringMoney))
 		{
-			Dialog.Text = RandSwear() + " И правда не могу."
-			PGG_ChangeRelation2MainCharacter(NPChar, 100);
-			AddMoneyToCharacter(pchar, -sti(npchar.HiringMoney));
-			npchar.HiringMoneyPaid = true;
-			link.l1 = "Вот твои деньги.";
-			link.l1.go = "companion";
+			if (CheckCompanionIndex(pchar, -1, sti(NPChar.index)) != -1)
+			{
+				Dialog.Text = RandSwear() + " И правда не могу."
+				PGG_ChangeRelation2MainCharacter(NPChar, 100);
+				AddMoneyToCharacter(pchar, -sti(npchar.HiringMoney));
+				npchar.HiringMoneyPaid = true;
+				link.l1 = "Вот твои деньги.";
+				link.l1.go = "companion";
+			}
+			else
+			{
+				Dialog.Text = RandPhraseSimple("Похоже, тебе уже достаточно компаньонов.", "У тебя и так много кораблей. Зачем тебе еще один?");
+				link.l1 = "Да... Может ты и прав.";
+				link.l1.go = "exit";
+			}
 		}
 		else
 		{
