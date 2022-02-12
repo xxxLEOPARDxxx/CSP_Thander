@@ -1852,9 +1852,7 @@ void ShowItemFromCharacterWindow()
 	log_testinfo(GetAttributeName(GetAttributeN(arTest,i)) + " = " + sTemp);
 	}
 
-
-SetFormatedText("ITEM_FROM_CHARACTER_WEIGHT_TEXT", XI_ConvertString("weight") + ": " + FloatToString(fWeight, 1) + " / "+GetMaxItemsWeight(xi_refCharacter));
-
+	SetFormatedText("ITEM_FROM_CHARACTER_WEIGHT_TEXT", XI_ConvertString("weight") + ": " + FloatToString(fWeight, 1) + " / "+GetMaxItemsWeight(xi_refCharacter));
 	LanguageCloseFile(lngFileID);
 }
 
@@ -1903,6 +1901,14 @@ void ChangeQTY_EDIT(string sItem)
 		fItemQuantity = GetItemsWeight(xi_refCharacter);
 	}
 
+	if (sti(xi_refCharacter.index) != nMainCharacterIndex) 
+	{
+		if (GetItemsWeight(pchar) + (iQuantity*stf(itm.Weight)) >= GetMaxItemsWeight(pchar))
+		{
+			SetFormatedText("ITEM_FROM_CHARACTER_TEXT", GetItemDescribe(GetItemIndex(sItem))+"\n\nПревышается переносимый вес главного героя.\nЛишний вес будет выброшен.");
+		}
+		else SetFormatedText("ITEM_FROM_CHARACTER_TEXT", GetItemDescribe(GetItemIndex(sItem)));
+	}														
 	SetFormatedText("ITEM_FROM_CHARACTER_WEIGHT_TEXT", XI_ConvertString("weight") + ": " + FloatToString(fWeight, 1) + " / "+GetMaxItemsWeight(xi_refCharacter));
 
 }
@@ -1972,8 +1978,22 @@ void RemoveItemsQuantity()
 		return;
 	}
 
+	float fItemQuantity = iQuantity*stf(itm.Weight);
+
 	TakeNItems(xi_refCharacter, itm.id, -iQuantity);
-	if(sti(xi_refCharacter.index) != nMainCharacterIndex) TakeNItems(PChar, itm.id, iQuantity);
+	if(sti(xi_refCharacter.index) != nMainCharacterIndex)
+	{
+		float fWeight = GetItemsWeight(pchar) + fItemQuantity;
+		if (GetMaxItemsWeight(pchar)<=fWeight) 
+		{
+			if (GetItemsWeight(pchar) >= GetMaxItemsWeight(pchar)) {}
+			else 
+			{
+				TakeNItems(pchar,itm.id, makeint(fItemQuantity - ((-1)*(GetMaxItemsWeight(pchar)-GetItemsWeight(pchar)-fItemQuantity)))/stf(itm.Weight)))
+			}
+		}
+		else TakeNItems(PChar, itm.id, iQuantity);
+	}											 
 
 	ExitItemFromCharacterWindow();
 	SetVariable();
