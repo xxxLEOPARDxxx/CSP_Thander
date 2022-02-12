@@ -138,9 +138,9 @@ void ProcessDialogEvent()
 		case "GiveMeSomeMoneyToo":
 			dialog.snd = "Voice\COGU\COGU005";
 			dialog.text = "Вот как? Нет, конечно, это занятие совершенно правомочно... Если нам, конечно, тоже достанется. А по сколько вы раздаете?";
-			Link.l1 = "Думаю, что " + makeint(sti(Pchar.contratradedmoney)*(0.9-(0.01*MOD_SKILL_ENEMY_RATE))) + " пиастров будет достаточно.";
+			Link.l1 = "Думаю, что " + makeint(sti(Pchar.contratradedmoney)*(0.1+(0.01*MOD_SKILL_ENEMY_RATE))) + " пиастров будет достаточно.";
 			//if(makeint(Pchar.rank)*1000 <= makeint(sti(Pchar.money)/10))
-			if (sti(pchar.money)>=makeint(sti(Pchar.contratradedmoney)*(0.9-(0.01*MOD_SKILL_ENEMY_RATE))))
+			if (sti(pchar.money)>=makeint(sti(Pchar.contratradedmoney)*(0.1+(0.01*MOD_SKILL_ENEMY_RATE))))
 			{
 				Link.l1.go = "MoneyAccepted10";
 			}
