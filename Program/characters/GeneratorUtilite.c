@@ -162,6 +162,7 @@ void Train_PPG(ref NPchar, bool setEquip bool increaseRank)   //WW
 
 	TakeNItems(NPchar, "Food5", 5);
 	TakeNItems(NPchar, "potion2", 5);
+	SetCharacterPerk(NPchar, prevPerk);
 	AddBonusEnergyToCharacter (NPchar, 15);
 }
 
