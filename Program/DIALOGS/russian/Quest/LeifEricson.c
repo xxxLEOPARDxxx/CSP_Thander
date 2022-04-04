@@ -215,7 +215,7 @@ void ProcessDialogEvent()
 			SetNationRelation2MainCharacter(FRANCE, RELATION_ENEMY);
             npchar.model = pchar.model;
 			npchar.model.animation = pchar.model.animation;
-            FaceMaker(npchar);
+            // FaceMaker(npchar);
 			npchar.FaceId = Pchar.questTemp.Ascold.heroFaceId;
 			DeleteAttribute(npchar,"heromodel");
             SetNewModelToChar(npchar);

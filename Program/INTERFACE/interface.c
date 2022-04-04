@@ -1459,7 +1459,7 @@ bool procInterfacePrepare(int interfaceCode)
 	if(g_ibVideoExecuting) return false;
 	//if(IsEntity(wdm_fader)!=0) return false;
 
-	if(interfaceCode != INTERFACE_FORTCAPTURE && interfaceCode != INTERFACE_RANSACK_MAIN)
+	if(interfaceCode != INTERFACE_FORTCAPTURE && interfaceCode != INTERFACE_RANSACK_MAIN && interfaceCode != INTERFACE_ARENA)
 	{
 		aref arFader;
 		if( GetEntity(arFader,"fader") ) {return false;}

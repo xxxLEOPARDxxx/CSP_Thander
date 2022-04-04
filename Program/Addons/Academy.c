@@ -543,11 +543,12 @@ void AcademyLandTrainingEnd(bool bWinner)
 	LAi_RemoveCheckMinHP(PChar);
 	LAi_SetCurHPMax(PChar);
 	LAi_SetImmortal(PChar, false);
-
-	if(CheckAttribute(PChar, "perks.list.Energaiser"))
+	
+	// LEO: Зачем вытирать этот перк, непонятно...
+	/* if(CheckAttribute(PChar, "perks.list.Energaiser"))
 	{
 		DeleteAttribute(PChar, "perks.list.Energaiser");
-	}
+	} */
 
 	if(PChar.location == "FencingTown_ExitTown")
 	{

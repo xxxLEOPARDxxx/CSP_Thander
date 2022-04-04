@@ -2300,7 +2300,7 @@ void FillPriceList(string _tabName, string  attr1, string attr2)
 		else
 		{
 			if (attr2 == "1") StoreNum = GetCharacterIndex(attr1); else StoreNum = GetStorage(attr1);
-			if(StoreNum > 0)
+			if(StoreNum > -1)
 			{
 
 				if (attr2 == "1") refStorage = &characters[StoreNum]; else refStorage = &stores[StoreNum];

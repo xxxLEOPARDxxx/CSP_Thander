@@ -54,7 +54,7 @@
 *.zap
 *.txx
 *.dds
-# *.png
+*.png
 
 # Видео
 *.mp4
