@@ -1464,7 +1464,7 @@ void ProcessDialogEvent()
 			}
 		break;
         case "healthAdd_1":
-            if (GetHealthMaxNum(pchar) == 6) // отлично
+            if (stf(pchar.Health.HP) >= 57.0) // отлично
             {
                 dialog.text = "Здоровье твое " + GetHealthNameMaxSmall(pchar) + ", а раны заживут сами. Нужно просто избегать кровопролития и поберечь своё здоровье.";
     			link.l1 = "Спасибо, обнадежили. Постараюсь некоторое время не ввязываться в драки.";
