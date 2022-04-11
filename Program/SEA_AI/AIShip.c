@@ -2477,28 +2477,31 @@ void ShipDead(int iDeadCharacterIndex, int iKillStatus, int iKillerCharacterInde
 	{
 		string sSunkString;
 		string sSunkShipType = XI_ConvertString(rBaseShip.BaseName);
+		string sSunkShipNation = "под флагом " + NationNameGenitive(sti(rDead.nation));
 		string sKillShipType = "";
 		string sKillShipName = "";
+		string sKillShipNation = "";
 		if (iKillerCharacterIndex != -1)
 		{
-		    sKillShipType = XI_ConvertString(rKillerBaseShip.BaseName);
-		    sKillShipName = "" + rKillerCharacter.Ship.Name;
+            sKillShipType = XI_ConvertString(rKillerBaseShip.BaseName);
+            sKillShipName = "" + rKillerCharacter.Ship.Name;
+			sKillShipNation = "под флагом " + NationNameGenitive(sti(rKillerCharacter.nation));
 		}
 		if (bCompanion && !bDeadCompanion && bRealKill)
 		{
-            sSunkString = sSunkShipType + " '" + rDead.Ship.Name + "' " + GetShipSexWord(rBaseShip.BaseName, "был потоплен ", "была потоплена ") + GetFullName(rKillerCharacter);
-        }
-        else
-        {
-            if (sKillShipName == "")
-            {
-            	sSunkString = sSunkShipType + " '" + rDead.Ship.Name + "' " + GetShipSexWord(rBaseShip.BaseName, "был потоплен.", "была потоплена.");
-            }
-            else
-            {
-				sSunkString = sSunkShipType + " '" + rDead.Ship.Name + "' " +GetShipSexWord(rBaseShip.BaseName, "был потоплен ", "была потоплена ") + sKillShipType + " '" + sKillShipName + "'";
+			sSunkString = sSunkShipType + " '" + rDead.Ship.Name + "' " + sSunkShipNation + GetShipSexWord(rBaseShip.BaseName, " был потоплен ", " была потоплена ") + GetFullName(rKillerCharacter);
+		}
+		else
+		{
+			if (sKillShipName == "")
+			{
+				sSunkString = sSunkShipType + " '" + rDead.Ship.Name + "' " + sSunkShipNation + GetShipSexWord(rBaseShip.BaseName, " был потоплен.", " была потоплена.");
 			}
-        }
+			else
+			{
+				sSunkString = sSunkShipType + " '" + rDead.Ship.Name + "' " + sSunkShipNation + GetShipSexWord(rBaseShip.BaseName, " был потоплен ", " была потоплена ") + sKillShipType + " '" + sKillShipName + "' " + sKillShipNation;
+			}
+		}
 		Log_SetStringToLog(sSunkString);
 	}
 

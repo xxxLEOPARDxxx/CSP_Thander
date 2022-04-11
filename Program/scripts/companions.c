@@ -78,7 +78,8 @@ bool Ship_AutoAbordage(ref rCharacter, float fMinEnemyDistance)
 			    }
 			    else
 			    {
-			        Log_SetStringToLog("Корабль " + rShipCharacter.Ship.Name + " взят на абордаж ");
+			        int iNation = sti(rShipCharacter.nation);
+					Log_SetStringToLog("Корабль " + rShipCharacter.Ship.Name + " под флагом " + NationNameGenitive(iNation) + " взят на абордаж ");
 			    }
 			    deadCrew = sti(rCharacter.Ship.Crew.Quantity) * fEnCrewFencing / (fOurCrewFencing*1.8);
 				if (IsCompanion(rShipCharacter))
