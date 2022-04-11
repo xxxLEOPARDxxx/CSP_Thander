@@ -2483,8 +2483,8 @@ void ShipDead(int iDeadCharacterIndex, int iKillStatus, int iKillerCharacterInde
 		string sKillShipNation = "";
 		if (iKillerCharacterIndex != -1)
 		{
-            sKillShipType = XI_ConvertString(rKillerBaseShip.BaseName);
-            sKillShipName = "" + rKillerCharacter.Ship.Name;
+		    sKillShipType = XI_ConvertString(rKillerBaseShip.BaseName);
+		    sKillShipName = "" + rKillerCharacter.Ship.Name;
 			sKillShipNation = "под флагом " + NationNameGenitive(sti(rKillerCharacter.nation));
 		}
 		if (bCompanion && !bDeadCompanion && bRealKill)
