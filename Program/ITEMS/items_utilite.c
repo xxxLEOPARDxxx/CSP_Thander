@@ -432,6 +432,9 @@ int FindItem(string sItemID)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Проверка, уникален ли каждый предмет "серии", или же идентичен
+#define GEN_ITEM_DISCRET 100
+#define GEN_ITEM_SEPARATOR "|"
+
 bool IsGenerableItemIndex(int idx)
 {
 	ref itemRef = &Items[idx];
@@ -449,8 +452,10 @@ bool IsGenerableItem(String _itemID)
 	return IsGenerableItemIndex(itemIndex);
 }
 
-#define GEN_ITEM_DISCRET 100
-#define GEN_ITEM_SEPARATOR "|"
+bool IsGeneratedItem(String _itemID)
+{
+	return findSubStr(_itemID, GEN_ITEM_SEPARATOR, 0) >= 0;
+}
 
 string GenerateBladeByParams(string sItemID, float dmg_min, float dmg_max, float weight)
 {
@@ -466,16 +471,12 @@ string GenerateBladeByParams(string sItemID, float dmg_min, float dmg_max, float
 
 string GetOriginalItem(string sItemID)
 {
-	//trace("GetOriginalItem: " + sItemID);
 	int sub = findSubStr(sItemID, GEN_ITEM_SEPARATOR, 0);
-	//trace("sub: " + sub);
 	if (sub > 0)
 	{
 		string result = strcut(sItemID, 0, sub - 1);
-		//trace("GetOriginalItem result: " + result);
 		return result;
 	}
-	//trace("GetOriginalItem result: " + sItemID);
 	return sItemID;
 }
 
@@ -485,11 +486,6 @@ string GetBladeParams(string sItemID, ref dmg_min, ref dmg_max, ref weight)
 	if (sub0 < 0)
 	{
 		ref item = ItemsFromID(sItemID);
-		if (!CheckAttribute(item.dmg_min))
-		{
-			trace("ITEM: " + sItemID);
-			DumpAttributes(item);
-		}
 		dmg_min = item.dmg_min;
 		dmg_max = item.dmg_max;
 		weight = item.weight;
@@ -513,15 +509,13 @@ string GetBladeParams(string sItemID, ref dmg_min, ref dmg_max, ref weight)
 
 float GetItemWeight(string sItemID)
 {
-	int itemIndex = GetItemIndex(sItemID);
-	if (itemIndex == -1)
+	if (!IsGeneratedItem(sItemID))
 	{
-		return false;
-	}
-
-	ref item = &Items[itemIndex];
-	if (!CheckAttribute(item, "Generation")) // Генерящийся ли предмет
-	{
+		ref item = ItemsFromID(sItemID);
+		if (!CheckAttribute(item, "weight"))
+		{
+			return 0;
+		}
 		return stf(item.weight);
 	}
 
@@ -531,29 +525,10 @@ float GetItemWeight(string sItemID)
 	return weight;
 }
 
-int GetItemPrice(String _itemId)
+int CalculateBladePrice(int fencingType, float dmg_min, float dmg_max, float weight)
 {
-	int itemIndex = GetItemIndex(_itemID);
-	if (itemIndex == -1)
-	{
-		return false;
-	}
-
-	ref item = &Items[itemIndex];
-	if (!CheckAttribute(item, "Generation")) // Генерящийся ли предмет
-	{
-		if (!CheckAttribute(item, "price"))
-		{
-			return -1;
-		}
-		return sti(item.price);
-	}
-
-	float dmg_min, dmg_max, weight;
-	GetBladeParams(_itemId, &dmg_min, &dmg_max, &weight);
-
 	int priceMod = 1;
-	switch(item.FencingType)
+	switch(fencingType)
 	{
 		case "FencingLight": // Легкое оружие
 			priceMod = 4;
@@ -569,6 +544,25 @@ int GetItemPrice(String _itemId)
 	}
 
 	return sti(priceMod * dmg_min * dmg_max / weight);
+}
+
+int GetItemPrice(String _itemId)
+{
+	ref item = ItemsFromID(_itemId);
+
+	if (!IsGeneratedItem(_itemId))
+	{
+		if (!CheckAttribute(item, "price"))
+		{
+			return -1;
+		}
+		return sti(item.price);
+	}
+
+	float dmg_min, dmg_max, weight;
+	GetBladeParams(_itemId, &dmg_min, &dmg_max, &weight);
+
+	return CalculateBladePrice(sti(item.FencingType), dmg_min, dmg_max, weight);
 }
 
 // Создадим предмет, вернет АйДи нового предмета

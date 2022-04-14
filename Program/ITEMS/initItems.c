@@ -9156,6 +9156,8 @@ int InitItems()
 	InitGunExt(		"mushket6", "t2", 	              "GunEchin",               "", 115.0, 180.0,  65.0, 115.0, 20.0, 20.0, 1, 1, 1, 0, 0, 1,  60,  45, 0);
 	InitGunExt(		"mushket_seadevil", "t1","shotgun_cartridge", 				"", 200.0, 375.0, 200.0, 375.0,  0.0,  0.0, 1, 0, 0, 2, 0, 0, 100,  65, 1);
 
+	FillGenerableItemsDefaults(n);
+
 	trace("Всего предметов (размерность массива) "+n);
 	trace("Всего заскриптованных предметов - " + iScriptItemCount);
 	trace("Начальный специальный предмет: " + Items[ItemsForLocators_start].id);
@@ -9203,6 +9205,41 @@ void InitGunExt(string id,
 	gun.type.(sAttr).Default        = isDefault;
 
 	if(Stun_NC || Stun_C) gun.stun = true;
+}
+
+void FillGenerableItemsDefaults(int itemsQ)
+{
+	// Рандомим дефолтные характеристики для сабель для того чтобы уменьшить необходимые изменения.
+	// TODO: убрать и сделать все предметы рандомными.
+
+	int minValue, maxValue;
+	ref item;
+
+	for (int i = 0; i < itemsQ; i++)
+	{
+		if (IsGenerableItemIndex(i))
+		{
+			makeref(item, Items[i]);
+
+			// Минимальный урон
+			minValue = sti(item.Generation.dmg_min.min) * GEN_ITEM_DISCRET; // Нижняя граница атрибута
+			maxValue = sti(item.Generation.dmg_min.max) * GEN_ITEM_DISCRET; // Верхняя граница атрибута
+			item.dmg_min = stf(minValue + rand(maxValue - minValue)) / GEN_ITEM_DISCRET;
+
+			// Максимальный урон
+			minValue = sti(item.Generation.dmg_max.min) * GEN_ITEM_DISCRET; // Нижняя граница атрибута
+			maxValue = sti(item.Generation.dmg_max.max) * GEN_ITEM_DISCRET; // Верхняя граница атрибута
+			item.dmg_max = stf(minValue + rand(maxValue - minValue)) / GEN_ITEM_DISCRET;
+
+			// Вес
+			minValue = sti(item.Generation.Weight.min) * GEN_ITEM_DISCRET; // Нижняя граница атрибута
+			maxValue = sti(item.Generation.Weight.max) * GEN_ITEM_DISCRET; // Верхняя граница атрибута
+			item.weight = stf(minValue + rand(maxValue - minValue)) / GEN_ITEM_DISCRET;
+
+			item.price = CalculateBladePrice(sti(item.FencingType),
+				stf(item.dmg_min), stf(item.dmg_max), stf(item.weight));
+		}
+	}
 }
 
 void InitRandItems()
