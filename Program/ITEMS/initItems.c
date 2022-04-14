@@ -43,7 +43,6 @@
 
 int InitItems()
 {
-	InitButtons();
 	InitRandItems();
 	ref itm;
 	int n;
@@ -9204,46 +9203,6 @@ void InitGunExt(string id,
 	gun.type.(sAttr).Default        = isDefault;
 
 	if(Stun_NC || Stun_C) gun.stun = true;
-}
-
-// Warship 24.10.08 ГПК 1.2.3 Рандом статов холодного оружия
-// Рудмент - нигде не используется
-void SetRandomBladesStates()
-{
-	/*int iDamageMin, iDamageMax;
-	ref rItem;
-
-	for(int i=0; i<ITEMS_QUANTITY; i++)
-	{
-		rItem = &items[i];
-
-		if(GetAttrValue(rItem, "groupID") == BLADE_ITEM_TYPE) // Значит холодное оружие
-		{
-			// Новые значения
-			iDamageMin = sti(rItem.dmg_min) - rand(MakeInt(sti(rItem.dmg_min)/3)) + rand(MakeInt(sti(rItem.dmg_min)/3));
-			iDamageMax = sti(rItem.dmg_max) - rand(MakeInt(sti(rItem.dmg_max)/2)) + rand(MakeInt(sti(rItem.dmg_max)/2));
-
-			// Запомним прежние
-			rItem.dmg_min.old = rItem.dmg_min;
-			rItem.dmg_max.old = rItem.dmg_max;
-
-			rItem.dmg_min = iDamageMin;
-			rItem.dmg_max = iDamageMax;
-		}
-	}*/
-}
-
-void InitButtons()
-{
-	/*aref lab3;
-	makearef(lab3, Locations[FindLocation("Labirint_3")]);
-
-	lab3.items.b_1.locator = "button01";
-	lab3.items.b_1.model   = "b1";
-	lab3.items.b_1.itemDeltaY  = 0.0;
-	lab3.items.b_1.deltaY  = -0.05;
-	lab3.items.b_1.trigged  = false;
-	*/
 }
 
 void InitRandItems()

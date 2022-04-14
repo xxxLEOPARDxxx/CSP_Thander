@@ -969,8 +969,8 @@ void ProcessDialogEvent()
 					if (npchar.itemtype == "indian11") npchar.itemtype = "indian"+(22-drand1(2));
 					aref ind;
 					Items_FindItem(npchar.itemtype, &ind);
-					npchar.pricevalue = sti(ind.price)*10;
-					if (CheckAttribute(ind,"groupID") && sti(ind.price) < 100) npchar.pricevalue = sti(npchar.pricevalue)*25;
+					npchar.pricevalue = sti(GetItemPrice(npchar.itemtype))*10;
+					if (CheckAttribute(ind,"groupID") && sti(GetItemPrice(npchar.itemtype)) < 100) npchar.pricevalue = sti(npchar.pricevalue)*25;
 					Dialog.Text = dialog.text+ "Сегодня в наличии у меня есть туземская побрякушка, "+LanguageConvertString(idLngFile, "itmname_"+npchar.itemtype)+". Интересует? За неё я прошу "+npchar.pricevalue+" пиастров.";
 					LanguageCloseFile(idLngFile);
 					if(sti(pchar.money) >= sti(npchar.pricevalue))

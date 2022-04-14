@@ -872,7 +872,7 @@ void FillCharactersScroll()
 void AddToTable(ref rChar)
 {
 	string sList, sItem, sTemp;
-	int n, i, iLeftQty, iRightQty, Index, iSelLine, iTemp;
+	int n, i, iLeftQty, iRightQty, iSelLine, iTemp;
 	ref rItem;
 	bool ok;
 	bool ok1 = false;
@@ -928,9 +928,8 @@ void AddToTable(ref rChar)
 	//if(iLeftQty > 0 || iRightQty > 0)
 	//{
 		sList = "tr" + n;
-		Index = FindItem("Gold");
-		rItem = &Items[Index];
-		sItem = rItem.id;
+		rItem = &Items[FindItem("Gold")];
+		GameInterface.TABLE_LIST.(sList).id = "Gold";
 		GameInterface.TABLE_LIST.(sList).td1.str = iLeftQty;
 		GameInterface.TABLE_LIST.(sList).td1.scale = 0.8;
 		GameInterface.TABLE_LIST.(sList).td2.str = "-";
@@ -941,7 +940,6 @@ void AddToTable(ref rChar)
 		GameInterface.TABLE_LIST.(sList).td3.icon.height = 30;
 		GameInterface.TABLE_LIST.(sList).td3.textoffset = "30, 0";
 		GameInterface.TABLE_LIST.(sList).td3.str = GetConvertStr(rItem.name, "ItemsDescribe.txt");
-		GameInterface.TABLE_LIST.(sList).index = Index;
 		GameInterface.TABLE_LIST.(sList).td3.scale = 1.0;
 		GameInterface.TABLE_LIST.(sList).td4.str = "-";
 		GameInterface.TABLE_LIST.(sList).td5.str = iRightQty;
@@ -951,7 +949,24 @@ void AddToTable(ref rChar)
 		iLinesCount++;
 	//}
 
-	// Сначало заполняем рандомящимся оружием
+	// Собираем статистику про генерирующиеся айтемы
+	ref generableItems;
+	aref arInventory, arItem;
+
+	makearef(arInventory, refCharacter.Items);
+	int inventorySize = GetAttributesNum(arInventory);
+	for (i = 0; i < inventorySize; i++)
+	{
+		arItem = GetAttributeN(arInventory, i);
+		sItem = GetAttributeName(arItem);
+
+		if (IsGenerableItem(sItem))
+		{
+			sList = "" + FindItem();
+			generableItems..(sItem) = true;
+		}
+
+	//Сначало заполняем рандомящимся оружием
 	for(i = ITEMS_QUANTITY; i < TOTAL_ITEMS; i++)
 	{
 		sList = "tr" + n;

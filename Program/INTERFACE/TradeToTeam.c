@@ -301,9 +301,6 @@ void AddToTable()
 			GameInterface.TABLE_LIST.(row).td4.str = LanguageConvertString(idLngFile, Items[i].name);
 			GameInterface.TABLE_LIST.(row).index = i;
 			GameInterface.TABLE_LIST.(row).td4.scale = 0.9;
-			//GameInterface.TABLE_LIST.(row).td4.color = iColor;
-            //GameInterface.TABLE_LIST.(row).td3.str = GetTradeItemPrice(i, PRICE_TYPE_BUY);
-			//GameInterface.TABLE_LIST.(row).td5.str = GetTradeItemPrice(i, PRICE_TYPE_SELL);
 			n++;
 		}
 	}

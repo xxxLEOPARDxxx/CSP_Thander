@@ -976,9 +976,9 @@ string GetAchievementIcon(string ach_name) // Получим описание д
 	return describeStr;
 }
 
-string GetItemDescribe(int iGoodIndex)
+string GetItemDescribe(string sItemID)
 {
-	string GoodName = Items[iGoodIndex].name;
+	int iGoodIndex = Items_FindItemIdx(sItemID);
 	ref    arItm = &Items[iGoodIndex];
 	int    lngFileID = LanguageOpenFile("ItemsDescribe.txt");
     string describeStr = "";
@@ -1110,11 +1110,7 @@ string GetItemDescribe(int iGoodIndex)
 			}
 		}
 	}
-	//aw013 -->
-	float fItmPrice;
-	if (arItm.price != 0 && arItm.Weight != 0) fItmPrice = stf(arItm.price) / stf(arItm.Weight);
-	else fItmPrice=0;
-	describeStr += "\nЦена " + makeint(arItm.price) + " / Вес " + FloatToString(stf(arItm.weight), 2) + newStr();
+	describeStr += "\nЦена " + GetItemPrice(sItemID) + " / Вес " + FloatToString(GetItemWeight(sItemID), 2) + newStr();
 	if (CheckAttribute(arItm, "groupID"))//Книги, процент прочитанности - Gregg
 	{
 		if(arItm.groupID == BOOK_ITEM_TYPE)

@@ -653,14 +653,14 @@ void ShowGoodsInfo(int iGoodIndex)
 
 	string describeStr = "";
 
-	if (bBettaTestMode)
+	/*if (bBettaTestMode)
 	{
 		describeStr += " id = " + Items[iGoodIndex].id + NewStr();
 		if(CheckAttribute(arItm, "dmg_min.old") && CheckAttribute(arItm, "dmg_max.old"))
 		{
 			describeStr += "OldDmgMin = " + sti(arItm.dmg_min.old) + ", OldDmgMax = "+sti(arItm.dmg_max.old) + newStr();
 		}
-	}
+	}*/
 	describeStr += GetItemDescribe(iGoodIndex);
 
 	fWeight = stf(Items[iGoodIndex].weight);
@@ -1133,7 +1133,7 @@ void ShowBladeEquipInfo()
 	sHeader = itm.name;
 	sHeader = LanguageConvertString(idLngFile, sHeader);
 
-	sText1 = GetItemDescribe(FindItem(sItem));
+	sText1 = GetItemDescribe(sItem);
 
 	CreateTooltip("#" + sHeader, sText1, argb(255,255,255,255), sText2, argb(255,255,192,192), sText3, argb(255,192,255,192), "", argb(255,255,255,255), sPicture, sGroup, sGroupPicture, 100, 100);
 	LanguageCloseFile(idLngFile);
@@ -1166,7 +1166,7 @@ void ShowGunEquipInfo()
 	sHeader = itm.name;
 	sHeader = LanguageConvertString(idLngFile, sHeader);
 
-	sText1 = GetItemDescribe(FindItem(sItem));
+	sText1 = GetItemDescribe(sItem);
 
 	CreateTooltip("#" + sHeader, sText1, argb(255,255,255,255), sText2, argb(255,255,192,192), sText3, argb(255,192,255,192), "", argb(255,255,255,255), sPicture, sGroup, sGroupPicture, 100, 100);
 	LanguageCloseFile(idLngFile);
@@ -1199,7 +1199,7 @@ void ShowSpyglassEquipInfo()
 	sHeader = itm.name;
 	sHeader = LanguageConvertString(idLngFile, sHeader);
 
-	sText1 = GetItemDescribe(FindItem(sItem));
+	sText1 = GetItemDescribe(sItem);
 
 	CreateTooltip("#" + sHeader, sText1, argb(255,255,255,255), sText2, argb(255,255,192,192), sText3, argb(255,192,255,192), "", argb(255,255,255,255), sPicture, sGroup, sGroupPicture, 100, 100);
 	LanguageCloseFile(idLngFile);
@@ -1232,7 +1232,7 @@ void ShowBackPackEquipInfo()
 	sHeader = itm.name;
 	sHeader = LanguageConvertString(idLngFile, sHeader);
 
-	sText1 = GetItemDescribe(FindItem(sItem));
+	sText1 = GetItemDescribe(sItem);
 
 	CreateTooltip("#" + sHeader, sText1, argb(255,255,255,255), sText2, argb(255,255,192,192), sText3, argb(255,192,255,192), "", argb(255,255,255,255), sPicture, sGroup, sGroupPicture, 100, 100);
 	LanguageCloseFile(idLngFile);
@@ -1265,7 +1265,7 @@ void ShowTalismanEquipInfo()
 	sHeader = itm.name;
 	sHeader = LanguageConvertString(idLngFile, sHeader);
 
-	sText1 = GetItemDescribe(FindItem(sItem));
+	sText1 = GetItemDescribe(sItem);
 
 	CreateTooltip("#" + sHeader, sText1, argb(255,255,255,255), sText2, argb(255,255,192,192), sText3, argb(255,192,255,192), "", argb(255,255,255,255), sPicture, sGroup, sGroupPicture, 100, 100);
 	LanguageCloseFile(idLngFile);
@@ -1298,7 +1298,7 @@ void ShowCirassEquipInfo()
 	sHeader = itm.name;
 	sHeader = LanguageConvertString(idLngFile, sHeader);
 
-	sText1 = GetItemDescribe(FindItem(sItem));
+	sText1 = GetItemDescribe(sItem);
 
 	CreateTooltip("#" + sHeader, sText1, argb(255,255,255,255), sText2, argb(255,255,192,192), sText3, argb(255,192,255,192), "", argb(255,255,255,255), sPicture, sGroup, sGroupPicture, 100, 100);
 	LanguageCloseFile(idLngFile);
@@ -1331,7 +1331,7 @@ void ShowBookEquipInfo()
 	sHeader = itm.name;
 	sHeader = LanguageConvertString(idLngFile, sHeader);
 
-	sText1 = GetItemDescribe(FindItem(sItem));
+	sText1 = GetItemDescribe(sItem);
 
 	CreateTooltip("#" + sHeader, sText1, argb(255,255,255,255), sText2, argb(255,255,192,192), sText3, argb(255,192,255,192), "", argb(255,255,255,255), sPicture, sGroup, sGroupPicture, 100, 100);
 	LanguageCloseFile(idLngFile);
@@ -1364,7 +1364,7 @@ void Show1EquipInfo()
 	sHeader = itm.name;
 	sHeader = LanguageConvertString(idLngFile, sHeader);
 
-	sText1 = GetItemDescribe(FindItem(sItem));
+	sText1 = GetItemDescribe(sItem);
 
 	CreateTooltip("#" + sHeader, sText1, argb(255,255,255,255), sText2, argb(255,255,192,192), sText3, argb(255,192,255,192), "", argb(255,255,255,255), sPicture, sGroup, sGroupPicture, 100, 100);
 	LanguageCloseFile(idLngFile);
@@ -1397,7 +1397,7 @@ void Show2EquipInfo()
 	sHeader = itm.name;
 	sHeader = LanguageConvertString(idLngFile, sHeader);
 
-	sText1 = GetItemDescribe(FindItem(sItem));
+	sText1 = GetItemDescribe(sItem);
 
 	CreateTooltip("#" + sHeader, sText1, argb(255,255,255,255), sText2, argb(255,255,192,192), sText3, argb(255,192,255,192), "", argb(255,255,255,255), sPicture, sGroup, sGroupPicture, 100, 100);
 	LanguageCloseFile(idLngFile);
@@ -1430,7 +1430,7 @@ void Show3EquipInfo()
 	sHeader = itm.name;
 	sHeader = LanguageConvertString(idLngFile, sHeader);
 
-	sText1 = GetItemDescribe(FindItem(sItem));
+	sText1 = GetItemDescribe(sItem);
 
 	CreateTooltip("#" + sHeader, sText1, argb(255,255,255,255), sText2, argb(255,255,192,192), sText3, argb(255,192,255,192), "", argb(255,255,255,255), sPicture, sGroup, sGroupPicture, 100, 100);
 	LanguageCloseFile(idLngFile);
@@ -1463,7 +1463,7 @@ void Show4EquipInfo()
 	sHeader = itm.name;
 	sHeader = LanguageConvertString(idLngFile, sHeader);
 
-	sText1 = GetItemDescribe(FindItem(sItem));
+	sText1 = GetItemDescribe(sItem);
 
 	CreateTooltip("#" + sHeader, sText1, argb(255,255,255,255), sText2, argb(255,255,192,192), sText3, argb(255,192,255,192), "", argb(255,255,255,255), sPicture, sGroup, sGroupPicture, 100, 100);
 	LanguageCloseFile(idLngFile);
@@ -1496,7 +1496,7 @@ void Show5EquipInfo()
 	sHeader = itm.name;
 	sHeader = LanguageConvertString(idLngFile, sHeader);
 
-	sText1 = GetItemDescribe(FindItem(sItem));
+	sText1 = GetItemDescribe(sItem);
 
 	CreateTooltip("#" + sHeader, sText1, argb(255,255,255,255), sText2, argb(255,255,192,192), sText3, argb(255,192,255,192), "", argb(255,255,255,255), sPicture, sGroup, sGroupPicture, 100, 100);
 	LanguageCloseFile(idLngFile);

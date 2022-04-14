@@ -59,13 +59,6 @@ void Item_OnLoadLocation(string currentLocation)
 		useLocatorsCount++;
 	}
 
-	// Warship 11.05.09 удаление неиспользующихся предметов
-	/*
-	if(!actLoadFlag) // FIX При лоаде прогружается лока - все че было нагенерено терлось с сундука
-	{
-		RefreshGeneratedItems();
-	}
-	*/
 	// load buttons & items
 	Items_ShowButtons(currentLocation);
 	RandItems_OnLoadLocation(activeLocation);
@@ -386,20 +379,8 @@ void Items_HideItem(int itemN)
 
 int Items_FindItem(string itemID, ref itemARef)
 {
-	aref curItem;
-
-	for(int i = 0; i < TOTAL_ITEMS; i++)
-	{
-		makearef(curItem,Items[i]);
-
-		if(CheckAttribute(curItem, "ID") && curItem.id == itemID)
-		{
-			itemARef = curItem;
-			return i;
-		}
-	}
-
-	return -1;
+	itemARef = ItemsFromID(itemID);
+	return GetItemIndex(itemID);
 }
 
 int Items_FindItemIdx(string itemID) // нужно для поиска только номера
