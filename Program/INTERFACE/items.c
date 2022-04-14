@@ -951,7 +951,7 @@ void ShowInfoWindow()
 	if (sCurrentNode == "TABLE_ITEMS")
 	{
 		string sItemID = GameInterface.(CurTable).(CurRow).id;
-		ref rBlade = FindItem(sItemID);
+		ref rBlade = ItemsFromID(sItemID);
 		if (ThisItemCanBeEquip(rBlade))
 		{
 			if(rBlade.groupID == BLADE_ITEM_TYPE)
@@ -1015,7 +1015,7 @@ void TableSelectChange()
 void SetItemInfo()
 {
 	string sItemID = GameInterface.(CurTable).(CurRow).id;
-	ref item = FindItem(sItemID);
+	ref item = ItemsFromID(sItemID);
 	SetFormatedText("INFO_TEXT", GetItemDescribe(sItemID));
 	SetNewGroupPicture("INFO_PIC", item.picTexture, "itm" + item.picIndex);
 	SetNodeUsing("INFO_TEXT", true);
@@ -1258,7 +1258,7 @@ bool ThisItemCanBeEquip( aref arItem )
 void EquipPress()
 {
 	string sItemID = GameInterface.(CurTable).(CurRow).id;
-	ref itmRef = FindItem(sItemID);
+	ref itmRef = ItemsFromID(sItemID);
 	string totalInfo;
 	int  i;
 
@@ -1308,7 +1308,7 @@ void EquipPress()
 					TakeNItems(xi_refCharacter, "map_part1", -1);
 					TakeNItems(xi_refCharacter, "map_part2", -1);
 					TakeNItems(pchar, "map_full",   1);
-					itmRef = FindItem("map_full");
+					itmRef = ItemsFromID("map_full");
 					// здесь генерация назначение и типа клада
 					pchar.GenQuest.TreasureBuild = true;
 					FillMapForTreasure(itmRef);
@@ -1513,7 +1513,7 @@ void EquipPress()
 			}
 			FillItemsSelected();
 			SendMessage(&GameInterface,"lsls",MSG_INTERFACE_MSG_TO_NODE,"EQUIP_BUTTON",0, "#"+XI_ConvertString("Equip that"));
-			SetSelectable("EQUIP_BUTTON",ThisItemCanBeEquip(&Items[iGoodIndex]));
+			SetSelectable("EQUIP_BUTTON",ThisItemCanBeEquip(itmRef));
 			SetItemInfo();
 		}
 	}
@@ -1803,7 +1803,7 @@ void ShowItemFromCharacterWindow()
 	SetCurrentNode("ITEM_FROM_CHARACTER_TEXT");
 	SetCurrentNode("ITEM_FROM_CHARACTER_NAME");
 
-	ref itm = FindItem(sItemID);
+	ref itm = ItemsFromID(sItemID);
 
 	string sTexture = itm.picTexture;
 	string sPicture = "itm" + itm.picIndex;

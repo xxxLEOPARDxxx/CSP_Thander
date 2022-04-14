@@ -379,8 +379,17 @@ void Items_HideItem(int itemN)
 
 int Items_FindItem(string itemID, ref itemARef)
 {
-	itemARef = ItemsFromID(itemID);
-	return GetItemIndex(itemID);
+	int index = GetItemIndex(itemID);
+	if (index < 0)
+	{
+		return -1;
+	}
+
+    aref curItem;
+	makearef(curItem, Items[index]);
+	itemARef = curItem;
+
+	return index;
 }
 
 int Items_FindItemIdx(string itemID) // нужно для поиска только номера

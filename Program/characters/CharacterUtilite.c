@@ -1685,7 +1685,12 @@ int GetChrItemQuantity(ref _refCharacter)
 }
 bool GiveItem2Character(ref _refCharacter,string itemName)
 {
-	return TakeNItems(_refCharacter,itemName,1);
+	bool result = TakeNItems(_refCharacter,itemName,1);
+	if (!result)
+	{
+		trace("Can't give item to character: " + itemName);
+	}
+	return result;
 }
 void TakeItemFromCharacter(ref _refCharacter,string itemName)
 {
@@ -1717,24 +1722,7 @@ void GenerateAndAddItems(ref _chr, string _itemID, int _qty)
 }
 bool CheckCharacterItem(ref _refCharacter,string itemName)
 {
-	ref tmpRef;
-	if(!IsGenerableItem(itemName))
-	{
-		if( CheckAttribute(_refCharacter,"Items."+itemName) && sti(_refCharacter.Items.(itemName))>0 )	return true;
-		else return false;
-	}
-	else
-	{
-		for(int i = ITEMS_QUANTITY; i < TOTAL_ITEMS; i++)
-		{
-			tmpRef = &Items[i];
-			if(CheckAttribute(tmpRef, "ID"))
-			{
-				if(tmpRef.DefItemID == itemName) return true;
-			}
-		}
-		return false;
-	}
+	return CheckAttribute(_refCharacter, "Items." + itemName) && (sti(_refCharacter.Items.(itemName)) > 0);
 }
 
 int GetCharacterItem(ref _refCharacter,string itemName)
