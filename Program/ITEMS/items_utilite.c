@@ -602,6 +602,33 @@ string GenerateItem(String _itemId)
 	return GenerateBladeByParams(_itemId, minDmg, maxDmg, weight);
 }
 
+string ModifyGeneratedBlade(string sItemID, float delta_dmg_min, float delta_dmg_max, float delta_weight)
+{
+	if (!IsGenerableItem(sItemID))
+	{
+		return sItemID;
+	}
+
+	ref item = ItemsFromID(sItemID);
+
+	float dmg_min, dmg_max, weight;
+	string origItem = GetBladeParams(sItemID, &dmg_min, &dmg_max, &weight);
+
+	dmg_min += delta_dmg_min;
+	if (dmg_min < stf(item.Generation.dmg_min.min)) dmg_min = stf(item.Generation.dmg_min.min);
+	if (dmg_min > stf(item.Generation.dmg_min.max)) dmg_min = stf(item.Generation.dmg_min.max);
+
+	dmg_max += delta_dmg_max;
+	if (dmg_max < stf(item.Generation.dmg_max.min)) dmg_max = stf(item.Generation.dmg_max.min);
+	if (dmg_max > stf(item.Generation.dmg_max.max)) dmg_max = stf(item.Generation.dmg_max.max);
+
+	weight += delta_weight;
+	if (weight < stf(item.Generation.weight.min)) weight = stf(item.Generation.weight.min);
+	if (weight > stf(item.Generation.weight.max)) weight = stf(item.Generation.weight.max);
+
+	return GenerateBladeByParams(origItem, dmg_min, dmg_max, weight);
+}
+
 //ugeen --> вернем случайный ID сгенерированного зараннее предмета
 string GetGeneratedItem(string _itemId)
 {
