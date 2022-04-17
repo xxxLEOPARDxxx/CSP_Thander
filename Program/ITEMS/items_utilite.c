@@ -525,7 +525,7 @@ float GetItemWeight(string sItemID)
 	return weight;
 }
 
-int CalculateBladePrice(int fencingType, float dmg_min, float dmg_max, float weight)
+int CalculateBladePrice(string fencingType, float dmg_min, float dmg_max, float weight)
 {
 	int priceMod = 1;
 	switch(fencingType)
@@ -562,7 +562,7 @@ int GetItemPrice(String _itemId)
 	float dmg_min, dmg_max, weight;
 	GetBladeParams(_itemId, &dmg_min, &dmg_max, &weight);
 
-	return CalculateBladePrice(sti(item.FencingType), dmg_min, dmg_max, weight);
+	return CalculateBladePrice(item.FencingType, dmg_min, dmg_max, weight);
 }
 
 // Создадим предмет, вернет АйДи нового предмета

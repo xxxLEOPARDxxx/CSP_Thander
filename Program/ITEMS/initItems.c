@@ -9236,7 +9236,7 @@ void FillGenerableItemsDefaults(int itemsQ)
 			maxValue = sti(item.Generation.Weight.max) * GEN_ITEM_DISCRET; // Верхняя граница атрибута
 			item.weight = stf(minValue + rand(maxValue - minValue)) / GEN_ITEM_DISCRET;
 
-			item.price = CalculateBladePrice(sti(item.FencingType),
+			item.price = CalculateBladePrice(item.FencingType,
 				stf(item.dmg_min), stf(item.dmg_max), stf(item.weight));
 		}
 	}

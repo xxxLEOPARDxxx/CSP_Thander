@@ -1065,7 +1065,7 @@ string GetItemDescribe(string sItemID)
 		{
 			float dmg_min, dmg_max, weight;
 			GetBladeParams(sItemID, &dmg_min, &dmg_max, &weight);
-			int price = CalculateBladePrice(sti(arItm.FencingType), dmg_min, dmg_max, weight);
+			int price = CalculateBladePrice(arItm.FencingType, dmg_min, dmg_max, weight);
 
 			// Собираем фейковый айтем, так как генерируемые параметры не содержатся в изначальном айтеме
 			object tempObj;
