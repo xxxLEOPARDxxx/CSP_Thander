@@ -555,24 +555,18 @@ void FillItemsTable()
 	GameInterface.CONSUME_TABLE_LIST.hr.td4.str = "Вес";
 	curBuyItemsWeight = 0;
 
-	aref arInventory, arItem;
-	ref itm;
-	int inventorySize = GetAttributesNum(arInventory);
-	makearef(arInventory, Characters[iCurFighter].TransferItems);
-
-	for (i = 0; i < inventorySize; i++)
+	for(i = 0, n = 1; i < ITEMS_QUANTITY; i++)
 	{
-		arItem = GetAttributeN(arInventory, i);
-		sItem = GetAttributeName(arItem);
-		itm = ItemsFromID(sItem);
+		sItem = Items[i].id;
 
-		if (!checkattribute(itm,"sortIndex"))
+		if (IsGenerableItemIndex(i)) continue;
+		if (!CheckAttribute(Items[i],"sortIndex"))
 		{
 			if (!HasSubStr(sItem,"CompCraft")) continue;//в списке только расходники
 		}
 		else
 		{
-			if (itm.SortIndex == 1 || itm.SortIndex == 2 || itm.ItemType == "CRAFTCOMPONENTS") {}
+			if (Items[i].SortIndex == 1 || Items[i].SortIndex == 2 || Items[i].ItemType == "CRAFTCOMPONENTS") {}
 			else continue; //в списке расходники и крафт
 
 		}
@@ -581,16 +575,17 @@ void FillItemsTable()
 		if (sItem == "CompCraft_Tools" || sItem == "CompCraft_Locksmith" || sItem == "CompCraft_Puleleyka") continue; //исключение выбранных Шахом штук
 		row = "tr" + n;
 
+		if (CheckAttribute(Characters[iCurFighter], "TransferItems." + sItem)) buyCount = sti(Characters[iCurFighter].TransferItems.(sItem)); else buyCount = 0;
+
 		GameInterface.CONSUME_TABLE_LIST.(row).id = sItem;
-		GameInterface.CONSUME_TABLE_LIST.(row).td1.icon.group = itm.picTexture;
-		GameInterface.CONSUME_TABLE_LIST.(row).td1.icon.image = "itm" + itm.picIndex;
+		GameInterface.CONSUME_TABLE_LIST.(row).td1.icon.group = Items[i].picTexture;
+		GameInterface.CONSUME_TABLE_LIST.(row).td1.icon.image = "itm" + Items[i].picIndex;
 		GameInterface.CONSUME_TABLE_LIST.(row).td1.icon.offset = "-2,0";
 		GameInterface.CONSUME_TABLE_LIST.(row).td1.icon.width = 40;
 		GameInterface.CONSUME_TABLE_LIST.(row).td1.icon.height = 40;
 		GameInterface.CONSUME_TABLE_LIST.(row).td1.textoffset = "40,0";
 		GameInterface.CONSUME_TABLE_LIST.(row).td1.align = "left";
-		GameInterface.CONSUME_TABLE_LIST.(row).td1.str = GetConvertStr(itm.name, "ItemsDescribe.txt");
-		buyCount = sti(Characters[iCurFighter].TransferItems.(sItem));
+		GameInterface.CONSUME_TABLE_LIST.(row).td1.str = GetConvertStr(Items[i].name, "ItemsDescribe.txt");
 		GameInterface.CONSUME_TABLE_LIST.(row).td2.str = buyCount;
 		buyCount2 = GetConsumeLimit(Characters[iCurFighter], sItem);
 		GameInterface.CONSUME_TABLE_LIST.(row).td3.str = buyCount2;
@@ -613,7 +608,7 @@ void TableSelectChange()
 	switch (sControl)
 	{
 		case "GOODS_TABLE_LIST": iCurGoodIndex = sti(GameInterface.GOODS_TABLE_LIST.(sRow).index); sCurGoodRow = sRow; break;
-		case "CONSUME_TABLE_LIST": sCurItemId = GameInterface.GOODS_TABLE_LIST.(sRow).id; sCurItemRow = sRow; break;
+		case "CONSUME_TABLE_LIST": sCurItemId = GameInterface.CONSUME_TABLE_LIST.(sRow).id; sCurItemRow = sRow; break;
 	}
 }
 

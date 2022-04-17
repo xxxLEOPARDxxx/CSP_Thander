@@ -471,6 +471,7 @@ string GenerateBladeByParams(string sItemID, float dmg_min, float dmg_max, float
 
 string GetOriginalItem(string sItemID)
 {
+	if (sItemID == "") return "";
 	int sub = findSubStr(sItemID, GEN_ITEM_SEPARATOR, 0);
 	if (sub > 0)
 	{
