@@ -1063,9 +1063,24 @@ string GetItemDescribe(string sItemID)
 		}
 		if(arItm.groupID==BLADE_ITEM_TYPE)
 		{
+			float dmg_min, dmg_max, weight;
+			GetBladeParams(sItemID, &dmg_min, &dmg_max, &weight);
+			int price = CalculateBladePrice(sti(arItm.FencingType), dmg_min, dmg_max, weight);
+
+			// Собираем фейковый айтем, так как генерируемые параметры не содержатся в изначальном айтеме
+			object tempObj;
+			aref arTemp;
+			makearef(arTemp, tempObj);
+			CopyAttributes(arTemp, arItm);
+			tempObj.dmg_min = dmg_min;
+			tempObj.dmg_max = dmg_max;
+			tempObj.weight = weight;
+			tempObj.price = price;
+
 			describeStr += GetAssembledString(
 				LanguageConvertString(lngFileID,"weapon blade parameters"),
-				arItm) + newStr();
+				arTemp) + newStr();
+
 			if (CheckAttribute(arItm, "FencingType"))
 			{
     			arItm.FencingTypeName = XI_ConvertString(arItm.FencingType);

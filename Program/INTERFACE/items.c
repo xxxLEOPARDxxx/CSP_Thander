@@ -644,9 +644,6 @@ void SetVariable()
 	else SetNodeUsing("EXCHANGE", false);
 
 	SetFormatedText("SETUP_FRAME_CAPTION", XI_ConvertString("Equipment") + ": " + GetFullName(xi_refCharacter));
-	// сортировка -->
-	SortItems(xi_refCharacter);
-	// сортировка -->
 	SetControlsTabMode(1);
 	for (int i=1;i<7;i++) {FillSetName(i);}//Заполняем имена комплектов снаряжения
 	HideItemInfo();
@@ -668,12 +665,11 @@ void SetVariable()
 void FillItemsTable(int _mode) // 1 - все 2 - оружие 3 - остальное
 {
 	int n, i, iTemp;
-	string row;
-	string sGood;
+	string row, sGood, sItem;
 	int  idLngFile;
 	bool ok, ok2 = true;
 	aref rootItems, arItem;
-	aref  curItem;
+	ref rItem;
 
 	GameInterface.TABLE_ITEMS.hr.td1.str = "Наименование предметов";
 	GameInterface.TABLE_ITEMS.hr.td1.scale = 0.8;
@@ -685,67 +681,99 @@ void FillItemsTable(int _mode) // 1 - все 2 - оружие 3 - остальн
 	GameInterface.TABLE_ITEMS.hr.td4.scale = 0.8;
 	GameInterface.TABLE_ITEMS.select = 0;
 	GameInterface.TABLE_ITEMS.top = 0;
-	n = 1;
 	idLngFile = LanguageOpenFile("ItemsDescribe.txt");
 	Table_Clear("TABLE_ITEMS", false, true, false);
 
-	// Заполним вещами от нас
+	object allItems;
+
+    makearef(rootItems, xi_refCharacter.equip); // экипировка
+    n = GetAttributesNum(rootItems);
+    for(i = 0; i < n; i++)
+    {
+        arItem = GetAttributeN(rootItems, i);
+        sItem = GetAttributeValue(arItem);
+        if (sItem == "") continue; //патенты клинит
+		iTemp = FindItem(sItem);
+		if (iTemp < 0) continue;
+		sGood = "00" + DigitsToString(iTemp, 4) + sItem;
+		allItems.(sGood) = sItem;
+    }
+
 	makearef(rootItems, xi_refCharacter.Items);
-	for (i=0; i<GetAttributesNum(rootItems); i++)
+	n = GetAttributesNum(rootItems);
+	for (i = 0; i < n; i++)
 	{
-		curItem = GetAttributeN(rootItems, i);
-		sGood = GetAttributeName(curItem);
+		arItem = GetAttributeN(rootItems, i);
+		sItem = GetAttributeName(arItem);
+		if (IsEquipCharacterByItem(xi_refCharacter, sItem)) continue;
+		iTemp = FindItem(sItem);
+		if (iTemp < 0) continue;
+		sGood = DigitsToString(iTemp, 4) + sItem;
 
-		if (Items_FindItem(sGood, &arItem) >= 0)
+		if (CheckAttribute(Items[iTemp], "SortIndex"))
 		{
-			row = "tr" + n;
-			ok = arItem.ItemType == "WEAPON" || arItem.ItemType == "SUPPORT";
-			if (CheckAttribute(arItem,"kind")) ok = true;
-			if (CheckAttribute(arItem,"mapSpecial"))
-			{
-				ok2 = false;
-			}
-			else
-			{
-				ok2 = true;
-			}
-			if (_mode == 1 && arItem.ItemType == "MAP" && ok2) continue
-			ok2 = ok2 && arItem.ItemType == "MAP";
-			if (_mode == 2 && !ok && ok2) continue;
-			ok = ok || arItem.ItemType == "MAP";
-			if (_mode == 3 && ok && ok2) continue;
-			if (_mode == 4 && arItem.ItemType != "MAP") continue;
-
-			if (GetCharacterItem(xi_refCharacter, sGood) > 0)
-			{
-				GameInterface.TABLE_ITEMS.(row).id = sGood;
-
-				GameInterface.TABLE_ITEMS.(row).td1.icon.group = arItem.picTexture;
-				GameInterface.TABLE_ITEMS.(row).td1.icon.image = "itm" + arItem.picIndex;
-				GameInterface.TABLE_ITEMS.(row).td1.icon.offset = "-2, 0";
-				GameInterface.TABLE_ITEMS.(row).td1.icon.width = 32;
-				GameInterface.TABLE_ITEMS.(row).td1.icon.height = 32;
-				GameInterface.TABLE_ITEMS.(row).td1.textoffset = "31,0";
-				GameInterface.TABLE_ITEMS.(row).td1.str = LanguageConvertString(idLngFile, arItem.name);
-
-				iTemp = CheckItemInSets(xi_refCharacter, sGood);
-				if (iTemp > 0)
-				{
-					GameInterface.TABLE_ITEMS.(row).td1.str = GameInterface.TABLE_ITEMS.(row).td1.str + " (К" + iTemp + ")";
-					GameInterface.TABLE_ITEMS.(row).td1.color = argb(255,196,196,255);//подцвечиваем предметы из комплектов
-				}
-				if (IsEquipCharacterByItem(xi_refCharacter, sGood)) GameInterface.TABLE_ITEMS.(row).td1.color = argb(255,196,196,255);//на этом интерфейсе надо подцвечивать и текущий комплект???
-
-				GameInterface.TABLE_ITEMS.(row).td1.scale = 0.85;
-				GameInterface.TABLE_ITEMS.(row).td2.str   = FloatToString(GetItemWeight(sGood), 1);
-				GameInterface.TABLE_ITEMS.(row).td2.scale = 0.9;
-				GameInterface.TABLE_ITEMS.(row).td3.str   = GetCharacterItem(xi_refCharacter, sGood);
-				GameInterface.TABLE_ITEMS.(row).td3.scale = 0.9;
-				GameInterface.TABLE_ITEMS.(row).td4.str   = FloatToString(GetItemWeight(sGood) * sti(GameInterface.TABLE_ITEMS.(row).td3.str), 1);
-				GameInterface.TABLE_ITEMS.(row).td4.scale = 0.9;
-				n++;
-			}
+			sGood = DigitsToString(sti(Items[iTemp].SortIndex) + 1, 2) + sGood;
 		}
+		else
+		{
+			sGood = "99" + sGood;
+		}
+		allItems.(sGood) = sItem;
+	}
+
+	makearef(rootItems, allItems);
+	sort(rootItems);
+
+	n = 1;
+	for (i = 0; i < GetAttributesNum(rootItems); i++)
+	{
+		arItem = GetAttributeN(rootItems, i);
+		sGood = GetAttributeValue(arItem);
+		rItem = ItemsFromID(sGood);
+
+		row = "tr" + n;
+		ok = rItem.ItemType == "WEAPON" || rItem.ItemType == "SUPPORT";
+		if (CheckAttribute(rItem,"kind")) ok = true;
+		if (CheckAttribute(rItem,"mapSpecial"))
+		{
+			ok2 = false;
+		}
+		else
+		{
+			ok2 = true;
+		}
+		if (_mode == 1 && rItem.ItemType == "MAP" && ok2) continue;
+		if (_mode == 2 && !ok && ok2) continue;
+		ok = ok || rItem.ItemType == "MAP";
+		if (_mode == 3 && ok && ok2) continue;
+		if (_mode == 4 && rItem.ItemType != "MAP") continue;
+
+		GameInterface.TABLE_ITEMS.(row).id = sGood;
+
+		GameInterface.TABLE_ITEMS.(row).td1.icon.group = rItem.picTexture;
+		GameInterface.TABLE_ITEMS.(row).td1.icon.image = "itm" + rItem.picIndex;
+		GameInterface.TABLE_ITEMS.(row).td1.icon.offset = "-2, 0";
+		GameInterface.TABLE_ITEMS.(row).td1.icon.width = 32;
+		GameInterface.TABLE_ITEMS.(row).td1.icon.height = 32;
+		GameInterface.TABLE_ITEMS.(row).td1.textoffset = "31,0";
+		GameInterface.TABLE_ITEMS.(row).td1.str = LanguageConvertString(idLngFile, rItem.name);
+
+		iTemp = CheckItemInSets(xi_refCharacter, sGood);
+		if (iTemp > 0)
+		{
+			GameInterface.TABLE_ITEMS.(row).td1.str = GameInterface.TABLE_ITEMS.(row).td1.str + " (К" + iTemp + ")";
+			GameInterface.TABLE_ITEMS.(row).td1.color = argb(255,196,196,255);//подцвечиваем предметы из комплектов
+		}
+		if (IsEquipCharacterByItem(xi_refCharacter, sGood)) GameInterface.TABLE_ITEMS.(row).td1.color = argb(255,196,196,255);//на этом интерфейсе надо подцвечивать и текущий комплект???
+
+		GameInterface.TABLE_ITEMS.(row).td1.scale = 0.85;
+		GameInterface.TABLE_ITEMS.(row).td2.str   = FloatToString(GetItemWeight(sGood), 1);
+		GameInterface.TABLE_ITEMS.(row).td2.scale = 0.9;
+		GameInterface.TABLE_ITEMS.(row).td3.str   = GetCharacterItem(xi_refCharacter, sGood);
+		GameInterface.TABLE_ITEMS.(row).td3.scale = 0.9;
+		GameInterface.TABLE_ITEMS.(row).td4.str   = FloatToString(GetItemWeight(sGood) * sti(GameInterface.TABLE_ITEMS.(row).td3.str), 1);
+		GameInterface.TABLE_ITEMS.(row).td4.scale = 0.9;
+		n++;
 	}
 
 	Table_UpdateWindow("TABLE_ITEMS");
@@ -761,7 +789,7 @@ void FillItemsSelected()
 	int	i;
 	string sGood;
 	int iLastGunItem;
-	ref rLastGunItem;
+	ref item, rLastGunItem;
 
 	// Скроем по умолчанию
 	SetNodeUsing("ITEM_1", false);
@@ -779,97 +807,89 @@ void FillItemsSelected()
 	SetNodeUsing("ITEM_13", false);
 	SetNodeUsing("ITEM_14", false);
 
-	for (i = 0; i< TOTAL_ITEMS; i++)
+	aref arEquip;
+	makearef(arEquip, xi_refCharacter.equip);
+	int q = GetAttributesNum(arEquip);
+	for(i = 0; i < q; i++)
 	{
-		if(!CheckAttribute(&Items[i], "ID"))
-		{
-			continue;
-		}
+		sGood = GetAttributeValue(GetAttributeN(arEquip, i));
+		item = ItemsFromID(sGood);
 
-		sGood = Items[i].id;
-
-		if (GetCharacterItem(xi_refCharacter, sGood) > 0)
+		switch (item.groupID)
 		{
-			/// экипировка
-			if (IsEquipCharacterByItem(xi_refCharacter, sGood))
-			{
-				switch (Items[i].groupID)
+			case BLADE_ITEM_TYPE:
+				SetNewGroupPicture("ITEM_1", item.picTexture, "itm" + item.picIndex);
+				SetNodeUsing("ITEM_1" , true);
+			break;
+			case GUN_ITEM_TYPE:
+				if (CheckAttribute(xi_refCharacter,"chr_ai.bullet"))
 				{
-					case BLADE_ITEM_TYPE:
-						SetNewGroupPicture("ITEM_1", Items[i].picTexture, "itm" + Items[i].picIndex);
-						SetNodeUsing("ITEM_1" , true);
-					break;
-					case GUN_ITEM_TYPE:
-						if (CheckAttribute(xi_refCharacter,"chr_ai.bullet"))
-						{
-							ref itms = ItemsFromID(xi_refCharacter.chr_ai.bullet);
-							SetNodeUsing("ITEM_14" , true);
-							SetNewGroupPicture("ITEM_14", itms.picTexture, "itm" + itms.picIndex);
-						}
-						if(CheckAttribute(xi_refCharacter, "IsMushketer"))
-						{
-							iLastGunItem = GetItemIndex(xi_refCharacter.IsMushketer.LastGunID);
-							// Покажем картинку старого пистоля, если он еще есть
-							if(iLastGunItem != -1 && GetCharacterItem(xi_refCharacter, xi_refCharacter.IsMushketer.LastGunID) > 0)
-							{
-								rLastGunItem = &Items[iLastGunItem];
-								SetNewGroupPicture("ITEM_2", rLastGunItem.picTexture, "itm" + rLastGunItem.picIndex);
-								SetNodeUsing("ITEM_2" , true);
-							}
-
-							rLastGunItem = &Items[GetItemIndex(xi_refCharacter.IsMushketer.MushketID)];
-							SetNodeUsing("ITEM_5", true);
-							SetNewGroupPicture("ITEM_5", rLastGunItem.picTexture, "itm" + rLastGunItem.picIndex);
-						}
-						else
-						{
-							SetNewGroupPicture("ITEM_2", Items[i].picTexture, "itm" + Items[i].picIndex);
-							SetNodeUsing("ITEM_2" , true);
-							SetNodeUsing("ITEM_5" , false); // Мушкет не юзается - уберем картинку
-						}
-					break;
-					case SPYGLASS_ITEM_TYPE:
-						SetNewGroupPicture("ITEM_3", Items[i].picTexture, "itm" + Items[i].picIndex);
-						SetNodeUsing("ITEM_3" , true);
-					break;
-					case CIRASS_ITEM_TYPE:
-						SetNewGroupPicture("ITEM_4", Items[i].picTexture, "itm" + Items[i].picIndex);
-						SetNodeUsing("ITEM_4" , true);
-					break;
-					case BACKPACK_ITEM_TYPE:
-						SetNewGroupPicture("ITEM_6", Items[i].picTexture, "itm" + Items[i].picIndex);
-						SetNodeUsing("ITEM_6" , true);
-					break;
-					case TALISMAN_ITEM_TYPE:
-						SetNewGroupPicture("ITEM_7", Items[i].picTexture, "itm" + Items[i].picIndex);
-						SetNodeUsing("ITEM_7" , true);
-					break;
-					case INDIAN_CENTER_ITEM_TYPE:
-						SetNewGroupPicture("ITEM_8", Items[i].picTexture, "itm" + Items[i].picIndex);
-						SetNodeUsing("ITEM_8" , true);
-					break;
-					case BOOK_ITEM_TYPE:
-						SetNewGroupPicture("ITEM_9", Items[i].picTexture, "itm" + Items[i].picIndex);
-						SetNodeUsing("ITEM_9" , true);
-					break;
-					case JEWELRY_INDIAN_LEFT_ITEM_TYPE:
-						SetNewGroupPicture("ITEM_10", Items[i].picTexture, "itm" + Items[i].picIndex);
-						SetNodeUsing("ITEM_10" , true);
-					break;
-					case JEWELRY_INDIAN_RIGHT_ITEM_TYPE:
-						SetNewGroupPicture("ITEM_11", Items[i].picTexture, "itm" + Items[i].picIndex);
-						SetNodeUsing("ITEM_11" , true);
-					break;
-					case IDOLS_LEFT_ITEM_TYPE:
-						SetNewGroupPicture("ITEM_12", Items[i].picTexture, "itm" + Items[i].picIndex);
-						SetNodeUsing("ITEM_12" , true);
-					break;
-					case IDOLS_RIGHT_ITEM_TYPE:
-						SetNewGroupPicture("ITEM_13", Items[i].picTexture, "itm" + Items[i].picIndex);
-						SetNodeUsing("ITEM_13" , true);
-					break;
+					ref itms = ItemsFromID(xi_refCharacter.chr_ai.bullet);
+					SetNodeUsing("ITEM_14" , true);
+					SetNewGroupPicture("ITEM_14", itms.picTexture, "itm" + itms.picIndex);
 				}
-			}
+				if(CheckAttribute(xi_refCharacter, "IsMushketer"))
+				{
+					iLastGunItem = GetItemIndex(xi_refCharacter.IsMushketer.LastGunID);
+					// Покажем картинку старого пистоля, если он еще есть
+					if(iLastGunItem != -1 && GetCharacterItem(xi_refCharacter, xi_refCharacter.IsMushketer.LastGunID) > 0)
+					{
+						rLastGunItem = &Items[iLastGunItem];
+						SetNewGroupPicture("ITEM_2", rLastGunItem.picTexture, "itm" + rLastGunItem.picIndex);
+						SetNodeUsing("ITEM_2" , true);
+					}
+
+					rLastGunItem = &Items[GetItemIndex(xi_refCharacter.IsMushketer.MushketID)];
+					SetNodeUsing("ITEM_5", true);
+					SetNewGroupPicture("ITEM_5", rLastGunItem.picTexture, "itm" + rLastGunItem.picIndex);
+				}
+				else
+				{
+					SetNewGroupPicture("ITEM_2", item.picTexture, "itm" + item.picIndex);
+					SetNodeUsing("ITEM_2" , true);
+					SetNodeUsing("ITEM_5" , false); // Мушкет не юзается - уберем картинку
+				}
+			break;
+			case SPYGLASS_ITEM_TYPE:
+				SetNewGroupPicture("ITEM_3", item.picTexture, "itm" + item.picIndex);
+				SetNodeUsing("ITEM_3" , true);
+			break;
+			case CIRASS_ITEM_TYPE:
+				SetNewGroupPicture("ITEM_4", item.picTexture, "itm" + item.picIndex);
+				SetNodeUsing("ITEM_4" , true);
+			break;
+			case BACKPACK_ITEM_TYPE:
+				SetNewGroupPicture("ITEM_6", item.picTexture, "itm" + item.picIndex);
+				SetNodeUsing("ITEM_6" , true);
+			break;
+			case TALISMAN_ITEM_TYPE:
+				SetNewGroupPicture("ITEM_7", item.picTexture, "itm" + item.picIndex);
+				SetNodeUsing("ITEM_7" , true);
+			break;
+			case INDIAN_CENTER_ITEM_TYPE:
+				SetNewGroupPicture("ITEM_8", item.picTexture, "itm" + item.picIndex);
+				SetNodeUsing("ITEM_8" , true);
+			break;
+			case BOOK_ITEM_TYPE:
+				SetNewGroupPicture("ITEM_9", item.picTexture, "itm" + item.picIndex);
+				SetNodeUsing("ITEM_9" , true);
+			break;
+			case JEWELRY_INDIAN_LEFT_ITEM_TYPE:
+				SetNewGroupPicture("ITEM_10", item.picTexture, "itm" + item.picIndex);
+				SetNodeUsing("ITEM_10" , true);
+			break;
+			case JEWELRY_INDIAN_RIGHT_ITEM_TYPE:
+				SetNewGroupPicture("ITEM_11", item.picTexture, "itm" + item.picIndex);
+				SetNodeUsing("ITEM_11" , true);
+			break;
+			case IDOLS_LEFT_ITEM_TYPE:
+				SetNewGroupPicture("ITEM_12", item.picTexture, "itm" + item.picIndex);
+				SetNodeUsing("ITEM_12" , true);
+			break;
+			case IDOLS_RIGHT_ITEM_TYPE:
+				SetNewGroupPicture("ITEM_13", item.picTexture, "itm" + item.picIndex);
+				SetNodeUsing("ITEM_13" , true);
+			break;
 		}
 	}
 	SetFormatedText("Weight_TEXT", XI_ConvertString("weight") + ": " + FloatToString(GetItemsWeight(xi_refCharacter), 1) + " / "+GetMaxItemsWeight(xi_refCharacter));
@@ -952,7 +972,7 @@ void ShowInfoWindow()
 	{
 		string sItemID = GameInterface.(CurTable).(CurRow).id;
 		ref rBlade = ItemsFromID(sItemID);
-		if (ThisItemCanBeEquip(rBlade))
+		if (ThisItemCanBeEquip(sItemID))
 		{
 			if(rBlade.groupID == BLADE_ITEM_TYPE)
 			{
@@ -1023,7 +1043,7 @@ void SetItemInfo()
 	SetVAligmentFormatedText("INFO_TEXT");
 
 	SendMessage(&GameInterface,"lsls",MSG_INTERFACE_MSG_TO_NODE,"EQUIP_BUTTON",0, "#"+XI_ConvertString("Equip that"));
-	SetSelectable("EQUIP_BUTTON",ThisItemCanBeEquip(&item));
+	SetSelectable("EQUIP_BUTTON",ThisItemCanBeEquip(sItemID));
 }
 
 void HideItemInfo()
@@ -1108,100 +1128,99 @@ void SetControlsTabMode(int nMode)
 
 void FillControlsList(int nMode)
 {
-	switch (nMode)
+	if ((nMode >= 1) && (nMode <= 4))
 	{
-		case 1: FillItemsTable(1); break;  // все
-		case 2: FillItemsTable(2); break;  // снаряжение
-		case 3: FillItemsTable(3); break;  // остальное
-		case 4: FillItemsTable(4); break;  // карты
+		FillItemsTable(nMode);
 	}
 }
 
-bool ThisItemCanBeEquip( aref arItem )
+bool ThisItemCanBeEquip(string sItemID)
 {
+	ref rItem = ItemsFromID(sItemID);
 	if (CheckAttribute(xi_refCharacter,"nonremovable")) return false;
 	if (HasSubStr(loadedLocation.id,"FencingTown")) return false;
-	if (HasSubStr(arItem.id,"Tube"))
+	if (HasSubStr(sItemId,"Tube"))
 	{
 		return true;
 	}
-	if (HasSubStr(arItem.id,"Strange"))
+	if (HasSubStr(sItemId,"Strange"))
 	{
 		if (!CheckAttribute(xi_refCharacter, "StrangeMushrooms")) xi_refCharacter.StrangeMushrooms = 0;
 		if (!CheckAttribute(xi_refCharacter, "StrangePotion")) xi_refCharacter.StrangePotion = 0;
 
-		if (arItem.id ==  "StrangeMushrooms" && sti(xi_refCharacter.StrangeMushrooms) < 5) return true;
-		else {if (arItem.id ==  "StrangePotion" && sti(xi_refCharacter.StrangePotion) < 5) return true;}
-		else {if (arItem.id ==  "StrangeElixir" && !CheckAttribute(xi_refCharacter, "StrangeElixir")) return true;}
+		if (sItemID ==  "StrangeMushrooms" && sti(xi_refCharacter.StrangeMushrooms) < 5) return true;
+		else {if (sItemID ==  "StrangePotion" && sti(xi_refCharacter.StrangePotion) < 5) return true;}
+		else {if (sItemID ==  "StrangeElixir" && !CheckAttribute(xi_refCharacter, "StrangeElixir")) return true;}
 	}
-	if( !CheckAttribute(arItem,"groupID") )
+	if( !CheckAttribute(rItem,"groupID") )
 	{
 		return false;
 	}
-	if (arItem.groupID == AMMO_ITEM_TYPE)
+	string sGroupID = rItem.groupID;
+	if (sGroupID == AMMO_ITEM_TYPE)
 	{
-		if (arItem.ID == "GunPowder" || arItem.ID == "shotgun_cartridge" || arItem.ID == "GunCap_colt" || arItem.ID == "12_gauge") return false;
+		if (sItemID == "GunPowder" || sItemID == "shotgun_cartridge" || sItemID == "GunCap_colt" || sItemID == "12_gauge") return false;
 		SendMessage(&GameInterface,"lsls",MSG_INTERFACE_MSG_TO_NODE,"EQUIP_BUTTON",0, "#"+XI_ConvertString("Equip that"));
 	}
-	if( !IsCanEquiping(xi_refCharacter, arItem.groupID) )
+	if( !IsCanEquiping(xi_refCharacter, sGroupID) )
 	{
 		return false;
 	}
-	if(arItem.id == "MapsAtlas")
+	if(sItemID == "MapsAtlas")
 	{
 		return true;
 	}
 
-	if (arItem.groupID == BLADE_ITEM_TYPE && CheckAttribute(xi_refCharacter, "DontChangeBlade")) return false;
-	if (arItem.groupID == GUN_ITEM_TYPE && CheckAttribute(xi_refCharacter, "DontChangeGun")) return false;
+	if (sGroupID == BLADE_ITEM_TYPE && CheckAttribute(xi_refCharacter, "DontChangeBlade")) return false;
+	if (sGroupID == GUN_ITEM_TYPE && CheckAttribute(xi_refCharacter, "DontChangeGun")) return false;
 
-	if (arItem.groupID == GUN_ITEM_TYPE)
+	if (sGroupID == GUN_ITEM_TYPE)
 	{
-		if (!IsMainCharacter(xi_refCharacter) && !CheckAttribute(xi_refCharacter, "CanTakeMushket") && HasSubStr(arItem.id, "mushket"))
+		if (!IsMainCharacter(xi_refCharacter) && !CheckAttribute(xi_refCharacter, "CanTakeMushket") && HasSubStr(sItemID, "mushket"))
 		{
 			return false;
 		}
-		if (!CheckAttribute(arItem,"chargeQ") )
+		if (!CheckAttribute(rItem,"chargeQ") )
 		{
 			return false;
 		}
-		if(arItem.id == "mushket2x2") return false; // Мушкет квестового офа
-		if(HasSubStr(arItem.id, "mushket") && !HasSubStr(arItem.id, "mushket_drob"))
+		if(sItemID == "mushket2x2") return false; // Мушкет квестового офа
+		if(HasSubStr(sItemID, "mushket") && !HasSubStr(sItemID, "mushket_drob"))
 		{
 			if (!IsCharacterPerkOn(xi_refCharacter,"Gunman") && !IsCharacterPerkOn(xi_refCharacter,"GunProfessional")) return false;
 		}
 
-		if (CheckAttribute(arItem,"ReqPerk"))
+		if (CheckAttribute(rItem,"ReqPerk"))
 		{
-			if (arItem.ReqPerk == "Gunman" && !IsCharacterPerkOn(xi_refCharacter,"Gunman") && !IsCharacterPerkOn(xi_refCharacter,"GunProfessional")) return false;
-			if (arItem.ReqPerk == "GunProfessional" && !IsCharacterPerkOn(xi_refCharacter,"GunProfessional")) return false;
+			if (rItem.ReqPerk == "Gunman" && !IsCharacterPerkOn(xi_refCharacter,"Gunman") && !IsCharacterPerkOn(xi_refCharacter,"GunProfessional")) return false;
+			if (rItem.ReqPerk == "GunProfessional" && !IsCharacterPerkOn(xi_refCharacter,"GunProfessional")) return false;
 		}
 
-		/*if(arItem.id == "mushket_Shtuzer" && !IsCharacterPerkOn(xi_refCharacter,"GunProfessional"))
+		/*if(sItemID == "mushket_Shtuzer" && !IsCharacterPerkOn(xi_refCharacter,"GunProfessional"))
 		{
 			return false;
 		}
-		if(arItem.id == "mushket2" && !IsCharacterPerkOn(xi_refCharacter,"GunProfessional"))
+		if(sItemID == "mushket2" && !IsCharacterPerkOn(xi_refCharacter,"GunProfessional"))
 		{
 			return false;
 		}*/
 
 		// Нельзя экипировать мушкет в непредназначенных для этого локациях (Таверна)
-		/*if(HasSubStr(arItem.id, "mushket") && !CanEquipMushketOnLocation(xi_refCharacter.Location))
+		/*if(HasSubStr(sItemID, "mushket") && !CanEquipMushketOnLocation(xi_refCharacter.Location))
 		{
 			return false;
 		}*/ //мушкеты в тавернах - Gregg
 
-		if (HasSubStr(arItem.id, "mushket") && IsMainCharacter(xi_refCharacter) && !IsPCharHaveMushketerModel())
+		if (HasSubStr(sItemID, "mushket") && IsMainCharacter(xi_refCharacter) && !IsPCharHaveMushketerModel())
 		{
 			return false;
 		}
 	}
-	if (IsEquipCharacterByItem(xi_refCharacter, arItem.id))
+	if (IsEquipCharacterByItem(xi_refCharacter, sItemID))
 	{
 		SendMessage(&GameInterface,"lsls",MSG_INTERFACE_MSG_TO_NODE,"EQUIP_BUTTON",0, "#"+XI_ConvertString("Remove that"));
-		//aw013	if(arItem.groupID==BLADE_ITEM_TYPE || arItem.groupID==SPYGLASS_ITEM_TYPE || arItem.groupID==PATENT_ITEM_TYPE)
-		if(arItem.groupID==PATENT_ITEM_TYPE)	//aw013
+		//aw013	if(sGroupID==BLADE_ITEM_TYPE || sGroupID==SPYGLASS_ITEM_TYPE || sGroupID==PATENT_ITEM_TYPE)
+		if(sGroupID==PATENT_ITEM_TYPE)	//aw013
 		{
 			if (CheckAttribute(pchar,"questTemp.Ascold"))
 			{
@@ -1212,14 +1231,14 @@ bool ThisItemCanBeEquip( aref arItem )
 	}
 	else
 	{
-		if (arItem.groupID == CIRASS_ITEM_TYPE && !IsCharacterPerkOn(xi_refCharacter,"Ciras") && arItem.Clothes == false)
+		if (sGroupID == CIRASS_ITEM_TYPE && !IsCharacterPerkOn(xi_refCharacter,"Ciras") && rItem.Clothes == false)
 		{
 			return false;
 		}
 
-		if (HasSubStr(arItem.id, "chest")) SendMessage(&GameInterface,"lsls",MSG_INTERFACE_MSG_TO_NODE,"EQUIP_BUTTON",0, "#Взломать");
+		if (HasSubStr(sItemID, "chest")) SendMessage(&GameInterface,"lsls",MSG_INTERFACE_MSG_TO_NODE,"EQUIP_BUTTON",0, "#Взломать");
 		else SendMessage(&GameInterface,"lsls",MSG_INTERFACE_MSG_TO_NODE,"EQUIP_BUTTON",0, "#"+XI_ConvertString("Equip that"));
-		if (arItem.id == "Chest") {SendMessage(&GameInterface,"lsls",MSG_INTERFACE_MSG_TO_NODE,"EQUIP_BUTTON",0, "#"+XI_ConvertString("Equip that")); return false;}
+		if (sItemID == "Chest") {SendMessage(&GameInterface,"lsls",MSG_INTERFACE_MSG_TO_NODE,"EQUIP_BUTTON",0, "#"+XI_ConvertString("Equip that")); return false;}
 	}
 	if (IsMainCharacter(xi_refCharacter) || CheckAttribute(xi_refCharacter, "CanTakeMushket"))
 	{
@@ -1227,31 +1246,31 @@ bool ThisItemCanBeEquip( aref arItem )
 		{
 			if (xi_refCharacter.id == "OffMushketer" || xi_refCharacter.id == "OfMush1" || xi_refCharacter.id == "OfMush2")
 			{
-				if(HasSubStr(arItem.id, "mushket") && !HasSubStr(arItem.id, "mushket2x2") && arItem.ID != xi_refCharacter.IsMushketer.MushketID)
+				if(HasSubStr(sItemID, "mushket") && !HasSubStr(sItemID, "mushket2x2") && sItemID != xi_refCharacter.IsMushketer.MushketID)
 				{
 					SendMessage(&GameInterface,"lsls",MSG_INTERFACE_MSG_TO_NODE,"EQUIP_BUTTON",0, "#"+XI_ConvertString("Equip that"));
 					return true;
 				}
-				if(arItem.groupID == BLADE_ITEM_TYPE || arItem.groupID == SPYGLASS_ITEM_TYPE || arItem.groupID == GUN_ITEM_TYPE)
+				if(sGroupID == BLADE_ITEM_TYPE || sGroupID == SPYGLASS_ITEM_TYPE || sGroupID == GUN_ITEM_TYPE)
 				{
 					return false;
 				}
 			}
 			else
 			{
-				if(arItem.ID == xi_refCharacter.IsMushketer.MushketID)
+				if(sItemID == xi_refCharacter.IsMushketer.MushketID)
 				{
 					SendMessage(&GameInterface,"lsls",MSG_INTERFACE_MSG_TO_NODE,"EQUIP_BUTTON",0, "#"+XI_ConvertString("Remove that"));
 					return true;
 				}
-				if(arItem.groupID == BLADE_ITEM_TYPE || arItem.groupID == SPYGLASS_ITEM_TYPE || arItem.groupID == GUN_ITEM_TYPE || arItem.groupID == CIRASS_ITEM_TYPE)
+				if(sGroupID == BLADE_ITEM_TYPE || sGroupID == SPYGLASS_ITEM_TYPE || sGroupID == GUN_ITEM_TYPE || sGroupID == CIRASS_ITEM_TYPE)
 				{
 					return false;
 				}
 			}
 		}
 	}
-	if (arItem.groupID == CIRASS_ITEM_TYPE && xi_refCharacter.model == "Protocusto") return false;
+	if (sGroupID == CIRASS_ITEM_TYPE && xi_refCharacter.model == "Protocusto") return false;
 	return true;
 }
 
@@ -1513,7 +1532,7 @@ void EquipPress()
 			}
 			FillItemsSelected();
 			SendMessage(&GameInterface,"lsls",MSG_INTERFACE_MSG_TO_NODE,"EQUIP_BUTTON",0, "#"+XI_ConvertString("Equip that"));
-			SetSelectable("EQUIP_BUTTON",ThisItemCanBeEquip(itmRef));
+			SetSelectable("EQUIP_BUTTON",ThisItemCanBeEquip(sItemID));
 			SetItemInfo();
 		}
 	}
@@ -1535,10 +1554,9 @@ void EquipPress()
 			PlaySound("interface\heartbeat.wav");
 			if (IsMainCharacter(xi_refCharacter)) Log_Info("Ваше максимальное здоровье увеличено на "+strangeHpBonus+"!");
 			else Log_Info(GetFullName(xi_refCharacter)+" увеличивает максимальное здоровье на "+strangeHpBonus+"!")
-			DumpAttributes(pchar);
 			ApplayNewSkill(pchar, "", 0);
 			TakeNItems(xi_refCharacter, sItemID, -1);
-			FillItemsTable(1);
+			FillItemsTable(iCurTab);
 		}
 		else
 		{
@@ -1550,10 +1568,9 @@ void EquipPress()
 				PlaySound("interface\heartbeat.wav");
 				if (IsMainCharacter(xi_refCharacter)) Log_Info("Ваша максимальная энергия увеличилась на "+strangeEnBonus+"!");
 				else {Log_Info(GetFullName(xi_refCharacter)+" увеличивает максимальную энергию на "+strangeEnBonus+"!")}
-				DumpAttributes(pchar);
 				ApplayNewSkill(pchar, "", 0);
 				TakeNItems(xi_refCharacter, sItemID, -1);
-				FillItemsTable(1);
+				FillItemsTable(iCurTab);
 			}
 			else
 			{
@@ -1564,10 +1581,9 @@ void EquipPress()
 					PlaySound("interface\heartbeat.wav");
 					if (IsMainCharacter(xi_refCharacter)) Log_Info("Ваш урон в ближнем бою навсегда увеличен на десять процентов!");
 					else {Log_Info(GetFullName(xi_refCharacter)+" навсегда увеличивает урон в ближнем бою на десять процентов!")}
-					DumpAttributes(pchar);
 					ApplayNewSkill(pchar, "", 0);
 					TakeNItems(xi_refCharacter, sItemID, -1);
-					FillItemsTable(1);
+					FillItemsTable(iCurTab);
 				}
 			}
 			else PlaySound("interface\knock.wav");
@@ -1617,10 +1633,9 @@ void EquipPress()
 
 		if (CheckAttribute(pchar,"drugstaken")) pchar.drugstaken = sti(pchar.drugstaken)+1;
 		else {pchar.drugstaken = 1; SetTimerFunction("ClearDrugs",0,0,10);}
-		DumpAttributes(pchar);
 		ApplayNewSkill(pchar, "", 0);
 		TakeNItems(pchar, sItemID, -1);
-		FillItemsTable(1);
+		FillItemsTable(iCurTab);
 
 	}
 }

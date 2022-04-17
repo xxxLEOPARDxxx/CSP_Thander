@@ -573,7 +573,7 @@ string GenerateItem(String _itemId)
 	int itemIndex = GetItemIndex(_itemID);
 	if (itemIndex == -1)
 	{
-		return false;
+		return _itemID;
 	}
 
 	ref item = &Items[itemIndex];
@@ -585,18 +585,18 @@ string GenerateItem(String _itemId)
 	int minValue, maxValue;
 
 	// Минимальный урон
-	minValue = sti(item.Generation.dmg_min.min) * GEN_ITEM_DISCRET; // Нижняя граница атрибута
-	maxValue = sti(item.Generation.dmg_min.max) * GEN_ITEM_DISCRET; // Верхняя граница атрибута
+	minValue = stf(item.Generation.dmg_min.min) * GEN_ITEM_DISCRET; // Нижняя граница атрибута
+	maxValue = stf(item.Generation.dmg_min.max) * GEN_ITEM_DISCRET; // Верхняя граница атрибута
 	float minDmg = stf(minValue + rand(maxValue - minValue)) / GEN_ITEM_DISCRET;
 
 	// Максимальный урон
-	minValue = sti(item.Generation.dmg_max.min) * GEN_ITEM_DISCRET; // Нижняя граница атрибута
-	maxValue = sti(item.Generation.dmg_max.max) * GEN_ITEM_DISCRET; // Верхняя граница атрибута
+	minValue = stf(item.Generation.dmg_max.min) * GEN_ITEM_DISCRET; // Нижняя граница атрибута
+	maxValue = stf(item.Generation.dmg_max.max) * GEN_ITEM_DISCRET; // Верхняя граница атрибута
 	float maxDmg = stf(minValue + rand(maxValue - minValue)) / GEN_ITEM_DISCRET;
 
 	// Вес
-	minValue = sti(item.Generation.Weight.min) * GEN_ITEM_DISCRET; // Нижняя граница атрибута
-	maxValue = sti(item.Generation.Weight.max) * GEN_ITEM_DISCRET; // Верхняя граница атрибута
+	minValue = stf(item.Generation.Weight.min) * GEN_ITEM_DISCRET; // Нижняя граница атрибута
+	maxValue = stf(item.Generation.Weight.max) * GEN_ITEM_DISCRET; // Верхняя граница атрибута
 	float weight = stf(minValue + rand(maxValue - minValue)) / GEN_ITEM_DISCRET;
 
 	return GenerateBladeByParams(_itemId, minDmg, maxDmg, weight);

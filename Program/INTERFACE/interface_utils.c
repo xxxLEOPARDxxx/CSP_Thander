@@ -1144,7 +1144,7 @@ void SetRumShipInfo(ref _character, String _node)
 int GetTradeItemPrice(string sItemID, int tradeType)
 {
 	int itmIdx = Items_FindItemIdx(sItemID);
-	if (itmIdx < 0 || itmIdx > TOTAL_ITEMS) return 0;
+	if (itmIdx < 0 || itmIdx > ITEMS_QUANTITY) return 0;
 
 	int itmprice = GetItemPrice(sItemID);
 	if (itmprice < 0) itmprice = 0;

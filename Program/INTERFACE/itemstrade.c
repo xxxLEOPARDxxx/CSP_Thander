@@ -13,7 +13,7 @@ string sChrId;
 ref refCharacter, refStoreChar; // текущий ГГ (оф) и торгаш
 int iCharQty, iStoreQty, iCharPrice, iStorePrice;
 float fWeight;
-int  iCurGoodsIdx;
+string sCurItem;
 
 //// {*} BUHO-FIST - ADDED CODE - Fist state variable
 #define FIT_ALL			0		// Normal
@@ -285,119 +285,119 @@ void DoPostExit()
 void CalculateInfoData()
 {
 	AddToTable();
-	ShowGoodsInfo(sti(GameInterface.TABLE_LIST.tr1.index));
+	ShowGoodsInfo(GameInterface.TABLE_LIST.tr1.id);
 }
 
 void AddToTable()
 {
 	int n, i, iTemp;
-	string row, sShipGroup;
-	string sGood, sTemp;
-	int  idLngFile;
+	string row, sItem;
+	int idLngFile;
 	int leftQty, rightQty;
-	n = 1;
 	idLngFile = LanguageOpenFile("ItemsDescribe.txt");
 	Table_Clear("TABLE_LIST", false, true, false);
 
-	// Сначало уникальные предметы
-	for (i = ITEMS_QUANTITY; i < TOTAL_ITEMS; i++)
+	object allItems;
+	aref arInventory, arItem;
+	ref rItem;
+
+	if (FIT_FilterState != FIT_TRADER)
 	{
-		row = "tr" + n;
-
-		if(!CheckAttribute(&Items[i], "ID"))
+		makearef(arInventory, refCharacter.Items);
+		n = GetAttributesNum(arInventory);
+		for (i = 0; i < n; i++)
 		{
-			continue;
-		}
+			arItem = GetAttributeN(arInventory, i);
+			sItem = GetAttributeName(arItem);
+			row = DigitsToString(FindItem(sItem), 4);
 
-		sGood = Items[i].id;
-		// проверка на экипировку, их не продаем
-		leftQty  = GetCharacterFreeItem(refCharacter, sGood);
-		rightQty = GetCharacterFreeItem(refStoreChar, sGood);
-
-		if (leftQty > 0 || rightQty > 0)
-		{
-			//// {*} BUHO-FIST - ADDED CODE - Filters at work.
-			if (leftQty == 0 && FIT_FilterState == FIT_BACKPACK) continue;
-			if (rightQty == 0 && FIT_FilterState == FIT_TRADER) continue;
-			//// {*} BUHO END ADDITION
-			GameInterface.TABLE_LIST.(row).td1.str = leftQty;
-			GameInterface.TABLE_LIST.(row).td2.str = FloatToString(stf(Items[i].Weight) * leftQty, 1);
-			GameInterface.TABLE_LIST.(row).td7.str = FloatToString(stf(Items[i].Weight), 1);
-
-			GameInterface.TABLE_LIST.(row).td6.str = rightQty;
-
-			GameInterface.TABLE_LIST.(row).td4.icon.group = Items[i].picTexture;
-			GameInterface.TABLE_LIST.(row).td4.icon.image = "itm" + Items[i].picIndex;
-			GameInterface.TABLE_LIST.(row).td4.icon.offset = "-2, 0";
-			GameInterface.TABLE_LIST.(row).td4.icon.width = 20;
-			GameInterface.TABLE_LIST.(row).td4.icon.height = 20;
-			GameInterface.TABLE_LIST.(row).td4.textoffset = "20,0";
-			GameInterface.TABLE_LIST.(row).td4.str = LanguageConvertString(idLngFile, Items[i].name);
-
-			iTemp = CheckItemInSets(refCharacter, sGood);
-			if (iTemp > 0)
+			if (IsGenerableItem(sItem))
 			{
-				GameInterface.TABLE_LIST.(row).td4.str = GameInterface.TABLE_LIST.(row).td4.str + " (К" + iTemp + ")";
-				//sTemp = "Set" + iTemp;
-				//GameInterface.TABLE_LIST.(row).td4.str = GameInterface.TABLE_LIST.(row).td4.str + " (" + refCharacter.(sTemp).nameset + ")";
-				GameInterface.TABLE_LIST.(row).td4.color = argb(255,196,196,255);//подцвечиваем предметы из комплектов
-				GameInterface.TABLE_LIST.(row).td1.color = argb(255,196,196,255);
+				// Сначала уникальные предметы
+				row = "a" + row + sItem;
+			}
+			else
+			{
+				row = "b" + row;
 			}
 
-			GameInterface.TABLE_LIST.(row).index = i;
-			GameInterface.TABLE_LIST.(row).td4.scale = 0.9;
-			GameInterface.TABLE_LIST.(row).td3.str = GetTradeItemPrice(i, PRICE_TYPE_BUY);
-			GameInterface.TABLE_LIST.(row).td5.str = GetTradeItemPrice(i, PRICE_TYPE_SELL);
-			n++;
+			allItems.(row) = sItem;
 		}
 	}
 
-	for (i = 0; i < ITEMS_QUANTITY; i++)
+	if (FIT_FilterState != FIT_BACKPACK)
 	{
-		row = "tr" + n;
-		sGood = Items[i].id;
-		if (IsQuestUsedItem(Items[i].id)) continue;
-		// проверка на экипировку, их не продаем
-		leftQty  = GetCharacterFreeItem(refCharacter, sGood);
-		rightQty = GetCharacterFreeItem(refStoreChar, sGood);
-
-		if (leftQty > 0 || rightQty > 0)
+		makearef(arInventory, refStoreChar.Items);
+		n = GetAttributesNum(arInventory);
+		for (i = 0; i < n; i++)
 		{
-			//// {*} BUHO-FIST - ADDED CODE - Filters at work.
-			if (leftQty == 0 && FIT_FilterState == FIT_BACKPACK) continue;
-			if (rightQty == 0 && FIT_FilterState == FIT_TRADER) continue;
-			//// {*} BUHO END ADDITION
-			GameInterface.TABLE_LIST.(row).td1.str = leftQty ;
-			GameInterface.TABLE_LIST.(row).td2.str = FloatToString(stf(Items[i].Weight) * sti(GameInterface.TABLE_LIST.(row).td1.str), 1);
-			GameInterface.TABLE_LIST.(row).td7.str = FloatToString(stf(Items[i].Weight), 1);
+			arItem = GetAttributeN(arInventory, i);
+			sItem = GetAttributeName(arItem);
+			row = DigitsToString(FindItem(sItem), 4);
 
-			GameInterface.TABLE_LIST.(row).td6.str = rightQty;
-
-			GameInterface.TABLE_LIST.(row).td4.icon.group = Items[i].picTexture;
-			GameInterface.TABLE_LIST.(row).td4.icon.image = "itm" + Items[i].picIndex;
-			GameInterface.TABLE_LIST.(row).td4.icon.offset = "-2, 0";
-			GameInterface.TABLE_LIST.(row).td4.icon.width = 20;
-			GameInterface.TABLE_LIST.(row).td4.icon.height = 20;
-			GameInterface.TABLE_LIST.(row).td4.textoffset = "20,0";
-			GameInterface.TABLE_LIST.(row).td4.str = LanguageConvertString(idLngFile, Items[i].name);
-
-			iTemp = CheckItemInSets(refCharacter, sGood);
-			if (iTemp > 0)
+			if (IsGenerableItem(sItem))
 			{
-				GameInterface.TABLE_LIST.(row).td4.str = GameInterface.TABLE_LIST.(row).td4.str + " (К" + iTemp + ")";
-				//sTemp = "Set" + iTemp;
-				//GameInterface.TABLE_LIST.(row).td4.str = GameInterface.TABLE_LIST.(row).td4.str + " (" + refCharacter.(sTemp).nameset + ")";
-				GameInterface.TABLE_LIST.(row).td4.color = argb(255,196,196,255);//подцвечиваем предметы из комплектов
-				GameInterface.TABLE_LIST.(row).td1.color = argb(255,196,196,255);
+				row = "a" + row + sItem;
+			}
+			else
+			{
+				row = "b" + row;
 			}
 
-			GameInterface.TABLE_LIST.(row).index = i;
-			GameInterface.TABLE_LIST.(row).td4.scale = 0.9;
-			//GameInterface.TABLE_LIST.(row).td4.color = iColor;
-			GameInterface.TABLE_LIST.(row).td3.str = GetTradeItemPrice(i, PRICE_TYPE_BUY);
-			GameInterface.TABLE_LIST.(row).td5.str = GetTradeItemPrice(i, PRICE_TYPE_SELL);
-			n++;
+			allItems.(row) = sItem;
 		}
+	}
+
+	makearef(arInventory, allItems);
+	sort(arInventory);
+
+	n = 1;
+	for (i = 0; i < GetAttributesNum(arInventory); i++)
+	{
+		arItem = GetAttributeN(arInventory, i);
+		sItem = GetAttributeValue(arItem);
+		rItem = ItemsFromID(sItem);
+
+		if (IsQuestUsedItem(sItem)) continue;
+
+		row = "tr" + n;
+		// проверка на экипировку, их не продаем
+		leftQty  = GetCharacterFreeItem(refCharacter, sItem);
+		rightQty = GetCharacterFreeItem(refStoreChar, sItem);
+
+		if ((leftQty == 0) && (rightQty == 0)) continue;
+		//// {*} BUHO-FIST - ADDED CODE - Filters at work.
+		if (leftQty == 0 && FIT_FilterState == FIT_BACKPACK) continue;
+		if (rightQty == 0 && FIT_FilterState == FIT_TRADER) continue;
+		//// {*} BUHO END ADDITION
+
+		GameInterface.TABLE_LIST.(row).id = sItem;
+		GameInterface.TABLE_LIST.(row).td1.str = leftQty;
+		GameInterface.TABLE_LIST.(row).td2.str = FloatToString(GetItemWeight(sItem) * leftQty, 1);
+		GameInterface.TABLE_LIST.(row).td7.str = FloatToString(GetItemWeight(sItem), 1);
+
+		GameInterface.TABLE_LIST.(row).td6.str = rightQty;
+
+		GameInterface.TABLE_LIST.(row).td4.icon.group = rItem.picTexture;
+		GameInterface.TABLE_LIST.(row).td4.icon.image = "itm" + rItem.picIndex;
+		GameInterface.TABLE_LIST.(row).td4.icon.offset = "-2, 0";
+		GameInterface.TABLE_LIST.(row).td4.icon.width = 20;
+		GameInterface.TABLE_LIST.(row).td4.icon.height = 20;
+		GameInterface.TABLE_LIST.(row).td4.textoffset = "20,0";
+		GameInterface.TABLE_LIST.(row).td4.str = LanguageConvertString(idLngFile, rItem.name);
+
+		iTemp = CheckItemInSets(refCharacter, sItem);
+		if (iTemp > 0)
+		{
+			GameInterface.TABLE_LIST.(row).td4.str = GameInterface.TABLE_LIST.(row).td4.str + " (К" + iTemp + ")";
+			GameInterface.TABLE_LIST.(row).td4.color = argb(255,196,196,255);//подцвечиваем предметы из комплектов
+			GameInterface.TABLE_LIST.(row).td1.color = argb(255,196,196,255);
+		}
+
+		GameInterface.TABLE_LIST.(row).td4.scale = 0.9;
+		GameInterface.TABLE_LIST.(row).td3.str = GetTradeItemPrice(sItem, PRICE_TYPE_BUY);
+		GameInterface.TABLE_LIST.(row).td5.str = GetTradeItemPrice(sItem, PRICE_TYPE_SELL);
+		n++;
 	}
 	NextFrameRefreshTable();
 	LanguageCloseFile(idLngFile);
@@ -420,7 +420,7 @@ void DoChange1()
 {
 	//AddToTable();
 	string row = "tr"+sti(GameInterface.TABLE_LIST.select);
-	if (row != "tr0") ShowGoodsInfo(sti(GameInterface.TABLE_LIST.(row).index));
+	if (row != "tr0") ShowGoodsInfo(GameInterface.TABLE_LIST.(row).id);
 	nocheck = true;
 }
 
@@ -516,7 +516,7 @@ void CS_TableSelectChange()
 	string sRow = "tr" + (iSelected);
 	SetCharWeight();
 	SetVariable();
-	ShowGoodsInfo(sti(GameInterface.TABLE_LIST.(sRow).index));
+	ShowGoodsInfo(GameInterface.TABLE_LIST.(sRow).id);
 }
 
 void FillCharactersScroll()
@@ -642,51 +642,49 @@ void SetCharWeight()
 	fStoreWeight = 0;
 }
 // инфа о предмете
-void ShowGoodsInfo(int iGoodIndex)
+void ShowGoodsInfo(string sItemID)
 {
-	string GoodName = Items[iGoodIndex].name;
-	ref	arItm = &Items[iGoodIndex];
+	sCurItem = sItemID;
+	ref	arItm = &Items[FindItem(sCurItem)];
+	string GoodName = arItm.name;
 	int	lngFileID = LanguageOpenFile("ItemsDescribe.txt");
 	string sHeader = LanguageConvertString(lngFileID, GoodName);
 
-	iCurGoodsIdx = iGoodIndex;
-
 	string describeStr = "";
 
-	/*if (bBettaTestMode)
+	if (bBettaTestMode)
 	{
-		describeStr += " id = " + Items[iGoodIndex].id + NewStr();
+		describeStr += " id = " + sCurItem + NewStr();
 		if(CheckAttribute(arItm, "dmg_min.old") && CheckAttribute(arItm, "dmg_max.old"))
 		{
 			describeStr += "OldDmgMin = " + sti(arItm.dmg_min.old) + ", OldDmgMax = "+sti(arItm.dmg_max.old) + newStr();
 		}
-	}*/
-	describeStr += GetItemDescribe(iGoodIndex);
+	}
+	describeStr += GetItemDescribe(sCurItem);
 
-	fWeight = stf(Items[iGoodIndex].weight);
+	fWeight = GetItemWeight(sCurItem);
 
 	BuyOrSell = 0;
 	SetFormatedText("QTY_TypeOperation", "");
 	SetFormatedText("QTY_Result", "");
 	GameInterface.qty_edit.str = "0";
 
-	SetNewGroupPicture("QTY_GOODS_PICTURE", Items[iCurGoodsIdx].picTexture, "itm" + Items[iCurGoodsIdx].picIndex);
+	SetNewGroupPicture("QTY_GOODS_PICTURE", arItm.picTexture, "itm" + arItm.picIndex);
 	SetFormatedText("QTY_CAPTION", sHeader);
 	SetFormatedText("QTY_GOODS_INFO", describeStr);
 	LanguageCloseFile(lngFileID);
 
-	iCharQty = GetCharacterFreeItem(refCharacter, Items[iGoodIndex].id);
-
-	iStoreQty = GetCharacterFreeItem(refStoreChar, Items[iGoodIndex].id);
+	iCharQty = GetCharacterFreeItem(refCharacter, sCurItem);
+	iStoreQty = GetCharacterFreeItem(refStoreChar, sCurItem);
 
 	SetFormatedText("QTY_INFO_STORE_QTY", its(iStoreQty));
 	SetFormatedText("QTY_INFO_SHIP_QTY", its(iCharQty));
 	BuyOrSell = 0;
 
-	iStorePrice = GetTradeItemPrice(iGoodIndex, PRICE_TYPE_SELL);
+	iStorePrice = GetTradeItemPrice(sCurItem, PRICE_TYPE_SELL);
 	SetFormatedText("QTY_INFO_STORE_PRICE",XI_ConvertString("Price buy") + NewStr() + its(iStorePrice));
 
-	iCharPrice = GetTradeItemPrice(iGoodIndex, PRICE_TYPE_BUY);
+	iCharPrice = GetTradeItemPrice(sCurItem, PRICE_TYPE_BUY);
 	SetFormatedText("QTY_INFO_SHIP_PRICE", XI_ConvertString("Price sell") + NewStr() + its(iCharPrice));
 }
 
@@ -750,14 +748,13 @@ void TransactionOK()
 
  	if (BuyOrSell == 1) // BUY
 	{
-		TakeNItems(refStoreChar, Items[iCurGoodsIdx].id, -nTradeQuantity);
-
-		TakeNItems(refCharacter, Items[iCurGoodsIdx].id, nTradeQuantity);
+		TakeNItems(refStoreChar, sCurItem, -nTradeQuantity);
+		TakeNItems(refCharacter, sCurItem, nTradeQuantity);
 		//#20200218-01
-		/*if(CheckAttribute(&Items[iCurGoodsIdx], "shown"))
-			Items[iCurGoodsIdx].shown = false;*/
+		/*if (CheckAttribute(&Items[FindItem(sCurItem)], "shown"))
+			Items[FindItem(sCurItem)].shown = false;*/
 		moneyback = makeint(iCharPrice*stf(GameInterface.qty_edit.str) + 0.5);
-		pchar.money = sti(pchar.money)  - moneyback;
+		pchar.money = sti(pchar.money) - moneyback;
 		Statistic_AddValue(Pchar, "Money_spend", moneyback);
 		// boal  check skill -->
 		AddCharacterExpToSkill(pchar, "Commerce", moneyback / 700.0);
@@ -766,13 +763,13 @@ void TransactionOK()
 	}
  	else
 	{ // SELL
-		TakeNItems(refStoreChar, Items[iCurGoodsIdx].id, nTradeQuantity);
-		TakeNItems(refCharacter, Items[iCurGoodsIdx].id, -nTradeQuantity);
+		TakeNItems(refStoreChar, sCurItem, nTradeQuantity);
+		TakeNItems(refCharacter, sCurItem, -nTradeQuantity);
 		//#20200218-01
-		/*if(CheckAttribute(&Items[iCurGoodsIdx], "shown"))
-			Items[iCurGoodsIdx].shown = true;*/
+		/*if(CheckAttribute(&Items[FindItem(sCurItem)], "shown"))
+			Items[FindItem(sCurItem)].shown = true;*/
 		moneyback = makeint(iStorePrice*stf(GameInterface.qty_edit.str) + 0.5);
-  		pchar.money = sti(pchar.money)  + moneyback;
+  		pchar.money = sti(pchar.money) + moneyback;
 		Statistic_AddValue(Pchar, "Money_get", moneyback);
 		// boal  check skill -->
 		AddCharacterExpToSkill(pchar, "Commerce", moneyback / 1000.0);
@@ -781,7 +778,7 @@ void TransactionOK()
 	}
 	AddToTable();
 	EndTooltip();
-	ShowGoodsInfo(iCurGoodsIdx); //сбросим все состояния
+	ShowGoodsInfo(sCurItem); //сбросим все состояния
 }
 
 void confirmChangeQTY_EDIT()
@@ -792,7 +789,8 @@ void confirmChangeQTY_EDIT()
 
 void ChangeQTY_EDIT()
 {
-	float  iWeight;
+	trace("ChangeQTY_EDIT");
+	float iWeight;
 	SetCharWeight();
 	GameInterface.qty_edit.str = sti(GameInterface.qty_edit.str);
 	if (sti(GameInterface.qty_edit.str) == 0)
@@ -825,7 +823,7 @@ void ChangeQTY_EDIT()
 			}
 			// проверка на колво доступное <--
 			// квестовые не продать -->
-			if (IsQuestUsedItem(Items[iCurGoodsIdx].id))
+			if (IsQuestUsedItem(sCurItem))
 			{
 				GameInterface.qty_edit.str = 0;
 			}
@@ -884,7 +882,7 @@ void REMOVE_ALL_BUTTON()  // продать все
 	{
 		ShowItemInfo();
 	}
-	ShowGoodsInfo(iCurGoodsIdx);
+	ShowGoodsInfo(sCurItem);
 	GameInterface.qty_edit.str = -iCharQty;
 	BuyOrSell = 0;
 	ChangeQTY_EDIT();
@@ -896,7 +894,7 @@ void ADD_ALL_BUTTON()  // купить все
 	{
 		ShowItemInfo();
 	}
-	ShowGoodsInfo(iCurGoodsIdx);
+	ShowGoodsInfo(sCurItem);
 	GameInterface.qty_edit.str = iStoreQty;
 	BuyOrSell = 0;
 	ChangeQTY_EDIT();
@@ -1684,12 +1682,12 @@ void BuyConsume(ref chr)
 
 		bNotEnough = true;//если сюда дошли хоть раз за цикл, значит чего-то не хватало до лимита
 
-		fItemWeight = stf(Items[GetItemIndex(itemname)].weight);
+		fItemWeight = GetItemWeight(itemname);
 		if (qty > makeint(freeWeight / fItemWeight)) qty = makeint(freeWeight / fItemWeight);
 		if (qty == 0) continue; //не хватает места даже для одного такого предмета
 		bNotOverWeight = true;//хватало места хотя бы для одного предмета
 
-		iCost = GetTradeItemPrice(Items_FindItemIdx(itemname), PRICE_TYPE_BUY);
+		iCost = GetTradeItemPrice(itemname, PRICE_TYPE_BUY);
 		if (qty > sti(PChar.Money) / iCost)) qty = sti(PChar.Money) / iCost;//TO DO - ВАЖНО - перепроверить деления и округления - при тесте покупало на один предмет больше, чем было денег в кармане.
 		if (qty == 0) continue; //не хватает денег даже на один такой предмет
 
@@ -1749,7 +1747,7 @@ void SellExcessConsume(ref chr)
 		qty = qty + GetConsumeLimit(chr, itemname);
 		curqty = GetCharacterItem(chr,itemname);
 		if (curqty > qty) qty = curqty - qty; else continue;
-		iCost = GetTradeItemPrice(Items_FindItemIdx(itemname), PRICE_TYPE_SELL);
+		iCost = GetTradeItemPrice(itemname, PRICE_TYPE_SELL);
 		iMoneyQty += iCost*qty;
 		TakeNItems(chr, itemname, -qty);
 		TakeNItems(refStoreChar, itemname, qty);
@@ -1790,7 +1788,7 @@ void Fastsale_trash(ref character)
 	int sellcost = 0;
 	int iOfficer = -1;
 	int idLngFile = LanguageOpenFile("ItemsDescribe.txt");
-	for(int z = 0; z < 6 + MAX_NUM_FIGHTERS; z++)
+	/*for(int z = 0; z < 6 + MAX_NUM_FIGHTERS; z++)
 	{
 		if (z == 0) iOfficer = GetMainCharacterIndex();
 		else iOfficer = GetOfficersIndex(pchar, z);
@@ -1818,7 +1816,7 @@ void Fastsale_trash(ref character)
 			//				|| Items[i].quality == "good"
 							)
 							{
-							sellcost = GetTradeItemPrice(Items_FindItemIdx(sGood), PRICE_TYPE_SELL)*sellqty
+							sellcost = GetTradeItemPrice(sGood, PRICE_TYPE_SELL)*sellqty
 							TakeNItems(&characters[iOfficer], sGood, -sellqty);
 							TakeNItems(refStoreChar, sGood, sellqty);
 							salemoney += sellcost
@@ -1868,7 +1866,7 @@ void Fastsale_trash(ref character)
 						||(sName == "Раскрашенный сосуд")
 						)
 						{
-						sellcost = GetTradeItemPrice(Items_FindItemIdx(sGood), PRICE_TYPE_SELL)*sellqty
+						sellcost = GetTradeItemPrice(sGood, PRICE_TYPE_SELL)*sellqty
 						TakeNItems(&characters[iOfficer], sGood, -sellqty);
 						TakeNItems(refStoreChar, sGood, sellqty);
 						salemoney += sellcost
@@ -1897,7 +1895,7 @@ void Fastsale_trash(ref character)
 						||(sName == "Оберег Тлальчитонатиу")
 						)
 						{
-						sellcost = GetTradeItemPrice(Items_FindItemIdx(sGood), PRICE_TYPE_SELL)*(sellqty - 1)
+						sellcost = GetTradeItemPrice(sGood, PRICE_TYPE_SELL)*(sellqty - 1)
 						TakeNItems(&characters[iOfficer], sGood, -(sellqty - 1));
 						TakeNItems(refStoreChar, sGood, (sellqty-1));
 						salemoney += sellcost
@@ -1908,7 +1906,7 @@ void Fastsale_trash(ref character)
 				}
 			}
 		}
-	}
+	}*/
 	LanguageCloseFile(idLngFile);
 	Log_Info("Продано: Клинков "+sellpiece1+ ", Пистолетов "+sellpiece4+ ", Идолов "+sellpiece3+", Хлама "+sellpiece2)
 	AddmoneyToCharacter(PChar, salemoney)
@@ -1935,7 +1933,7 @@ void Fastsale_trash_single(ref character)
 	int sellcost = 0;
 	int idLngFile = LanguageOpenFile("ItemsDescribe.txt");
 
-	for (i = ITEMS_QUANTITY; i < TOTAL_ITEMS; i++)
+	/*for (i = ITEMS_QUANTITY; i < TOTAL_ITEMS; i++)
 	{
 
 		if(!CheckAttribute(&Items[i], "ID"))
@@ -1955,7 +1953,7 @@ void Fastsale_trash_single(ref character)
 //				|| Items[i].quality == "good"
 				)
 				{
-				sellcost = GetTradeItemPrice(Items_FindItemIdx(sGood), PRICE_TYPE_SELL)*sellqty
+				sellcost = GetTradeItemPrice(sGood, PRICE_TYPE_SELL)*sellqty
 				TakeNItems(character, sGood, -sellqty);
 				TakeNItems(refStoreChar, sGood, sellqty);
 				salemoney += sellcost
@@ -2005,7 +2003,7 @@ void Fastsale_trash_single(ref character)
 			||(sName == "Раскрашенный сосуд")
 			)
 			{
-			sellcost = GetTradeItemPrice(Items_FindItemIdx(sGood), PRICE_TYPE_SELL)*sellqty
+			sellcost = GetTradeItemPrice(sGood, PRICE_TYPE_SELL)*sellqty
 			TakeNItems(character, sGood, -sellqty);
 			TakeNItems(refStoreChar, sGood, sellqty);
 			salemoney += sellcost
@@ -2034,7 +2032,7 @@ void Fastsale_trash_single(ref character)
 			||(sName == "Оберег Тлальчитонатиу")
 			)
 			{
-			sellcost = GetTradeItemPrice(Items_FindItemIdx(sGood), PRICE_TYPE_SELL)*(sellqty - 1)
+			sellcost = GetTradeItemPrice(sGood, PRICE_TYPE_SELL)*(sellqty - 1)
 			TakeNItems(character, sGood, -(sellqty - 1));
 			TakeNItems(refStoreChar, sGood, (sellqty-1));
 			salemoney += sellcost
@@ -2042,7 +2040,7 @@ void Fastsale_trash_single(ref character)
 //				Log_Info(sName + ": " + (sellQty - 1) + " шт. " + sellcost + " зол.")
 			}
 		}
-	}
+	}*/
 	LanguageCloseFile(idLngFile);
 	Log_Info("Продано: Клинков "+sellpiece1+ ", Пистолетов "+sellpiece4+ ", Идолов "+sellpiece3+", Хлама "+sellpiece2)
 	AddmoneyToCharacter(PChar, salemoney)

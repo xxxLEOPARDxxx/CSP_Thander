@@ -2351,18 +2351,17 @@ string GetCharacterEquipByGroup(ref chref, string groupID)
 string GetCharacterEquipPictureByGroup(ref chref, string groupID)
 {
 	string sItem = GetCharacterEquipByGroup(chref, groupID);
-	for(int i = TOTAL_ITEMS-1; i >= 0; i--)
+	int index = FindItem(sItem);
+	if (index < 0)
 	{
-		if(CheckAttribute(&items[i], "ID") && items[i].id == sItem)
-		{
-			if(Items[i].id == "spyglass5")
-			{
-				Items[i].picIndex = 4;
-			}
-			return groupID + items[i].picIndex;
-		}
+		return "";
 	}
-	return "";
+
+	if (sItem == "spyglass5")
+	{
+		Items[index].picIndex = 4;
+	}
+	return groupID + Items[index].picIndex;
 }
 
 void RemoveCharacterEquip(ref chref, string groupID)
@@ -3862,7 +3861,7 @@ void RefreshEquippedMaps(ref chref)
 	string  itemID, groupID;
     ref     itm;
 
-	for (i=0; i<TOTAL_ITEMS; i++)
+	for (i=0; i<ITEMS_QUANTITY; i++)
 	{
 		makeref(itm,Items[i]);
 		if(CheckAttribute(itm, "ID") && CheckAttribute(itm, "groupID"))
