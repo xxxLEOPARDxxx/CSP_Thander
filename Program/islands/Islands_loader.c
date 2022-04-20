@@ -227,7 +227,6 @@ void Sea2Sea_Reload()
 	seaLoginToSea.playerGroup.ay = CAY;
 	seaLoginToSea.island = CIsland;
 
-	seaLoginToSea.imageName = pchar.loadscreen;
     //musicName = "";
     DeleteAttribute(pchar, "pirateFriendly");
 	SeaLogin(&seaLoginToSea);
