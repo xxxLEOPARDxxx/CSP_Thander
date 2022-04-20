@@ -129,11 +129,15 @@ void ProcessCommandExecute()
     switch(nodName)
 	{
 		case "QTY_REMOVE_BUTTON":
-			if (comName=="activate" || comName=="click")
+			if (comName == "activate" || comName == "click")
 			{
 				qnt = qnt - 1;
 				if(qntMAX != 0 && qnt < 1) qnt = 1;
-
+				SetFormatedText("CRAFT_QTY", ""+qnt);
+			}
+			if (comName == "rclick")
+			{
+				qnt = 1;
 				SetFormatedText("CRAFT_QTY", ""+qnt);
 			}
 		break;
@@ -142,9 +146,12 @@ void ProcessCommandExecute()
 			if (comName=="activate" || comName=="click")
 			{
 				qnt = qnt + 1;
-
 				if(qnt > qntMAX) qnt = qntMAX;
-
+				SetFormatedText("CRAFT_QTY", ""+qnt);
+			}
+			if (comName == "rclick")
+			{
+				qnt = qntMAX;
 				SetFormatedText("CRAFT_QTY", ""+qnt);
 			}
 		break;
