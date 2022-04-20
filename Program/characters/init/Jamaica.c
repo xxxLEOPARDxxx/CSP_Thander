@@ -383,8 +383,8 @@ int CreateJamaicaCharacters(int n)
 	ch.watchBoxes = true;
 	ch.NotRemoved = true;
 	GiveItem2Character(ch, GUN_COMMON);
-	GiveItem2Character(ch, "topor4");
-	ch.equip.blade = "topor4";
+	GiveItem2Character(ch, "topor3");
+	ch.equip.blade = "topor3";
 	ch.equip.gun = GUN_COMMON;
 	SetRandSPECIAL(ch);
     	SetSelfSkill(ch, 30, 30, 70, 50, 30);

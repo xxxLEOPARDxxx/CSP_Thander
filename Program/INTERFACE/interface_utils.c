@@ -1141,15 +1141,13 @@ void SetRumShipInfo(ref _character, String _node)
 	}
 }
 
-int GetTradeItemPrice(int itmIdx, int tradeType)
+int GetTradeItemPrice(string sItemID, int tradeType)
 {
-	int itmprice = 0;
-	if(itmIdx<0 || itmIdx>TOTAL_ITEMS) return 0;
+	int itmIdx = Items_FindItemIdx(sItemID);
+	if (itmIdx < 0 || itmIdx > ITEMS_QUANTITY) return 0;
 
-	if(CheckAttribute(&Items[itmIdx],"price"))
-	{
-		itmprice = sti(Items[itmIdx].price);
-	}
+	int itmprice = GetItemPrice(sItemID);
+	if (itmprice < 0) itmprice = 0;
 
 	float skillDelta = GetSummonSkillFromNameToOld(pchar, SKILL_COMMERCE);
 	float skillModify;

@@ -976,9 +976,9 @@ string GetAchievementIcon(string ach_name) // Получим описание д
 	return describeStr;
 }
 
-string GetItemDescribe(int iGoodIndex)
+string GetItemDescribe(string sItemID)
 {
-	string GoodName = Items[iGoodIndex].name;
+	int iGoodIndex = Items_FindItemIdx(sItemID);
 	ref    arItm = &Items[iGoodIndex];
 	int    lngFileID = LanguageOpenFile("ItemsDescribe.txt");
     string describeStr = "";
@@ -1063,9 +1063,24 @@ string GetItemDescribe(int iGoodIndex)
 		}
 		if(arItm.groupID==BLADE_ITEM_TYPE)
 		{
+			float dmg_min, dmg_max, weight;
+			GetBladeParams(sItemID, &dmg_min, &dmg_max, &weight);
+			int price = CalculateBladePrice(arItm.FencingType, dmg_min, dmg_max, weight);
+
+			// Собираем фейковый айтем, так как генерируемые параметры не содержатся в изначальном айтеме
+			object tempObj;
+			aref arTemp;
+			makearef(arTemp, tempObj);
+			CopyAttributes(arTemp, arItm);
+			tempObj.dmg_min = dmg_min;
+			tempObj.dmg_max = dmg_max;
+			tempObj.weight = weight;
+			tempObj.price = price;
+
 			describeStr += GetAssembledString(
 				LanguageConvertString(lngFileID,"weapon blade parameters"),
-				arItm) + newStr();
+				arTemp) + newStr();
+
 			if (CheckAttribute(arItm, "FencingType"))
 			{
     			arItm.FencingTypeName = XI_ConvertString(arItm.FencingType);
@@ -1110,11 +1125,7 @@ string GetItemDescribe(int iGoodIndex)
 			}
 		}
 	}
-	//aw013 -->
-	float fItmPrice;
-	if (arItm.price != 0 && arItm.Weight != 0) fItmPrice = stf(arItm.price) / stf(arItm.Weight);
-	else fItmPrice=0;
-	describeStr += "\nЦена " + makeint(arItm.price) + " / Вес " + FloatToString(stf(arItm.weight), 2) + newStr();
+	describeStr += "\nЦена " + GetItemPrice(sItemID) + " / Вес " + FloatToString(GetItemWeight(sItemID), 2) + newStr();
 	if (CheckAttribute(arItm, "groupID"))//Книги, процент прочитанности - Gregg
 	{
 		if(arItm.groupID == BOOK_ITEM_TYPE)

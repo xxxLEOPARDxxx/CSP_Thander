@@ -1018,8 +1018,6 @@ void InitGame()
 		UnloadSegment("items\initItems.c");
 	}
 	ReloadProgressUpdate();
-	GenerateGenerableItems(); // <-- ugeen генерация предметов
-	ReloadProgressUpdate();
 	//Boyer change #20170301-6...CharactersInit assigns RealShips, and after a bunch of 'New' games in a
 	//session, RealShips array overflows, so call new function to reset
 	ResetRealShipArray();

@@ -15,6 +15,7 @@ void ProcessDialogEvent()
 	int i, iTemp;
 	string sAttr;
 
+	float dmg_min, dmg_max, weight;
 
 	// генератор ИДХ по кейсу -->
 	sAttr = Dialog.CurrentNode;
@@ -539,10 +540,14 @@ void ProcessDialogEvent()
 				Link.lWhisperPortrait = "Сменить портрет.";
 				Link.lWhisperPortrait.go = "WhisperPortrait";
 			}
+
 			if (bBettaTestMode)
 			{
 				Link.l12 = "Установить время на глобальной карте (должно быть значение float)";
 				Link.l12.go = "WorldmapTime";
+
+				Link.l13 = "Модифицировать экипированный клинок";
+				Link.l13.go = "BladeModify";
 			}
 
 			Link.lSmugglingFlag = "Во время контрабандных сделок, автоматически менять флаг на пиратский, в случае нападения патруля.";
@@ -606,6 +611,125 @@ void ProcessDialogEvent()
 			Link.l1 = "Отлично.";
 			Link.l1.go = "exit";
 		break;
+
+		case "BladeModify":
+			sAttr = GetCharacterEquipByGroup(PChar, BLADE_ITEM_TYPE);
+			if (sAttr == "")
+			{
+				Dialog.Text = "Ну зачем ты так, сам ведь знаешь, что нет у тебя экипированного клинка.";
+				link.l1 = "Да так, игру багонуть хотел...";
+				link.l1.go = "exit";
+			}
+
+			sAttr = GetBladeParams(sAttr, &dmg_min, &dmg_max, &weight);
+			iTemp = LanguageOpenFile("ItemsDescribe.txt");
+			rShip = ItemsFromID(sAttr);
+
+			Dialog.Text = "Ваш клинок: " + LanguageConvertString(iTemp, rShip.name) + ", урон " + dmg_min + "/" + dmg_max + ", вес " + weight + ". Выберите действие: увеличить/уменьшить характеристики оружия в границах допустимого или просто сгенерировать имбу.";
+			link.l1 = "Уменьшить минимальный урон на 1.";
+			link.l1.go = "BladeModifyDecMinDmg";
+			link.l2 = "Увеличить минимальный урон на 1.";
+			link.l2.go = "BladeModifyIncMinDmg";
+			link.l3 = "Уменьшить максимальный урон на 1.";
+			link.l3.go = "BladeModifyDecMaxDmg";
+			link.l4 = "Увеличить максимальный урон на 1.";
+			link.l4.go = "BladeModifyIncMaxDmg";
+			link.l5 = "Уменьшить вес на 0.05.";
+			link.l5.go = "BladeModifyDecWeight";
+			link.l6 = "Увеличить вес на 0.05.";
+			link.l6.go = "BladeModifyIncWeight";
+			link.l7 = "Сделать супер-оружие.";
+			link.l7.go = "BladeModifyCreateSuper";
+			Link.l8 = "Все, хватит.";
+			Link.l8.go = "exit";
+
+			LanguageCloseFile(iTemp);
+		break;
+
+		case "BladeModifyDecMinDmg":
+			sAttr = GetCharacterEquipByGroup(PChar, BLADE_ITEM_TYPE);
+			RemoveCharacterEquip(PChar, BLADE_ITEM_TYPE);
+			TakeItemFromCharacter(PChar, sAttr);
+			sAttr = ModifyGeneratedBlade(sAttr, -1, 0, 0);
+			GiveItem2Character(PChar, sAttr);
+			EquipCharacterByItem(PChar, sAttr);
+			Dialog.Text = "Готово.";
+			link.l1 = "Вот и отлично.";
+			link.l1.go = "BladeModify";
+		break;
+
+		case "BladeModifyIncMinDmg":
+			sAttr = GetCharacterEquipByGroup(PChar, BLADE_ITEM_TYPE);
+			RemoveCharacterEquip(PChar, BLADE_ITEM_TYPE);
+			TakeItemFromCharacter(PChar, sAttr);
+			sAttr = ModifyGeneratedBlade(sAttr, 1, 0, 0);
+			GiveItem2Character(PChar, sAttr);
+			EquipCharacterByItem(PChar, sAttr);
+			Dialog.Text = "Готово.";
+			link.l1 = "Вот и отлично.";
+			link.l1.go = "BladeModify";
+		break;
+
+		case "BladeModifyDecMaxDmg":
+			sAttr = GetCharacterEquipByGroup(PChar, BLADE_ITEM_TYPE);
+			RemoveCharacterEquip(PChar, BLADE_ITEM_TYPE);
+			TakeItemFromCharacter(PChar, sAttr);
+			sAttr = ModifyGeneratedBlade(sAttr, 0, -1, 0);
+			GiveItem2Character(PChar, sAttr);
+			EquipCharacterByItem(PChar, sAttr);
+			Dialog.Text = "Готово.";
+			link.l1 = "Вот и отлично.";
+			link.l1.go = "BladeModify";
+		break;
+
+		case "BladeModifyIncMaxDmg":
+			sAttr = GetCharacterEquipByGroup(PChar, BLADE_ITEM_TYPE);
+			RemoveCharacterEquip(PChar, BLADE_ITEM_TYPE);
+			TakeItemFromCharacter(PChar, sAttr);
+			sAttr = ModifyGeneratedBlade(sAttr, 0, 1, 0);
+			GiveItem2Character(PChar, sAttr);
+			EquipCharacterByItem(PChar, sAttr);
+			Dialog.Text = "Готово.";
+			link.l1 = "Вот и отлично.";
+			link.l1.go = "BladeModify";
+		break;
+
+		case "BladeModifyDecWeight":
+			sAttr = GetCharacterEquipByGroup(PChar, BLADE_ITEM_TYPE);
+			RemoveCharacterEquip(PChar, BLADE_ITEM_TYPE);
+			TakeItemFromCharacter(PChar, sAttr);
+			sAttr = ModifyGeneratedBlade(sAttr, 0, 0, -0.05);
+			GiveItem2Character(PChar, sAttr);
+			EquipCharacterByItem(PChar, sAttr);
+			Dialog.Text = "Готово.";
+			link.l1 = "Вот и отлично.";
+			link.l1.go = "BladeModify";
+		break;
+
+		case "BladeModifyIncWeight":
+			sAttr = GetCharacterEquipByGroup(PChar, BLADE_ITEM_TYPE);
+			RemoveCharacterEquip(PChar, BLADE_ITEM_TYPE);
+			TakeItemFromCharacter(PChar, sAttr);
+			sAttr = ModifyGeneratedBlade(sAttr, 0, 0, 0.05);
+			GiveItem2Character(PChar, sAttr);
+			EquipCharacterByItem(PChar, sAttr);
+			Dialog.Text = "Готово.";
+			link.l1 = "Вот и отлично.";
+			link.l1.go = "BladeModify";
+		break;
+
+		case "BladeModifyCreateSuper":
+			sAttr = GetCharacterEquipByGroup(PChar, BLADE_ITEM_TYPE);
+			RemoveCharacterEquip(PChar, BLADE_ITEM_TYPE);
+			TakeItemFromCharacter(PChar, sAttr);
+			sAttr = GenerateBladeByParams(GetOriginalItem(sAttr), 200, 1000, 0.1);
+			GiveItem2Character(PChar, sAttr);
+			EquipCharacterByItem(PChar, sAttr);
+			Dialog.Text = "Эх, зря ты так... Ну ладно, получай что заказывал.";
+			link.l1 = "Давай сюда, и не спорь с терминатором.";
+			link.l1.go = "BladeModify";
+		break;
+
 		case "HellSpawn_Ritual"://перерождение
 			Dialog.Text = "(Вы чувствуете себя немного другим).";
 			pchar.Ritual.ModelChanged = false;

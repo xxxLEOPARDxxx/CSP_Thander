@@ -203,7 +203,7 @@ void ShowInfoWindow()
 
 	idLngFile = LanguageOpenFile("ItemsDescribe.txt");
 	sHeader = LanguageConvertString(idLngFile, itmRef.name);
-	sText1  = GetItemDescribe(iGoodIndex);
+	sText1  = GetItemDescribe(itmRef.id);
 	CreateTooltip("#" + sHeader, sText1, argb(255,255,255,255), sText2, argb(255,255,192,192), sText3, argb(255,192,255,192), "", argb(255,255,255,255), sPicture, sGroup, sGroupPicture, 64, 64);
 	LanguageCloseFile(idLngFile);
 }

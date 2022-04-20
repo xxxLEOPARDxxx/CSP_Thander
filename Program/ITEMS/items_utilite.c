@@ -422,347 +422,239 @@ bool FindCharacterAntidote(ref _char, ref _itemId)
 
 int FindItem(string sItemID)
 {
-/*
-	for(int i = 0; i < TOTAL_ITEMS; i++)
-	{
-		if(CheckAttribute(Items[i], "ID") && Items[i].id == sItemID)
-		{
-			return i;
-		}
-	}
-	return -1;
-*/
 	// Warship 07.07.09 Перевел на движковую функцию - по-идее, так должно работать быстрее
-	return NativeFindCharacter(&Items, sItemID);
+	return NativeFindCharacter(&Items, GetOriginalItem(sItemID));
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //	Warship 08.05.09 НОВАЯ СИСТЕМА ПРЕДМЕТОВ -->
 //      Ugeen --> 10.02.10 добавлена первичная генерация предметов и выбор из массива сгенерированных предметов
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// ugeen --> начальная генерация генерируемых предметов
-void GenerateGenerableItems()
-{
-	ref itemRef;
 
-	for(int i = 0; i < ITEMS_QUANTITY; i++)
+// Проверка, уникален ли каждый предмет "серии", или же идентичен
+#define GEN_ITEM_DISCRET 100
+#define GEN_ITEM_SEPARATOR "|"
+
+bool IsGenerableItemIndex(int idx)
+{
+	ref itemRef = &Items[idx];
+	return CheckAttribute(itemRef, "Generation");
+}
+
+bool IsGenerableItem(String _itemID)
+{
+	int itemIndex = GetItemIndex(_itemID);
+	if (itemIndex == -1)
 	{
-		itemRef = &Items[i];
-		if(CheckAttribute(itemRef, "id") && CheckAttribute(itemRef, "Generation.Qty") && !CheckAttribute(itemRef, "GeneratedAll"))
-		{
-			for(int j = 0; j < sti(itemRef.Generation.Qty); j++)
-			{
-				GenerateItem(itemRef.id);
-			}
-			SetItemPrice(itemRef.id);
-			itemRef.GeneratedAll = true;
-		}
+		return false;
 	}
+
+	return IsGenerableItemIndex(itemIndex);
+}
+
+bool IsGeneratedItem(String _itemID)
+{
+	return findSubStr(_itemID, GEN_ITEM_SEPARATOR, 0) >= 0;
+}
+
+string GenerateBladeByParams(string sItemID, float dmg_min, float dmg_max, float weight)
+{
+	string dmg_min_scaled = sti(dmg_min * GEN_ITEM_DISCRET);
+	string dmg_max_scaled = sti(dmg_max * GEN_ITEM_DISCRET);
+	string weight_scaled = sti(weight * GEN_ITEM_DISCRET);
+
+	return sItemID + GEN_ITEM_SEPARATOR +
+		dmg_min_scaled + GEN_ITEM_SEPARATOR +
+		dmg_max_scaled + GEN_ITEM_SEPARATOR +
+		weight_scaled;
+}
+
+string GetOriginalItem(string sItemID)
+{
+	if (sItemID == "") return "";
+	int sub = findSubStr(sItemID, GEN_ITEM_SEPARATOR, 0);
+	if (sub > 0)
+	{
+		string result = strcut(sItemID, 0, sub - 1);
+		return result;
+	}
+	return sItemID;
+}
+
+string GetBladeParams(string sItemID, ref dmg_min, ref dmg_max, ref weight)
+{
+	int sub0 = findSubStr(sItemID, GEN_ITEM_SEPARATOR, 0);
+	if (sub0 < 0)
+	{
+		ref item = ItemsFromID(sItemID);
+		dmg_min = item.dmg_min;
+		dmg_max = item.dmg_max;
+		weight = item.weight;
+		return sItemID;
+	}
+
+	string origItemID = strcut(sItemID, 0, sub0 - 1);
+
+	int sub1 = findSubStr(sItemID, GEN_ITEM_SEPARATOR, sub0 + 1);
+	if (sub1 < 0) { return "ERROR"; }
+	dmg_min = stf(strcut(sItemID, sub0 + 1, sub1 - 1)) / GEN_ITEM_DISCRET;
+
+	int sub2 = findSubStr(sItemID, GEN_ITEM_SEPARATOR, sub1 + 1);
+	if (sub2 < 0) { return "ERROR"; }
+	dmg_max = stf(strcut(sItemID, sub1 + 1, sub2 - 1)) / GEN_ITEM_DISCRET;
+
+	weight = stf(strcut(sItemID, sub2 + 1, strlen(sItemID) - 1)) / GEN_ITEM_DISCRET;
+
+	return origItemID;
+}
+
+float GetItemWeight(string sItemID)
+{
+	if (!IsGeneratedItem(sItemID))
+	{
+		ref item = ItemsFromID(sItemID);
+		if (!CheckAttribute(item, "weight"))
+		{
+			return 0;
+		}
+		return stf(item.weight);
+	}
+
+	float dmg_min, dmg_max, weight;
+	GetBladeParams(sItemID, &dmg_min, &dmg_max, &weight);
+
+	return weight;
+}
+
+int CalculateBladePrice(string fencingType, float dmg_min, float dmg_max, float weight)
+{
+	int priceMod = 1;
+	switch(fencingType)
+	{
+		case "FencingLight": // Легкое оружие
+			priceMod = 4;
+		break;
+
+		case "Fencing": // Среднее оружие
+			priceMod = 5;
+		break;
+
+		case "FencingHeavy": // Тяжелое оружие
+			priceMod = 7;
+		break;
+	}
+
+	return sti(priceMod * dmg_min * dmg_max / weight);
+}
+
+int GetItemPrice(String _itemId)
+{
+	ref item = ItemsFromID(_itemId);
+
+	if (!IsGeneratedItem(_itemId))
+	{
+		if (!CheckAttribute(item, "price"))
+		{
+			return -1;
+		}
+		return sti(item.price);
+	}
+
+	float dmg_min, dmg_max, weight;
+	GetBladeParams(_itemId, &dmg_min, &dmg_max, &weight);
+
+	return CalculateBladePrice(item.FencingType, dmg_min, dmg_max, weight);
+}
+
+// Создадим предмет, вернет АйДи нового предмета
+string GenerateItem(String _itemId)
+{
+	_itemId = GetOriginalItem(_itemId);
+
+	int itemIndex = GetItemIndex(_itemID);
+	if (itemIndex == -1)
+	{
+		return _itemID;
+	}
+
+	ref item = &Items[itemIndex];
+	if (!CheckAttribute(item, "Generation")) // Генерящийся ли предмет
+	{
+		return _itemID;
+	}
+
+	int minValue, maxValue;
+
+	// Минимальный урон
+	minValue = stf(item.Generation.dmg_min.min) * GEN_ITEM_DISCRET; // Нижняя граница атрибута
+	maxValue = stf(item.Generation.dmg_min.max) * GEN_ITEM_DISCRET; // Верхняя граница атрибута
+	float minDmg = stf(minValue + rand(maxValue - minValue)) / GEN_ITEM_DISCRET;
+
+	// Максимальный урон
+	minValue = stf(item.Generation.dmg_max.min) * GEN_ITEM_DISCRET; // Нижняя граница атрибута
+	maxValue = stf(item.Generation.dmg_max.max) * GEN_ITEM_DISCRET; // Верхняя граница атрибута
+	float maxDmg = stf(minValue + rand(maxValue - minValue)) / GEN_ITEM_DISCRET;
+
+	// Вес
+	minValue = stf(item.Generation.Weight.min) * GEN_ITEM_DISCRET; // Нижняя граница атрибута
+	maxValue = stf(item.Generation.Weight.max) * GEN_ITEM_DISCRET; // Верхняя граница атрибута
+	float weight = stf(minValue + rand(maxValue - minValue)) / GEN_ITEM_DISCRET;
+
+	return GenerateBladeByParams(_itemId, minDmg, maxDmg, weight);
+}
+
+string ModifyGeneratedBlade(string sItemID, float delta_dmg_min, float delta_dmg_max, float delta_weight)
+{
+	if (!IsGenerableItem(sItemID))
+	{
+		return sItemID;
+	}
+
+	ref item = ItemsFromID(sItemID);
+
+	float dmg_min, dmg_max, weight;
+	string origItem = GetBladeParams(sItemID, &dmg_min, &dmg_max, &weight);
+
+	dmg_min += delta_dmg_min;
+	if (dmg_min < stf(item.Generation.dmg_min.min)) dmg_min = stf(item.Generation.dmg_min.min);
+	if (dmg_min > stf(item.Generation.dmg_min.max)) dmg_min = stf(item.Generation.dmg_min.max);
+
+	dmg_max += delta_dmg_max;
+	if (dmg_max < stf(item.Generation.dmg_max.min)) dmg_max = stf(item.Generation.dmg_max.min);
+	if (dmg_max > stf(item.Generation.dmg_max.max)) dmg_max = stf(item.Generation.dmg_max.max);
+
+	weight += delta_weight;
+	if (weight < stf(item.Generation.weight.min)) weight = stf(item.Generation.weight.min);
+	if (weight > stf(item.Generation.weight.max)) weight = stf(item.Generation.weight.max);
+
+	return GenerateBladeByParams(origItem, dmg_min, dmg_max, weight);
 }
 
 //ugeen --> вернем случайный ID сгенерированного зараннее предмета
 string GetGeneratedItem(string _itemId)
 {
-	int itemsQty = 0;
-	String generatedItems[TOTAL_ITEMS];
-
-	if(!IsGenerableItem(_itemId)) // Генерящийся ли предмет
-	{
-		return _itemID;
-	}
-
-	for(int i = ITEMS_QUANTITY; i < TOTAL_ITEMS; i++)
-	{
-		if(CheckAttribute(&Items[i], "DefItemID") && Items[i].DefItemID == _itemId)
-		{
-			generatedItems[itemsQty] = Items[i].ID;
-			itemsQty++;
-		}
-	}
-
-	if(itemsQty == 0)
-	{
-		return _itemId; // Ничего не нашлось
-	}
-
-	return generatedItems[rand(itemsQty - 1)];
-}
-
-//  вернем определенный ID сгенерированного предмета
-string GetGeneratedItemNum(string _itemId, int Num)
-{
-	int itemsQty = 0;
-	String generatedItems[TOTAL_ITEMS];
-
-	if(!IsGenerableItem(_itemId)) // Генерящийся ли предмет
-	{
-		return _itemID;
-	}
-
-	for(int i = ITEMS_QUANTITY; i < TOTAL_ITEMS; i++)
-	{
-		if(CheckAttribute(&Items[i], "DefItemID") && Items[i].DefItemID == _itemId)
-		{
-			generatedItems[itemsQty] = Items[i].ID;
-			itemsQty++;
-		}
-	}
-
-	if(itemsQty == 0 || itemsQty < Num)
-	{
-		return _itemId; // Ничего не нашлось
-	}
-
-	return generatedItems[itemsQty + Num];
-}
-
-void SetItemPrice(String _itemId)
-{
-	int priceMod;
-	ref item = &Items[GetItemIndex(_itemId)];
-
-	switch(item.FencingType)
-	{
-		case "FencingLight": // Легкое оружие
-			priceMod = 4;
-		break;
-
-		case "Fencing": // Среднее оружие
-			priceMod = 5;
-		break;
-
-		case "FencingHeavy": // Тяжелое оружие
-			priceMod = 7;
-		break;
-	}
-	if(CheckAttribute(item, "Weight") && stf(item.Weight) > 0.0)
-	{
-		item.price = priceMod * (stf(item.dmg_min) * stf(item.dmg_max)) / stf(item.Weight);
-	}
-}
-
-// Создадим предмет, вернет АйДи нового предмета
-String GenerateItem(String _itemId)
-{
-	int i, defItemIndex, priceMod;
-	int itemsQty = 0;
-	int itemIndex = FindFirstEmptyItem();
-	float minValue, maxValue, curMinDmg, curMaxDmg, curWeight;
-	ref item, realItem;
-	String generatedItems[TOTAL_ITEMS];
-
-	if(!IsGenerableItem(_itemId)) // Генерящийся ли предмет
-	{
-		return _itemID;
-	}
-
-	if(itemIndex == -1) // Нету свободных слотов - вернем случайный существующий
-	{
-		for(i = ITEMS_QUANTITY; i < TOTAL_ITEMS; i++)
-		{
-			if(CheckAttribute(&Items[i], "DefItemID") && Items[i].DefItemID == _itemId)
-			{
-				generatedItems[itemsQty] = Items[i].ID;
-				itemsQty++;
-			}
-		}
-
-		if(itemsQty == 0)
-		{
-			return _itemId; // Ничего не нашлось
-		}
-
-		return generatedItems[rand(itemsQty - 1)];
-	}
-
-	defItemIndex = GetItemIndex(_itemId);
-	item = &Items[defItemIndex];
-	realItem = &Items[itemIndex];
-
-	CopyAttributes(realItem, item); // Копируем аттрибуты
-
-	// Warship 06.06.09 Оптимизация - выкинул нафиг цикл
-
-	// Минимальный урон
-	minValue = stf(item.Generation.dmg_min.min); // Нижняя граница аттрибута
-	maxValue = stf(item.Generation.dmg_min.max); // Верхняя граница аттрибута
-	curMinDmg = minValue + frandsmall(maxValue - minValue);
-	realItem.dmg_min = curMinDmg;
-
-	// Максимальный урон
-	minValue = stf(item.Generation.dmg_max.min); // Нижняя граница аттрибута
-	maxValue = stf(item.Generation.dmg_max.max); // Верхняя граница аттрибута
-	curMaxDmg = minValue + frandsmall(maxValue - minValue);
-	realItem.dmg_max = curMaxDmg;
-
-	// Вес
-	minValue = stf(item.Generation.Weight.min); // Нижняя граница аттрибута
-	maxValue = stf(item.Generation.Weight.max); // Верхняя граница аттрибута
-	curWeight = minValue + frandsmall(maxValue - minValue);
-	realItem.Weight = curWeight;
-
-	// Определяем модификатор цены от типа оружия
-	switch(item.FencingType)
-	{
-		case "FencingLight": // Легкое оружие
-			priceMod = 4;
-		break;
-
-		case "Fencing": // Среднее оружие
-			priceMod = 5;
-		break;
-
-		case "FencingHeavy": // Тяжелое оружие
-			priceMod = 7;
-		break;
-	}
-
-	// Генерим цену, если нужно
-	if(CheckAttribute(item, "Generation.price"))
-	{
-		realItem.price = priceMod * (curMinDmg * curMaxDmg) / curWeight;
-	}
-
-	realItem.ID = _itemId + "_" + itemIndex; // Новый АйДи предмету
-	realItem.Index = itemIndex; // Новый индекс
-	realItem.Generated = true; // Сгенерированный предмет
-	realItem.DefItemID = _itemId; // Запомним АйДи и индекс начального предмета
-	realItem.DefItemIndex = defItemIndex;
-
-	return realItem.ID;
-}
-
-// Найдем первый пустой слот для предмета
-int FindFirstEmptyItem()
-{
-	for(int i = ITEMS_QUANTITY; i < TOTAL_ITEMS; i++)
-	{
-		if(!CheckAttribute(&Items[i], "ID") || Items[i].ID == "0")
-		{
-			return i;
-		}
-	}
-	return -1;
-}
-
-// Проверим на пустые предметы и удалим их
-// Метод выполняется долго - лучше вызывать его при переходах между локациями (как щас и сделано)
-void RefreshGeneratedItems()
-{
-	ref item;
-	int curLastIndex = FindFirstEmptyItem();
-
-	for(int i = ITEMS_QUANTITY; i < TOTAL_ITEMS; i++)
-	{
-		item = &Items[i];
-
-		if(!CheckAttribute(item, "ID")) continue; // Пустой слот
-
-		RefreshGeneratedItem(item.ID);
-	}
-
-	trace("Произведено удаление пустых предметов");
-	trace("Первый свободный элемент (было/стало) == (" + curLastIndex + "/"+ FindFirstEmptyItem() + ")");
-}
-
-// Метод рефреша для конкретного предмета. Вернет булево значение - удалился предмет или нет
-bool RefreshGeneratedItem(String _itemID)
-{
-	int i, j;
-	int itemIndex = GetItemIndex(_itemID);
-	String curSimpleBox, curPrivateBox;
-	ref reference;
-
-	if(itemIndex == -1) return false;
-
-	for(i = 0; i < nLocationsNum; i++)
-	{
-		reference = &Locations[i];
-
-		for(j = 1; j < MAX_HANDLED_BOXES; j++)
-		{
-			curSimpleBox = "box" + j;
-			curPrivateBox = "private" + j;
-			if (reference.id == "Caiman_StoreHouse" || reference.id == "Reefs_chapter") break;
-
-			if(!CheckAttribute(reference, curSimpleBox) && !CheckAttribute(reference, curPrivateBox)) break;
-
-			// Симпл боксы
-			if(CheckAttribute(reference, curSimpleBox + ".Items." + _itemID))
-			{
-				return false;
-			}
-
-			// Приваты
-			if(CheckAttribute(reference, curPrivateBox + ".Items." + _itemID))
-			{
-				return false;
-			}
-		}
-	}
-
-	for(i = 0; i < TOTAL_CHARACTERS; i++)
-	{
-		reference = &Characters[i];
-
-		// Проверка на торговца, у которого уже можно отобрать предметы
-		if(CheckAttribute(reference, "Merchant") && CheckNPCQuestDate(reference, "Item_date"))
-		{
-			DeleteAttribute(reference, "items");
-			continue;
-		}
-
-		if(CheckAttribute(reference, "Items." + _itemID))
-		{
-			return false;
-		}
-	}
-
-//	DeleteAttribute(&Items[itemIndex], ""); // Потрем все аттрибуты
-	return true;
-}
-
-// Проверка, уникален ли каждый предмет "серии", или же идентичен
-bool IsGenerableItem(String _itemID)
-{
-	int itemIndex = GetItemIndex(_itemID);
-	ref itemRef;
-
-	if(itemIndex == -1)
-	{
-		return false;
-	}
-
-	itemRef = &Items[itemIndex];
-
-	if(CheckAttribute(itemRef, "Generation") && !CheckAttribute(itemRef, "Generated"))
-	{
-		return true;
-	}
-
-	return false;
+	return GenerateItem(_itemID);
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //										<-- Warship НОВАЯ СИСТЕМА ПРЕДМЕТОВ
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 // Warship Проверка на оружие
 bool IsBlade(String _itemID)
 {
 	int itemIndex = GetItemIndex(_itemID);
 	ref item;
 
-	if(itemIndex == -1)
+	if (itemIndex == -1)
 	{
 		return false;
 	}
 
 	item = &Items[itemIndex];
 
-	if(CheckAttribute(&item, "groupID"))
+	if (CheckAttribute(&item, "groupID"))
 	{
-		if(item.groupID == BLADE_ITEM_TYPE)
+		if (item.groupID == BLADE_ITEM_TYPE)
 		{
 			return true;
 		}
