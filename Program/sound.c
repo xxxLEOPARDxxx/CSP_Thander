@@ -770,7 +770,7 @@ void Sound_OnSeaAlarm(bool _seaAlarmed)
 
 	if (seaAlarmed)
 	{ //alarm on!
-		AddSoundScheme("sea_battle_voice_SBV"); // LEO: Добавление схемы голосовых криков на корабле, в режиме боя
+		if(bCharVoice) AddSoundScheme("sea_battle_voice_SBV"); // LEO: Добавление схемы голосовых криков на корабле, в режиме боя
 		SetMusic("music_sea_battle");
 	}
 	else
