@@ -63,8 +63,8 @@ void wdmReloadToSea()
 			imageName = "loading\Twister.tga";
 		}*/ // boal пусть будет одна
 	}
-	wdmLoginToSea.imageName = imageName;
-	SendMessage(&wdm_fader, "ls",FADER_PICTURE0, imageName);
+	pchar.loadscreen = imageName;
+	SendMessage(&wdm_fader, "ls",FADER_PICTURE0, pchar.loadscreen);
 }
 
 void WdmStartFade()
