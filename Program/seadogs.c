@@ -491,12 +491,9 @@ void LoadGame()
 	SetTimeScale(1.0);
 	TimeScaleCounter = 0;
 
-    string loadScr="";
-	loadScr = "loading\StartGame.tga";
-
 	CreateEntity(&LanguageObject,"obj_strservice");
 	CreateEntity(&reload_fader, "fader");
-	SendMessage(&reload_fader, "ls",FADER_PICTURE0, loadScr);
+	SendMessage(&reload_fader, "ls",FADER_PICTURE0, "loading\StartGame.tga");
 	SendMessage(&reload_fader, "lfl", FADER_IN, RELOAD_TIME_FADE_IN, true);
 	ReloadProgressStart();
 	pchar.savegamename = saveName;

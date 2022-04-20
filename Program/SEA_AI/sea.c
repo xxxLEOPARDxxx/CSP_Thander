@@ -28,6 +28,7 @@
 
 #event_handler("Sea_FirstInit", "Sea_FirstInit");
 #event_handler("SeaLoad_GetPointer", "SeaLoad_GetPointer");
+#event_handler("GroupShipPos_event", "CalculateGroupShipPos");
 
 #define PLAYER_GROUP	"OurGroup"
 #define SHIPS_PC_SQUAD_DOUBLE 3
@@ -524,7 +525,8 @@ void Sea_MapLoad()
 	CreateEntity(&SeaFader, "fader");
 	SendMessage(&SeaFader, "lfl", FADER_OUT, 0.7, true);
 	SendMessage(&SeaFader, "l", FADER_STARTFRAME);
-	SendMessage(&SeaFader, "ls", FADER_PICTURE0, "loading\sea_" + rand(31) + ".tga");
+	pchar.loadscreen = "loading\sea_" + rand(31) + ".tga";
+	SendMessage(&SeaFader, "ls", FADER_PICTURE0, pchar.loadscreen);
 
 	bSkipSeaLogin = true;
 
@@ -549,7 +551,8 @@ void Land_MapLoad()
 	CreateEntity(&SeaFader, "fader");
 	SendMessage(&SeaFader, "lfl", FADER_OUT, 0.7, true);
 	SendMessage(&SeaFader, "l", FADER_STARTFRAME);
-	SendMessage(&SeaFader, "ls", FADER_PICTURE0, "loading\sea_" + rand(31) + ".tga");
+	pchar.loadscreen = "loading\sea_" + rand(31) + ".tga";
+	SendMessage(&SeaFader, "ls", FADER_PICTURE0, pchar.loadscreen);
 
 	bSkipSeaLogin = true;
 
@@ -663,14 +666,9 @@ void SeaLogin(ref Login)
 	Event(EVENT_SEA_LOGIN, "");
 	if (bSkipSeaLogin) return;
 
-	// Sea Fader start
-	//Boyer add #20170401-02
-	pchar.loadscreen = "loading\sea_" + rand(31) + ".tga";
-	if (!CheckAttribute(&Login,"ImageName")) { Login.ImageName = "loading\sea_" + rand(31) + ".tga"; }
-
 	CreateEntity(&SeaFader, "fader");
 	SendMessage(&SeaFader, "lfl", FADER_IN, 0.5, true);
-	SendMessage(&SeaFader, "ls", FADER_PICTURE0, Login.ImageName);
+	SendMessage(&SeaFader, "ls", FADER_PICTURE0, pchar.loadscreen);
 
 	// create all sea modules
 	CreateSeaEnvironment();
@@ -1710,4 +1708,40 @@ void ReconnectShips()
             }
         }
 	}*/
+}
+
+ref CalculateGroupShipPos()
+{
+	int shipIndex = GetEventData();
+	float centerPosX = GetEventData();
+	float rotation = GetEventData();
+	float centerPosZ = GetEventData();
+	ref rChar = GetEventData();
+	int shipCount = GetCompanionQuantity(PChar);
+
+	float distanceBetweenShips = 250.0;
+
+	float result[3];
+	result[0] = centerPosX;
+	result[1] = rotation;
+	result[2] = centerPosZ;
+
+	if (shipIndex == 0)
+	{
+		return &result;
+	}
+
+	if ((shipIndex == 1) && (shipCount == 2))
+	{
+		result[0] -= distanceBetweenShips * sin(rotation);
+		result[2] -= distanceBetweenShips * cos(rotation);
+		return &result;
+	}
+
+	float offset_sign = -1;
+	if ((shipIndex % 2) == 1) offset_sign = 1;
+
+	result[0] -= distanceBetweenShips * (sin(rotation) + cos(rotation));
+	result[2] -= offset_sign * distanceBetweenShips * (cos(rotation) - sin(rotation));
+	return &result;
 }

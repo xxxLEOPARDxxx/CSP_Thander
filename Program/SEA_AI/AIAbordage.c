@@ -269,7 +269,8 @@ void Sea_AbordageStartNow(int _iAbordageMode, int _iAbordageCharacter, bool _bPl
 	SetEventHandler("FaderEvent_StartFade", "Abordage_ReloadStartFade", 0);
 	SetEventHandler("FaderEvent_EndFade", "Abordage_ReloadEndFade", 0);
 
-	SendMessage(&reload_fader, "ls", FADER_PICTURE0, LAi_GetBoardingImage(GetCharacter(iAbordageCharacter), bMCAbordageInitiator));
+	pchar.loadscreen = LAi_GetBoardingImage(GetCharacter(iAbordageCharacter), bMCAbordageInitiator);
+	SendMessage(&reload_fader, "ls", FADER_PICTURE0, pchar.loadscreen);
 	SendMessage(&reload_fader, "lfl", FADER_OUT, 2.0, false);
 	SendMessage(&reload_fader, "l", FADER_STARTFRAME);
 
