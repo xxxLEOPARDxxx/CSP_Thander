@@ -2854,6 +2854,9 @@ void initNewMainCharacter()
 	// Установим начальный дневной рандом
 	PChar.DayRandom = Random();
 	SetAllAchievements(0); // Обнуляем все достижения
+
+	// Устанавливаеи функцию расположения кораблей при выходе в море.
+	PChar.GroupShipPos_event = "CalculateGroupShipPos";
 }
 
 void initMainCharacterItem()

@@ -459,11 +459,13 @@ bool IsGeneratedItem(String _itemID)
 
 string GenerateBladeByParams(string sItemID, float dmg_min, float dmg_max, float weight)
 {
+	string sOriginalItemID = GetOriginalItem(sItemID);
+
 	string dmg_min_scaled = sti(dmg_min * GEN_ITEM_DISCRET);
 	string dmg_max_scaled = sti(dmg_max * GEN_ITEM_DISCRET);
 	string weight_scaled = sti(weight * GEN_ITEM_DISCRET);
 
-	return sItemID + GEN_ITEM_SEPARATOR +
+	return sOriginalItemID + GEN_ITEM_SEPARATOR +
 		dmg_min_scaled + GEN_ITEM_SEPARATOR +
 		dmg_max_scaled + GEN_ITEM_SEPARATOR +
 		weight_scaled;
