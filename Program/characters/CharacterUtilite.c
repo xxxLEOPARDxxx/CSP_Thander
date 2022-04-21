@@ -2497,12 +2497,20 @@ void SetEquipedItemToCharacter(ref chref, string groupID, string itemID)
 			UnsetSpecialAttributes(chref);
 		}
 
-		float dmg_min, dmg_max, weight;
-		GetBladeParams(itemID, &dmg_min, &dmg_max, &weight);
+		if (itemID != "")
+		{
+			float dmg_min, dmg_max, weight;
+			GetBladeParams(itemID, &dmg_min, &dmg_max, &weight);
 
-		LAi_BladeSetDamageMin(chref, dmg_min);
-		LAi_BladeSetDamageMax(chref, dmg_max);
-		LAi_BladeEnergyType(chref, GetEnergyBladeDrain(weight));  // энергоемкость от веса
+			LAi_BladeSetDamageMin(chref, dmg_min);
+			LAi_BladeSetDamageMax(chref, dmg_max);
+			LAi_BladeEnergyType(chref, GetEnergyBladeDrain(weight));  // энергоемкость от веса
+		}
+		else
+		{
+			LAi_BladeSetDamageMin(chref, 0.0);
+			LAi_BladeSetDamageMax(chref, 0.0);
+		}
 
 		if(CheckAttribute(arItm,"piercing"))
 		{	LAi_BladeSetPiercing(chref,stf(arItm.piercing)*0.01);
