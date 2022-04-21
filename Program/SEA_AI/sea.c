@@ -28,7 +28,6 @@
 
 #event_handler("Sea_FirstInit", "Sea_FirstInit");
 #event_handler("SeaLoad_GetPointer", "SeaLoad_GetPointer");
-#event_handler("GroupShipPos_event", "CalculateGroupShipPos");
 
 #define PLAYER_GROUP	"OurGroup"
 #define SHIPS_PC_SQUAD_DOUBLE 3
@@ -1710,16 +1709,16 @@ void ReconnectShips()
 	}*/
 }
 
+#event_handler("CalculateGroupShipPos", "CalculateGroupShipPos")
 ref CalculateGroupShipPos()
 {
 	int shipIndex = GetEventData();
 	float centerPosX = GetEventData();
 	float rotation = GetEventData();
 	float centerPosZ = GetEventData();
-	ref rChar = GetEventData();
 	int shipCount = GetCompanionQuantity(PChar);
 
-	float distanceBetweenShips = 250.0;
+	float distanceBetweenShips = 200.0;
 
 	float result[3];
 	result[0] = centerPosX;
@@ -1738,10 +1737,12 @@ ref CalculateGroupShipPos()
 		return &result;
 	}
 
-	float offset_sign = -1;
-	if ((shipIndex % 2) == 1) offset_sign = 1;
+	float offset_sign = -0.4;
+	if ((shipIndex % 2) == 0) offset_sign = 0.4;
 
-	result[0] -= distanceBetweenShips * (sin(rotation) + cos(rotation));
-	result[2] -= offset_sign * distanceBetweenShips * (cos(rotation) - sin(rotation));
+	int offset_in_line = makeint((shipCount - shipIndex - 1) / 2) + 1;
+
+	result[0] -= distanceBetweenShips * (offset_in_line * sin(rotation) + offset_sign * cos(rotation));
+	result[2] -= distanceBetweenShips * (offset_in_line * cos(rotation) - offset_sign * sin(rotation));
 	return &result;
 }
