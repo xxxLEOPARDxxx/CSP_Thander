@@ -759,13 +759,18 @@ void LaunchShipStateNPC(ref _chr)
 
 void LaunchStore(int storeNum)
 {
-  if(storeNum<0)	return;
-  if(storeNum>STORE_QUANTITY-1)	return;
-	gStoreNum=storeNum;
-	if(procInterfacePrepare(INTERFACE_STORE))
+	if (storeNum < 0) return;
+	if (storeNum > STORE_QUANTITY - 1) return;
+	gStoreNum = storeNum;
+
+	int storeInterfaceId = INTERFACE_STORE;
+	if (CheckAttribute(InterfaceStates, "EnabledOldStore") && sti(InterfaceStates.EnabledOldStore) == 1)
+		storeInterfaceId = INTERFACE_STORE_GOOD_OLD;
+
+	if(procInterfacePrepare(storeInterfaceId))
 	{
 		nPrevInterface = -1;
-		CurrentInterface = INTERFACE_STORE;
+		CurrentInterface = storeInterfaceId;
 		InitInterface_R(Interfaces[CurrentInterface].IniFile,&stores[storeNum]);
 	}
 }
