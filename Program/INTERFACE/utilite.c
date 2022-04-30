@@ -616,22 +616,22 @@ string GlobalStringConvert(string strID)
 
 void EnumerateIcons(string sDirectory, string sFileMask, string sControlName, int iAddListSize)
 {
-	/*object oTmp;
-	//Boyer change #20170301-2 to new function as NFFindFiles (NF) functions no longer exist in our source
-	int iNumFiles = FindFiles(&oTmp, sDirectory, sFileMask, false);
-	Trace("Find files : " + iNumFiles);
-	for (int i=0; i<iNumFiles; i++)
+	object fileFinder;
+	fileFinder.dir = sDirectory;
+	fileFinder.mask = sFileMask;
+	CreateEntity(&fileFinder, "FINDFILESINTODIRECTORY");
+	aref arFileList;
+	makearef(arFileList, fileFinder.filelist);
+	int iNumFiles = GetAttributesNum(arFileList);
+	for (int i = 0; i < iNumFiles; i++)
 	{
+		string sFile = "id" + i;
 		string attrName = "pic" + (i + 1);
-		string sFile = "f" + i;
-		GameInterface.(sControlName).(attrName).name1 = oTmp.(sFile).FilePath;
-		GameInterface.(sControlName).(attrName).FileName = oTmp.(sFile).FileName;
-		GameInterface.(sControlName).(attrName).FileName.Name = oTmp.(sFile).Name;
-		GameInterface.(sControlName).(attrName).FileName.Ext = oTmp.(sFile).Ext;
-		Trace("Find file : " + oTmp.(sFile).FileName);
+
+		GameInterface.(sControlName).(attrName).name1 = sDirectory + "\" + arFileList.(sFile);
+		GameInterface.(sControlName).(attrName).FileName = arFileList.(sFile);
 	}
 	GameInterface.(sControlName).ListSize = iNumFiles + iAddListSize;
-	//SendMessage(&GameInterface,"lsl",MSG_INTERFACE_SCROLL_CHANGE,sControlName,-1);*/
 }
 
 void CreateTooltip(string header, string text1, int color1, string text2, int color2, string text3, int color3, string text4, int color4, string picTexture, string picGroup, string picImage, int nPicWidth, int nPicHeight)
