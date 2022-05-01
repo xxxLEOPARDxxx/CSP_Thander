@@ -1376,8 +1376,8 @@ void ShowInfo()
 			sHeader = XI_ConvertString("Store Mode");
 			sText1 = XI_ConvertString("Store Mode_descr");
             sPicture = "INTERFACES\FaqPictures\OLDSTORE_CHECKBOX.png";
-			xx = 585;
-			yy = 250;
+			xx = 607;
+			yy = 258;
 		break;
 
 		case "FLAGALLWDM_CHECKBOX":
