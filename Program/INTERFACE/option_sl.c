@@ -429,6 +429,7 @@ void SetCurentOptions(ref optref)
 
 	ControlsMakeInvert();
 	SetRealMouseSensitivity();
+	SetPerspectiveSettings();
 }
 
 void ReadSavedOptions(ref gopt)
