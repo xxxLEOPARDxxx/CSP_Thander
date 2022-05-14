@@ -331,13 +331,13 @@ void CheckWoundedOfficers()
 
 					int healing_time = makeint(LAi_GetCharacterMaxHP(chr)/10);//время от хп
 
-					if (CheckOfficersPerk(pchar, "EmergentSurgeon")) healing_time -= makeint(healing_time/10*3);//снижения от перков врачей
+					if (CheckOfficersPerk(pchar, "EmergentSurgeon")) healing_time -= makeint(healing_time/10*6);//снижения от перков врачей
 					else
 					{
-						if (CheckOfficersPerk(pchar, "Doctor2")) healing_time -= makeint(healing_time/10*2);
+						if (CheckOfficersPerk(pchar, "Doctor2")) healing_time -= makeint(healing_time/10*4);
 						else
 						{
-							if (CheckOfficersPerk(pchar, "Doctor1")) healing_time -= makeint(healing_time/10);
+							if (CheckOfficersPerk(pchar, "Doctor1")) healing_time -= makeint(healing_time/5);
 						}
 					}
 

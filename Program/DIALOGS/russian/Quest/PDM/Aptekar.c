@@ -466,7 +466,7 @@ void ProcessDialogEvent()
 				iOfficer = GetPassenger(pchar, i);
 				sld = GetCharacter(iOfficer);
 				if (!GetRemovable(sld)) continue;
-				if (!CheckAttribute(sld, "HPminusDaysNeedtoRestore") || CheckAttribute(sld, "Doctored")) continue;
+				if (!CheckAttribute(sld, "HPminusDaysNeedtoRestore")) continue;
 				attrL = "l"+i;
 				Link.(attrL)	= "Офицер " + GetFullName(sld) + ".";
 				Link.(attrL).go = "OfficerConfusedSel_" + i;
@@ -506,21 +506,10 @@ void ProcessDialogEvent()
 			AddMoneyToCharacter(pchar,-sti(npchar.HealPrice));
 			LAi_Fade("", "");
 			WaitDate("",0,0,0, 0, 60);
-			int plusdays = makeint(sti(chref.HPminusDaysNeedtoRestore)/4*3);
-			if (plusdays > 30) plusdays = 30;
-			chref.HPminusDays = sti(chref.HPminusDays) + plusdays;
-			if(sti(chref.HPminusDays) >= sti(chref.HPminusDaysNeedtoRestore))
-			{
-				DeleteAttribute(chref, "HPminusDays");
-				DeleteAttribute(chref, "HPminusDaysNeedtoRestore");
-				Log_Info("Офицер " + GetFullName(chref) + " выздоровел.");
-				dialog.Text = "Мне удалось полностью исцелить " + GetFullName(chref) + ". Хотя надо признать, что это было весьма непросто...  У вас всё или кому-то ещё требуется моя помощь?";
-			}
-			else
-			{
-				chref.Doctored = true;
-				dialog.Text = "Я сделал всё, на что я способен. Скорее всего уже в ближайшие дни " + GetFullName(chref) + " будет в полном порядке. У вас всё или кому-то ещё требуется моя помощь?";
-			}
+			DeleteAttribute(chref, "HPminusDays");
+			DeleteAttribute(chref, "HPminusDaysNeedtoRestore");
+			Log_Info("Офицер " + GetFullName(chref) + " выздоровел.");
+			dialog.Text = "Мне удалось полностью исцелить " + GetFullName(chref) + ". Хотя надо признать, что это было весьма непросто...  У вас всё или кому-то ещё требуется моя помощь?";
 			Link.l1 = "Нет, есть ещё нуждающиеся.";
 			Link.l1.go = "CheckForConfuse";
 			Link.l99 = "Пока всё. Благодарю вас за помощь.";
