@@ -1236,15 +1236,15 @@ void ProcessControls()
 				csmLootCollector();
 			break;
             case "BOAL_ActivateRush":  // boal KEY_F
-				if (bLandInterfaceStart && GetCharacterPerkUsing(pchar, "Rush") && PChar.location != "FencingTown_Arena" && PChar.location != "FencingTown_ExitTown")
+				if (bLandInterfaceStart)
 				{
-					ActivateCharacterPerk(pchar, "Rush");
-					PlayVoice(GetSexPhrase("interface\Bers_"+rand(5)+".wav","interface\Bersf_"+rand(4)+".wav"));
-					pchar.chr_ai.energy    = pchar.chr_ai.energyMax;
-				}
-                else
-                {
-                    if (bLandInterfaceStart && curKeyGroupName == "FightModeControls")
+					if (GetCharacterPerkUsing(pchar, "Rush") && LAi_IsFightMode(pchar) && PChar.location != "FencingTown_Arena" && PChar.location != "FencingTown_ExitTown")
+					{
+						ActivateCharacterPerk(pchar, "Rush");
+						PlayVoice(GetSexPhrase("interface\Bers_"+rand(5)+".wav","interface\Bersf_"+rand(4)+".wav"));
+						pchar.chr_ai.energy    = pchar.chr_ai.energyMax;
+					}
+					else
                     {
                         PlaySound("knock");
                     }
@@ -1664,15 +1664,15 @@ void ProcessControls()
 		break;
 
         case "BOAL_ActivateRush":  // boal KEY_F
-			if (bLandInterfaceStart && GetCharacterPerkUsing(pchar, "Rush"))
+			if (bLandInterfaceStart)
             {
-		        ActivateCharacterPerk(pchar, "Rush");
-				PlayVoice(GetSexPhrase("interface\Bers_"+rand(5)+".wav","interface\Bersf_"+rand(4)+".wav"));
-				pchar.chr_ai.energy    = pchar.chr_ai.energyMax;
-		    }
-            else
-            {
-                if (bLandInterfaceStart && curKeyGroupName == "FightModeControls")
+				if (GetCharacterPerkUsing(pchar, "Rush") && LAi_IsFightMode(pchar))
+				{
+					ActivateCharacterPerk(pchar, "Rush");
+					PlayVoice(GetSexPhrase("interface\Bers_"+rand(5)+".wav","interface\Bersf_"+rand(4)+".wav"));
+					pchar.chr_ai.energy    = pchar.chr_ai.energyMax;
+				}
+				else
                 {
                     PlaySound("interface\knock.wav");
                 }
