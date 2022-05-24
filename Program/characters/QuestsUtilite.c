@@ -3494,6 +3494,13 @@ void QuestCheckTakeBoxes(ref itemsRef)
 		pchar.quest.Husband_death.win_condition.l1.character = "Husband";
 		pchar.quest.Husband_death.win_condition = "OpenTheDoors";
 	}
+	//<<-- Квест Изабеллы.
+	//-->> Сундук с револьвером Колье в Тено.
+	if (locLoad.id == "Temple_round")
+	{
+		TenoRoundTempleChestOpen();
+	}
+	//<<-- Сундук с револьвером Колье в Тено.
 }
 //открытие дверей в локации города для коммонов. только на текущие сутки + еще одни, потом снимается само.
 void SetOpenDoorCommonLoc(string City, string locationId)

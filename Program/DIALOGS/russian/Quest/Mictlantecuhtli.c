@@ -2,7 +2,8 @@
 void ProcessDialogEvent()
 {
 	ref NPChar;
-	aref Link, NextDiag;
+	aref Link, NextDiag, arChestItems;
+	string sBlade;
 
 	DeleteAttribute(&Dialog,"Links");
 
@@ -65,7 +66,7 @@ void ProcessDialogEvent()
 			link.l1.go = "InGreateTemple_1";
 		break;
 		case "InGreateTemple_1":
-			dialog.text = "Это так\nЯ давно наблюдаю за тобой, твое рысканье по Теночтитлану занимало меня. Но сейчас ты взял"+ GetSexPhrase("","а") +" предмет моего культа, и это уже не смешно...";
+			dialog.text = "Это так...\nЯ давно наблюдаю за тобой, твое рысканье по Теночтитлану занимало меня. Но сейчас ты взял"+ GetSexPhrase("","а") +" предмет моего культа, и это уже не смешно...";
 			link.l1 = "Понимаете, уважаемый бог, мне заказал этот самый предмет некий ацтек, имя которого здесь произносить не принято.";
 			link.l1.go = "InGreateTemple_2";
 		break;
@@ -174,5 +175,174 @@ void ProcessDialogEvent()
 			pchar.quest.treasure_portal.win_condition = "treasure_portal";
 			DialogExit();
 		break;
+
+		case "Uicilopochtli_F_0":
+			dialog.text = "Приветствую тебя, смертн" + GetSexPhrase("ый.","ая.");
+			link.l1 = "Кхм... здравствуй, Миктлан... Миктлан...";
+			link.l1.go = "Uicilopochtli_F_1";
+		break;
+
+		case "Uicilopochtli_F_1":
+			dialog.text = "Что?! Да как ты смеешь! Я - Уицилопочтли, бог войны, самый могущественный воин среди людей и богов, и Миктлантекутли не сравниться со мной в силе и выносливости. Ты оскорбил" + GetSexPhrase("","a") + " меня, и за это тебя ждет мучительная смерть. Готовься узреть каков Уицилопочтли в бою!";
+			link.l1 = "А, черт...";
+			link.l1.go = "Uicilopochtli_F_2";
+		break;
+
+		case "Uicilopochtli_F_2":
+			dialog.text = "Ха-ха, да что ты задрожал" + GetSexPhrase("","a") + "-то так, пошутить нельзя что-ли? Ха-ха-ха! Успокойся, я не стану на тебя бросаться за то что ты черопочек потрогал" + GetSexPhrase("","a") + ", ха-ха-ха!";
+			link.l1 = "Фу-ух, спасибо. Поединка с Миктлантекутли мне, честно говоря, хватило...";
+			link.l1.go = "Uicilopochtli_F_3";
+		break;
+
+		case "Uicilopochtli_F_3":
+			dialog.text = "Да, Миклуха в своем репертуаре... Он небось наплел тебе про то что череп - это предмет культа, к которому нельзя прикасаться? Ага, а как он интересно ритуалы проводить собрался, если череп не трогать? Чтоб ты знал" + GetSexPhrase("","a") + " - этот персонаж просто хотел тебя в свою коллекцию добавить. Любит он души павших воинов, а тут " + GetSexPhrase("подвернулся такой мастер меча","подвернулась такая мастерица меча") + ", как ты.";
+			link.l1 = "Хорошо что мне удалось выбраться из той передряги. Не хотелось бы навсегда стать стражем Теночтитлана.";
+			link.l1.go = "Uicilopochtli_F_4";
+		break;
+
+		case "Uicilopochtli_F_4":
+			dialog.text = "И не говори - ты бы " + GetSexPhrase("помер","померла") + " со скуки, ха-ха! А 'мертвому богу' давно пора было нос утереть - таким уж напыщенным заделался после падения ацтеков... Пока все скучают в лимбе, он себе тут гуляет со своими игрушками и ни разу к нам не заглянул. Даже Миктлансиуатль не навещал, бедняжка совсем без мужского внимания осталась, представляешь? И ведь я ему предлагал: у тебя тут целая армия, говорю, давай между ними бойню устроим, повеселимся, кости разомнем? А он все нет и нет - видите ли, занят он, Теночтитлан охранять нужно. Ну вот и доохранялся, что ты " + GetSexPhrase("пришел да всю его охрану порешил","пришла да всю его охрану порешила") + ", ха-ха!";
+			link.l1 = "Вот как... Кстати... не сочтите за дерзость, уважаемый бог, но если все боги кроме Миктлантекутли находятся в лимбе, то как вы здесь оказались?";
+			link.l1.go = "Uicilopochtli_F_5";
+		break;
+
+		case "Uicilopochtli_F_5":
+			dialog.text = "Не сочту, " + GetSexPhrase("дружище","дорогуша") + ". Да, я очень долго прозябал в лимбе и не мог оттуда выбраться. Но потом ты " + GetSexPhrase("устроил", "устроила") + " здесь заварушку с духами ацтекских воинов, а это вернуло из небытия ацтекскую воинскую славу и подкрепило мои силы как бога войны. В какой-то момент я почувствовал что могу переместиться сюда и решил не упускать момент\nТак что ты " + GetSexPhrase("оказал","оказала") + " мне услугу, за которую тебе положена награда. Отныне я разрешаю тебе совершать ритуал поклонения Уицилопочтли!";
+			link.l1 = "Гхм, спасибо...";
+			link.l1.go = "Uicilopochtli_F_6";
+		break;
+
+		case "Uicilopochtli_F_6":
+			dialog.text = "Ты не очень-то " + GetSexPhrase("рад","рада") + ", верно? Ничего, сейчас я тебе все объясню. Ритуал поклонения заключается в том, что ты приносишь жертву и просишь даровать тебе силу для будущих сражений. И если сделать все правильно, то ты эту силу получаешь, а именно - твой клинок становится лучше."
+			link.l1 = "Ага, значит ты можешь улучшить мое оружие?";
+			link.l1.go = "Uicilopochtli_F_7";
+		break;
+
+		case "Uicilopochtli_F_7":
+			dialog.text = "Да, могу, если совершишь ритуал. Ты же не думал, что это Миктлантекутли сделал макуауитли такими смертоносными? Но давай я сразу обозначу некоторые ограничения\nПервое - я не буду улучшать оружие сверх его инженерных возможностей. Я мог бы, но тогда оно бы превратилось в магическое оружие богов и... в общем, такой клинок в человеческих руках никогда до добра не доводил. Но я уверен, что ты все равно сможешь почувствовать улучшение\nВторое - за один раз я могу улучшить лишь одну из характеристик - уменьшить вес или увеличить минимальный или максимальный урон. Выбирать характеристику и величину улучшения ты не сможешь - все таки, поклонение богу - это неточная наука. Но ты сможешь провести много ритуалов над одним и тем же клинком, и через некоторое их количество твое оружие улучшится до идеального состояния."
+			link.l1 = "Звучит неплохо. А что на счет жертв? Много пленных понадобится?";
+			link.l1.go = "Uicilopochtli_F_8";
+		break;
+
+		case "Uicilopochtli_F_8":
+			dialog.text = "Нет, не надо мне твоих пленных. Мне эти обычаи никогда не нравились. Вопли, визги - они хороши, если враг издает их в честной битве, а не когда привязан к алтарю. Я долго пытался объяснить ацтекам, что человеческие жертвы - это по части Миктлантекутли, но все без толку - уж очень любили они людей резать\nЖертва для ритуала должна состоять из двух частей. Первая - это оружие поверженных врагов. Для одного ритуала тебе понадобится 10 других клинков того же качества, что и твое оружие. Вторая - это золото, в количестве, эквивалентном десятикратной стоимости клинка. Оно мне и не нужно особо, это просто традиция такая, и без нее никак. Вот в твоем народе есть шаманы? Они небось без золота с тобой и разговаривать не станут, так?"
+			link.l1 = "Хе-хе, да, тут не поспоришь.";
+			link.l1.go = "Uicilopochtli_F_9";
+		break;
+
+		case "Uicilopochtli_F_9":
+			dialog.text = "Вот и я пытаюсь не казаться белой вороной... В общем, собираешь это добро, кладешь на алтарь, обращаешься ко мне - и, если все хорошо, я заберу жертву и улучшу экипированный тобой клинок. И не волнуйся, если что-то пойдет не так - например, жертвы на алтаре будет недостаточно или твой клинок уже некуда будет улучшать - я жульничать не буду, скажу все как есть, и все что на алтаре - останется при тебе."
+			link.l1 = "Понятно. А как нужно обращаться?";
+			link.l1.go = "Uicilopochtli_F_10";
+		break;
+
+		case "Uicilopochtli_F_10":
+			dialog.text = "Да просто попроси от чистого сердца, ха-ха! В конце-концов, это взаимовыгодная сделка - ты получаешь оружие получше, а я - поклонение, подпитывающее мои божественные силы. Так что приходи, не стесняйся."
+			link.l1 = "Что ж, спасибо за такую возможность, уважаемый бог. Загляну при случае.";
+			link.l1.go = "Uicilopochtli_exit";
+			LAi_SetStayType(NPChar);
+		break;
+
+		case "Uicilopochtli_exit":
+			NPChar.dialog.currentnode = "Uicilopochtli_default";
+			DialogExit();
+		break;
+
+		case "Uicilopochtli_default":
+			dialog.text = "Приветствую тебя, сметрн" + GetSexPhrase("ый.","ая.");
+			link.l1 = "О великий бог войны Уицилопочтли! Преподношу тебе в дар оружие поверженных мною врагов и прошу тебе дать мне силы для будущих сражений!";
+			link.l1.go = "Uicilopochtli_improve";
+			link.l2 = "Здравствуй, Уицилопочтли. Я так, просто поздороваться зашел...";
+			link.l2.go = "Uicilopochtli_exit";
+		break;
+
+		case "Uicilopochtli_improve":
+			sBlade = GetCharacterEquipByGroup(PChar, BLADE_ITEM_TYPE);
+			if (sBlade == "")
+			{
+				dialog.text = "Я бы не против, но ты ведь клинок не экипировал.";
+				link.l1 = "Точно! Сейчас разберусь.";
+				link.l1.go = "Uicilopochtli_exit";
+				break;
+			}
+
+			if (BladeIsPerfect(sBlade))
+			{
+				dialog.text = "За дары спасибо, но дело в том, что твой клинок уже достиг своих пределов совершенства, так что улучшить его еще сильнее я не могу, извини.";
+				link.l1 = "Вот как? Ладно.";
+				link.l1.go = "Uicilopochtli_exit";
+				break;
+			}
+
+			makearef(arChestItems, Locations[FindLocation(PChar.location)].box1);
+			if (!TryTakeSacrificeForBladeImprovement(arChestItems, sBlade))
+			{
+				dialog.text = "Твоей жертвы недостаточно. Напоминаю, нужно 10 клинков эквивалентного твоему качества и золото в количестве, эквивалентном десятикратной стоимости твоего клинка.";
+				link.l1 = "Хорошо, как скажешь.";
+				link.l1.go = "Uicilopochtli_exit";
+				break;
+			}
+
+			RemoveCharacterEquip(PChar, BLADE_ITEM_TYPE);
+			TakeItemFromCharacter(PChar, sBlade);
+			sBlade = ImproveGeneratedBlade(sBlade, 0.25);
+			GiveItem2Character(PChar, sBlade);
+			EquipCharacterByItem(PChar, sBlade);
+			Dialog.Text = "Благодарю тебя, сметрн" + GetSexPhrase("ый.","ая.");
+			link.l1 = "И тебе спасибо, уважаемый бог.";
+			link.l1.go = "Uicilopochtli_exit";
+		break;
 	}
+}
+
+bool TryTakeSacrificeForBladeImprovement(aref arChestItems, string sBlade)
+{
+	int price = GetItemPrice(sBlade) * 10;
+	if (sti(arChestItems.money) < price)
+	{
+		return false;
+	}
+
+	object bladesToTake;
+	aref arBlades, arItem;
+	makearef(arBlades, arChestItems.Items);
+	string sCurrBlade, sCurrBladeQuality;
+	string sBladeQuality = ItemsFromID(sBlade).quality;
+	int bladesCount = 10;
+	int i, num;
+	for (i = 0; (i < GetAttributesNum(arBlades)) && (bladesCount > 0); i++)
+	{
+		arItem = GetAttributeN(arBlades, i);
+		sCurrBlade = GetAttributeName(arItem);
+		num = sti(GetAttributeValue(arItem));
+
+		if (!IsBlade(sCurrBlade))
+		{
+			continue;
+		}
+
+		sCurrBladeQuality = ItemsFromID(sCurrBlade).quality;
+		if (sCurrBladeQuality == sBladeQuality)
+		{
+			num = func_min(num, bladesCount);
+			bladesToTake.(sCurrBlade) = num;
+			bladesCount = bladesCount - num;
+		}
+	}
+
+	if (bladesCount > 0)
+	{
+		return false;
+	}
+
+	arChestItems.money = sti(arChestItems.money) - price;
+	makearef(arBlades, bladesToTake);
+	for (i = 0; i < GetAttributesNum(arBlades); i++)
+	{
+		arItem = GetAttributeN(arBlades, i);
+		sCurrBlade = GetAttributeName(arItem);
+		num = sti(GetAttributeValue(arItem));
+		TakeNItems(arChestItems, sCurrBlade, -num);
+	}
+	return true;
 }
