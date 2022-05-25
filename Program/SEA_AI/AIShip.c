@@ -3634,7 +3634,8 @@ void Ship_UpdateParameters()
 	// boal кэш оптимизация -->
 	if (!CheckAttribute(rCharacter, "Tmp.SpeedRecall") || sti(rCharacter.Tmp.SpeedRecall) <= 0)
 	{
-		fShipSpeed    = FindShipSpeed(rCharacter);
+		float fTRFromSailDamage = Bring2Range(0.1, 1.0, 0.1, 100.0, stf(rCharacter.ship.sp)); //0.3
+		fShipSpeed    = FindShipSpeed(rCharacter) / fTRFromSailDamage;//убирает движковое дублирование расчета скорости от урона по парусам
 		fShipTurnRate = FindShipTurnRate(rCharacter);
 
 		rCharacter.Tmp.SpeedRecall   = 8 + rand(5);
