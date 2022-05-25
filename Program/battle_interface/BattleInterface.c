@@ -2881,7 +2881,7 @@ bool CheckInstantRepairCondition(ref chref)
 	float chrShipSP = GetSailPercent(chref);
 
 	bool bYesHPRepair = chrShipHP < InstantRepairRATE;// boal 23.01.2004
-	bool bYesSPRepair = chrShipSP < InstantRepairRATEsail; //bestreducer быстрая починка// boal 23.01.2004
+	bool bYesSPRepair = chrShipSP < InstantRepairRATE; // boal 23.01.2004
 
 	if( bYesHPRepair )	{ bYesHPRepair = GetCargoGoods(chref,GOOD_PLANKS)>0; }
 	if( bYesSPRepair )	{ bYesSPRepair = GetCargoGoods(chref,GOOD_SAILCLOTH)>0; }
