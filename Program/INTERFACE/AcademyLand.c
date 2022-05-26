@@ -372,7 +372,7 @@ void SetEquipmentInformation()
 	ref rSaber = &Items[FindItem(sSaber)];
 
 	string sSaberName = LanguageConvertString(idLngFile, rSaber.name);
-	string sSaberDescribe = GetItemDescribe(FindItem(sSaber));
+	string sSaberDescribe = GetItemDescribe(sSaber);
 	string sSaberPicture = "itm" + rSaber.picIndex;
 	string sSaberTexture = rSaber.picTexture;
 

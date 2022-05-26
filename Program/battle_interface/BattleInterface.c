@@ -26,6 +26,9 @@
 
 #define SHIP_FLAG      -2
 #define SHIP_SFLAG     -3
+
+#event_handler("BI_GetCmdListOrderPriority", "BI_GetCmdListOrderPriority");
+
 int bi_icons_ShowType;
 int bi_icons_CommandMode;
 
@@ -304,6 +307,35 @@ void RefreshBattleInterface()
 	BI_SetCommandMode(0,-1,-1,-1);
 	SendMessage(&BattleInterface,"l",BI_MSG_REFRESH);
 	BI_SetCommandMode(BI_COMMODE_MY_SHIP_SELECT,-1,-1,-1);
+}
+
+ref BI_GetCmdListOrderPriority()
+{
+  int curItem = GetEventData();
+
+  if(curItem < 0 || curItem > 13) {
+    return;
+  }
+
+  int i = 0;
+  int cmdList[14];
+  cmdList[i] = BI_COMMODE_NOTDISEASED_TOWN; i++;
+  cmdList[i] = BI_COMMODE_DISEASED_TOWN; i++;
+  cmdList[i] = BI_COMMODE_ENEMY_TOWN; i++;
+  cmdList[i] = BI_COMMODE_LAND_SELECT; i++;
+  cmdList[i] = BI_COMMODE_FRIEND_FORT_SELECT; i++;
+  cmdList[i] = BI_COMMODE_NEUTRAL_FORT_SELECT; i++;
+  cmdList[i] = BI_COMMODE_ENEMY_FORT_SELECT; i++;
+  cmdList[i] = BI_COMMODE_MY_SHIP_SELECT; i++;
+  cmdList[i] = BI_COMMODE_NEUTRAL_SHIP_SELECT; i++;
+  cmdList[i] = BI_COMMODE_FRIEND_SHIP_SELECT; i++;
+  cmdList[i] = BI_COMMODE_ENEMY_SHIP_SELECT; i++;
+  cmdList[i] = BI_COMMODE_COMMAND_SELECT; i++;
+  cmdList[i] = BI_COMMODE_CANNON_CHARGE; i++;
+  cmdList[i] = BI_COMMODE_USER_ICONS; i++;
+
+  BI_intRetValue = cmdList[curItem];
+  return &BI_intRetValue;
 }
 
 void DeleteBattleInterface()

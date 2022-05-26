@@ -6,8 +6,7 @@ string sCurGoodRow;
 
 int	nCurScrollNumC = 0;
 int iCurFighter = 0;
-int iCurItemIndex;
-string sCurItemRow;
+string sCurItemRow, sCurItemId;
 
 int iITEMS_SET = 0;
 int iGOODS_SET = 0;
@@ -193,42 +192,45 @@ void ShowTransferGoods()
 	}
 	else
 	{	//показ предмета правой таблицы
-		SetNewGroupPicture("TG_GOODS_PICTURE", Items[iCurItemIndex].picTexture, "itm" + Items[iCurItemIndex].picIndex);//картинка
+		ref item = ItemsFromID(sCurItemId);
+		SetNewGroupPicture("TG_GOODS_PICTURE", item.picTexture, "itm" + item.picIndex);//картинка
 		String FighterId = Characters[iCurFighter].Id;
-		string sItem = Items[iCurItemIndex].name;
+		string sItem = item.name;
 		int	lngFileID = LanguageOpenFile("ItemsDescribe.txt");
 		sHeader = LanguageConvertString(lngFileID, sItem);
 		LanguageCloseFile(lngFileID);
-		describeStr = GetItemDescribe(iCurItemIndex);
-		sItem = Items[iCurItemIndex].id;
+		describeStr = GetItemDescribe(sCurItemId);
+		sItem = sCurItemId;
 		if (CheckAttribute(Characters[iCurFighter], "TransferItems." + sItem)) buyCount = sti(Characters[iCurFighter].TransferItems.(sItem)); else buyCount = 0;
 	}
-		SetFormatedText("TG_GOODS_CAPTION", sHeader);//заголовок
-		SetFormatedText("TG_GOODS_INFO", describeStr);//описание
-		GameInterface.TG_EDIT.str = buyCount;
+
+	SetFormatedText("TG_GOODS_CAPTION", sHeader);//заголовок
+	SetFormatedText("TG_GOODS_INFO", describeStr);//описание
+	GameInterface.TG_EDIT.str = buyCount;
 }
 
 void OnAddBtnClick(int _add)
 {
-	ref rGood;
-	int iNum = MakeInt(GameInterface.TG_EDIT.str);;
-	int _Units = 1;
+	int iNum = MakeInt(GameInterface.TG_EDIT.str);
 
 	if (isGoodTable)
 	{
-	rGood = &Goods[iCurGoodIndex];
-	_Units = sti(rGood.Units);
-	_add = _add * abs(_add);
+		ref rGood = &Goods[iCurGoodIndex];
+		int _Units = sti(rGood.Units);
+		_add = _add * abs(_add);
+
+		iNum = iNum + _add * _Units;
+		if (iNum < 0) iNum = 0;
+		// максимум 15000 грузоподъемности, хотя и 10000 много было бы
+		if (iNum > 15000 / sti(rGood.Weight) * _Units) iNum = 15000 / sti(rGood.Weight) * _Units;
 	}
 	else
 	{
-	rGood = &Items[iCurItemIndex];
+		iNum = iNum + _add;
+		if (iNum < 0) iNum = 0;
+		if (iNum > 200 / GetItemWeight(sCurItemId)) iNum = 200 / GetItemWeight(sCurItemId);
 	}
 
-	iNum = iNum + _add*_Units;
-	if(iNum < 0) iNum = 0;
-	if (!isGoodTable && iNum > 200/stf(rGood.Weight)) iNum = 200/stf(rGood.Weight);
-	if (isGoodTable && iNum > 15000/sti(rGood.Weight)*_Units) iNum = 15000/sti(rGood.Weight)*_Units;//максимум 15000 грузоподъемности, хотя и 10000 много было бы
 	GameInterface.TG_EDIT.str = iNum;
 }
 
@@ -316,13 +318,13 @@ void ProcCommand()
 				}
 				else
 				{
-					String sItem = Items[iCurItemIndex].id;
-					if (!checkattribute(Characters[iCurFighter],"TransferItems." + sItem)) Characters[iCurFighter].TransferItems.(sItem) = 0;
-					iNum =  sti(GameInterface.TG_EDIT.str);
-					if (iNum >9999) iNum = 9999;
-					curBuyItemsWeight = curBuyItemsWeight + (iNum - sti(Characters[iCurFighter].TransferItems.(sItem)))*stf(Items[iCurItemIndex].weight);
+					if (!checkattribute(Characters[iCurFighter],"TransferItems." + sCurItemId)) Characters[iCurFighter].TransferItems.(sCurItemId) = 0;
+					iNum = sti(GameInterface.TG_EDIT.str);
+					if (iNum > 9999) iNum = 9999;
+					curBuyItemsWeight = curBuyItemsWeight + (iNum - sti(Characters[iCurFighter].TransferItems.(sCurItemId))) * GetItemWeight(sCurItemId);
 //НАДО ЛИ это затирание? Может, наоборот при закрытии все строчки заполнять, чтоб чекатрибут не делать?
-					if (iNum == 0) DeleteAttribute(&Characters[iCurFighter],"TransferItems." + sItem); else Characters[iCurFighter].TransferItems.(sItem) = iNum; // Прибавим в список закупок
+					if (iNum == 0) DeleteAttribute(&Characters[iCurFighter],"TransferItems." + sCurItemId);
+					else Characters[iCurFighter].TransferItems.(sCurItemId) = iNum; // Прибавим в список закупок
 					GameInterface.CONSUME_TABLE_LIST.(sCurItemRow).td2.str = iNum;
 					Table_UpdateWindow("CONSUME_TABLE_LIST");
 					SetFormatedText("ITEMS_SET_SUM", "Вес выбранного комплекта: " + FloatToString(curBuyItemsWeight,1));
@@ -555,9 +557,12 @@ void FillItemsTable()
 
 	for(i = 0, n = 1; i < ITEMS_QUANTITY; i++)
 	{
-		if (!checkattribute(Items[i],"sortIndex"))
+		sItem = Items[i].id;
+
+		if (IsGenerableItemIndex(i)) continue;
+		if (!CheckAttribute(Items[i],"sortIndex"))
 		{
-			if (!HasSubStr(Items[i].id,"CompCraft")) continue;//в списке только расходники
+			if (!HasSubStr(sItem,"CompCraft")) continue;//в списке только расходники
 		}
 		else
 		{
@@ -566,11 +571,13 @@ void FillItemsTable()
 
 		}
 		//но, возможно, лучше напрямую список предметов в массиве указывать... не весь список предметов проверяться будет, и при добавлении новых не возникнет неожиданностей
-		if (Items[i].id == "Lockpick") continue;//отмычки пропускаем
-		if (Items[i].id == "CompCraft_Tools" || Items[i].id == "CompCraft_Locksmith" || Items[i].id == "CompCraft_Puleleyka") continue; //исключение выбранных Шахом штук
+		if (sItem == "Lockpick") continue;//отмычки пропускаем
+		if (sItem == "CompCraft_Tools" || sItem == "CompCraft_Locksmith" || sItem == "CompCraft_Puleleyka") continue; //исключение выбранных Шахом штук
 		row = "tr" + n;
 
-		GameInterface.CONSUME_TABLE_LIST.(row).index = i;
+		if (CheckAttribute(Characters[iCurFighter], "TransferItems." + sItem)) buyCount = sti(Characters[iCurFighter].TransferItems.(sItem)); else buyCount = 0;
+
+		GameInterface.CONSUME_TABLE_LIST.(row).id = sItem;
 		GameInterface.CONSUME_TABLE_LIST.(row).td1.icon.group = Items[i].picTexture;
 		GameInterface.CONSUME_TABLE_LIST.(row).td1.icon.image = "itm" + Items[i].picIndex;
 		GameInterface.CONSUME_TABLE_LIST.(row).td1.icon.offset = "-2,0";
@@ -579,14 +586,12 @@ void FillItemsTable()
 		GameInterface.CONSUME_TABLE_LIST.(row).td1.textoffset = "40,0";
 		GameInterface.CONSUME_TABLE_LIST.(row).td1.align = "left";
 		GameInterface.CONSUME_TABLE_LIST.(row).td1.str = GetConvertStr(Items[i].name, "ItemsDescribe.txt");
-		sItem = Items[i].id;
-		if (CheckAttribute(Characters[iCurFighter], "TransferItems." + sItem)) buyCount = sti(Characters[iCurFighter].TransferItems.(sItem)); else buyCount = 0;
 		GameInterface.CONSUME_TABLE_LIST.(row).td2.str = buyCount;
 		buyCount2 = GetConsumeLimit(Characters[iCurFighter], sItem);
 		GameInterface.CONSUME_TABLE_LIST.(row).td3.str = buyCount2;
 		if (!buyCount2) GameInterface.CONSUME_TABLE_LIST.(row).td3.color = argb(255,160,160,160);
-		GameInterface.CONSUME_TABLE_LIST.(row).td4.str = FloatToString(stf(Items[i].Weight), 1);
-		curBuyItemsWeight = curBuyItemsWeight + (buyCount+buyCount2)*stf(Items[i].Weight);
+		GameInterface.CONSUME_TABLE_LIST.(row).td4.str = FloatToString(GetItemWeight(sItem), 1);
+		curBuyItemsWeight = curBuyItemsWeight + (buyCount + buyCount2) * GetItemWeight(sItem);
 		n++;
 	}
 	GameInterface.CONSUME_TABLE_LIST.select = 0;
@@ -603,7 +608,7 @@ void TableSelectChange()
 	switch (sControl)
 	{
 		case "GOODS_TABLE_LIST": iCurGoodIndex = sti(GameInterface.GOODS_TABLE_LIST.(sRow).index); sCurGoodRow = sRow; break;
-		case "CONSUME_TABLE_LIST": iCurItemIndex = sti(GameInterface.CONSUME_TABLE_LIST.(sRow).index); sCurItemRow = sRow; break;
+		case "CONSUME_TABLE_LIST": sCurItemId = GameInterface.CONSUME_TABLE_LIST.(sRow).id; sCurItemRow = sRow; break;
 	}
 }
 

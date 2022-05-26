@@ -536,3 +536,14 @@ string strreplace(string strSource, string from, string into)
 }
 // <-- KK
 
+string DigitsToString(int value, int digits)
+{
+	int v = value;
+	string result = "";
+	for (int i = 0; i < digits; i++)
+	{
+		result = "" + (v % 10) + result;
+		v = v / 10;
+	}
+	return result;
+}

@@ -524,7 +524,8 @@ void Sea_MapLoad()
 	CreateEntity(&SeaFader, "fader");
 	SendMessage(&SeaFader, "lfl", FADER_OUT, 0.7, true);
 	SendMessage(&SeaFader, "l", FADER_STARTFRAME);
-	SendMessage(&SeaFader, "ls", FADER_PICTURE0, "loading\sea_" + rand(31) + ".tga");
+	pchar.loadscreen = "loading\sea_" + rand(31) + ".tga";
+	SendMessage(&SeaFader, "ls", FADER_PICTURE0, pchar.loadscreen);
 
 	bSkipSeaLogin = true;
 
@@ -549,7 +550,8 @@ void Land_MapLoad()
 	CreateEntity(&SeaFader, "fader");
 	SendMessage(&SeaFader, "lfl", FADER_OUT, 0.7, true);
 	SendMessage(&SeaFader, "l", FADER_STARTFRAME);
-	SendMessage(&SeaFader, "ls", FADER_PICTURE0, "loading\sea_" + rand(31) + ".tga");
+	pchar.loadscreen = "loading\sea_" + rand(31) + ".tga";
+	SendMessage(&SeaFader, "ls", FADER_PICTURE0, pchar.loadscreen);
 
 	bSkipSeaLogin = true;
 
@@ -663,14 +665,9 @@ void SeaLogin(ref Login)
 	Event(EVENT_SEA_LOGIN, "");
 	if (bSkipSeaLogin) return;
 
-	// Sea Fader start
-	//Boyer add #20170401-02
-	pchar.loadscreen = "loading\sea_" + rand(31) + ".tga";
-	if (!CheckAttribute(&Login,"ImageName")) { Login.ImageName = "loading\sea_" + rand(31) + ".tga"; }
-
 	CreateEntity(&SeaFader, "fader");
 	SendMessage(&SeaFader, "lfl", FADER_IN, 0.5, true);
-	SendMessage(&SeaFader, "ls", FADER_PICTURE0, Login.ImageName);
+	SendMessage(&SeaFader, "ls", FADER_PICTURE0, pchar.loadscreen);
 
 	// create all sea modules
 	CreateSeaEnvironment();
@@ -1710,4 +1707,42 @@ void ReconnectShips()
             }
         }
 	}*/
+}
+
+#event_handler("CalculateGroupShipPos", "CalculateGroupShipPos")
+ref CalculateGroupShipPos()
+{
+	int shipIndex = GetEventData();
+	float centerPosX = GetEventData();
+	float rotation = GetEventData();
+	float centerPosZ = GetEventData();
+	int shipCount = GetCompanionQuantity(PChar);
+
+	float distanceBetweenShips = 200.0;
+
+	float result[3];
+	result[0] = centerPosX;
+	result[1] = rotation;
+	result[2] = centerPosZ;
+
+	if (shipIndex == 0)
+	{
+		return &result;
+	}
+
+	if ((shipIndex == 1) && (shipCount == 2))
+	{
+		result[0] -= distanceBetweenShips * sin(rotation);
+		result[2] -= distanceBetweenShips * cos(rotation);
+		return &result;
+	}
+
+	float offset_sign = -0.4;
+	if ((shipIndex % 2) == 0) offset_sign = 0.4;
+
+	int offset_in_line = makeint((shipCount - shipIndex - 1) / 2) + 1;
+
+	result[0] -= distanceBetweenShips * (offset_in_line * sin(rotation) + offset_sign * cos(rotation));
+	result[2] -= distanceBetweenShips * (offset_in_line * cos(rotation) - offset_sign * sin(rotation));
+	return &result;
 }

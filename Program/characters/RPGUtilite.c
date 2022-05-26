@@ -1580,22 +1580,26 @@ string GetPerkListText(ref _chref, string _type)
 float GetItemsWeight(ref _chref)
 {
     float   Amount = 0;
-    int     j;
     string  itemID;
     ref     itm;
 
     if (bCabinStarted || bAbordageStarted || !bSeaActive || !CheckAttribute(_chref, "ItemsWeight") || CheckForExchangeAllowed(_chref))
     {
-        for (j=0; j<TOTAL_ITEMS; j++)
-		{
-    		makeref(itm,Items[j]);
+		aref arInventory, arItem;
+		makearef(arInventory, _chref.Items);
+		int inventorySize = GetAttributesNum(arInventory);
 
-			if(CheckAttribute(itm, "ID"))
+		for (int i = 0; i < inventorySize; i++)
+		{
+			arItem = GetAttributeN(arInventory, i);
+			itemID = GetAttributeName(arItem);
+			itm = ItemsFromID(itemID);
+
+			if (CheckAttribute(itm, "ID"))
 			{
-				itemID = itm.id;
-				if (CheckAttribute(_chref, "items."+itemID) && itemID != "MapsAtlas")      // ugeen - атлас карт не учитываем !!
+				if (itemID != "MapsAtlas")      // ugeen - атлас карт не учитываем !!
 				{
-					Amount += sti(_chref.items.(itemID))*stf(itm.Weight);
+					Amount += sti(_chref.items.(itemID)) * GetItemWeight(itemID);
 				}
 			}
         }
@@ -2850,6 +2854,9 @@ void initNewMainCharacter()
 	// Установим начальный дневной рандом
 	PChar.DayRandom = Random();
 	SetAllAchievements(0); // Обнуляем все достижения
+
+	// Устанавливаеи функцию расположения кораблей при выходе в море.
+	PChar.GroupShipPos_event = "CalculateGroupShipPos";
 }
 
 void initMainCharacterItem()

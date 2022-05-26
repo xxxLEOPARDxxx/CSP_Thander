@@ -580,7 +580,8 @@ void LAi_ReloadBoarding()
 	{
 		if(CheckAttribute(&Locations[FindLocation(nextDeck)], "image"))
 		{
-			SendMessage(&boarding_fader, "ls", FADER_PICTURE0, Locations[FindLocation(nextDeck)].image);
+			pchar.loadscreen = Locations[FindLocation(nextDeck)].image;
+			SendMessage(&boarding_fader, "ls", FADER_PICTURE0, pchar.loadscreen);
 		}
 	}
 	float fadeOutTime = RELOAD_TIME_FADE_OUT;

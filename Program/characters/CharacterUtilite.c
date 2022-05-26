@@ -1685,7 +1685,12 @@ int GetChrItemQuantity(ref _refCharacter)
 }
 bool GiveItem2Character(ref _refCharacter,string itemName)
 {
-	return TakeNItems(_refCharacter,itemName,1);
+	bool result = TakeNItems(_refCharacter,itemName,1);
+	if (!result)
+	{
+		trace("Can't give item to character: " + itemName);
+	}
+	return result;
 }
 void TakeItemFromCharacter(ref _refCharacter,string itemName)
 {
@@ -1717,24 +1722,7 @@ void GenerateAndAddItems(ref _chr, string _itemID, int _qty)
 }
 bool CheckCharacterItem(ref _refCharacter,string itemName)
 {
-	ref tmpRef;
-	if(!IsGenerableItem(itemName))
-	{
-		if( CheckAttribute(_refCharacter,"Items."+itemName) && sti(_refCharacter.Items.(itemName))>0 )	return true;
-		else return false;
-	}
-	else
-	{
-		for(int i = ITEMS_QUANTITY; i < TOTAL_ITEMS; i++)
-		{
-			tmpRef = &Items[i];
-			if(CheckAttribute(tmpRef, "ID"))
-			{
-				if(tmpRef.DefItemID == itemName) return true;
-			}
-		}
-		return false;
-	}
+	return CheckAttribute(_refCharacter, "Items." + itemName) && (sti(_refCharacter.Items.(itemName)) > 0);
 }
 
 int GetCharacterItem(ref _refCharacter,string itemName)
@@ -1772,7 +1760,7 @@ bool TakeNItems(ref _refCharacter, string itemName, int n)
 	int q;
 	aref arItm;
 
-	if(Items_FindItem(itemName, &arItm) < 0)
+	if (Items_FindItem(itemName, &arItm) < 0)
 	{
 		trace("TakeNItems warning - can't find " + itemName + " item");
 		return false;
@@ -1820,9 +1808,10 @@ bool TakeNItems(ref _refCharacter, string itemName, int n)
 	}
 	//<-
 
-	if(CheckAttribute(arItm, "price") && sti(arItm.price) == 0)
+	int price = GetItemPrice(itemName);
+	if(price == 0)
 	{
-		if(arItm.ID != "Gold") // Warship. Для нового интерфейса обмена - проверка на золото
+		if(itemName != "Gold") // Warship. Для нового интерфейса обмена - проверка на золото
 		{
 			if(CheckAttribute(_refCharacter, "index"))
 			{
@@ -2108,124 +2097,128 @@ string GenerateRandomName_Generator(int iNation, string sSex)
 //=============================================================================
 string FindCharacterItemByGroup(ref chref, string groupID)
 {
- 	int i,n;
+ 	int i, n;
 	ref refItm;
-    float  maxBladeValue, curBladeValue;
-    string resultItemId;
-   if (CheckAttribute(chref, "CanTakeMushket") && CheckAttribute(chref, "IsMushketer")) return ""; // мушкеты не выбираем
+    float maxValue, curValue;
+    string resultItemId, itemId;
+	float dmg_min, dmg_max, weight;
+
+	// мушкеты не выбираем
+    if (CheckAttribute(chref, "CanTakeMushket") && CheckAttribute(chref, "IsMushketer")) return "";
+
     // boal 17.06.05 офицерам даем кулаки -->
 	if (groupID == BLADE_ITEM_TYPE && IsOfficer(chref) && IsEquipCharacterByItem(chref, "unarmed") && !CheckAttribute(chref, "isMusketer"))
 	{
         RemoveCharacterEquip(chref, BLADE_ITEM_TYPE);
         TakeItemFromCharacter(chref, "unarmed");
 	}
+
 	// boal 17.06.05 офицерам даем кулаки <--
-	maxBladeValue = 0;
+	maxValue = 0;
 	resultItemId  = "";
-	for(i=TOTAL_ITEMS-1; i>=0; i--)
+
+	aref arInventory, arItem;
+	makearef(arInventory, chref.Items);
+	int inventorySize = GetAttributesNum(arInventory);
+
+	for (i = 0; i < inventorySize; i++)
 	{
-		refItm = &Items[i];
-		if( !CheckAttribute(refItm,"groupID") ) continue;
-		if(refItm.groupID!=groupID) continue;
-		if( !CheckAttribute(chref,"items."+refItm.id) ) continue;
-		if(groupID==GUN_ITEM_TYPE)
+		arItem = GetAttributeN(arInventory, i);
+		itemId = GetAttributeName(arItem);
+		refItm = ItemsFromID(itemId);
+
+		if (!CheckAttribute(refItm, "groupID")) continue;
+		if (refItm.groupID != groupID) continue;
+
+		if (groupID == GUN_ITEM_TYPE)
 		{
-			if( !CheckAttribute(refItm,"chargeQ") ) continue;
+			if (!CheckAttribute(refItm, "chargeQ")) continue;
 			n = sti(refItm.chargeQ);
-			if(n<2) {return refItm.id;}
-			if(n<4)
+
+			if ((n >= 2) && !IsCharacterPerkOn(chref, "Gunman")) continue;
+			if ((n >= 4) && !IsCharacterPerkOn(chref, "GunProfessional")) continue;
+
+			curValue = GetItemPrice(itemId);
+			if (curValue > maxValue)
 			{
-				if( IsCharacterPerkOn(chref,"Gunman") ) {return refItm.id;}
-				else continue;
+			    maxValue = curValue;
+			    resultItemId = itemId;
 			}
-            //boal -->
-            if( IsCharacterPerkOn(chref,"GunProfessional") )	{return refItm.id;}
-            // boal <--
+
 			continue;
 		}
+
 		// boal 08.10.04 броню офицерам -->
 		if (groupID == CIRASS_ITEM_TYPE)
 		{
-           if( IsCharacterPerkOn(chref, "Ciras") )	{return refItm.id;}
-           continue;
+			if (!IsCharacterPerkOn(chref, "Ciras")) continue;
+
+			if (!CheckAttribute(refItm, "CirassLevel"))
+			{
+				continue;
+			}
+
+			curValue = sti(refItm.CirassLevel);
+			if (curValue > maxValue)
+			{
+			    maxValue = curValue;
+			    resultItemId = refItm.id;
+			}
+
+			continue;
 		}
 		// boal 08.10.04 броню офицерам <--
 
 		// Lugger -->
 		if (groupID == BACKPACK_ITEM_TYPE)
 		{
-			if(!CheckAttribute(refItm, "BackPackWeight"))
+			if (!CheckAttribute(refItm, "BackPackWeight"))
 			{
 				continue;
 			}
 
-			if(sti(refItm.BackPackWeight) >= 75)
+			curValue = sti(refItm.BackPackWeight);
+			if (curValue > maxValue)
 			{
-				return refItm.id;
-			}
-			else
-			{
-				if(sti(refItm.BackPackWeight) >= 50)
-				{
-					return refItm.id;
-				}
-				else
-				{
-					if(sti(refItm.BackPackWeight) >= 36)
-					{
-						return refItm.id;
-					}
-					else
-					{
-						if(sti(refItm.BackPackWeight) >= 20)
-						{
-							return refItm.id;
-						}
-						else
-						{
-							if(sti(refItm.BackPackWeight) >= 10)
-							{
-								return refItm.id;
-							}
-							else
-							{
-								continue;
-							}
-						}
-					}
-				}
+			    maxValue = curValue;
+			    resultItemId = refItm.id;
 			}
 
-           		continue;
+			continue;
 		}
 		// Lugger <--
 
 		// перебор на лучшую саблю
 		if (groupID == BLADE_ITEM_TYPE)
 		{
+			GetBladeParams(itemId, &dmg_min, &dmg_max, &weight);
+
 			// формула лучшего выбора
-			curBladeValue = (stf(refItm.dmg_min)*3 + (stf(refItm.dmg_max)*GetCharacterSkill(chref, refItm.FencingType)) / SKILL_MAX) / GetEnergyBladeDrain(stf(refItm.Weight));// + stf(refItm.piercing) + stf(refItm.block);
-			if (curBladeValue > maxBladeValue)
+			curValue = (dmg_min * 3 + (dmg_max * GetCharacterSkill(chref, refItm.FencingType)) / SKILL_MAX) / GetEnergyBladeDrain(weight);// + stf(refItm.piercing) + stf(refItm.block);
+			if (curValue > maxValue)
 			{
-			    maxBladeValue = curBladeValue;
-			    resultItemId  = refItm.id;
+			    maxValue = curValue;
+			    resultItemId = itemId;
 			}
+
+			continue;
 		}
-		else
-		{
-		    return refItm.id;
-		}
+
+		return refItm.id;
 	}
+
 	if (resultItemId != "")
 	{
         return resultItemId;
 	}
+
 	// boal 17.06.05 офицерам даем кулаки -->
 	if (groupID == BLADE_ITEM_TYPE && IsOfficer(chref) && sti(chref.index) != GetMainCharacterIndex() && !CheckAttribute(chref, "isMusketer"))
 	{
         GiveItem2Character(chref, "unarmed");
         EquipCharacterByItem(chref, "unarmed");
 	}
+
 	// boal 17.06.05 офицерам даем кулаки <--
 	return "";  //ничего не делать далее
 }
@@ -2313,32 +2306,34 @@ bool IsEquipCharacterByMap(ref chref, string itemID)
 // получить суммарный вес экипированных предметов в зависимости от группы -> нужно для атласа карт
 float GetEquippedItemsWeight(ref chref, string groupID)
 {
-	int 	j;
 	string  itemID;
     ref     itm;
 	float 	fEquipWeight = 0.0;
 
-	for (j=0; j<TOTAL_ITEMS; j++)
+	aref arInventory, arItem;
+	makearef(arInventory, chref.Items);
+	int inventorySize = GetAttributesNum(arInventory);
+
+	for (int i = 0; i < inventorySize; i++)
 	{
-		makeref(itm,Items[j]);
-		if(CheckAttribute(itm, "ID"))
+		arItem = GetAttributeN(arInventory, i);
+		itemID = GetAttributeName(arItem);
+		itm = ItemsFromID(itemID);
+
+		if (CheckAttribute(itm, "ID"))
 		{
-			itemID = itm.id;
-			if(groupID == MAPS_ITEM_TYPE)
+			if (groupID == MAPS_ITEM_TYPE)
 			{
-				if (!CheckAttribute(itm,"mapSpecial"))
+				if (!CheckAttribute(itm, "mapSpecial") && IsEquipCharacterByMap(chref, itemID))
 				{
-					if (CheckAttribute(chref, "items."+itemID) && IsEquipCharacterByMap(chref, itemID))
-					{
-						fEquipWeight += stf(itm.Weight);
-					}
+					fEquipWeight += GetItemWeight(itemID);
 				}
 			}
 			else
 			{
-				if (CheckAttribute(chref, "items."+itemID) && IsEquipCharacterByItem(chref, itemID))
+				if (IsEquipCharacterByItem(chref, itemID))
 				{
-					fEquipWeight += stf(itm.Weight);
+					fEquipWeight += GetItemWeight(itemID);
 				}
 			}
 		}
@@ -2356,18 +2351,17 @@ string GetCharacterEquipByGroup(ref chref, string groupID)
 string GetCharacterEquipPictureByGroup(ref chref, string groupID)
 {
 	string sItem = GetCharacterEquipByGroup(chref, groupID);
-	for(int i = TOTAL_ITEMS-1; i >= 0; i--)
+	int index = FindItem(sItem);
+	if (index < 0)
 	{
-		if(CheckAttribute(&items[i], "ID") && items[i].id == sItem)
-		{
-			if(Items[i].id == "spyglass5")
-			{
-				Items[i].picIndex = 4;
-			}
-			return groupID + items[i].picIndex;
-		}
+		return "";
 	}
-	return "";
+
+	if (sItem == "spyglass5")
+	{
+		Items[index].picIndex = 4;
+	}
+	return groupID + Items[index].picIndex;
 }
 
 void RemoveCharacterEquip(ref chref, string groupID)
@@ -2503,16 +2497,21 @@ void SetEquipedItemToCharacter(ref chref, string groupID, string itemID)
 			UnsetSpecialAttributes(chref);
 		}
 
-		if(CheckAttribute(arItm,"dmg_min"))
-		{	LAi_BladeSetDamageMin(chref,stf(arItm.dmg_min));
-		} else
-		{	LAi_BladeSetDamageMin(chref,0.0);
+		if (itemID != "")
+		{
+			float dmg_min, dmg_max, weight;
+			GetBladeParams(itemID, &dmg_min, &dmg_max, &weight);
+
+			LAi_BladeSetDamageMin(chref, dmg_min);
+			LAi_BladeSetDamageMax(chref, dmg_max);
+			LAi_BladeEnergyType(chref, GetEnergyBladeDrain(weight));  // энергоемкость от веса
 		}
-		if(CheckAttribute(arItm,"dmg_max"))
-		{	LAi_BladeSetDamageMax(chref,stf(arItm.dmg_max));
-		} else
-		{	LAi_BladeSetDamageMax(chref,0.0);
+		else
+		{
+			LAi_BladeSetDamageMin(chref, 0.0);
+			LAi_BladeSetDamageMax(chref, 0.0);
 		}
+
 		if(CheckAttribute(arItm,"piercing"))
 		{	LAi_BladeSetPiercing(chref,stf(arItm.piercing)*0.01);
 		} else
@@ -2528,10 +2527,6 @@ void SetEquipedItemToCharacter(ref chref, string groupID, string itemID)
 		{	LAi_BladeFencingType(chref, arItm.FencingType);
 		} else
 		{	LAi_BladeFencingType(chref, "Fencing");
-		}
-		if(CheckAttribute(arItm,"Weight")) //eddy.при загрузки локации если у ГГ нет оружия - ошибка
-		{
-			LAi_BladeEnergyType(chref, GetEnergyBladeDrain(stf(arItm.Weight)) );  // энергоемкость от веса
 		}
 		// boal <--
 	break;
@@ -3874,7 +3869,7 @@ void RefreshEquippedMaps(ref chref)
 	string  itemID, groupID;
     ref     itm;
 
-	for (i=0; i<TOTAL_ITEMS; i++)
+	for (i=0; i<ITEMS_QUANTITY; i++)
 	{
 		makeref(itm,Items[i]);
 		if(CheckAttribute(itm, "ID") && CheckAttribute(itm, "groupID"))

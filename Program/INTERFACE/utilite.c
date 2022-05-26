@@ -616,22 +616,22 @@ string GlobalStringConvert(string strID)
 
 void EnumerateIcons(string sDirectory, string sFileMask, string sControlName, int iAddListSize)
 {
-	/*object oTmp;
-	//Boyer change #20170301-2 to new function as NFFindFiles (NF) functions no longer exist in our source
-	int iNumFiles = FindFiles(&oTmp, sDirectory, sFileMask, false);
-	Trace("Find files : " + iNumFiles);
-	for (int i=0; i<iNumFiles; i++)
+	object fileFinder;
+	fileFinder.dir = sDirectory;
+	fileFinder.mask = sFileMask;
+	CreateEntity(&fileFinder, "FINDFILESINTODIRECTORY");
+	aref arFileList;
+	makearef(arFileList, fileFinder.filelist);
+	int iNumFiles = GetAttributesNum(arFileList);
+	for (int i = 0; i < iNumFiles; i++)
 	{
+		string sFile = "id" + i;
 		string attrName = "pic" + (i + 1);
-		string sFile = "f" + i;
-		GameInterface.(sControlName).(attrName).name1 = oTmp.(sFile).FilePath;
-		GameInterface.(sControlName).(attrName).FileName = oTmp.(sFile).FileName;
-		GameInterface.(sControlName).(attrName).FileName.Name = oTmp.(sFile).Name;
-		GameInterface.(sControlName).(attrName).FileName.Ext = oTmp.(sFile).Ext;
-		Trace("Find file : " + oTmp.(sFile).FileName);
+
+		GameInterface.(sControlName).(attrName).name1 = sDirectory + "\" + arFileList.(sFile);
+		GameInterface.(sControlName).(attrName).FileName = arFileList.(sFile);
 	}
 	GameInterface.(sControlName).ListSize = iNumFiles + iAddListSize;
-	//SendMessage(&GameInterface,"lsl",MSG_INTERFACE_SCROLL_CHANGE,sControlName,-1);*/
 }
 
 void CreateTooltip(string header, string text1, int color1, string text2, int color2, string text3, int color3, string text4, int color4, string picTexture, string picGroup, string picImage, int nPicWidth, int nPicHeight)
@@ -976,9 +976,9 @@ string GetAchievementIcon(string ach_name) // Получим описание д
 	return describeStr;
 }
 
-string GetItemDescribe(int iGoodIndex)
+string GetItemDescribe(string sItemID)
 {
-	string GoodName = Items[iGoodIndex].name;
+	int iGoodIndex = Items_FindItemIdx(sItemID);
 	ref    arItm = &Items[iGoodIndex];
 	int    lngFileID = LanguageOpenFile("ItemsDescribe.txt");
     string describeStr = "";
@@ -1063,9 +1063,24 @@ string GetItemDescribe(int iGoodIndex)
 		}
 		if(arItm.groupID==BLADE_ITEM_TYPE)
 		{
+			float dmg_min, dmg_max, weight;
+			GetBladeParams(sItemID, &dmg_min, &dmg_max, &weight);
+			int price = CalculateBladePrice(arItm.FencingType, dmg_min, dmg_max, weight);
+
+			// Собираем фейковый айтем, так как генерируемые параметры не содержатся в изначальном айтеме
+			object tempObj;
+			aref arTemp;
+			makearef(arTemp, tempObj);
+			CopyAttributes(arTemp, arItm);
+			tempObj.dmg_min = dmg_min;
+			tempObj.dmg_max = dmg_max;
+			tempObj.weight = weight;
+			tempObj.price = price;
+
 			describeStr += GetAssembledString(
 				LanguageConvertString(lngFileID,"weapon blade parameters"),
-				arItm) + newStr();
+				arTemp) + newStr();
+
 			if (CheckAttribute(arItm, "FencingType"))
 			{
     			arItm.FencingTypeName = XI_ConvertString(arItm.FencingType);
@@ -1110,11 +1125,7 @@ string GetItemDescribe(int iGoodIndex)
 			}
 		}
 	}
-	//aw013 -->
-	float fItmPrice;
-	if (arItm.price != 0 && arItm.Weight != 0) fItmPrice = stf(arItm.price) / stf(arItm.Weight);
-	else fItmPrice=0;
-	describeStr += "\nЦена " + makeint(arItm.price) + " / Вес " + FloatToString(stf(arItm.weight), 2) + newStr();
+	describeStr += "\nЦена " + GetItemPrice(sItemID) + " / Вес " + FloatToString(GetItemWeight(sItemID), 2) + newStr();
 	if (CheckAttribute(arItm, "groupID"))//Книги, процент прочитанности - Gregg
 	{
 		if(arItm.groupID == BOOK_ITEM_TYPE)

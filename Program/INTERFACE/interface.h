@@ -1,58 +1,57 @@
 #define INTERFACE_QUANTITY				77
 
 #define INTERFACE_STORE					0
-#define INTERFACE_SHIPYARD				1
-#define INTERFACE_CHARACTER				2  // просмотр НПС и выбор специалc
-#define INTERFACE_MAINMENU				3
-#define INTERFACE_HIRECREW				4
-#define INTERFACE_RANSACK_MAIN			5 // более не при делах, но где-то идут проверки на определение, вызов  INTERFACE_TRANSFER_MAIN по сути, но с поправкой на море и абордаж
-#define INTERFACE_TRANSFER_MAIN			6
-#define INTERFACE_ITEMS					7
-#define INTERFACE_CHARACTER_SELECT		8  // начало игры
-#define INTERFACE_QUESTBOOK				9
-#define INTERFACE_SAVELOAD				10
-#define INTERFACE_FORTCAPTURE			11
-#define INTERFACE_ITEMSBOX				12
-#define INTERFACE_OPTIONSCREEN			13
-#define INTERFACE_CHARACTER_ALL			14
-#define INTERFACE_ITEMSTRADE			15
-#define INTERFACE_SALARY				16
-#define INTERFACE_PS_HERO	     		17  //boal
-#define INTERFACE_NATIONRELATION				18
-#define INTERFACE_FOR_TEST  			19  // для тестов
-#define INTERFACE_MAP					20
-#define INTERFACE_CANNONS 				21
-#define INTERFACE_TRADEBOOK				22
-#define INTERFACE_NATION_LEGEND			23
-#define INTERFACE_PAPER_MAP				24
-#define INTERFACE_COLONY_CAPTURE		25
-#define INTERFACE_ABOUT					26
-#define INTERFACE_SAILSGERALD 			27  // герб на парус
-//#define INTERFACE_RIOT_RESULT			27
-#define INTERFACE_NET_FINDGAME			28
-#define INTERFACE_NET_CREATEGAME		29
-#define INTERFACE_NET_BUY				30
-#define INTERFACE_NET_CHAT				31
-#define INTERFACE_NET_GAMESTATE			32
-#define INTERFACE_NET_TOPLIST			33
-#define INTERFACE_NET_CHATSTRING		34
-#define INTERFACE_NET_PLAYERSETTINGS	35
-#define INTERFACE_NET_ENDGAME			36
-#define INTERFACE_GAMEMENU			    37
-#define INTERFACE_DISEASE_ALERT		    38
-#define INTERFACE_SHIP_CHOOSE			39   // to_do
-#define INTERFACE_COLONY_INFO			40   // to_do
-#define INTERFACE_QUICK_SAVE			41
-#define INTERFACE_NET_NETMENU			42
-#define INTERFACE_DEBUGER   			43 //boal
-#define INTERFACE_BOAL_BETA             44
-#define INTERFACE_DICE_GAME             45
-#define INTERFACE_CARDSGAME             46
-//#define INTERFACE_BOAL_CHARACTER        47
+#define INTERFACE_STORE_GOOD_OLD		1
+#define INTERFACE_SHIPYARD				2
+#define INTERFACE_CHARACTER				3  // просмотр НПС и выбор специалc
+#define INTERFACE_MAINMENU				4
+#define INTERFACE_HIRECREW				5
+#define INTERFACE_RANSACK_MAIN			6 // более не при делах, но где-то идут проверки на определение, вызов  INTERFACE_TRANSFER_MAIN по сути, но с поправкой на море и абордаж
+#define INTERFACE_TRANSFER_MAIN			7
+#define INTERFACE_ITEMS					8 
+#define INTERFACE_CHARACTER_SELECT		9	// начало игры
+#define INTERFACE_QUESTBOOK				10
+#define INTERFACE_SAVELOAD				11
+#define INTERFACE_FORTCAPTURE			12
+#define INTERFACE_ITEMSBOX				13
+#define INTERFACE_OPTIONSCREEN			14
+#define INTERFACE_CHARACTER_ALL			15
+#define INTERFACE_ITEMSTRADE			16
+#define INTERFACE_SALARY				17
+#define INTERFACE_PS_HERO	     		18  //boal
+#define INTERFACE_NATIONRELATION		19
+#define INTERFACE_FOR_TEST  			20  // для тестов
+#define INTERFACE_MAP					21
+#define INTERFACE_CANNONS 				22
+#define INTERFACE_TRADEBOOK				23
+#define INTERFACE_NATION_LEGEND			24
+#define INTERFACE_PAPER_MAP				25
+#define INTERFACE_COLONY_CAPTURE		26
+#define INTERFACE_ABOUT					27
+#define INTERFACE_SAILSGERALD 			28  // герб на парус
+#define INTERFACE_NET_FINDGAME			29
+#define INTERFACE_NET_CREATEGAME		30
+#define INTERFACE_NET_BUY				31
+#define INTERFACE_NET_CHAT				32
+#define INTERFACE_NET_GAMESTATE			33
+#define INTERFACE_NET_TOPLIST			34
+#define INTERFACE_NET_CHATSTRING		35
+#define INTERFACE_NET_PLAYERSETTINGS	36
+#define INTERFACE_NET_ENDGAME			37
+#define INTERFACE_GAMEMENU			    38
+#define INTERFACE_DISEASE_ALERT		    39
+#define INTERFACE_SHIP_CHOOSE			40   // to_do
+#define INTERFACE_COLONY_INFO			41   // to_do
+#define INTERFACE_QUICK_SAVE			42
+#define INTERFACE_NET_NETMENU			43
+#define INTERFACE_DEBUGER   			44 //boal
+#define INTERFACE_BOAL_BETA             45
+#define INTERFACE_DICE_GAME             46
+#define INTERFACE_CARDSGAME             47
 #define INTERFACE_FRAMEFORM             48
 #define INTERFACE_LEAVE_BATTLE          49
 // Warship -->
-#define INTERFACE_BEST_MAP			50	// Интерфейс отличной карты
+#define INTERFACE_BEST_MAP				50	// Интерфейс отличной карты
 #define INTERFACE_TAVERN_WAIT			51	// Интерфейс отдыха
 #define INTERFACE_GOODS_TRANSFER		52	// Интерфейс закупки товара казначеем
 // <-- Warship
@@ -86,7 +85,7 @@
 #define INTERFACE_POINTS_EX				72
 
 #define INTERFACE_CRAFT_ALL				73
-#define	INTERFACE_ARENA				74
+#define	INTERFACE_ARENA					74
 #define	INTERFACE_ACADEMY_LAND			75
 
 #define INTERFACE_SHIPYARD2				76

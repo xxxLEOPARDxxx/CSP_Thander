@@ -124,6 +124,12 @@ void GetRealOptions(ref optref)
 		optref.cameramode.EnabledCMControls = true;
 	}
 
+	if( CheckAttribute(&InterfaceStates,"EnabledOldStore") ) {
+		optref.cameramode.EnabledOldStore = sti(InterfaceStates.EnabledOldStore);
+	} else {
+		optref.cameramode.EnabledOldStore = false;
+	}
+
 	if( CheckAttribute(&InterfaceStates,"EnabledShipMarks") ) {
 		optref.cameramode.EnabledShipMarks = sti(InterfaceStates.EnabledShipMarks);
 	} else {
@@ -287,6 +293,12 @@ void SetCurentOptions(ref optref)
 		InterfaceStates.EnabledCMControls = false;
 	}
 
+	if( CheckAttribute(optref,"cameramode.EnabledOldStore") ) {
+		InterfaceStates.EnabledOldStore = optref.cameramode.EnabledOldStore;
+	} else {
+		InterfaceStates.EnabledOldStore = false;
+	}
+
 	if( CheckAttribute(optref,"cameramode.EnabledShipMarks") ) {
 		InterfaceStates.EnabledShipMarks = optref.cameramode.EnabledShipMarks;
 	} else {
@@ -417,6 +429,7 @@ void SetCurentOptions(ref optref)
 
 	ControlsMakeInvert();
 	SetRealMouseSensitivity();
+	SetPerspectiveSettings();
 }
 
 void ReadSavedOptions(ref gopt)

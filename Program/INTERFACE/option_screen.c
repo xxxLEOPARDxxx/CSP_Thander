@@ -243,6 +243,12 @@ void IReadVariableAfterInit()
 	}
 	SendMessage(&GameInterface,"lslll",MSG_INTERFACE_MSG_TO_NODE,"CM_CONTROLS_CHECKBOX", 2, 1, nEnabledCMControls );
 
+	int nEnabledOldStore = 0;
+	if( CheckAttribute(&InterfaceStates,"EnabledOldStore") ) {
+		nEnabledOldStore = sti(InterfaceStates.EnabledOldStore);
+	}
+	SendMessage(&GameInterface,"lslll",MSG_INTERFACE_MSG_TO_NODE,"GOOD_OLD_STORE_CHECKBOX", 2, 1, nEnabledOldStore );
+
 	int nEnabledShipMarks = 1;
 	if( CheckAttribute(&InterfaceStates,"EnabledShipMarks") ) {
 		nEnabledShipMarks = sti(InterfaceStates.EnabledShipMarks);
@@ -487,6 +493,12 @@ void procCheckBoxChange()
 	{
 		{ // Show battle mode border
 			InterfaceStates.EnabledCMControls = bBtnState;
+		}
+	}
+	if( sNodName == "GOOD_OLD_STORE_CHECKBOX" )
+	{
+		{ // Show battle mode border
+			InterfaceStates.EnabledOldStore = bBtnState;
 		}
 	}
 
@@ -1358,6 +1370,14 @@ void ShowInfo()
 		case "CM_CONTROLS_CHECKBOX":
 			sHeader = XI_ConvertString("CMControls Mode");
 			sText1 = XI_ConvertString("CMControls Mode_descr");
+		break;
+
+		case "GOOD_OLD_STORE_CHECKBOX":
+			sHeader = XI_ConvertString("Store Mode");
+			sText1 = XI_ConvertString("Store Mode_descr");
+            sPicture = "INTERFACES\FaqPictures\OLDSTORE_CHECKBOX.png";
+			xx = 607;
+			yy = 258;
 		break;
 
 		case "FLAGALLWDM_CHECKBOX":

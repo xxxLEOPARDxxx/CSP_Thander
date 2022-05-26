@@ -13,7 +13,7 @@ string sChrId;
 ref refCharacter, refStoreChar; // текущий ГГ (оф) и торгаш
 int iCharQty, iStoreQty, iCharPrice, iStorePrice;
 float fWeight;
-int  iCurGoodsIdx;
+string sCurItem;
 
 //// {*} BUHO-FIST - ADDED CODE - Fist state variable
 #define FIT_ALL			0		// Normal
@@ -285,119 +285,119 @@ void DoPostExit()
 void CalculateInfoData()
 {
 	AddToTable();
-	ShowGoodsInfo(sti(GameInterface.TABLE_LIST.tr1.index));
+	ShowGoodsInfo(GameInterface.TABLE_LIST.tr1.id);
 }
 
 void AddToTable()
 {
 	int n, i, iTemp;
-	string row, sShipGroup;
-	string sGood, sTemp;
-	int  idLngFile;
+	string row, sItem;
+	int idLngFile;
 	int leftQty, rightQty;
-	n = 1;
 	idLngFile = LanguageOpenFile("ItemsDescribe.txt");
 	Table_Clear("TABLE_LIST", false, true, false);
 
-	// Сначало уникальные предметы
-	for (i = ITEMS_QUANTITY; i < TOTAL_ITEMS; i++)
+	object allItems;
+	aref arInventory, arItem;
+	ref rItem;
+
+	if (FIT_FilterState != FIT_TRADER)
 	{
-		row = "tr" + n;
-
-		if(!CheckAttribute(&Items[i], "ID"))
+		makearef(arInventory, refCharacter.Items);
+		n = GetAttributesNum(arInventory);
+		for (i = 0; i < n; i++)
 		{
-			continue;
-		}
+			arItem = GetAttributeN(arInventory, i);
+			sItem = GetAttributeName(arItem);
+			row = DigitsToString(FindItem(sItem), 4);
 
-		sGood = Items[i].id;
-		// проверка на экипировку, их не продаем
-		leftQty  = GetCharacterFreeItem(refCharacter, sGood);
-		rightQty = GetCharacterFreeItem(refStoreChar, sGood);
-
-		if (leftQty > 0 || rightQty > 0)
-		{
-			//// {*} BUHO-FIST - ADDED CODE - Filters at work.
-			if (leftQty == 0 && FIT_FilterState == FIT_BACKPACK) continue;
-			if (rightQty == 0 && FIT_FilterState == FIT_TRADER) continue;
-			//// {*} BUHO END ADDITION
-			GameInterface.TABLE_LIST.(row).td1.str = leftQty;
-			GameInterface.TABLE_LIST.(row).td2.str = FloatToString(stf(Items[i].Weight) * leftQty, 1);
-			GameInterface.TABLE_LIST.(row).td7.str = FloatToString(stf(Items[i].Weight), 1);
-
-			GameInterface.TABLE_LIST.(row).td6.str = rightQty;
-
-			GameInterface.TABLE_LIST.(row).td4.icon.group = Items[i].picTexture;
-			GameInterface.TABLE_LIST.(row).td4.icon.image = "itm" + Items[i].picIndex;
-			GameInterface.TABLE_LIST.(row).td4.icon.offset = "-2, 0";
-			GameInterface.TABLE_LIST.(row).td4.icon.width = 20;
-			GameInterface.TABLE_LIST.(row).td4.icon.height = 20;
-			GameInterface.TABLE_LIST.(row).td4.textoffset = "20,0";
-			GameInterface.TABLE_LIST.(row).td4.str = LanguageConvertString(idLngFile, Items[i].name);
-
-			iTemp = CheckItemInSets(refCharacter, sGood);
-			if (iTemp > 0)
+			if (IsGenerableItem(sItem))
 			{
-				GameInterface.TABLE_LIST.(row).td4.str = GameInterface.TABLE_LIST.(row).td4.str + " (К" + iTemp + ")";
-				//sTemp = "Set" + iTemp;
-				//GameInterface.TABLE_LIST.(row).td4.str = GameInterface.TABLE_LIST.(row).td4.str + " (" + refCharacter.(sTemp).nameset + ")";
-				GameInterface.TABLE_LIST.(row).td4.color = argb(255,196,196,255);//подцвечиваем предметы из комплектов
-				GameInterface.TABLE_LIST.(row).td1.color = argb(255,196,196,255);
+				// Сначала уникальные предметы
+				row = "a" + row + sItem;
+			}
+			else
+			{
+				row = "b" + row;
 			}
 
-			GameInterface.TABLE_LIST.(row).index = i;
-			GameInterface.TABLE_LIST.(row).td4.scale = 0.9;
-			GameInterface.TABLE_LIST.(row).td3.str = GetTradeItemPrice(i, PRICE_TYPE_BUY);
-			GameInterface.TABLE_LIST.(row).td5.str = GetTradeItemPrice(i, PRICE_TYPE_SELL);
-			n++;
+			allItems.(row) = sItem;
 		}
 	}
 
-	for (i = 0; i < ITEMS_QUANTITY; i++)
+	if (FIT_FilterState != FIT_BACKPACK)
 	{
-		row = "tr" + n;
-		sGood = Items[i].id;
-		if (IsQuestUsedItem(Items[i].id)) continue;
-		// проверка на экипировку, их не продаем
-		leftQty  = GetCharacterFreeItem(refCharacter, sGood);
-		rightQty = GetCharacterFreeItem(refStoreChar, sGood);
-
-		if (leftQty > 0 || rightQty > 0)
+		makearef(arInventory, refStoreChar.Items);
+		n = GetAttributesNum(arInventory);
+		for (i = 0; i < n; i++)
 		{
-			//// {*} BUHO-FIST - ADDED CODE - Filters at work.
-			if (leftQty == 0 && FIT_FilterState == FIT_BACKPACK) continue;
-			if (rightQty == 0 && FIT_FilterState == FIT_TRADER) continue;
-			//// {*} BUHO END ADDITION
-			GameInterface.TABLE_LIST.(row).td1.str = leftQty ;
-			GameInterface.TABLE_LIST.(row).td2.str = FloatToString(stf(Items[i].Weight) * sti(GameInterface.TABLE_LIST.(row).td1.str), 1);
-			GameInterface.TABLE_LIST.(row).td7.str = FloatToString(stf(Items[i].Weight), 1);
+			arItem = GetAttributeN(arInventory, i);
+			sItem = GetAttributeName(arItem);
+			row = DigitsToString(FindItem(sItem), 4);
 
-			GameInterface.TABLE_LIST.(row).td6.str = rightQty;
-
-			GameInterface.TABLE_LIST.(row).td4.icon.group = Items[i].picTexture;
-			GameInterface.TABLE_LIST.(row).td4.icon.image = "itm" + Items[i].picIndex;
-			GameInterface.TABLE_LIST.(row).td4.icon.offset = "-2, 0";
-			GameInterface.TABLE_LIST.(row).td4.icon.width = 20;
-			GameInterface.TABLE_LIST.(row).td4.icon.height = 20;
-			GameInterface.TABLE_LIST.(row).td4.textoffset = "20,0";
-			GameInterface.TABLE_LIST.(row).td4.str = LanguageConvertString(idLngFile, Items[i].name);
-
-			iTemp = CheckItemInSets(refCharacter, sGood);
-			if (iTemp > 0)
+			if (IsGenerableItem(sItem))
 			{
-				GameInterface.TABLE_LIST.(row).td4.str = GameInterface.TABLE_LIST.(row).td4.str + " (К" + iTemp + ")";
-				//sTemp = "Set" + iTemp;
-				//GameInterface.TABLE_LIST.(row).td4.str = GameInterface.TABLE_LIST.(row).td4.str + " (" + refCharacter.(sTemp).nameset + ")";
-				GameInterface.TABLE_LIST.(row).td4.color = argb(255,196,196,255);//подцвечиваем предметы из комплектов
-				GameInterface.TABLE_LIST.(row).td1.color = argb(255,196,196,255);
+				row = "a" + row + sItem;
+			}
+			else
+			{
+				row = "b" + row;
 			}
 
-			GameInterface.TABLE_LIST.(row).index = i;
-			GameInterface.TABLE_LIST.(row).td4.scale = 0.9;
-			//GameInterface.TABLE_LIST.(row).td4.color = iColor;
-			GameInterface.TABLE_LIST.(row).td3.str = GetTradeItemPrice(i, PRICE_TYPE_BUY);
-			GameInterface.TABLE_LIST.(row).td5.str = GetTradeItemPrice(i, PRICE_TYPE_SELL);
-			n++;
+			allItems.(row) = sItem;
 		}
+	}
+
+	makearef(arInventory, allItems);
+	sort(arInventory);
+
+	n = 1;
+	for (i = 0; i < GetAttributesNum(arInventory); i++)
+	{
+		arItem = GetAttributeN(arInventory, i);
+		sItem = GetAttributeValue(arItem);
+		rItem = ItemsFromID(sItem);
+
+		if (IsQuestUsedItem(sItem)) continue;
+
+		row = "tr" + n;
+		// проверка на экипировку, их не продаем
+		leftQty  = GetCharacterFreeItem(refCharacter, sItem);
+		rightQty = GetCharacterFreeItem(refStoreChar, sItem);
+
+		if ((leftQty == 0) && (rightQty == 0)) continue;
+		//// {*} BUHO-FIST - ADDED CODE - Filters at work.
+		if (leftQty == 0 && FIT_FilterState == FIT_BACKPACK) continue;
+		if (rightQty == 0 && FIT_FilterState == FIT_TRADER) continue;
+		//// {*} BUHO END ADDITION
+
+		GameInterface.TABLE_LIST.(row).id = sItem;
+		GameInterface.TABLE_LIST.(row).td1.str = leftQty;
+		GameInterface.TABLE_LIST.(row).td2.str = FloatToString(GetItemWeight(sItem) * leftQty, 1);
+		GameInterface.TABLE_LIST.(row).td7.str = FloatToString(GetItemWeight(sItem), 1);
+
+		GameInterface.TABLE_LIST.(row).td6.str = rightQty;
+
+		GameInterface.TABLE_LIST.(row).td4.icon.group = rItem.picTexture;
+		GameInterface.TABLE_LIST.(row).td4.icon.image = "itm" + rItem.picIndex;
+		GameInterface.TABLE_LIST.(row).td4.icon.offset = "-2, 0";
+		GameInterface.TABLE_LIST.(row).td4.icon.width = 20;
+		GameInterface.TABLE_LIST.(row).td4.icon.height = 20;
+		GameInterface.TABLE_LIST.(row).td4.textoffset = "20,0";
+		GameInterface.TABLE_LIST.(row).td4.str = LanguageConvertString(idLngFile, rItem.name);
+
+		iTemp = CheckItemInSets(refCharacter, sItem);
+		if (iTemp > 0)
+		{
+			GameInterface.TABLE_LIST.(row).td4.str = GameInterface.TABLE_LIST.(row).td4.str + " (К" + iTemp + ")";
+			GameInterface.TABLE_LIST.(row).td4.color = argb(255,196,196,255);//подцвечиваем предметы из комплектов
+			GameInterface.TABLE_LIST.(row).td1.color = argb(255,196,196,255);
+		}
+
+		GameInterface.TABLE_LIST.(row).td4.scale = 0.9;
+		GameInterface.TABLE_LIST.(row).td3.str = GetTradeItemPrice(sItem, PRICE_TYPE_BUY);
+		GameInterface.TABLE_LIST.(row).td5.str = GetTradeItemPrice(sItem, PRICE_TYPE_SELL);
+		n++;
 	}
 	NextFrameRefreshTable();
 	LanguageCloseFile(idLngFile);
@@ -420,7 +420,7 @@ void DoChange1()
 {
 	//AddToTable();
 	string row = "tr"+sti(GameInterface.TABLE_LIST.select);
-	if (row != "tr0") ShowGoodsInfo(sti(GameInterface.TABLE_LIST.(row).index));
+	if (row != "tr0") ShowGoodsInfo(GameInterface.TABLE_LIST.(row).id);
 	nocheck = true;
 }
 
@@ -516,7 +516,7 @@ void CS_TableSelectChange()
 	string sRow = "tr" + (iSelected);
 	SetCharWeight();
 	SetVariable();
-	ShowGoodsInfo(sti(GameInterface.TABLE_LIST.(sRow).index));
+	ShowGoodsInfo(GameInterface.TABLE_LIST.(sRow).id);
 }
 
 void FillCharactersScroll()
@@ -642,51 +642,49 @@ void SetCharWeight()
 	fStoreWeight = 0;
 }
 // инфа о предмете
-void ShowGoodsInfo(int iGoodIndex)
+void ShowGoodsInfo(string sItemID)
 {
-	string GoodName = Items[iGoodIndex].name;
-	ref	arItm = &Items[iGoodIndex];
+	sCurItem = sItemID;
+	ref	arItm = &Items[FindItem(sCurItem)];
+	string GoodName = arItm.name;
 	int	lngFileID = LanguageOpenFile("ItemsDescribe.txt");
 	string sHeader = LanguageConvertString(lngFileID, GoodName);
-
-	iCurGoodsIdx = iGoodIndex;
 
 	string describeStr = "";
 
 	if (bBettaTestMode)
 	{
-		describeStr += " id = " + Items[iGoodIndex].id + NewStr();
+		describeStr += " id = " + sCurItem + NewStr();
 		if(CheckAttribute(arItm, "dmg_min.old") && CheckAttribute(arItm, "dmg_max.old"))
 		{
 			describeStr += "OldDmgMin = " + sti(arItm.dmg_min.old) + ", OldDmgMax = "+sti(arItm.dmg_max.old) + newStr();
 		}
 	}
-	describeStr += GetItemDescribe(iGoodIndex);
+	describeStr += GetItemDescribe(sCurItem);
 
-	fWeight = stf(Items[iGoodIndex].weight);
+	fWeight = GetItemWeight(sCurItem);
 
 	BuyOrSell = 0;
 	SetFormatedText("QTY_TypeOperation", "");
 	SetFormatedText("QTY_Result", "");
 	GameInterface.qty_edit.str = "0";
 
-	SetNewGroupPicture("QTY_GOODS_PICTURE", Items[iCurGoodsIdx].picTexture, "itm" + Items[iCurGoodsIdx].picIndex);
+	SetNewGroupPicture("QTY_GOODS_PICTURE", arItm.picTexture, "itm" + arItm.picIndex);
 	SetFormatedText("QTY_CAPTION", sHeader);
 	SetFormatedText("QTY_GOODS_INFO", describeStr);
 	LanguageCloseFile(lngFileID);
 
-	iCharQty = GetCharacterFreeItem(refCharacter, Items[iGoodIndex].id);
-
-	iStoreQty = GetCharacterFreeItem(refStoreChar, Items[iGoodIndex].id);
+	iCharQty = GetCharacterFreeItem(refCharacter, sCurItem);
+	iStoreQty = GetCharacterFreeItem(refStoreChar, sCurItem);
 
 	SetFormatedText("QTY_INFO_STORE_QTY", its(iStoreQty));
 	SetFormatedText("QTY_INFO_SHIP_QTY", its(iCharQty));
 	BuyOrSell = 0;
 
-	iStorePrice = GetTradeItemPrice(iGoodIndex, PRICE_TYPE_SELL);
+	iStorePrice = GetTradeItemPrice(sCurItem, PRICE_TYPE_SELL);
 	SetFormatedText("QTY_INFO_STORE_PRICE",XI_ConvertString("Price buy") + NewStr() + its(iStorePrice));
 
-	iCharPrice = GetTradeItemPrice(iGoodIndex, PRICE_TYPE_BUY);
+	iCharPrice = GetTradeItemPrice(sCurItem, PRICE_TYPE_BUY);
 	SetFormatedText("QTY_INFO_SHIP_PRICE", XI_ConvertString("Price sell") + NewStr() + its(iCharPrice));
 }
 
@@ -750,14 +748,13 @@ void TransactionOK()
 
  	if (BuyOrSell == 1) // BUY
 	{
-		TakeNItems(refStoreChar, Items[iCurGoodsIdx].id, -nTradeQuantity);
-
-		TakeNItems(refCharacter, Items[iCurGoodsIdx].id, nTradeQuantity);
+		TakeNItems(refStoreChar, sCurItem, -nTradeQuantity);
+		TakeNItems(refCharacter, sCurItem, nTradeQuantity);
 		//#20200218-01
-		/*if(CheckAttribute(&Items[iCurGoodsIdx], "shown"))
-			Items[iCurGoodsIdx].shown = false;*/
+		/*if (CheckAttribute(&Items[FindItem(sCurItem)], "shown"))
+			Items[FindItem(sCurItem)].shown = false;*/
 		moneyback = makeint(iCharPrice*stf(GameInterface.qty_edit.str) + 0.5);
-		pchar.money = sti(pchar.money)  - moneyback;
+		pchar.money = sti(pchar.money) - moneyback;
 		Statistic_AddValue(Pchar, "Money_spend", moneyback);
 		// boal  check skill -->
 		AddCharacterExpToSkill(pchar, "Commerce", moneyback / 700.0);
@@ -766,13 +763,13 @@ void TransactionOK()
 	}
  	else
 	{ // SELL
-		TakeNItems(refStoreChar, Items[iCurGoodsIdx].id, nTradeQuantity);
-		TakeNItems(refCharacter, Items[iCurGoodsIdx].id, -nTradeQuantity);
+		TakeNItems(refStoreChar, sCurItem, nTradeQuantity);
+		TakeNItems(refCharacter, sCurItem, -nTradeQuantity);
 		//#20200218-01
-		/*if(CheckAttribute(&Items[iCurGoodsIdx], "shown"))
-			Items[iCurGoodsIdx].shown = true;*/
+		/*if(CheckAttribute(&Items[FindItem(sCurItem)], "shown"))
+			Items[FindItem(sCurItem)].shown = true;*/
 		moneyback = makeint(iStorePrice*stf(GameInterface.qty_edit.str) + 0.5);
-  		pchar.money = sti(pchar.money)  + moneyback;
+  		pchar.money = sti(pchar.money) + moneyback;
 		Statistic_AddValue(Pchar, "Money_get", moneyback);
 		// boal  check skill -->
 		AddCharacterExpToSkill(pchar, "Commerce", moneyback / 1000.0);
@@ -781,7 +778,7 @@ void TransactionOK()
 	}
 	AddToTable();
 	EndTooltip();
-	ShowGoodsInfo(iCurGoodsIdx); //сбросим все состояния
+	ShowGoodsInfo(sCurItem); //сбросим все состояния
 }
 
 void confirmChangeQTY_EDIT()
@@ -792,7 +789,8 @@ void confirmChangeQTY_EDIT()
 
 void ChangeQTY_EDIT()
 {
-	float  iWeight;
+	trace("ChangeQTY_EDIT");
+	float iWeight;
 	SetCharWeight();
 	GameInterface.qty_edit.str = sti(GameInterface.qty_edit.str);
 	if (sti(GameInterface.qty_edit.str) == 0)
@@ -825,7 +823,7 @@ void ChangeQTY_EDIT()
 			}
 			// проверка на колво доступное <--
 			// квестовые не продать -->
-			if (IsQuestUsedItem(Items[iCurGoodsIdx].id))
+			if (IsQuestUsedItem(sCurItem))
 			{
 				GameInterface.qty_edit.str = 0;
 			}
@@ -884,7 +882,7 @@ void REMOVE_ALL_BUTTON()  // продать все
 	{
 		ShowItemInfo();
 	}
-	ShowGoodsInfo(iCurGoodsIdx);
+	ShowGoodsInfo(sCurItem);
 	GameInterface.qty_edit.str = -iCharQty;
 	BuyOrSell = 0;
 	ChangeQTY_EDIT();
@@ -896,7 +894,7 @@ void ADD_ALL_BUTTON()  // купить все
 	{
 		ShowItemInfo();
 	}
-	ShowGoodsInfo(iCurGoodsIdx);
+	ShowGoodsInfo(sCurItem);
 	GameInterface.qty_edit.str = iStoreQty;
 	BuyOrSell = 0;
 	ChangeQTY_EDIT();
@@ -1133,7 +1131,7 @@ void ShowBladeEquipInfo()
 	sHeader = itm.name;
 	sHeader = LanguageConvertString(idLngFile, sHeader);
 
-	sText1 = GetItemDescribe(FindItem(sItem));
+	sText1 = GetItemDescribe(sItem);
 
 	CreateTooltip("#" + sHeader, sText1, argb(255,255,255,255), sText2, argb(255,255,192,192), sText3, argb(255,192,255,192), "", argb(255,255,255,255), sPicture, sGroup, sGroupPicture, 100, 100);
 	LanguageCloseFile(idLngFile);
@@ -1166,7 +1164,7 @@ void ShowGunEquipInfo()
 	sHeader = itm.name;
 	sHeader = LanguageConvertString(idLngFile, sHeader);
 
-	sText1 = GetItemDescribe(FindItem(sItem));
+	sText1 = GetItemDescribe(sItem);
 
 	CreateTooltip("#" + sHeader, sText1, argb(255,255,255,255), sText2, argb(255,255,192,192), sText3, argb(255,192,255,192), "", argb(255,255,255,255), sPicture, sGroup, sGroupPicture, 100, 100);
 	LanguageCloseFile(idLngFile);
@@ -1199,7 +1197,7 @@ void ShowSpyglassEquipInfo()
 	sHeader = itm.name;
 	sHeader = LanguageConvertString(idLngFile, sHeader);
 
-	sText1 = GetItemDescribe(FindItem(sItem));
+	sText1 = GetItemDescribe(sItem);
 
 	CreateTooltip("#" + sHeader, sText1, argb(255,255,255,255), sText2, argb(255,255,192,192), sText3, argb(255,192,255,192), "", argb(255,255,255,255), sPicture, sGroup, sGroupPicture, 100, 100);
 	LanguageCloseFile(idLngFile);
@@ -1232,7 +1230,7 @@ void ShowBackPackEquipInfo()
 	sHeader = itm.name;
 	sHeader = LanguageConvertString(idLngFile, sHeader);
 
-	sText1 = GetItemDescribe(FindItem(sItem));
+	sText1 = GetItemDescribe(sItem);
 
 	CreateTooltip("#" + sHeader, sText1, argb(255,255,255,255), sText2, argb(255,255,192,192), sText3, argb(255,192,255,192), "", argb(255,255,255,255), sPicture, sGroup, sGroupPicture, 100, 100);
 	LanguageCloseFile(idLngFile);
@@ -1265,7 +1263,7 @@ void ShowTalismanEquipInfo()
 	sHeader = itm.name;
 	sHeader = LanguageConvertString(idLngFile, sHeader);
 
-	sText1 = GetItemDescribe(FindItem(sItem));
+	sText1 = GetItemDescribe(sItem);
 
 	CreateTooltip("#" + sHeader, sText1, argb(255,255,255,255), sText2, argb(255,255,192,192), sText3, argb(255,192,255,192), "", argb(255,255,255,255), sPicture, sGroup, sGroupPicture, 100, 100);
 	LanguageCloseFile(idLngFile);
@@ -1298,7 +1296,7 @@ void ShowCirassEquipInfo()
 	sHeader = itm.name;
 	sHeader = LanguageConvertString(idLngFile, sHeader);
 
-	sText1 = GetItemDescribe(FindItem(sItem));
+	sText1 = GetItemDescribe(sItem);
 
 	CreateTooltip("#" + sHeader, sText1, argb(255,255,255,255), sText2, argb(255,255,192,192), sText3, argb(255,192,255,192), "", argb(255,255,255,255), sPicture, sGroup, sGroupPicture, 100, 100);
 	LanguageCloseFile(idLngFile);
@@ -1331,7 +1329,7 @@ void ShowBookEquipInfo()
 	sHeader = itm.name;
 	sHeader = LanguageConvertString(idLngFile, sHeader);
 
-	sText1 = GetItemDescribe(FindItem(sItem));
+	sText1 = GetItemDescribe(sItem);
 
 	CreateTooltip("#" + sHeader, sText1, argb(255,255,255,255), sText2, argb(255,255,192,192), sText3, argb(255,192,255,192), "", argb(255,255,255,255), sPicture, sGroup, sGroupPicture, 100, 100);
 	LanguageCloseFile(idLngFile);
@@ -1364,7 +1362,7 @@ void Show1EquipInfo()
 	sHeader = itm.name;
 	sHeader = LanguageConvertString(idLngFile, sHeader);
 
-	sText1 = GetItemDescribe(FindItem(sItem));
+	sText1 = GetItemDescribe(sItem);
 
 	CreateTooltip("#" + sHeader, sText1, argb(255,255,255,255), sText2, argb(255,255,192,192), sText3, argb(255,192,255,192), "", argb(255,255,255,255), sPicture, sGroup, sGroupPicture, 100, 100);
 	LanguageCloseFile(idLngFile);
@@ -1397,7 +1395,7 @@ void Show2EquipInfo()
 	sHeader = itm.name;
 	sHeader = LanguageConvertString(idLngFile, sHeader);
 
-	sText1 = GetItemDescribe(FindItem(sItem));
+	sText1 = GetItemDescribe(sItem);
 
 	CreateTooltip("#" + sHeader, sText1, argb(255,255,255,255), sText2, argb(255,255,192,192), sText3, argb(255,192,255,192), "", argb(255,255,255,255), sPicture, sGroup, sGroupPicture, 100, 100);
 	LanguageCloseFile(idLngFile);
@@ -1430,7 +1428,7 @@ void Show3EquipInfo()
 	sHeader = itm.name;
 	sHeader = LanguageConvertString(idLngFile, sHeader);
 
-	sText1 = GetItemDescribe(FindItem(sItem));
+	sText1 = GetItemDescribe(sItem);
 
 	CreateTooltip("#" + sHeader, sText1, argb(255,255,255,255), sText2, argb(255,255,192,192), sText3, argb(255,192,255,192), "", argb(255,255,255,255), sPicture, sGroup, sGroupPicture, 100, 100);
 	LanguageCloseFile(idLngFile);
@@ -1463,7 +1461,7 @@ void Show4EquipInfo()
 	sHeader = itm.name;
 	sHeader = LanguageConvertString(idLngFile, sHeader);
 
-	sText1 = GetItemDescribe(FindItem(sItem));
+	sText1 = GetItemDescribe(sItem);
 
 	CreateTooltip("#" + sHeader, sText1, argb(255,255,255,255), sText2, argb(255,255,192,192), sText3, argb(255,192,255,192), "", argb(255,255,255,255), sPicture, sGroup, sGroupPicture, 100, 100);
 	LanguageCloseFile(idLngFile);
@@ -1496,7 +1494,7 @@ void Show5EquipInfo()
 	sHeader = itm.name;
 	sHeader = LanguageConvertString(idLngFile, sHeader);
 
-	sText1 = GetItemDescribe(FindItem(sItem));
+	sText1 = GetItemDescribe(sItem);
 
 	CreateTooltip("#" + sHeader, sText1, argb(255,255,255,255), sText2, argb(255,255,192,192), sText3, argb(255,192,255,192), "", argb(255,255,255,255), sPicture, sGroup, sGroupPicture, 100, 100);
 	LanguageCloseFile(idLngFile);
@@ -1586,7 +1584,7 @@ void ClickItem(string sItem)
 void Autotrade_All()
 {
 	if (!IsPCharHaveTreasurer()) {Log_Info("Нет казначея. Закупки некому проводить!"); return;}
-	Fastsale_trash(refCharacter);
+	Fastsale_trash();
 	int iOfficer = -1;
 	ref _chr;
 
@@ -1628,16 +1626,12 @@ void Autotrade_This()
 void BuyConsume(ref chr)
 {
 	int 	qty = 0;
-	int 	i, n, iCost;
+	int 	i, iCost;
 	int		curqty = 0;
 	int		curTraderQty = 0;
 	int		iMoneyQty = 0;
-	string 	itemname = "";
-	int idLngFile = LanguageOpenFile("ItemsDescribe.txt");
 	bool	bAdded, bNotEnough, bNotOverWeight, bNotEnoughTrader;
 	float	freeWeight, fItemWeight;
-
-//if (CheckAttribute(chr,"fighter") || z == 0)
 
 	string sTemp = "";
 	if (chr.sex == "woman") sTemp = "а";
@@ -1649,66 +1643,79 @@ void BuyConsume(ref chr)
 		return;
 	}
 
+	int idLngFile = LanguageOpenFile("ItemsDescribe.txt");
+
 	bAdded = false;//будет ли хоть один предмет добавлен
 	bNotOverWeight = false;//хватало ли места в инвентаре
 	bNotEnough = false;//хватало ли уже всего
 	bNotEnoughTrader = false;//хватало ли у торговца
 
-	for(i = 0, n = 1; i < ITEMS_QUANTITY; i++)
+	aref arInventory, arItem;
+	string sItem;
+	ref rItem;
+
+	makearef(arInventory, chr.TransferItems);
+	for (i = 0; i < GetAttributesNum(arInventory); i++)
 	{
-		if (!checkattribute(Items[i],"sortIndex"))
+		arItem = GetAttributeN(arInventory, i);
+		sItem = GetAttributeName(arItem);
+		rItem = ItemsFromID(sItem);
+
+		if (IsGenerableItem(sItem)) continue;
+		if (!CheckAttribute(rItem, "sortIndex"))
 		{
-			if (!HasSubStr(Items[i].id,"CompCraft")) continue;//в списке только расходники
+			if (!HasSubStr(sItem, "CompCraft")) continue;//в списке только расходники
 		}
 		else
 		{
-			if (Items[i].SortIndex == 1 || Items[i].SortIndex == 2 || Items[i].ItemType == "CRAFTCOMPONENTS"); else continue;//в списке расходники и крафт
+			if (rItem.SortIndex == 1 || rItem.SortIndex == 2 || rItem.ItemType == "CRAFTCOMPONENTS"); else continue;//в списке расходники и крафт
 		}
-		itemname = Items[i].id;
-		if (itemname == "Lockpick") continue;//отмычки пропускаем
-		if (itemname == "CompCraft_Tools" || itemname == "CompCraft_Locksmith" || itemname == "CompCraft_Puleleyka") continue; //исключение выбранных Шахом штук
-		curTraderQty = GetCharacterItem(refStoreChar, itemname);
+
+		if (sItem == "Lockpick") continue;//отмычки пропускаем
+		if (sItem == "CompCraft_Tools" || sItem == "CompCraft_Locksmith" || sItem == "CompCraft_Puleleyka") continue; //исключение выбранных Шахом штук
+		curTraderQty = GetCharacterItem(refStoreChar, sItem);
 
 //if (curTraderQty == 0) continue;//у торговца ничего нет, давай следующий предмет//TO DO - пока что без возможности покупать из воздуха
 //row = "tr" + n;
-		if (checkattribute(chr,"TransferItems."+itemname)) qty = sti(chr.TransferItems.(itemname)); else qty = 0;
-		qty = qty + GetConsumeLimit(chr, itemname);
+		qty = sti(chr.TransferItems.(sItem));
 		//if (qty == 0) continue; //вообще не требуется закупать
-		curqty = GetCharacterItem(chr,itemname);
+		curqty = GetCharacterItem(chr, sItem);
 		if (qty > curqty) {qty = qty - curqty;}
 			else continue;//этого припаса уже было достаточно
 //TO DO - можно бы совсем убрать эту проверку превышения, если сначала всё равно должна идти продажа лишнего
-//Log_TestInfo("отладка - " + itemname + "|" + qty + "|" + curqty + "|" + curTraderQty);
+//Log_TestInfo("отладка - " + sItem + "|" + qty + "|" + curqty + "|" + curTraderQty);
 		if (qty > curTraderQty) {qty = curTraderQty; bNotEnoughTrader = true;}//TO DO - пока что без возможности покупать из воздуха
 		if (qty == 0) continue; //нечего купить у торговца
 
 		bNotEnough = true;//если сюда дошли хоть раз за цикл, значит чего-то не хватало до лимита
 
-		fItemWeight = stf(Items[GetItemIndex(itemname)].weight);
+		fItemWeight = GetItemWeight(sItem);
 		if (qty > makeint(freeWeight / fItemWeight)) qty = makeint(freeWeight / fItemWeight);
 		if (qty == 0) continue; //не хватает места даже для одного такого предмета
 		bNotOverWeight = true;//хватало места хотя бы для одного предмета
 
-		iCost = GetTradeItemPrice(Items_FindItemIdx(itemname), PRICE_TYPE_BUY);
+		iCost = GetTradeItemPrice(sItem, PRICE_TYPE_BUY);
 		if (qty > sti(PChar.Money) / iCost)) qty = sti(PChar.Money) / iCost;//TO DO - ВАЖНО - перепроверить деления и округления - при тесте покупало на один предмет больше, чем было денег в кармане.
 		if (qty == 0) continue; //не хватает денег даже на один такой предмет
 
 		iMoneyQty -= iCost*qty;
-		TakeNItems(chr, itemname, qty);
-		TakeNItems(refStoreChar, itemname, -qty);
-		if (qty > 0 && GetFullName(chr) == GetFullName(PChar)) Log_Info(GetFullName(chr) + " куплено: " + "'" + LanguageConvertString(idLngFile, Items[i].name) + "' " + qty + " шт. " + iCost*qty + " зол.");
+		TakeNItems(chr, sItem, qty);
+		TakeNItems(refStoreChar, sItem, -qty);
+		if (qty > 0 && GetFullName(chr) == GetFullName(PChar)) Log_Info(GetFullName(chr) + " куплено: " + "'" + LanguageConvertString(idLngFile, rItem.name) + "' " + qty + " шт. " + iCost*qty + " зол.");
 		//WaitDate("", 0, 0, 0, 0, 1);// Крутим время за каждый товар - многовато для закупок по списку
 		freeWeight -= fItemWeight*qty;
 		bAdded = true;//что-то успешно докупили
 	}
 
-	if(iMoneyQty != 0) // Если хоть что-то купили
+	if (iMoneyQty != 0) // Если хоть что-то купили
 	{
 		AddmoneyToCharacter(PChar, iMoneyQty);
 		ref rTreasurer = GetPCharTreasurerRef();//Казначей. Ему даем экспу
 		AddCharacterExpToSkill(rTreasurer, "Commerce", MakeInt(abs(iMoneyQty) / 800) + rand(1) + 2) //отчитываться о том, что опыт за торговлю получил казначей, а не игрок?
 		//TO DO - это начисление опыта за торговлю товарами, перепроверить, что за предметы столько же идёт
 	}
+
+	LanguageCloseFile(idLngFile);
 
 	if (bAdded) 		{Log_Info(GetFullName(chr)+" пополнил" + sTemp + " комплект расходников.");	return;}
 	if (bNotOverWeight)	{Log_Info(GetFullName(chr)+" не получил" + sTemp + " новых расходников. Кончились деньги."); return;}
@@ -1717,42 +1724,49 @@ void BuyConsume(ref chr)
 						 Log_Info(GetFullName(chr)+" уже имел" + sTemp + " полный комплект расходников.");
 	//TO DO - сделать подробный и красивый вывод результата
 	//TO DO - содержимое таблицы товаров не обновляется после отъёма товаров у торговца - исправить, Да и остаток золота в кармане тоже обновлять надо
-	LanguageCloseFile(idLngFile);
 }
 
 void SellExcessConsume(ref chr)
 {
-	if (!checkattribute(chr,"TransferItems.SellRestriction")) return;//не включено разрешение продавать
+	if (!CheckAttribute(chr,"TransferItems.SellRestriction")) return;//не включено разрешение продавать
 	int 	qty = 0;
 	int 	i, n, iCost;
 	int		curqty = 0;
 	int		iMoneyQty = 0;
-	string 	itemname = "";
 
 	string sTemp = "";
 	if (chr.sex == "woman") sTemp = "а";
 
-	for(i = 0, n = 1; i < ITEMS_QUANTITY; i++)
+	aref arInventory, arItem;
+	string sItem;
+	ref rItem;
+
+	makearef(arInventory, chr.TransferItems);
+	for (i = 0; i < GetAttributesNum(arInventory); i++)
 	{
-		if (!checkattribute(Items[i],"sortIndex"))
+		arItem = GetAttributeN(arInventory, i);
+		sItem = GetAttributeName(arItem);
+		rItem = ItemsFromID(sItem);
+
+		if (IsGenerableItem(sItem)) continue;
+		if (!CheckAttribute(rItem,"sortIndex"))
 		{
-			if (!HasSubStr(Items[i].id,"CompCraft")) continue;//в списке только расходники
+			if (!HasSubStr(sItem,"CompCraft")) continue;//в списке только расходники
 		}
 		else
 		{
-			if (Items[i].SortIndex == 1 || Items[i].SortIndex == 2 || Items[i].ItemType == "CRAFTCOMPONENTS"); else continue;//в списке расходники и крафт
+			if (rItem.SortIndex == 1 || rItem.SortIndex == 2 || rItem.ItemType == "CRAFTCOMPONENTS"); else continue;//в списке расходники и крафт
 		}
-		itemname = Items[i].id;
-		if (itemname == "Lockpick") continue;//отмычки пропускаем
-		if (itemname == "CompCraft_Tools" || itemname == "CompCraft_Locksmith" || itemname == "CompCraft_Puleleyka") continue; //исключение выбранных Шахом штук
-		if (checkattribute(chr,"TransferItems."+itemname)) qty = sti(chr.TransferItems.(itemname)); else qty = 0;
-		qty = qty + GetConsumeLimit(chr, itemname);
-		curqty = GetCharacterItem(chr,itemname);
+
+		if (sItem == "Lockpick") continue;//отмычки пропускаем
+		if (sItem == "CompCraft_Tools" || sItem == "CompCraft_Locksmith" || sItem == "CompCraft_Puleleyka") continue; //исключение выбранных Шахом штук
+		qty = sti(chr.TransferItems.(sItem));
+		curqty = GetCharacterItem(chr, sItem);
 		if (curqty > qty) qty = curqty - qty; else continue;
-		iCost = GetTradeItemPrice(Items_FindItemIdx(itemname), PRICE_TYPE_SELL);
+		iCost = GetTradeItemPrice(sItem, PRICE_TYPE_SELL);
 		iMoneyQty += iCost*qty;
-		TakeNItems(chr, itemname, -qty);
-		TakeNItems(refStoreChar, itemname, qty);
+		TakeNItems(chr, sItem, -qty);
+		TakeNItems(refStoreChar, sItem, qty);
 		//WaitDate("", 0, 0, 0, 0, 1);// Крутим время за каждый товар - многовато для закупок по списку
 	}
 	if(iMoneyQty != 0) // Если хоть что-то продали
@@ -1766,291 +1780,157 @@ void SellExcessConsume(ref chr)
 	}
 }
 
-int GetConsumeLimit(ref chr, string _itemname)
+void FastSaleCharacter(ref rChar, ref rSaleProps)
 {
-	return 0;
+	aref arInventory, arItem;
+	string sItem;
+	ref rItem;
+	int sellQty, sellcost, i;
+
+	makearef(arInventory, rChar.Items);
+	for (i = 0; i < GetAttributesNum(arInventory); i++)
+	{
+		arItem = GetAttributeN(arInventory, i);
+		sItem = GetAttributeName(arItem);
+		rItem = ItemsFromID(sItem);
+
+		sellQty = GetCharacterFreeItem(rChar, sItem);
+		if (sellQty == 0) continue;
+
+		if ((sItem == "slave_01") || (sItem == "pistol3")) continue;
+
+		if (CheckAttribute(rItem, "quality"))
+		{
+			if ((rItem.quality == "poor") || (rItem.quality == "ordinary"))
+			{
+				if (CheckAttribute(rItem, "groupID") && (rItem.groupID == GUN_ITEM_TYPE))
+					rSaleProps.GunCount = sti(rSaleProps.GunCount) + sellQty;
+				else
+					rSaleProps.BladeCount = sti(rSaleProps.BladeCount) + sellQty;
+			}
+			else continue;
+		}
+		else
+		{
+			bool isRubbish =
+				(sItem == "mineral2") ||	// Лютня
+				(sItem == "mineral3") ||    // Свечи
+				(sItem == "mineral4") ||    // Баклан
+				(sItem == "mineral5") ||    // Старое ведро
+				(sItem == "mineral6") ||    // Коралл
+				(sItem == "mineral7") ||    // Трубка
+				(sItem == "mineral8") ||    // Башмак
+				(sItem == "mineral9") ||    // Кружка
+				(sItem == "mineral10") ||   // Мешочек соли
+				(sItem == "spyglass1") ||   // Дешевая подзорная труба
+				(sItem == "spyglass2") ||   // Обычная подзорная труба
+				(sItem == "jewelry6") ||    // Серебряное кольцо с сапфиром
+				(sItem == "jewelry7") ||    // Золотое кольцо с изумрудом
+				(sItem == "jewelry10") ||   // Золотое кольцо с сапфиром
+				(sItem == "jewelry11") ||   // Большая жемчужина
+				(sItem == "jewelry12") ||   // Маленькая жемчужина
+				(sItem == "jewelry13") ||   // Камея
+				(sItem == "jewelry16") ||   // Ожерелье
+				(sItem == "jewelry18") ||   // Золотое кольцо с рубином
+				(sItem == "indian2") ||     // Пугающая фигурка
+				(sItem == "indian8") ||     // Серебряный кубок
+				(sItem == "indian9") ||     // Алебастровый сосуд
+				(sItem == "indian13") ||    // Древняя курительница
+				(sItem == "indian16");      // Раскрашенный сосуд
+			bool isTalisman =               
+				(sItem == "indian17") ||	// Тельная ладанка
+				(sItem == "indian3") ||     // Нефритовая маска
+				(sItem == "indian5") ||     // Двойная маска
+				(sItem == "indian7") ||     // Идол Великой Матери
+				(sItem == "indian14") ||    // Чаша Ололиуки
+				(sItem == "indian12") ||    // Кубок-тотем Тепейоллотля
+				(sItem == "indian10") ||    // Оберег Эхекатля
+				(sItem == "indian1");       // Оберег Тлальчитонатиу
+			if (isRubbish)
+			{
+				rSaleProps.RubbishCount = sti(rSaleProps.RubbishCount) + sellQty;
+			}
+			else
+			{
+				if (isTalisman)
+				{
+					sellQty -= 1;
+					rSaleProps.TalismanCount = sti(rSaleProps.TalismanCount) + sellQty;
+				}
+				else continue;
+			}
+		}
+
+		rSaleProps.Items.(sItem) = sellQty;
+	}
+
+	makearef(arInventory, rSaleProps.Items);
+	for (i = 0; i < GetAttributesNum(arInventory); i++)
+	{
+		arItem = GetAttributeN(arInventory, i);
+		sItem = GetAttributeName(arItem);
+		sellQty = sti(GetAttributeValue(arItem));
+
+		sellcost = GetTradeItemPrice(sItem, PRICE_TYPE_SELL) * sellQty;
+		TakeNItems(rChar, sItem, -sellQty);
+		TakeNItems(refStoreChar, sItem, sellQty);
+		rSaleProps.money = sti(rSaleProps.money) + sellcost;
+	}
+
+	DeleteAttribute(rSaleProps, "Items");
 }
 
-void AddResult(string sTableName, string Result, bool isFail)
+void Fastsale_trash()
 {
-
-}
-
-void Fastsale_trash(ref character)
-{
-	int salemoney = 0;
-	ref refCharacter = pchar
-	int i;
-	string sGood, sName;
-	int sellQty;
-	int sellpiece1 = 0;
-	int sellpiece2 = 0;
-	int sellpiece3 = 0;
-	int sellpiece4 = 0;
-	int sellcost = 0;
 	int iOfficer = -1;
-	int idLngFile = LanguageOpenFile("ItemsDescribe.txt");
-	for(int z = 0; z < 6 + MAX_NUM_FIGHTERS; z++)
+
+	object sellProps;
+	ref rSaleProps;
+	makeref(rSaleProps, sellProps);
+
+	rSaleProps.money = 0;
+	rSaleProps.BladeCount = 0;
+	rSaleProps.GunCount = 0;
+	rSaleProps.RubbishCount = 0;
+	rSaleProps.TalismanCount = 0;
+
+	for (int z = 0; z < 6 + MAX_NUM_FIGHTERS; z++)
 	{
 		if (z == 0) iOfficer = GetMainCharacterIndex();
 		else iOfficer = GetOfficersIndex(pchar, z);
-		if(iOfficer != -1)
+		if (iOfficer != -1)
 		{
 			if (CheckAttribute(&characters[iOfficer],"fighter") || z == 0)
 			{
-				for (i = ITEMS_QUANTITY; i < TOTAL_ITEMS; i++)
-				{
-
-					if(!CheckAttribute(&Items[i], "ID"))
-					{
-						continue;
-					}
-
-					sGood = Items[i].id;
-					sName = LanguageConvertString(idLngFile, Items[i].name)
-					sellQty  = GetCharacterFreeItem(&characters[iOfficer], sGood);
-					if(sellQty > 0)
-					{
-						if (Items[i].id == "slave_01" || Items[i].id == "pistol3") continue;
-						if (
-							Items[i].quality == "poor"
-							|| Items[i].quality == "ordinary"
-			//				|| Items[i].quality == "good"
-							)
-							{
-							sellcost = GetTradeItemPrice(Items_FindItemIdx(sGood), PRICE_TYPE_SELL)*sellqty
-							TakeNItems(&characters[iOfficer], sGood, -sellqty);
-							TakeNItems(refStoreChar, sGood, sellqty);
-							salemoney += sellcost
-							if (CheckAttribute(Items[i],"groupID") && Items[i].groupID == GUN_ITEM_TYPE) sellpiece4 += sellqty; else sellpiece1 += sellqty;
-			//				Log_Info(sName + ": " + sellQty + " шт. " + sellcost + " зол.")
-						}
-					}
-				}
-
-
-				for (i = 0; i < ITEMS_QUANTITY; i++)
-				{
-					sGood = Items[i].id;
-					sName = LanguageConvertString(idLngFile, Items[i].name)
-					sellQty  = GetCharacterFreeItem(&characters[iOfficer], sGood);
-					if(sellQty > 0)
-					{
-						if (Items[i].id == "slave_01" || Items[i].id == "pistol3") continue;
-						bool ok1 = CheckAttribute(Items[i],"quality") && (Items[i].quality == "poor");
-						bool ok2 = CheckAttribute(Items[i],"quality") && (Items[i].quality == "ordinary");
-						if (
-						(ok1)
-						||(ok2)
-						||(sName == "Лютня")
-						||(sName == "Свечи")
-						||(sName == "Баклан")
-						||(sName == "Старое ведро")
-						||(sName == "Коралл")
-						||(sName == "Трубка")
-						||(sName == "Башмак")
-						||(sName == "Кружка")
-						||(sName == "Мешочек соли")
-						||(sName == "Дешевая подзорная труба")
-						||(sName == "Обычная подзорная труба")
-						||(sName == "Серебряное кольцо с сапфиром")
-						||(sName == "Золотое кольцо с изумрудом")
-						||(sName == "Золотое кольцо с сапфиром")
-						||(sName == "Большая жемчужина")
-						||(sName == "Маленькая жемчужина")
-						||(sName == "Камея")
-						||(sName == "Ожерелье")
-						||(sName == "Золотое кольцо с рубином")
-						||(sName == "Пугающая фигурка")
-						||(sName == "Серебряный кубок")
-						||(sName == "Алебастровый сосуд")
-						||(sName == "Древняя курительница")
-						||(sName == "Раскрашенный сосуд")
-						)
-						{
-						sellcost = GetTradeItemPrice(Items_FindItemIdx(sGood), PRICE_TYPE_SELL)*sellqty
-						TakeNItems(&characters[iOfficer], sGood, -sellqty);
-						TakeNItems(refStoreChar, sGood, sellqty);
-						salemoney += sellcost
-						if (CheckAttribute(Items[i],"groupID") && Items[i].groupID == GUN_ITEM_TYPE) sellpiece4 += sellqty; else sellpiece2 += sellqty;
-		//				Log_Info(sName + ": " + sellQty + " шт. " + sellcost + " зол.")
-						}
-					}
-				}
-
-
-				for (i = 0; i < ITEMS_QUANTITY; i++)
-				{
-					sGood = Items[i].id;
-					sName = LanguageConvertString(idLngFile, Items[i].name)
-					sellQty  = GetCharacterFreeItem(&characters[iOfficer], sGood);
-					if(sellQty > 1)
-					{
-						if (
-						(sName == "Тельная ладанка")
-						||(sName == "Нефритовая маска")
-						||(sName == "Двойная маска")
-						||(sName == "Идол Великой Матери")
-						||(sName == "Чаша Ололиуки")
-						||(sName == "Кубок-тотем Тепейоллотля")
-						||(sName == "Оберег Эхекатля")
-						||(sName == "Оберег Тлальчитонатиу")
-						)
-						{
-						sellcost = GetTradeItemPrice(Items_FindItemIdx(sGood), PRICE_TYPE_SELL)*(sellqty - 1)
-						TakeNItems(&characters[iOfficer], sGood, -(sellqty - 1));
-						TakeNItems(refStoreChar, sGood, (sellqty-1));
-						salemoney += sellcost
-						sellpiece3 += (sellqty-1)
-		//				Log_Info(sName + ": " + (sellQty - 1) + " шт. " + sellcost + " зол.")
-						}
-					}
-				}
+				FastSaleCharacter(&characters[iOfficer], rSaleProps);
 			}
 		}
 	}
-	LanguageCloseFile(idLngFile);
-	Log_Info("Продано: Клинков "+sellpiece1+ ", Пистолетов "+sellpiece4+ ", Идолов "+sellpiece3+", Хлама "+sellpiece2)
-	AddmoneyToCharacter(PChar, salemoney)
+
+	Log_Info("Продано: Клинков " + rSaleProps.BladeCount + ", Пистолетов " + rSaleProps.GunCount +
+		", Идолов " + rSaleProps.TalismanCount + ", Хлама " + rSaleProps.RubbishCount);
+	AddmoneyToCharacter(PChar, sti(rSaleProps.money));
 	ref rTreasurer = GetPCharTreasurerRef();//Казначей. Ему даем экспу
-	AddCharacterExpToSkill(rTreasurer, "Commerce", MakeInt(abs(salemoney) / 800) + rand(1) + 2)
-	salemoney = 0
-	sellpiece1 = 0
-	sellpiece2 = 0
-	sellpiece3 = 0
-	sellpiece4 = 0
+	AddCharacterExpToSkill(rTreasurer, "Commerce", MakeInt(abs(sti(rSaleProps.money)) / 800) + rand(1) + 2);
 }
 
 void Fastsale_trash_single(ref character)
 {
-	int salemoney = 0;
-	ref refCharacter = pchar
-	int i;
-	string sGood, sName;
-	int sellQty;
-	int sellpiece1 = 0;
-	int sellpiece2 = 0;
-	int sellpiece3 = 0;
-	int sellpiece4 = 0;
-	int sellcost = 0;
-	int idLngFile = LanguageOpenFile("ItemsDescribe.txt");
+	object sellProps;
+	ref rSaleProps;
+	makeref(rSaleProps, sellProps);
 
-	for (i = ITEMS_QUANTITY; i < TOTAL_ITEMS; i++)
-	{
+	rSaleProps.money = 0;
+	rSaleProps.BladeCount = 0;
+	rSaleProps.GunCount = 0;
+	rSaleProps.RubbishCount = 0;
+	rSaleProps.TalismanCount = 0;
 
-		if(!CheckAttribute(&Items[i], "ID"))
-		{
-			continue;
-		}
+	FastSaleCharacter(character, rSaleProps);
 
-		sGood = Items[i].id;
-		sName = LanguageConvertString(idLngFile, Items[i].name)
-		sellQty  = GetCharacterFreeItem(character, sGood);
-		if(sellQty > 0)
-		{
-			if (Items[i].id == "slave_01" || Items[i].id == "pistol3") continue;
-			if (
-				Items[i].quality == "poor"
-				|| Items[i].quality == "ordinary"
-//				|| Items[i].quality == "good"
-				)
-				{
-				sellcost = GetTradeItemPrice(Items_FindItemIdx(sGood), PRICE_TYPE_SELL)*sellqty
-				TakeNItems(character, sGood, -sellqty);
-				TakeNItems(refStoreChar, sGood, sellqty);
-				salemoney += sellcost
-				if (CheckAttribute(Items[i],"groupID") && Items[i].groupID == GUN_ITEM_TYPE) sellpiece4 += sellqty; else sellpiece1 += sellqty;
-//				Log_Info(sName + ": " + sellQty + " шт. " + sellcost + " зол.")
-			}
-		}
-	}
-
-
-	for (i = 0; i < ITEMS_QUANTITY; i++)
-	{
-		sGood = Items[i].id;
-		sName = LanguageConvertString(idLngFile, Items[i].name)
-		sellQty  = GetCharacterFreeItem(character, sGood);
-		if(sellQty > 0)
-		{
-			if (Items[i].id == "slave_01" || Items[i].id == "pistol3") continue;
-			bool ok1 = CheckAttribute(Items[i],"quality") && (Items[i].quality == "poor");
-			bool ok2 = CheckAttribute(Items[i],"quality") && (Items[i].quality == "ordinary");
-			if (
-			(ok1)
-			||(ok2)
-			||(sName == "Лютня")
-			||(sName == "Свечи")
-			||(sName == "Баклан")
-			||(sName == "Старое ведро")
-			||(sName == "Коралл")
-			||(sName == "Трубка")
-			||(sName == "Башмак")
-			||(sName == "Кружка")
-			||(sName == "Мешочек соли")
-			||(sName == "Дешевая подзорная труба")
-			||(sName == "Обычная подзорная труба")
-			||(sName == "Серебряное кольцо с сапфиром")
-			||(sName == "Золотое кольцо с изумрудом")
-			||(sName == "Золотое кольцо с сапфиром")
-			||(sName == "Большая жемчужина")
-			||(sName == "Маленькая жемчужина")
-			||(sName == "Камея")
-			||(sName == "Ожерелье")
-			||(sName == "Золотое кольцо с рубином")
-			||(sName == "Пугающая фигурка")
-			||(sName == "Серебряный кубок")
-			||(sName == "Алебастровый сосуд")
-			||(sName == "Древняя курительница")
-			||(sName == "Раскрашенный сосуд")
-			)
-			{
-			sellcost = GetTradeItemPrice(Items_FindItemIdx(sGood), PRICE_TYPE_SELL)*sellqty
-			TakeNItems(character, sGood, -sellqty);
-			TakeNItems(refStoreChar, sGood, sellqty);
-			salemoney += sellcost
-			if (CheckAttribute(Items[i],"groupID") && Items[i].groupID == GUN_ITEM_TYPE) sellpiece4 += sellqty; else sellpiece2 += sellqty;
-//				Log_Info(sName + ": " + sellQty + " шт. " + sellcost + " зол.")
-			}
-		}
-	}
-
-
-	for (i = 0; i < ITEMS_QUANTITY; i++)
-	{
-		sGood = Items[i].id;
-		sName = LanguageConvertString(idLngFile, Items[i].name)
-		sellQty  = GetCharacterFreeItem(character, sGood);
-		if(sellQty > 1)
-		{
-			if (
-			(sName == "Тельная ладанка")
-			||(sName == "Нефритовая маска")
-			||(sName == "Двойная маска")
-			||(sName == "Идол Великой Матери")
-			||(sName == "Чаша Ололиуки")
-			||(sName == "Кубок-тотем Тепейоллотля")
-			||(sName == "Оберег Эхекатля")
-			||(sName == "Оберег Тлальчитонатиу")
-			)
-			{
-			sellcost = GetTradeItemPrice(Items_FindItemIdx(sGood), PRICE_TYPE_SELL)*(sellqty - 1)
-			TakeNItems(character, sGood, -(sellqty - 1));
-			TakeNItems(refStoreChar, sGood, (sellqty-1));
-			salemoney += sellcost
-			sellpiece3 += (sellqty-1)
-//				Log_Info(sName + ": " + (sellQty - 1) + " шт. " + sellcost + " зол.")
-			}
-		}
-	}
-	LanguageCloseFile(idLngFile);
-	Log_Info("Продано: Клинков "+sellpiece1+ ", Пистолетов "+sellpiece4+ ", Идолов "+sellpiece3+", Хлама "+sellpiece2)
-	AddmoneyToCharacter(PChar, salemoney)
+	Log_Info("Продано: Клинков " + rSaleProps.BladeCount + ", Пистолетов " + rSaleProps.GunCount +
+		", Идолов " + rSaleProps.TalismanCount + ", Хлама " + rSaleProps.RubbishCount);
+	AddmoneyToCharacter(PChar, sti(rSaleProps.money));
 	ref rTreasurer = GetPCharTreasurerRef();//Казначей. Ему даем экспу
-	AddCharacterExpToSkill(rTreasurer, "Commerce", MakeInt(abs(salemoney) / 800) + rand(1) + 2)
-	salemoney = 0
-	sellpiece1 = 0
-	sellpiece2 = 0
-	sellpiece3 = 0
-	sellpiece4 = 0
+	AddCharacterExpToSkill(rTreasurer, "Commerce", MakeInt(abs(sti(rSaleProps.money)) / 800) + rand(1) + 2);
 }
