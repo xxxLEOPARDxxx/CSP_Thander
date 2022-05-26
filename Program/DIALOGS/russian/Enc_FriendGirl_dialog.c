@@ -2,7 +2,8 @@ void ProcessDialogEvent()
 {
 	ref NPChar, sld;
 	aref Link, NextDiag;
-	int i, iRank, iMassive;
+	int i, iRank;
+	string attr;
 
 	DeleteAttribute(&Dialog,"Links");
 
@@ -54,40 +55,31 @@ void ProcessDialogEvent()
 				LAi_LocationDisableOffGenTimer(pchar.GenQuest.EncGirl.locationId, 1); //офицеров не пускать 1 день
 				LocatorReloadEnterDisable(pchar.GenQuest.EncGirl.locationId, "reload2", true);
 				pchar.GenQuest.OpenTheRopeExit = pchar.GenQuest.EncGirl.locationId; //флаг для открытия релоада
-				string model[10];
-				model[0] = "pirate_1";
-				model[1] = "pirate_2";
-				model[2] = "pirate_3";
-				model[3] = "pirate_4";
-				model[4] = "pirate_5";
-				model[5] = "pirate_6";
-				model[6] = "pirate_7";
-				model[7] = "pirate_8";
-				model[8] = "pirate_9";
-				model[9] = "pirate_10";
-				i = 0;
-				while(i < 3)
+				object models;
+				for (i = 0; i < 10; i++)
 				{
-					iMassive = rand(9);
-					if (model[iMassive] != "")
-					{
-						iRank = sti(pchar.rank) - rand(5) + rand(5);
-						if (iRank < 1) iRank = 1;
-						sld = GetCharacter(NPC_GenerateCharacter("CaveGandMan" + i, model[iMassive], "man", "man", iRank, PIRATE, 1, true));
-						SetFantomParamFromRank(sld, iRank, true);
-						sld.SaveItemsForDead = true;
-						sld.DontClearDead = true;
-						sld.money = iRank*200+1000+rand(500);
-						LAi_CharacterDisableDialog(sld);
-						LAi_SetWarriorType(sld);
-						LAi_warrior_SetStay(sld, true);
-						//LAi_group_MoveCharacter(sld, LAI_GROUP_MONSTERS);
-						ChangeCharacterAddressGroup(sld, pchar.GenQuest.EncGirl.locationId, "quest", "quest" + i);
-						LAi_group_MoveCharacter(sld, "CaveBandit");// лесник изменил группу чтобы ядом таино травить можно было
-						LAi_group_FightGroups("CaveBandit", LAI_GROUP_PLAYER, true);
-						i++;
-						model[iMassive] = "";
-					}
+					attr = "s" + i;
+					models.(attr) = "pirate_" + (i + 1);
+				}
+				RandomShuffle(&models);
+				for (i = 0; i < 3; i++)
+				{
+					iRank = sti(pchar.rank) - rand(5) + rand(5);
+					if (iRank < 1) iRank = 1;
+					attr = "s" + i;
+					sld = GetCharacter(NPC_GenerateCharacter("CaveGandMan" + i, models.(attr), "man", "man", iRank, PIRATE, 1, true));
+					SetFantomParamFromRank(sld, iRank, true);
+					sld.SaveItemsForDead = true;
+					sld.DontClearDead = true;
+					sld.money = iRank*200+1000+rand(500);
+					LAi_CharacterDisableDialog(sld);
+					LAi_SetWarriorType(sld);
+					LAi_warrior_SetStay(sld, true);
+					//LAi_group_MoveCharacter(sld, LAI_GROUP_MONSTERS);
+					ChangeCharacterAddressGroup(sld, pchar.GenQuest.EncGirl.locationId, "quest", "quest" + i);
+					LAi_group_MoveCharacter(sld, "CaveBandit");// лесник изменил группу чтобы ядом таино травить можно было
+					LAi_group_FightGroups("CaveBandit", LAI_GROUP_PLAYER, true);
+					i++;
 				}
 				pchar.quest.Enc_FriendGirl_afterGang.win_condition.l1 = "ExitFromLocation";
 				pchar.quest.Enc_FriendGirl_afterGang.win_condition.l1.location = pchar.location;

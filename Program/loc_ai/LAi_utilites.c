@@ -1194,27 +1194,20 @@ void CreatePearlVillage(aref loc)
 		model[22] = "pirate_23";
 		model[23] = "pirate_24";
 		model[24] = "pirate_25";
-		//i = 0;
 		num = rand(3) + 2;
-		//while(i < num)
-		for(i=0; i < num; i++)
+		for (i = 0; i < num; i++)
 		{
 			iMassive = rand(25);
-			//if (model[iMassive] != "")
-			//{
-				chr = GetCharacter(NPC_GenerateCharacter("FightMan"+iPrefix+"_"+i, model[iMassive], "man", "man", 15, iPearNation, 30, true));
-				SetFantomParamFromRank(chr, 15, true);
-				chr.dialog.Filename = "Pearl_dialog.c";
-				chr.dialog.currentnode = "PearlMan";
-				chr.greeting = "cit_common";
-				chr.city = "SantaCatalina"; //НЗГ Санта-Каталины
-				PlaceCharacter(chr, "goto", "random");
-				LAi_SetWarriorType(chr);
-				LAi_group_MoveCharacter(chr, "PearlGroup_"+iPrefix);
-			//	i++;
-			//	model[iMassive] = "";
-			//}
-				SetFoodToCharacter(chr, 3, 20);
+			chr = GetCharacter(NPC_GenerateCharacter("FightMan"+iPrefix+"_"+i, model[iMassive], "man", "man", 15, iPearNation, 30, true));
+			SetFantomParamFromRank(chr, 15, true);
+			chr.dialog.Filename = "Pearl_dialog.c";
+			chr.dialog.currentnode = "PearlMan";
+			chr.greeting = "cit_common";
+			chr.city = "SantaCatalina"; //НЗГ Санта-Каталины
+			PlaceCharacter(chr, "goto", "random");
+			LAi_SetWarriorType(chr);
+			LAi_group_MoveCharacter(chr, "PearlGroup_"+iPrefix);
+			SetFoodToCharacter(chr, 3, 20);
 		}
 		// ==> просто работники
 		model[0] = "indsair2";
@@ -1228,40 +1221,33 @@ void CreatePearlVillage(aref loc)
 		model[8] = "trader_4";
 		model[9] = "barmen_9";
 		//Boyer change
-		//i = 0;
 		num = rand(3) + 2;
-		//while(i < num)
-		for(i=0; i < num; i++)
+		for (i = 0; i < num; i++)
 		{
 			iMassive = rand(9);
-			//if (model[iMassive] != "")
-			//{
-				sAnime = "man"
-				if (model[iMassive] == "indsair2" || model[iMassive] == "indsar1") sAnime = "man";
-				chr = GetCharacter(NPC_GenerateCharacter("WorkMan"+iPrefix+"_"+i, model[iMassive], "man", sAnime, 7, iPearNation, 30, false));
-				chr.dialog.Filename = "Pearl_dialog.c";
-				chr.dialog.currentnode = "PearlMan";
-				if (model[iMassive] == "indsair2" || model[iMassive] == "indsar1")
-				{
-					chr.name = LinkRandPhrase("Венету", "Соколиный глаз", "Гойко Митич");
-					chr.lastname = "";
-					chr.dialog.currentnode = "IndPearlMan";
-					chr.greeting = "Gr_PearlIndian";
-				}
-				else
-				{
-				    chr.greeting = "cit_common";
-				}
-				chr.CityType = "citizen";
-				chr.city = "SantaCatalina"; //НЗГ Санта-Каталины
+			sAnime = "man"
+			if (model[iMassive] == "indsair2" || model[iMassive] == "indsar1") sAnime = "man";
+			chr = GetCharacter(NPC_GenerateCharacter("WorkMan"+iPrefix+"_"+i, model[iMassive], "man", sAnime, 7, iPearNation, 30, false));
+			chr.dialog.Filename = "Pearl_dialog.c";
+			chr.dialog.currentnode = "PearlMan";
+			if (model[iMassive] == "indsair2" || model[iMassive] == "indsar1")
+			{
+				chr.name = LinkRandPhrase("Венету", "Соколиный глаз", "Гойко Митич");
+				chr.lastname = "";
+				chr.dialog.currentnode = "IndPearlMan";
+				chr.greeting = "Gr_PearlIndian";
+			}
+			else
+			{
+				chr.greeting = "cit_common";
+			}
+			chr.CityType = "citizen";
+			chr.city = "SantaCatalina"; //НЗГ Санта-Каталины
 
-				PlaceCharacter(chr, "goto", "random");
-				LAi_SetCitizenType(chr);
-				LAi_group_MoveCharacter(chr, "PearlGroup_"+iPrefix);
-			//	i++;
-			//	model[iMassive] = "";
-			//}
-				SetFoodToCharacter(chr, 3, 20);
+			PlaceCharacter(chr, "goto", "random");
+			LAi_SetCitizenType(chr);
+			LAi_group_MoveCharacter(chr, "PearlGroup_"+iPrefix);
+			SetFoodToCharacter(chr, 3, 20);
 		}
 		//=========================== квесты в поселениях ================================
 		//--> перс Алекса
