@@ -1319,17 +1319,18 @@ void SetCharWeight()
 // Жмакнули по кнопке "взять все"
 void onGetAllBtnClick()
 {
-	int iItemsQty, maxItemsToAdd;
+	int i, iItemsQty, maxItemsToAdd;
 	String itemID;
 	aref arInventory, arItem;
+	object itemsToTake;
 	float weight;
 	bool bOk = false;
 
 	makearef(arInventory, refToChar.Items);
-	for (int i = 0; i < GetAttributesNum(arInventory); i++)
+	for (i = 0; i < GetAttributesNum(arInventory); i++)
 	{
 		arItem = GetAttributeN(arInventory, i);
-		itemID = GetAttributeValue(arItem);
+		itemID = GetAttributeName(arItem);
 
 		iItemsQty = GetCharacterFreeItem(refToChar, itemID);
 		if(iItemsQty < 1) continue;
@@ -1339,7 +1340,7 @@ void onGetAllBtnClick()
 		float itemWeight = GetItemWeight(itemID);
 		if(itemWeight == 0)
 		{
-			RemoveItems(refToChar, itemID, iItemsQty);
+			itemsToTake.(itemID) = iItemsQty;
 			AddItems(refCharacter, itemID, iItemsQty);
 			continue;
 		}
@@ -1353,8 +1354,7 @@ void onGetAllBtnClick()
 
 			if(iItemsQty < 1) continue;
 
-
-			RemoveItems(refToChar, itemID, iItemsQty);
+			itemsToTake.(itemID) = iItemsQty;
 			AddItems(refCharacter, itemID, iItemsQty);
 
 			bOk = true;
@@ -1363,6 +1363,16 @@ void onGetAllBtnClick()
 			fCharWeight += weight; // Тут обновляем для метода GetMaxItemsToTake, иначе тормоза
 			fStoreWeight -= weight;
 		}
+	}
+
+	makearef(arInventory, itemsToTake);
+	for (i = 0; i < GetAttributesNum(arInventory); i++)
+	{
+		arItem = GetAttributeN(arInventory, i);
+		itemID = GetAttributeName(arItem);
+		iItemsQty = sti(GetAttributeValue(arItem));
+
+		RemoveItems(refToChar, itemID, iItemsQty);
 	}
 
 	if(bOk) WaitDate("", 0, 0, 0, 0, 1);
