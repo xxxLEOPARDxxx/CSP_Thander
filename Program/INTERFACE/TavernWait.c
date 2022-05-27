@@ -156,11 +156,7 @@ void Sleep()
 		if (iCurrentTime < 7) iAddTime = 7 - iCurrentTime;
     }
 
-    if(SendMessage(&GameInterface,"lsll",MSG_INTERFACE_MSG_TO_NODE, "TIME_CHECK", 3, 3))
-    {
-        iAddtime = iTime+1;
-    }
-	if(SendMessage(&GameInterface,"lsll",MSG_INTERFACE_MSG_TO_NODE, "TIME_CHECK", 3, 4))
+    if(SendMessage(&GameInterface,"lsll",MSG_INTERFACE_MSG_TO_NODE, "TIME_CHECK", 3, 3) == 1 || SendMessage(&GameInterface,"lsll",MSG_INTERFACE_MSG_TO_NODE, "TIME_CHECK", 3, 4) == 1)
     {
         iAddtime = iTime+1;
     }
