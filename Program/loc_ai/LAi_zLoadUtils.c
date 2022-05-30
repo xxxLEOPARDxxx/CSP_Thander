@@ -923,7 +923,7 @@ void CreatDesMoines(aref loc)
 	object models;
 	if (pchar.questTemp.MC != "Incquisitio")
 	{
-		bNoSkeletons = (GetHour() > 6.0 && GetHour() < 21.99);
+		bNoSkeletons = (GetHour() > 6.0) && (GetHour() < 21.99);
 		bNoSkeletons = bNoSkeletons || (pchar.questTemp.MC == "over");
 		if (loc.id == "DesMoines_town")
 		{
