@@ -505,7 +505,7 @@ float Ship_MastDamage()
 			float iResist = 1;
 			if(iXmark > iClass)
 			{
-				iResist = 1.0 / (iXmark - iClass);
+				iResist = 1 + 1.0 / (iXmark - iClass);
 			}
 			else
 			{
