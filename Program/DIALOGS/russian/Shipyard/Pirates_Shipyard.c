@@ -250,13 +250,19 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 
 			if (!CheckAttribute(npchar, "questTemp.ShipOrderTime"))
 			{
-			link.l5 = "А можно у вас на верфи заказать корабль, подходящий моим личным предпочтениям?";
-			link.l5.go = "Shipyard1";
+				link.l5 = "А можно у вас на верфи заказать корабль, подходящий моим личным предпочтениям?";
+				link.l5.go = "Shipyard1";
 			}
 			else
 			{
-			link.l5 = "Готов ли заказанный мною корабль?";
-			link.l5.go = "shiporder1";
+				link.l5 = "Готов ли заказанный мною корабль?";
+				link.l5.go = "shiporder1";
+			}
+
+			if ((RealShips[sti(Pchar.Ship.Type)].name == "Flyingdutchman1") && (pchar.location.from_sea == "Pirates_town"))
+			{
+				link.l7 = "Мастер, у меня тут особенный кораблик...";
+				link.l7.go = "DutchmanRepair1";
 			}
 
 			link.l3 = "Мне нужны орудия на корабль.";
@@ -337,13 +343,19 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 
 			if (!CheckAttribute(npchar, "questTemp.ShipOrderTime"))
 			{
-			link.l6 = "А можно у вас на верфи заказать корабль, подходящий моим личным предпочтениям?";
-			link.l6.go = "Shipyard1";
+				link.l6 = "А можно у вас на верфи заказать корабль, подходящий моим личным предпочтениям?";
+				link.l6.go = "Shipyard1";
 			}
 			else
 			{
-			link.l6 = "Готов ли заказанный мною корабль?";
-			link.l6.go = "shiporder1";
+				link.l6 = "Готов ли заказанный мною корабль?";
+				link.l6.go = "shiporder1";
+			}
+
+			if ((RealShips[sti(Pchar.Ship.Type)].name == "Flyingdutchman1") && (pchar.location.from_sea == "Pirates_town"))
+			{
+				link.l7 = "Мастер, у меня тут особенный кораблик...";
+				link.l7.go = "DutchmanRepair1";
 			}
 
 			link.l3 = "Мне нужны орудия на корабль.";
@@ -2433,6 +2445,34 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1.go = "exit";
 		break;
 		//<-Капремонт пса
+
+		case "DutchmanRepair1":
+			dialog.text = "О-хо-хо, неужто это тот самый Летучий Голландец?! Ах, какая прелесть! Невероятная огневая мощь, фантастически могучий корпус, но в тоже время как быстро красавец идет по морской глади... Тебя что-то не устраивает?";
+			link.l1 = "Внешний вид, мастер. Обросшие борта, трещины в палубе, покореженная отделка - все это выглядит совершенно непрезентабельно, да и матросов отпугивает.";
+			link.l1.go = "DutchmanRepair2";
+		break;
+
+		case "DutchmanRepair2":
+			dialog.text = "Кхм... а мне казалось, что подобный вид - скорее достоинство для капитана твоей сферы деятельности... Ну да ладно, не мне судить. Что ж, я могу отремонтировать этот корабль. Это обойдется тебе в миллион пиастров.";
+			if (sti(PChar.money) >= 1000000)
+			{
+				link.l1 = "Отлично, вот ваши деньги.";
+				link.l1.go = "DutchmanRepair3";
+			}
+			link.l2 = "Эмм, что-то туговато для моего кошеля... Зайду попозже.";
+			link.l2.go = "exit";
+		break;
+
+		case "DutchmanRepair3":
+			AddMoneyToCharacter(PChar, -1000000);
+			AddTimeToCurrent(8, 0);
+			shTo = GetRealShip(sti(PChar.Ship.Type));
+			shTo.Name = "Flyingdutchmannew1";
+
+			dialog.text = "Хорошо, приступаю к ремонту корабля... Готово! Теперь можешь хоть на бал с ним идти.";
+			link.l1 = "Спасибо, мастер.";
+			link.l1.go = "exit";
+		break;
 	}
 	UnloadSegment(NPChar.FileDialog2);  // если где-то выход внутри switch  по return не забыть сделать анлод
 }
