@@ -642,9 +642,9 @@ void BLI_SetObjectData()
 		fTmp 											= makeint(-10.0 * fHtRatio);
 		fTmp2 											= makeint(26.0 * fHtRatio);
 		objLandInterface.ManSign.gunreloadoffset		= fTmp + "," + fTmp2;
-		fTmp 											= makeint(60.0 * fHtRatio);
-		fTmp2 											= makeint(85.0 * fHtRatio);
-		objLandInterface.ManSign.gunreloadiconsize		= "70.0,6.0"
+		fTmp 											= makeint(56.0 * fHtRatio);
+		fTmp2 											= makeint(5.0 * fHtRatio);
+		objLandInterface.ManSign.gunreloadiconsize		= fTmp + "," + fTmp2;
 	}
 	else
 	{
@@ -726,12 +726,15 @@ void BLI_SetObjectData()
 		objLandInterface.ManSign.gunreloadbackcolor		= ARGB(255, 0, 255, 62);
 		objLandInterface.ManSign.gunreloadUV			= "0.0,0.0,1.0,1.0";
 		fTmp 											= makeint(0.0 * fHtRatio);
-		fTmp2 											= makeint(26.0 * fHtRatio);
+		fTmp2 											= makeint(25.0 * fHtRatio);
 		objLandInterface.ManSign.gunreloadoffset		= fTmp + "," + fTmp2;
-		fTmp 											= makeint(60.0 * fHtRatio);
-		fTmp2 											= makeint(85.0 * fHtRatio);
-		objLandInterface.ManSign.gunreloadiconsize		= "48.0,8.0";
+		fTmp 											= makeint(39.0 * fHtRatio);
+		fTmp2 											= makeint(10.0 * fHtRatio);
+		objLandInterface.ManSign.gunreloadiconsize		= fTmp + "," + fTmp2;
 	}
+
+	fTmp    = makeint(60.0 * fHtRatio);
+	fTmp2   = makeint(85.0 * fHtRatio);
 
 	for(i = 1; i<=MAX_NUM_FIGHTERS + 1; i++) {
 		string sOffsetIcon = "iconoffset" + i;
