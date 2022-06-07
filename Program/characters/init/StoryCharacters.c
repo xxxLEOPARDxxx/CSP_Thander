@@ -305,7 +305,7 @@ int CreateStoryCharacters(int n)
 	ch.name = "Уицилопочтли";
 	ch.lastname = "";
 	ch.id = "Uicilopochtli";
-	ch.model = "mictlantecuhtli";
+	ch.model = "Uchilopochi";
 	ch.sex = "skeleton";
 	ch.location	= "none";
 	ch.location.group = "";
