@@ -632,6 +632,85 @@ string ModifyGeneratedBlade(string sItemID, float delta_dmg_min, float delta_dmg
 	return GenerateBladeByParams(origItem, dmg_min, dmg_max, weight);
 }
 
+bool BladeIsPerfect(string sItemID)
+{
+	if (!IsGenerableItem(sItemID))
+	{
+		return true;
+	}
+
+	ref item = ItemsFromID(sItemID);
+
+	float dmg_min, dmg_max, weight;
+	string origItem = GetBladeParams(sItemID, &dmg_min, &dmg_max, &weight);
+
+	return (dmg_min == stf(item.Generation.dmg_min.max)) &&
+		(dmg_max == stf(item.Generation.dmg_max.max)) &&
+		(weight == stf(item.Generation.weight.min));
+}
+
+string ImproveGeneratedBlade(string sItemID, float improveAmount)
+{
+	if (!IsGenerableItem(sItemID))
+	{
+		return sItemID;
+	}
+
+	ref item = ItemsFromID(sItemID);
+
+	float dmg_min, dmg_max, weight, statNew;
+	string origItem = GetBladeParams(sItemID, &dmg_min, &dmg_max, &weight);
+
+	bool dmg_min_perfect = dmg_min == stf(item.Generation.dmg_min.max);
+	bool dmg_max_perfect = dmg_max == stf(item.Generation.dmg_max.max);
+	bool weight_perfect = weight == stf(item.Generation.weight.min);
+	int statsToChoose = !dmg_min_perfect + !dmg_max_perfect + !weight_perfect;
+	if (statsToChoose == 0)
+	{
+		return sItemID;
+	}
+
+	int seed = sti((dmg_min + dmg_max + weight) * GEN_ITEM_DISCRET);
+	int statInd = seed % statsToChoose;
+
+	if (!dmg_min_perfect)
+	{
+		if (statInd == 0)
+		{
+			statNew = (stf(item.Generation.dmg_min.max) - stf(item.Generation.dmg_min.min)) * improveAmount;
+			statNew = retMin(dmg_min + statNew, stf(item.Generation.dmg_min.max));
+			Log_Info("Минимальный урон клинка повышен с " + dmg_min + " до " + statNew);
+			dmg_min = statNew;
+		}
+		statInd = statInd - 1;
+	}
+
+	if (!dmg_max_perfect)
+	{
+		if (statInd == 0)
+		{
+			statNew = (stf(item.Generation.dmg_max.max) - stf(item.Generation.dmg_max.min)) * improveAmount;
+			statNew = retMin(dmg_max + statNew, stf(item.Generation.dmg_max.max));
+			Log_Info("Максимальный урон клинка повышен с " + dmg_max + " до " + statNew);
+			dmg_max = statNew;
+		}
+		statInd = statInd - 1;
+	}
+
+	if (!weight_perfect)
+	{
+		if (statInd == 0)
+		{
+			statNew = (stf(item.Generation.weight.max) - stf(item.Generation.weight.min)) * improveAmount;
+			statNew = retMax(weight - statNew, stf(item.Generation.weight.min));
+			Log_Info("Вес клинка снижен с " + weight + " до " + statNew);
+			weight = statNew;
+		}
+	}
+
+	return GenerateBladeByParams(origItem, dmg_min, dmg_max, weight);
+}
+
 //ugeen --> вернем случайный ID сгенерированного зараннее предмета
 string GetGeneratedItem(string _itemId)
 {
@@ -1060,11 +1139,6 @@ void QuestCheckTakeItem(aref _location, string _itemId)
 	if (_itemId == "SkullAztec")
 	{
 		LoginDeadmansGod();
-	}
-	//взятие шотгана
-	if (_itemId == "pistol7")
-	{
-		LoginShotgunGuards();
 	}
 }
 
