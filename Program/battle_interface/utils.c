@@ -16,7 +16,6 @@ native int ShipSailState(int chrIdx);
 #define BI_FAST_REPAIR_PERCENT	1.0
 #define BI_FAST_REPAIR_SAIL		3.0
 #define BI_FAST_REPAIR_PERIOD	50
-#define InstantRepairRATESAIL	78.0
 
 #event_handler("evntActionRepair","procActionRepair");
 
@@ -155,7 +154,7 @@ void procActionRepair()
 			}*/
 			ProcessHullRepairDigital(chref,fRepairH);
 		}
-		if(spp < InstantRepairRATESAIL && nMaterialS>0) // boal 23.01.2004
+		if(spp < InstantRepairRATE && nMaterialS>0) // boal 23.01.2004
 		{
 			//fRepairS = ProcessSailRepairFast(chref,fRepairS);
 			//Log_Info("fRepairS "+chref.ship.Repair+"GetSailPercent(chref) "+chref.ship.SP);
@@ -177,28 +176,37 @@ void procActionRepair()
 			if(fRepairS > 0)
 				chref.ship.RepairS = ProcessSailRepairFast(chref, fRepairS);
 				//Log_Info("chref.ship.RepairS "+chref.ship.RepairS);
-			if(CheckOfficersPerk(chref, "Builder"))
+			if(fRepairS != stf(chref.ship.RepairS))
 			{
-				ftmp2 = BI_FAST_REPAIR_PERCENT*0.9;
-				if(!CheckAttribute(chref, "ship.MatDeltaS"))
-					chref.ship.MatDeltaS = 0.01;
-				ftmp2 += stf(chref.ship.MatDeltaS);
-				if(ftmp2 >= 1)
+				if(CheckOfficersPerk(chref, "Builder"))
 				{
-					nMatDeltaS = ftmp2;
-					//Log_Info("nMatDeltaS "+nMatDeltaS+" ftmp1 "+ftmp1);
-					ftmp2 -= nMatDeltaS;
+					ftmp2 = BI_FAST_REPAIR_PERCENT*0.9;
+					if(!CheckAttribute(chref, "ship.MatDeltaS"))
+						chref.ship.MatDeltaS = 0.01;
+					ftmp2 += stf(chref.ship.MatDeltaS);
+					if(ftmp2 >= 1)
+					{
+						nMatDeltaS = ftmp2;
+						//Log_Info("nMatDeltaS "+nMatDeltaS+" ftmp1 "+ftmp1);
+						ftmp2 -= nMatDeltaS;
+					}
+					chref.ship.MatDeltaS = ftmp2;
 				}
-				chref.ship.MatDeltaS = ftmp2;
+				else
+				{
+					nMatDeltaS = BI_FAST_REPAIR_PERCENT;
+				}
 			}
 			else
-				nMatDeltaS = BI_FAST_REPAIR_PERCENT;
+			{
+				nMatDeltaS = 0;
+			}
 			//Log_Info("nMatDeltaS "+nMatDeltaS);
 			//if(fRepairS>BI_FAST_REPAIR_PERCENT)
 			//	{fRepairS=BI_FAST_REPAIR_PERCENT;}
 			//Log_Info("ремонт "+ fRepairS + " nMatDeltaS " + nMatDeltaS + "fMaterialS" + fMaterialS);
 			/*старое
-			fRepairS = InstantRepairRATESAIL -spp; // boal 23.01.2004
+			fRepairS = InstantRepairRATE -spp; // boal 23.01.2004
 			if(fRepairS>BI_FAST_REPAIR_PERCENT)	{fRepairS=BI_FAST_REPAIR_PERCENT;}
 			ftmp1 = GetSailSPP(chref)*5; //*1
 			ftmp2 = fMaterialS + ftmp1*fRepairS;
@@ -250,7 +258,7 @@ void procActionRepair()
 			}
 			else
 			{
-				if(spp < InstantRepairRATESAIL) // boal 23.01.2004
+				if(spp < InstantRepairRATE) // boal 23.01.2004
 				{	PostEvent("evntActionRepair",BI_FAST_REPAIR_PERIOD,"llff",chrIdx,1, fMaterialH,fMaterialS);
 				}
 				else
