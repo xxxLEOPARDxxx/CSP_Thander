@@ -1539,8 +1539,8 @@ void FlagsProcess1(int nation)
 	int i, cn;
 	ref chref;
 
-
 	Sea_ClearCheckFlag(); // сбросить всем в море проверку смотрения на флаг.
+	Flag_Change(nation);
 	DoQuestFunctionDelay("FreeChangeFlagMode", 15.0); // ролик + запас
 
 	switch (nation)

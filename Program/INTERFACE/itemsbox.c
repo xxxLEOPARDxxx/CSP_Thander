@@ -678,17 +678,23 @@ void ProcCommand()
 					box = "box"+curchest;
 					makearef(chest,loadedLocation.(box));
 					SetCharactersMoneyOnExit();
-					InitInterface_RS(Interfaces[INTERFACE_ITEMSBOX].IniFile,chest,"");
+					SetCharacterMoneyToGold(refCharacter); // Переводим деньги ГГ в золото
+					SetCharacterMoneyToGold(chest);
+					iSetCharIDToCharactersArroy(refCharacter); // Заносим в список ГГ
+					AddToTable(chest);
 					SetFormatedText("STORECAPTION1","Сундук каюты под номером "+curchest);
 					curchest = curchest+1;
 				}
 				else
 				{
 					curchest = 1;
-					box = "box"+curchest);
+					box = "box"+curchest;
 					makearef(chest,loadedLocation.(box));
 					SetCharactersMoneyOnExit();
-					InitInterface_RS(Interfaces[INTERFACE_ITEMSBOX].IniFile,chest,"");
+					SetCharacterMoneyToGold(refCharacter); // Переводим деньги ГГ в золото
+					SetCharacterMoneyToGold(chest);
+					iSetCharIDToCharactersArroy(refCharacter); // Заносим в список ГГ
+					AddToTable(chest);
 					SetFormatedText("STORECAPTION1","Сундук каюты под номером "+curchest);
 					curchest = curchest+1;
 				}
