@@ -202,7 +202,6 @@ bool LAi_CreateEncounters(ref location)
 	{
 		iRand = rand(5);
 	}
-	iRand = 1;
 	switch (iRand)
 	{
 		//------------------ Банда рейдеров типа дежурит на грабежах ----------------------

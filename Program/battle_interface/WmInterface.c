@@ -318,13 +318,11 @@ void WM_SetParameterData()
 		BattleInterface.wm_sign.shipspoffset			= RecalculateHIcon(54.5* fHtRatio)+","+RecalculateVIcon(-18.5* fHtRatio);
 		BattleInterface.wm_sign.shipspiconsize			= RecalculateHIcon(makeint(64* fHtRatio))+","+RecalculateVIcon(makeint(88* fHtRatio));
 
-
-		BattleInterface.wm_sign.shipclasstexturename	= "battle_interface\ShipClassCSP.tga";
+		BattleInterface.wm_sign.shipclasstexturename	= "0";
 		BattleInterface.wm_sign.shipclasscolor			= argb(255,50,50,50);
 		BattleInterface.wm_sign.shipclassuv				= "0.0,0.0,1.0,1.0";
-		BattleInterface.wm_sign.shipclassoffset			= RecalculateHIcon(makeint(-12* fHtRatio))+","+RecalculateVIcon(makeint(-53* fHtRatio));
-		BattleInterface.wm_sign.shipclassiconsize		= RecalculateHIcon(makeint(64* fHtRatio))+","+RecalculateVIcon(makeint(16* fHtRatio));
-		BattleInterface.wm_sign.gunchargeprogress		= "0.0625, 0.219, 0.359, 0.5, 0.641, 0.781, 0.983";
+		BattleInterface.wm_sign.shipclassoffset			= "0,0";
+		BattleInterface.wm_sign.shipclassiconsize		= "0,0";
 
 		BattleInterface.wm_sign.shiptexturename		= "battle_interface\ship_icons2.tga";
 		BattleInterface.wm_sign.shipcolor				= argb(255,128,128,128);

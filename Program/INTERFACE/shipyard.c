@@ -2104,7 +2104,7 @@ void RepairOk()
 	int sp = MakeInt(GetSailPercent(xi_refCharacter));
 	float ret;
 
-	if(GetChrClearSoilingCoast() > 0 && SendMessage(&GameInterface,"lsll",MSG_INTERFACE_MSG_TO_NODE, "REPAIR_Soiling_CHECKBOX", 3, 1) && xi_refCharacter.ship.soiling > 0)
+	if ((GetChrClearSoilingCoast() > 0) && (SendMessage(&GameInterface,"lsll",MSG_INTERFACE_MSG_TO_NODE, "REPAIR_Soiling_CHECKBOX", 3, 1) > 0) && (xi_refCharacter.ship.soiling > 0))
 	{
 		xi_refCharacter.ship.soiling = 0;
 		timeSoil = timeSoil + (8-GetCharacterShipClass(xi_refCharacter));
