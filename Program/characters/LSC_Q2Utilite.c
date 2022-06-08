@@ -2866,6 +2866,39 @@ void LoginDeadmansGod()
 	LAi_CharacterPlaySound(sld, "DeadmansGod");
 }
 
+void TenoRoundTempleChestOpen()
+{
+	ref sld;
+	if (pchar.questTemp.Teno != "YouWinGod")
+	{
+		// Если квест Тено не закончен, генерируем охрану револьвера
+		LAi_group_Delete("EnemyFight");
+		chrDisableReloadToLocation = true;
+		for (i=1; i<=8; i++)
+		{
+			sld = GetCharacter(NPC_GenerateCharacter("AztecWarrior_"+i, "AztecWarrior"+(rand(4)+1), "skeleton", "man", 30, PIRATE, 0, true));
+			FantomMakeCoolFighter(sld, 30, 90, 90, "toporAZ", "", 100);
+			LAi_SetWarriorType(sld);
+			LAi_group_MoveCharacter(sld, "EnemyFight");
+			ChangeCharacterAddressGroup(sld, pchar.location, "goto",  "goto"+i);
+			LAi_group_SetRelation("EnemyFight", LAI_GROUP_PLAYER, LAI_GROUP_ENEMY);
+			LAi_group_FightGroups("EnemyFight", LAI_GROUP_PLAYER, true);
+			LAi_group_SetCheck("EnemyFight", "OpenTheDoors");
+		}
+	}
+	else
+	{
+		if (!CheckAttribute(PChar, "questTemp.Uicilopochtli"))
+		{
+			sld = GetCharacter(GetCharacterIndex("Uicilopochtli"));
+			ChangeCharacterAddressGroup(sld, "Temple_round", "goto", "goto1");
+			LAi_ActorDialog(sld, pchar, "", 0.0, 0);
+
+			PChar.questTemp.Uicilopochtli = 0;
+		}
+	}
+}
+
 void LoginDeadmansGod2()
 {
 	if (MOD_SKILL_ENEMY_RATE == 10 && bHardAnimations) ref sld = GetCharacter(NPC_GenerateCharacter("DeadmansGod2", "mictlantumsamil", "skeleton", "spy", 60, PIRATE, 0, true)); // LEO: Превозмогаторам - страдать 01.12.2021
@@ -3012,27 +3045,6 @@ bool CheckMainHeroMap(string itemName)
 		return true;
 	}
 	return false;
-}
-// <-- ugeen
-void LoginShotgunGuards()
-{
-	ref sld;
-	if (pchar.questTemp.Teno != "YouWinGod")
-	{
-		LAi_group_Delete("EnemyFight");
-		chrDisableReloadToLocation = true;
-		for (i=1; i<=8; i++)
-		{
-			sld = GetCharacter(NPC_GenerateCharacter("AztecWarrior_"+i, "AztecWarrior"+(rand(4)+1), "skeleton", "man", 30, PIRATE, 0, true));
-			FantomMakeCoolFighter(sld, 30, 90, 90, "toporAZ", "", 100);
-			LAi_SetWarriorType(sld);
-			LAi_group_MoveCharacter(sld, "EnemyFight");
-			ChangeCharacterAddressGroup(sld, pchar.location, "goto",  "goto"+i);
-			LAi_group_SetRelation("EnemyFight", LAI_GROUP_PLAYER, LAI_GROUP_ENEMY);
-			LAi_group_FightGroups("EnemyFight", LAI_GROUP_PLAYER, true);
-			LAi_group_SetCheck("EnemyFight", "OpenTheDoors");
-		}
-	}
 }
 
 // Инициализация прочих квестов. Warship

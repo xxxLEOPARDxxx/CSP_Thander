@@ -2,7 +2,7 @@
 // здесь и далее ник boal - это разработческий ник ALexusB
 
 #define VERSION_NUMBER1       "ГПК v.1.3.2 ATR  "
-#define VERSION_NUMBER2       "CSP v2.3.0 (Весна 2022)"
+#define VERSION_NUMBER2       "CSP v2.3.0a (24.05.2022)"
 #define VERSION_NUMBER3       ""
 #define PROVIDER_TXT            "LEOPARD's team"
 #define VERSION_NUM      99910  // текущий номер

@@ -101,8 +101,8 @@ void SetTimeSlider()
 
 void SetWariable()
 {
-        string sCurDayTime;
-        SetFormatedText("CURRENTTIME_TEXT", "");
+	string sCurDayTime;
+	SetFormatedText("CURRENTTIME_TEXT", "");
 
 	sDate = environment.date.day + " " + XI_ConvertString("target_month_" + environment.date.month) + " " + environment.date.year;
 
@@ -114,11 +114,11 @@ void SetWariable()
 
    if(sti(sHour) < 10)
 	{
-	        sHour = "0" + sHour;
+		sHour = "0" + sHour;
 	}
 	if(sti(sMinuts) < 10)
 	{
-                sMinuts = "0" + sMinuts;
+		sMinuts = "0" + sMinuts;
 	}
 
 	sTime = sHour + " : " + sMinuts;
@@ -156,10 +156,11 @@ void Sleep()
 		if (iCurrentTime < 7) iAddTime = 7 - iCurrentTime;
     }
 
-    if(SendMessage(&GameInterface,"lsll",MSG_INTERFACE_MSG_TO_NODE, "TIME_CHECK", 3, 3) || SendMessage(&GameInterface,"lsll",MSG_INTERFACE_MSG_TO_NODE, "TIME_CHECK", 3, 4))
+    if(SendMessage(&GameInterface,"lsll",MSG_INTERFACE_MSG_TO_NODE, "TIME_CHECK", 3, 3) == 1 || SendMessage(&GameInterface,"lsll",MSG_INTERFACE_MSG_TO_NODE, "TIME_CHECK", 3, 4) == 1)
     {
-            iAddtime = iTime+1;
+        iAddtime = iTime+1;
     }
+	
 	pchar.quest.waithours = iAddtime;
     if (days == false)
 	{
@@ -180,16 +181,16 @@ void ProcessCancelExit()
 void IDoExit(int exitCode, bool bCode)
 {
 	DelEventHandler("InterfaceBreak","ProcessCancelExit");
-   DelEventHandler("frame","ProcessFrame");
-   DelEventHandler("exitCancel","ProcessCancelExit");
-   DelEventHandler("eSlideChange","ChangeTimeProgress");
-   DelEventHandler("RefreshVariables","RefreshVariables");
-   DelEventHandler("exitOk","Sleep");
+	DelEventHandler("frame","ProcessFrame");
+	DelEventHandler("exitCancel","ProcessCancelExit");
+	DelEventHandler("eSlideChange","ChangeTimeProgress");
+	DelEventHandler("RefreshVariables","RefreshVariables");
+	DelEventHandler("exitOk","Sleep");
 
-   SetTimeScale(1.0);
+	SetTimeScale(1.0);
 	locCameraSleep(false);
 
-   BLI_EnableShow();
+	BLI_EnableShow();
 
 	interfaceResultCommand = exitCode;
 	EndCancelInterface(bCode);
@@ -208,13 +209,13 @@ string FindHourString(int iHour)
 
 void Restore_HP()
 {
-        int iOfficer;
+	int iOfficer;
 	LAi_SetCurHPMax(pchar);
 	for (int i=1; i<4; i++)
 	{
-	        if (GetOfficersIndex(Pchar, i) != -1)
+		if (GetOfficersIndex(Pchar, i) != -1)
 		{
-		        iOfficer = GetOfficersIndex(Pchar, i);
+			iOfficer = GetOfficersIndex(Pchar, i);
 			LAi_SetCurHPMax(&characters[iOfficer]);
 		}
 	}

@@ -718,6 +718,7 @@ void ShowInfoWindow()
 		    	sText2 = sText2 + NewStr() + "Дальность: "  + sti(Cannon.FireRange);
 		    	sText2 = sText2 + NewStr() + "Урон: x"  + FloatToString(stf(Cannon.DamageMultiply), 1);
 		    	sText2 = sText2 + NewStr() + "Перезарядка: "  + sti(GetCannonReloadTime(Cannon)) + " сек.";
+				sText2 = sText2 + NewStr() + "Расход пороха: "  + sti(Cannon.powder) + " ед.";
 		    	sText2 = sText2 + NewStr() + "Вес: "  + sti(Cannon.Weight) + " ц.";
 
 		    	sGroup = "GOODS";
