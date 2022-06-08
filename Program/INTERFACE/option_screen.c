@@ -1566,7 +1566,7 @@ void SetKeyChooseWarning( string sWarningText )
 	SendMessage(&GameInterface,"lslle",MSG_INTERFACE_MSG_TO_NODE,"CHANGEKEY_TEXT", 10, 4, &sWarningText );
 	SendMessage( &GameInterface,"lsl",MSG_INTERFACE_MSG_TO_NODE,"CHANGEKEY_TEXT", 5 );
 	SendMessage(&GameInterface,"lslll",MSG_INTERFACE_MSG_TO_NODE,"CHANGEKEY_TEXT", 8, 4, argb(255,255,64,64) );
-	PostEvent("evFaderFrame",700,"lll",500,0,50);
+	PostEvent("evFaderFrame",700,"lll",3000,0,50);
 }
 
 void FaderFrame()
