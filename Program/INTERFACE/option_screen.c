@@ -1,6 +1,7 @@
 int g_nCurControlsMode = -1;
 int g_ControlsLngFile = -1;
 bool blockkey = true;
+string curkey = "";
 bool g_bToolTipStarted = false;
 
 float 	fHUDRatio 	= 1.0;
@@ -1202,9 +1203,15 @@ bool DoMapToOtherKey(int keyIdx,int stickUp)
 	if( KeyAlreadyUsed(groupName, sControl, GetAttributeName(arKey)) )
 	{
 		SetKeyChooseWarning( XI_ConvertString("KeyAlreadyUsed") );
+		if (curkey != "" && curkey != GetAttributeName(arKey))
+		{
+			curkey = GetAttributeName(arKey);
+			return false;
+		}
 		if (blockkey) 
 		{
 			blockkey = false;
+			curkey = GetAttributeName(arKey);
 			return false;
 		}
 	}
@@ -1220,6 +1227,7 @@ bool DoMapToOtherKey(int keyIdx,int stickUp)
 	GameInterface.controls_list.(srow).userdata.key = arKey;
 	GameInterface.controls_list.(srow).td1.str = arKey.img;
 	SendMessage( &GameInterface, "lsl", MSG_INTERFACE_MSG_TO_NODE, "CONTROLS_LIST", 0 );
+	curkey = "";
 	blockkey = true;
 	return true;
 }
