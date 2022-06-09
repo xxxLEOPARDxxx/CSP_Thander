@@ -336,7 +336,7 @@ void SetOfficerParam(ref Npchar, int _type)
 		case 0:
 		    SetRandSPECIAL_K(Npchar);  // вот сюда методы  под каждого типа оффов
 			Npchar.quest.officertype = "boatswain";
-			Npchar.quest.officertype_2 = RandPhraseSimple("Могу и доктором побыть, если припрет. ", "Еще умею матросов беречь, кости им вправлять, когда подранят. ");
+			Npchar.quest.officertype_2 = RandPhraseSimple("Могу и доктором побыть, если припрёт. ", "Ещё умею матросов беречь, кости им вправлять, когда подранят. ");
 			Npchar.quest.LeadershipModify     = frandSmall(2.0);
 			Npchar.quest.FencingModify     = Rand(1);
 			Npchar.quest.GrapplingModify   = frandSmall(2.0) + 2;
@@ -360,7 +360,7 @@ void SetOfficerParam(ref Npchar, int _type)
 
 		case 2:
 		    SetRandSPECIAL_K(Npchar);
-			Npchar.quest.officertype_2 = RandPhraseSimple("Могу и корабль починить помочь. ", "Еще умею с пилой и рубанком обращаться. ");
+			Npchar.quest.officertype_2 = RandPhraseSimple("Могу и корабль починить помочь. ", "Ещё умею с пилой и рубанком обращаться. ");
 			Npchar.quest.officertype = "treasurer";
 			Npchar.quest.RepairModify        = frandSmall(2.0) + 3;
 			Npchar.quest.CommerceModify      = frandSmall(2.0) + 2;
@@ -372,7 +372,7 @@ void SetOfficerParam(ref Npchar, int _type)
 
 		case 3:
 		    SetRandSPECIAL_K(Npchar);
-			Npchar.quest.officertype_2 = RandPhraseSimple("Еще поверхностно медицину знаю. ", "Врачем, конечно, не считаюсь, но подскажу и в этом. ");
+			Npchar.quest.officertype_2 = RandPhraseSimple("Еще поверхностно медицину знаю. ", "Врачём, конечно, не считаюсь, но подскажу и в этом. ");
 			Npchar.quest.officertype = "navigator";
 			Npchar.quest.SailingModify        = frandSmall(2.0) + 2;
 			Npchar.quest.DefenseModify        = frandSmall(2.0) + 1.3;

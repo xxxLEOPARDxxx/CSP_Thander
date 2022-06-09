@@ -380,8 +380,8 @@ void ProcessDialogEvent()
 			LAi_CharacterDisableDialog(npchar);
 			npchar.lifeday = 0;
 
-			AddCharacterSkill(pchar, "Sailing", 1);
-			AddCharacterSkill(pchar, "Repair", 1);
+			AddCharacterSkillDontClearExp(pchar, "Sailing", 1);
+			AddCharacterSkillDontClearExp(pchar, "Repair", 1);
 			Log_SetStringToLog("Навигация + 1");
 			Log_SetStringToLog("Ремонт + 1");
 

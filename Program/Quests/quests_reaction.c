@@ -10201,18 +10201,16 @@ void QuestComplete(string sQuestName, string qname)
 //========================  Квест "Непутёвый казначей".  =======================
 
 		case "PDM_NK_Viktor":
-			Log_SetStringToLog("Лёгкое оружие + 1");
-			Log_SetStringToLog("Среднее оружие + 1");
-			Log_SetStringToLog("Тяжёлое оружие + 1");
+			Log_SetStringToLog("Холодное оружие + 1");
 			Log_SetStringToLog("Пистолеты + 1");
 			Log_SetStringToLog("Скрытность - 1");
 			Log_SetStringToLog("Торговля - 1");
-			AddCharacterSkill(pchar, "FencingLight", 1);
-			AddCharacterSkill(pchar, "Fencing", 1);
-			AddCharacterSkill(pchar, "FencingHeavy", 1);
-			AddCharacterSkill(pchar, "Pistol", 1);
-			AddCharacterSkill(pchar, "Sneak", -1);
-			AddCharacterSkill(pchar, "Commerce", -1);
+			AddCharacterSkillDontClearExp(pchar, "FencingLight", 1);
+			AddCharacterSkillDontClearExp(pchar, "Fencing", 1);
+			AddCharacterSkillDontClearExp(pchar, "FencingHeavy", 1);
+			AddCharacterSkillDontClearExp(pchar, "Pistol", 1);
+			AddCharacterSkillDontClearExp(pchar, "Sneak", -1);
+			AddCharacterSkillDontClearExp(pchar, "Commerce", -1);
 
 			AddQuestRecord("PDM_Neputyovy_kaznachey", "4");
 

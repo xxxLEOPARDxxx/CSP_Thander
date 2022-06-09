@@ -148,7 +148,7 @@ void ProcessDialogEvent()
 										//flag = sti(npchar.nation)!=PIRATE && pchar.location != "Pirates_tavern" && pchar.location != "FortOrange_tavern" && pchar.location != "Dominica_tavern" && pchar.location != "Guibraltar_tavern" && pchar.location != "Fishing_Settlement_tavern" && pchar.location != "Panama_tavern";
 										//Log_Info("Дней: "+GetQuestPastDayParam("CasinoGenerator_timer")+" надо > 15 Шанс: "+sti(npchar.GenQuest)+" надо < 30");
 										//if (flag && GetQuestPastDayParam("CasinoGenerator_timer") > 15 && sti(npchar.GenQuest) < 15 && !CheckAttribute(pchar, "HOTP_CasinoQuest") && !CheckAttribute(npchar, "CasinoQuest.decline"))
-										if (drand(100) < 15 && !CheckAttribute(pchar, "HOTP_CasinoQuest") && !CheckAttribute(npchar, "CasinoQuest.decline") && !CheckAttribute(pchar, "questTemp.KIP_Looser") && (pchar.location != "Pirates_tavern") && (pchar.location != "LaVega_tavern") && (pchar.location != "PuertoPrincipe_tavern") && (pchar.location != "LeFransua_tavern") && (pchar.location != "FortOrange_tavern") && (pchar.location != "Panama_tavern") && (pchar.location != "Fishing_Settlement_tavern") && (pchar.location != "Guibraltar_tavern") && (pchar.location != "Dominica_tavern") && (pchar.location != "Caiman_tavern"))
+										if (drand(100) < 9 && !CheckAttribute(pchar, "HOTP_CasinoQuest") && !CheckAttribute(npchar, "CasinoQuest.decline") && !CheckAttribute(pchar, "questTemp.KIP_Looser") && (pchar.location != "Pirates_tavern") && (pchar.location != "LaVega_tavern") && (pchar.location != "PuertoPrincipe_tavern") && (pchar.location != "LeFransua_tavern") && (pchar.location != "FortOrange_tavern") && (pchar.location != "Panama_tavern") && (pchar.location != "Fishing_Settlement_tavern") && (pchar.location != "Guibraltar_tavern") && (pchar.location != "Dominica_tavern") && (pchar.location != "Caiman_tavern"))
 										{
 											DeleteAttribute(link, "l2");
 											DeleteAttribute(link, "l3");
@@ -184,7 +184,7 @@ void ProcessDialogEvent()
 										//flag = sti(npchar.nation)!=PIRATE && pchar.location != "FortOrange_tavern" && pchar.location != "Dominica_tavern" && pchar.location != "Guibraltar_tavern" && pchar.location != "Fishing_Settlement_tavern" && pchar.location != "Panama_tavern";
 										//Log_Info("Дней: "+GetQuestPastDayParam("CasinoGenerator_timer")+" надо > 15 Шанс: "+sti(npchar.GenQuest)+" надо < 30");
 										//if (flag && GetQuestPastDayParam("CasinoGenerator_timer") > 15 && sti(npchar.GenQuest) < 15 && !CheckAttribute(pchar, "HOTP_CasinoQuest") && !CheckAttribute(npchar, "CasinoQuest.decline"))
-										if (drand(100) < 15 && !CheckAttribute(pchar, "HOTP_CasinoQuest") && !CheckAttribute(npchar, "CasinoQuest.decline") && !CheckAttribute(pchar, "questTemp.KIP_Looser") && (pchar.location != "Pirates_tavern") && (pchar.location != "LaVega_tavern") && (pchar.location != "PuertoPrincipe_tavern") && (pchar.location != "LeFransua_tavern") && (pchar.location != "FortOrange_tavern") && (pchar.location != "Panama_tavern") && (pchar.location != "Fishing_Settlement_tavern") && (pchar.location != "Guibraltar_tavern") && (pchar.location != "Dominica_tavern") && (pchar.location != "Caiman_tavern"))
+										if (drand(100) < 9 && !CheckAttribute(pchar, "HOTP_CasinoQuest") && !CheckAttribute(npchar, "CasinoQuest.decline") && !CheckAttribute(pchar, "questTemp.KIP_Looser") && (pchar.location != "Pirates_tavern") && (pchar.location != "LaVega_tavern") && (pchar.location != "PuertoPrincipe_tavern") && (pchar.location != "LeFransua_tavern") && (pchar.location != "FortOrange_tavern") && (pchar.location != "Panama_tavern") && (pchar.location != "Fishing_Settlement_tavern") && (pchar.location != "Guibraltar_tavern") && (pchar.location != "Dominica_tavern") && (pchar.location != "Caiman_tavern"))
 										{
 											DeleteAttribute(link, "l2");
 											DeleteAttribute(link, "l3");
@@ -1144,7 +1144,7 @@ void ProcessDialogEvent()
 		// Dolphin -> Генератор возврата выигрыша
 		case "HOTP_CasinoQuest_1":
 			pchar.questTemp.KIP_Looser = "KIP_Looser";
-			SetTimerFunction("LooserGenerator_NewGeneratorQuest", 0, 0, 15);
+			//SetTimerFunction("LooserGenerator_NewGeneratorQuest", 0, 0, 15);
 			npchar.CasinoQuest.decline = true;	// второй раз говорить об этому уже не будет
 			dialog.text = "Ты прав"+ GetSexPhrase("","а") +", "+ GetSexPhrase("приятель","подруга") +". Я намедни проиграл всё, что у меня было. Видать фортуна решила подшутить надо мной. Это было похоже на наваждение.";
 			link.l1 = RandSwear()+" Кто же этот счастливчик?";

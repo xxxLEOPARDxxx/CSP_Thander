@@ -98,7 +98,7 @@ void ProcessDialogEvent()
 							+ LinkRandPhrase("Деньги не имеют запаха. ", "Пиастры не пахнут. ","Одной добродетелью сыт не будешь! ")+
 							+GetFullName(npchar)+  " к вашим услугам!",
 			                + LinkRandPhrase("Приятно познакомится с новым клиентом, ", "Рад новому клиенту, ", "Добро пожаловать, ")
-							+ GetAddress_Form(NPChar)+ ". Мое имя "  + GetFullName(npchar)+
+							+ GetAddress_Form(NPChar)+ ". Моё имя "  + GetFullName(npchar)+
 							+ RandPhraseSimple(", мой магазин к вашим услугам.",", я полностью в вашем распоряжении."));
 			link.l1 = "Позвольте представиться. " +RandPhraseSimple("Меня зовут ","Я - ")+ "капитан "+ GetFullName(pchar)+".";
 			link.l1.go = "node_1";

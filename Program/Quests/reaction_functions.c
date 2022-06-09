@@ -11088,7 +11088,7 @@ void LooserGenerator_sart_Magazin(string s)		//Украл владелец ма�
 	ChangeCharacterReputation(pchar, -5);
 
 	ref chr = CharacterFromID(pchar.HOTP_CasinoQuest.npcharID);
-	chr.dialog.filename = "Quest\KIP\looser.c";
+	chr.dialog.filename = "Quest\PDM\looser.c";
 	chr.dialog.currentnode = "Jdet_1";
 	DeleteAttribute(chr, "lifeday");		// на всякий случай, чтобы не исчез
 
@@ -11110,7 +11110,7 @@ void LooserGenerator_sart_Verf(string s)	//Украл владелец верф�
 	ChangeCharacterReputation(pchar, -5);
 
 	ref chr = CharacterFromID(pchar.HOTP_CasinoQuest.npcharID);
-	chr.dialog.filename = "Quest\KIP\looser.c";
+	chr.dialog.filename = "Quest\PDM\looser.c";
 	chr.dialog.currentnode = "Jdet_1";
 	DeleteAttribute(chr, "lifeday");		// на всякий случай, чтобы не исчез
 
@@ -11264,7 +11264,7 @@ void LooserGenerator_OpenLocation(string s)
 
 	ref chr = CharacterFromID(pchar.HOTP_CasinoQuest.npcharID);
 	chr.CasinoQuest_ok = true;
-	chr.dialog.filename = "Quest\KIP\looser.c";
+	chr.dialog.filename = "Quest\PDM\looser.c";
 	chr.dialog.currentnode = "quest";
 
 	DeleteQuestCheck("LooserGeneratorFailed");
@@ -11275,10 +11275,6 @@ void LooserGenerator_OpenLocation(string s)
 // Успешное завершение квеста
 void LooserGenerator_Complette()
 {
-	AddCharacterSkillDontClearExp(pchar, "Fortune", 1);
-	Log_SetStringToLog("Везение + 1");
-
-	PlayStereoSound("interface\important_item.wav");
 	DeleteAttribute(pchar, "items.Bag_with_money");
 	DeleteAttribute(pchar, "KIP_PI_SleditZaNami");
 	PChar.quest.LooserGenerator_TimeFailed.over = "yes";
@@ -11286,8 +11282,8 @@ void LooserGenerator_Complette()
 	ref chr = CharacterFromID(pchar.HOTP_CasinoQuest.npcharID);
 	chr.lifeday = 0;
 	CloseQuestHeader("LOOSER_GENERATOR");
-	DeleteAttribute(pchar, "HOTP_CasinoQuest");
-	SaveCurrentQuestDateParam("CasinoGenerator_timer");
+	//DeleteAttribute(pchar, "HOTP_CasinoQuest");
+	//SaveCurrentQuestDateParam("CasinoGenerator_timer");
 }
 
 //--------------------------------------------------------------------------------------------------------------
@@ -11306,7 +11302,7 @@ void LooserGenerator_TimeFailed(string s)
 
 	ref chr = CharacterFromID(pchar.HOTP_CasinoQuest.npcharID);
 	chr.lifeday = 0;
-	chr.dialog.filename = "Quest\KIP\looser.c";
+	chr.dialog.filename = "Quest\PDM\looser.c";
 	chr.dialog.currentnode = "first time";
 }
 //--------------------------------------------------------------------------------------------------------------
@@ -11321,7 +11317,7 @@ void LooserGenerator_FailedByEnc(string s)
 	ref chr = CharacterFromID(pchar.HOTP_CasinoQuest.npcharID);
 	chr.lifeday = 0;
 	chr.CasinoQuest_ok = true;
-	chr.dialog.filename = "Quest\KIP\looser.c";
+	chr.dialog.filename = "Quest\PDM\looser.c";
 	chr.dialog.currentnode = "first time";
 
 	DeleteQuestCheck("LooserGeneratorSart");
@@ -11336,13 +11332,13 @@ void LooserGenerator_FailedByEnc(string s)
 	AddQuestRecord("LOOSER_GENERATOR", "2");
 	CloseQuestHeader("LOOSER_GENERATOR");
 }
-// Проходит 15 дней, можно брать снова
-void LooserGenerator_NewGeneratorQuest(string s)
+// Проходит 15 дней, можно брать снова. UPD 09.06.2022 Sinistra - теперь это одноразовый квест
+/*void LooserGenerator_NewGeneratorQuest(string s)
 {
 	DeleteAttribute(pchar, "questTemp.KIP_Looser");
 	DeleteAttribute(pchar, "KIP_PI_ZapisVSJ");
 	DeleteAttribute(pchar, "items.Bag_with_money");
-}
+}*/
 // Дополнительная проверка на наличие 7+ кошельков
 void LooserGenerator_DopProverka(string s)
 {
