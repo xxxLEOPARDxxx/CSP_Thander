@@ -101,11 +101,12 @@ void ShowGoodsInfo(int iGoodIndex) {
 
     iCurGoodsIdx = iGoodIndex;
 
-    string describeStr = GetItemDescribe(FindItem(Items[iGoodIndex].id));
+    string describeStr = GetItemDescribe(Items[iGoodIndex].id);
+	// Считаем что предмет не генерящийся, так что можно узнать вес из атрибута
 	fWeight = stf(Items[iGoodIndex].weight);
 
     GameInterface.qty_edit.str = 0;
-	item_price = GetItemPrice(iGoodIndex);
+	item_price = GetItemPriceInPoints(iGoodIndex);
 	ChangeQTY_EDIT();
 
 	SetNewGroupPicture("QTY_GOODS_PICTURE", Items[iCurGoodsIdx].picTexture, "itm" + Items[iCurGoodsIdx].picIndex);
@@ -123,10 +124,17 @@ void AddToTable() {
 
 	Table_Clear("TABLE_LIST", false, true, false);
 
-	for (i = 0; i < ITEMS_QUANTITY; i++) {
-        row = "tr" + n;
-
+	for (i = 0; i < ITEMS_QUANTITY; i++)
+	{
 		if (CheckAttribute(&Items[i], "points_shop")) {
+			if (IsGenerableItemIndex(i))
+			{
+				Log_TestInfo("Генерирующийся предмет в ачившопе: " + Items[i].id + ", работать не будет.");
+				continue;
+			}
+
+			row = "tr" + n;
+
 			GameInterface.TABLE_LIST.(row).td1.icon.group = Items[i].picTexture;
 			GameInterface.TABLE_LIST.(row).td1.icon.image = "itm" + Items[i].picIndex;
 			GameInterface.TABLE_LIST.(row).td1.icon.offset = "-2,0";
@@ -136,7 +144,8 @@ void AddToTable() {
 			GameInterface.TABLE_LIST.(row).td1.str = LanguageConvertString(idLngFile, Items[i].name);
 			GameInterface.TABLE_LIST.(row).td1.scale = 0.9;
 
-			GameInterface.TABLE_LIST.(row).td2.str = GetItemPrice(i);
+			GameInterface.TABLE_LIST.(row).td2.str = GetItemPriceInPoints(i);
+			// Считаем что предмет не генерящийся, так что можно узнать вес из атрибута
 			GameInterface.TABLE_LIST.(row).td3.str = FloatToString(stf(Items[i].Weight), 1);
 
 			GameInterface.TABLE_LIST.(row).index = i;
@@ -148,7 +157,7 @@ void AddToTable() {
 	LanguageCloseFile(idLngFile);
 }
 
-int GetItemPrice(int itmIdx) {
+int GetItemPriceInPoints(int itmIdx) {
 	int itmprice = 0;
 
 	if (itmIdx < 0 || itmIdx > ITEMS_QUANTITY)

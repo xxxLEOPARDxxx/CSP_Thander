@@ -1082,11 +1082,11 @@ void CalculateInfoDataF6()
 	// mc.Ship.Type = GenerateShipExt(SHIP_CORVETTE_QUEST, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_WH_CORVETTE_QUEST, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_ARABELLA, true, mc);
-	// mc.Ship.Type = GenerateShipExt(SHIP_FRIGATEQUEEN, true, mc);
+	mc.Ship.Type = GenerateShipExt(SHIP_FRIGATEQUEEN, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_CATHERINE, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_FLYINGDUTCHMAN, true, mc);
 	// mc.Ship.Type = GenerateShipExt(SHIP_SANTISIMA, true, mc);
-	mc.Ship.Type = GenerateShipExt(SHIP_SOLEYRU, true, mc);
+	// mc.Ship.Type = GenerateShipExt(SHIP_SOLEYRU, true, mc);
 
 	SetBaseShipData(mc);
 	ref VeryRealShip = GetRealShip(sti(PChar.Ship.Type));

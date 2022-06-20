@@ -505,7 +505,7 @@ float Ship_MastDamage()
 			float iResist = 1;
 			if(iXmark > iClass)
 			{
-				iResist = 1.0 / (iXmark - iClass);
+				iResist = 1 + 1.0 / (iXmark - iClass);
 			}
 			else
 			{
@@ -1939,7 +1939,7 @@ void Ship_NotEnoughBalls()
 	// boal -->
 	if (!bNotEnoughBalls)
 	{
-	    if (GetCargoGoods(pchar, GOOD_POWDER) < GetPowderQuantity(pchar))
+	    if (GetCargoGoods(pchar, GOOD_POWDER) < 1)
 	    {
 	        bNotEnoughBalls = true;
 	    }
@@ -2477,28 +2477,31 @@ void ShipDead(int iDeadCharacterIndex, int iKillStatus, int iKillerCharacterInde
 	{
 		string sSunkString;
 		string sSunkShipType = XI_ConvertString(rBaseShip.BaseName);
+		string sSunkShipNation = "под флагом " + NationNameGenitive(sti(rDead.nation));
 		string sKillShipType = "";
 		string sKillShipName = "";
+		string sKillShipNation = "";
 		if (iKillerCharacterIndex != -1)
 		{
 		    sKillShipType = XI_ConvertString(rKillerBaseShip.BaseName);
 		    sKillShipName = "" + rKillerCharacter.Ship.Name;
+			sKillShipNation = "под флагом " + NationNameGenitive(sti(rKillerCharacter.nation));
 		}
 		if (bCompanion && !bDeadCompanion && bRealKill)
 		{
-            sSunkString = sSunkShipType + " '" + rDead.Ship.Name + "' " + GetShipSexWord(rBaseShip.BaseName, "был потоплен ", "была потоплена ") + GetFullName(rKillerCharacter);
-        }
-        else
-        {
-            if (sKillShipName == "")
-            {
-            	sSunkString = sSunkShipType + " '" + rDead.Ship.Name + "' " + GetShipSexWord(rBaseShip.BaseName, "был потоплен.", "была потоплена.");
-            }
-            else
-            {
-				sSunkString = sSunkShipType + " '" + rDead.Ship.Name + "' " +GetShipSexWord(rBaseShip.BaseName, "был потоплен ", "была потоплена ") + sKillShipType + " '" + sKillShipName + "'";
+			sSunkString = sSunkShipType + " '" + rDead.Ship.Name + "' " + sSunkShipNation + GetShipSexWord(rBaseShip.BaseName, " был потоплен ", " была потоплена ") + GetFullName(rKillerCharacter);
+		}
+		else
+		{
+			if (sKillShipName == "")
+			{
+				sSunkString = sSunkShipType + " '" + rDead.Ship.Name + "' " + sSunkShipNation + GetShipSexWord(rBaseShip.BaseName, " был потоплен.", " была потоплена.");
 			}
-        }
+			else
+			{
+				sSunkString = sSunkShipType + " '" + rDead.Ship.Name + "' " + sSunkShipNation + GetShipSexWord(rBaseShip.BaseName, " был потоплен ", " была потоплена ") + sKillShipType + " '" + sKillShipName + "' " + sKillShipNation;
+			}
+		}
 		Log_SetStringToLog(sSunkString);
 	}
 
@@ -3631,7 +3634,8 @@ void Ship_UpdateParameters()
 	// boal кэш оптимизация -->
 	if (!CheckAttribute(rCharacter, "Tmp.SpeedRecall") || sti(rCharacter.Tmp.SpeedRecall) <= 0)
 	{
-		fShipSpeed    = FindShipSpeed(rCharacter);
+		float fTRFromSailDamage = Bring2Range(0.1, 1.0, 0.1, 100.0, stf(rCharacter.ship.sp)); //0.3
+		fShipSpeed    = FindShipSpeed(rCharacter) / fTRFromSailDamage;//убирает движковое дублирование расчета скорости от урона по парусам
 		fShipTurnRate = FindShipTurnRate(rCharacter);
 
 		rCharacter.Tmp.SpeedRecall   = 8 + rand(5);

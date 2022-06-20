@@ -241,12 +241,12 @@ void SetVariable()
 	SetFormatedText("LOYALITY_STR", XI_ConvertString("Loyality")+" ("+GetCharacterLoyality(xi_refCharacter)+"/35)");
     if (xi_refCharacter.id == pchar.id)
     {
-	    GameInterface.StatusLine.BAR_HEALTH.Max   = 54;
+	    GameInterface.StatusLine.BAR_HEALTH.Max   = 60;
 	    GameInterface.StatusLine.BAR_HEALTH.Min   = 1;
 	    GameInterface.StatusLine.BAR_HEALTH.Value = makeint(pchar.Health.HP);
-	    if (sti(pchar.Health.HP) > 54 )
+	    if (sti(pchar.Health.HP) > 60 )
 	    {
-	        GameInterface.StatusLine.BAR_HEALTH.Value = 54;
+	        GameInterface.StatusLine.BAR_HEALTH.Value = 60;
 	    }
     }
     else

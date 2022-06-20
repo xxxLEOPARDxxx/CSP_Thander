@@ -25,7 +25,6 @@ void InitCannons()
 	rCannon.HeightMultiply = 1.0;
 	rCannon.DamageMultiply = 6;
 	rCannon.hp = 35.0;
-	rCannon.powder = 1;
 	InitBaseCannons_CalcSpeedV0(&rCannon,400.0);
 
 	makeref(rCannon,Cannon[CANNON_TYPE_CULVERINE_LBS12]);
@@ -45,7 +44,6 @@ void InitCannons()
 	rCannon.HeightMultiply = 1.0;
 	rCannon.DamageMultiply = 9;
 	rCannon.hp = 40.0;
-	rCannon.powder = 1;
 	InitBaseCannons_CalcSpeedV0(&rCannon,500.0);
 
 	makeref(rCannon,Cannon[CANNON_TYPE_CULVERINE_LBS16]);
@@ -65,7 +63,6 @@ void InitCannons()
 	rCannon.HeightMultiply = 1.0;
 	rCannon.DamageMultiply = 12;
 	rCannon.hp = 45.0;
-	rCannon.powder = 2;
 	InitBaseCannons_CalcSpeedV0(&rCannon,600.0);
 
 	makeref(rCannon,Cannon[CANNON_TYPE_CULVERINE_LBS20]);
@@ -85,7 +82,6 @@ void InitCannons()
 	rCannon.HeightMultiply = 0.6;
 	rCannon.DamageMultiply = 15;
 	rCannon.hp = 45.0;
-	rCannon.powder = 2;
 	InitBaseCannons_CalcSpeedV0(&rCannon,650.0);
 
 	makeref(rCannon,Cannon[CANNON_TYPE_CULVERINE_LBS24]);
@@ -105,7 +101,6 @@ void InitCannons()
 	rCannon.HeightMultiply = 1.0;
 	rCannon.DamageMultiply = 18;
 	rCannon.hp = 50.0;
-	rCannon.powder = 3;
 	InitBaseCannons_CalcSpeedV0(&rCannon,700.0);
 
     makeref(rCannon,Cannon[CANNON_TYPE_CULVERINE_LBS32]);
@@ -125,7 +120,6 @@ void InitCannons()
 	rCannon.HeightMultiply = 1.0;
 	rCannon.DamageMultiply = 24;
 	rCannon.hp = 55.0;
-	rCannon.powder = 4;
 	InitBaseCannons_CalcSpeedV0(&rCannon,800.0);
 
 	makeref(rCannon,Cannon[CANNON_TYPE_CULVERINE_LBS36]);
@@ -145,7 +139,6 @@ void InitCannons()
 	rCannon.HeightMultiply = 1.0;
 	rCannon.DamageMultiply = 28;
 	rCannon.hp = 55.0;
-	rCannon.powder = 5;
 	InitBaseCannons_CalcSpeedV0(&rCannon,850.0);
 
     makeref(rCannon,Cannon[CANNON_TYPE_CANNON_LBS8]);
@@ -165,7 +158,6 @@ void InitCannons()
 	rCannon.HeightMultiply = 1.0;
 	rCannon.DamageMultiply = 8;
 	rCannon.hp = 40.0;
-	rCannon.powder = 1;
 	InitBaseCannons_CalcSpeedV0(&rCannon,300.0);
 
 	makeref(rCannon,Cannon[CANNON_TYPE_CANNON_LBS12]);
@@ -185,7 +177,6 @@ void InitCannons()
 	rCannon.HeightMultiply = 1.0;
 	rCannon.DamageMultiply = 12;
 	rCannon.hp = 45.0;
-	rCannon.powder = 1;
 	InitBaseCannons_CalcSpeedV0(&rCannon,400.0);
 
 	makeref(rCannon,Cannon[CANNON_TYPE_CANNON_LBS16]);
@@ -205,7 +196,6 @@ void InitCannons()
 	rCannon.HeightMultiply = 1.0;
 	rCannon.DamageMultiply = 16;
 	rCannon.hp = 50.0;
-	rCannon.powder = 2;
 	InitBaseCannons_CalcSpeedV0(&rCannon,500.0);
 
 	makeref(rCannon,Cannon[CANNON_TYPE_CANNON_LBS20]);
@@ -225,7 +215,6 @@ void InitCannons()
 	rCannon.HeightMultiply = 1.0;
 	rCannon.DamageMultiply = 20;
 	rCannon.hp = 50.0;
-	rCannon.powder = 2;
 	InitBaseCannons_CalcSpeedV0(&rCannon,550.0);
 
 	makeref(rCannon,Cannon[CANNON_TYPE_CANNON_LBS24]);
@@ -245,7 +234,6 @@ void InitCannons()
 	rCannon.HeightMultiply = 1.0;
 	rCannon.DamageMultiply = 24;
 	rCannon.hp = 55.0;
-	rCannon.powder = 3;
 	InitBaseCannons_CalcSpeedV0(&rCannon,600.0);
 
 	makeref(rCannon,Cannon[CANNON_TYPE_CANNON_LBS32]);
@@ -265,7 +253,6 @@ void InitCannons()
 	rCannon.HeightMultiply = 1.0;
 	rCannon.DamageMultiply = 32;
 	rCannon.hp = 60.0;
-	rCannon.powder = 4;
 	InitBaseCannons_CalcSpeedV0(&rCannon,700.0);
 
 	makeref(rCannon,Cannon[CANNON_TYPE_CANNON_LBS36]);
@@ -285,7 +272,6 @@ void InitCannons()
 	rCannon.HeightMultiply = 1.0;
 	rCannon.DamageMultiply = 36;
 	rCannon.hp = 60.0;
-	rCannon.powder = 5;
 	InitBaseCannons_CalcSpeedV0(&rCannon,750.0);
 
 	makeref(rCannon,Cannon[CANNON_TYPE_CANNON_LBS42]);
@@ -306,7 +292,6 @@ void InitCannons()
 	rCannon.DamageMultiply = 42;
 	rCannon.TradeOff = true;
 	rCannon.hp = 70.0;
-	rCannon.powder = 6;
 	InitBaseCannons_CalcSpeedV0(&rCannon,800.0);
 
 	makeref(rCannon,Cannon[CANNON_TYPE_CANNON_LBS48]);
@@ -327,6 +312,5 @@ void InitCannons()
 	rCannon.HeightMultiply = 1.0;
 	rCannon.TradeOff = true;
 	rCannon.hp = 80.0;
-	rCannon.powder = 8;
 	InitBaseCannons_CalcSpeedV0(&rCannon,900.0);
 }

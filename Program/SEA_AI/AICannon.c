@@ -26,11 +26,6 @@ void CreateCannonsEnvironment()
 	SendMessage(&AISea, "lff", AI_MESSAGE_CANNONS_PARAMS, MAX_CANNON_DAMAGE_DISTANCE, 1.0);	// fMaxCannonDamageDistance, fMaxCannonDamageRadiusPoint
 }
 
-int GetPowderQuantity(ref chref)
-{
-	return sti(Cannon[sti(chref.Ship.Cannons.Type)].powder);
-}
-
 bool Cannon_LoadBall()
 {
 	aref	aCharacter = GetEventData();
@@ -42,7 +37,7 @@ bool Cannon_LoadBall()
 	if (iNumBalls > 0 && iNumPowder > 0)
 	{
 		AddCharacterGoodsCannon(aCharacter, iBallType, -1);
-		AddCharacterGoodsCannon(aCharacter, GOOD_POWDER, -GetPowderQuantity(aCharacter));
+		AddCharacterGoodsCannon(aCharacter, GOOD_POWDER, -1);
 		// boal <--
 		return true;
 	}
@@ -57,7 +52,7 @@ void Cannon_UnloadBall()
 		AddCharacterGoodsCannon(aCharacter, sti(aCharacter.Ship.Cannons.Charge.Type), 1);
 	}
 	// boal -->
-	AddCharacterGoodsCannon(aCharacter, GOOD_POWDER, GetPowderQuantity(aCharacter));
+	AddCharacterGoodsCannon(aCharacter, GOOD_POWDER, 1);
 	// boal <--
 }
 

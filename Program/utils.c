@@ -536,3 +536,30 @@ string strreplace(string strSource, string from, string into)
 }
 // <-- KK
 
+string DigitsToString(int value, int digits)
+{
+	int v = value;
+	string result = "";
+	for (int i = 0; i < digits; i++)
+	{
+		result = "" + (v % 10) + result;
+		v = v / 10;
+	}
+	return result;
+}
+
+void RandomShuffle(aref data)
+{
+	int data_count = GetAttributesNum(data);
+	int j;
+	string temp, attr_i, attr_j;
+	for (int i = data_count - 1; i > 0; i--)
+	{
+		j = rand(i);
+		attr_i = "s" + i;
+		attr_j = "s" + j;
+		temp = data.(attr_j);
+		data.(attr_j) = data.(attr_i);
+		data.(attr_i) = temp;
+	}
+}

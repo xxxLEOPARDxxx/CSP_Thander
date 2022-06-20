@@ -1046,6 +1046,10 @@ int LocationInitTenotchitlan(int n)
 	locations[n].reload.l1.go = "Tenochtitlan";
 	locations[n].reload.l1.emerge = "reloadTemple31";
 	locations[n].locators_radius.item.item1 = 1.6;
+
+	locations[n].box1 = Items_MakeTime(0, 0, 1, 2003);
+	locations[n].box1.items.pistol7 = 1;
+
 	n = n + 1;
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

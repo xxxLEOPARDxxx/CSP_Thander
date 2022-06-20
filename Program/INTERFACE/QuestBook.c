@@ -2269,14 +2269,14 @@ void FillPriceList(string _tabName, string  attr1, string attr2)
 			for (i = 0; i < GetAttributesNum(rootItems); i++)
 			{
 				curItem = GetAttributeN(rootItems, i);
+				sGood = GetAttributeName(curItem);
 
-				if (Items_FindItem(GetAttributeName(curItem), &arItem)>=0 )
+				if (Items_FindItem(sGood, &arItem)>=0 )
 				{
 					row = "tr" + n;
-					sGood = arItem.id;
 					if (GetCharacterItem(usurer, sGood) > 0)
 					{
-						GameInterface.(_tabName).(row).index = GetItemIndex(arItem.id);
+						GameInterface.(_tabName).(row).id = sGood;
 						GameInterface.(_tabName).(row).td1.icon.group = arItem.picTexture;
 						GameInterface.(_tabName).(row).td1.icon.image = "itm" + arItem.picIndex;
 						GameInterface.(_tabName).(row).td1.icon.offset = "-2, 0";
@@ -2285,11 +2285,11 @@ void FillPriceList(string _tabName, string  attr1, string attr2)
 						GameInterface.(_tabName).(row).td1.textoffset = "31,0";
 						GameInterface.(_tabName).(row).td1.str = LanguageConvertString(idLngFile, arItem.name);
 						GameInterface.(_tabName).(row).td1.scale = 0.85;
-						GameInterface.(_tabName).(row).td2.str   = FloatToString(stf(arItem.Weight), 1);
+						GameInterface.(_tabName).(row).td2.str   = FloatToString(GetItemWeight(sGood), 1);
 						GameInterface.(_tabName).(row).td2.scale = 0.9;
 						GameInterface.(_tabName).(row).td3.str   = GetCharacterItem(usurer, sGood);
 						GameInterface.(_tabName).(row).td3.scale = 0.9;
-						GameInterface.(_tabName).(row).td4.str   = FloatToString(stf(arItem.Weight) * sti(GameInterface.(_tabName).(row).td3.str), 1);
+						GameInterface.(_tabName).(row).td4.str   = FloatToString(GetItemWeight(sGood) * sti(GetCharacterItem(usurer, sGood)), 1);
 						GameInterface.(_tabName).(row).td4.scale = 0.9;
 						n++;
 					}
@@ -2300,7 +2300,7 @@ void FillPriceList(string _tabName, string  attr1, string attr2)
 		else
 		{
 			if (attr2 == "1") StoreNum = GetCharacterIndex(attr1); else StoreNum = GetStorage(attr1);
-			if(StoreNum > 0)
+			if(StoreNum > -1)
 			{
 
 				if (attr2 == "1") refStorage = &characters[StoreNum]; else refStorage = &stores[StoreNum];
@@ -2735,7 +2735,7 @@ void AddToTable(string _tabName, string type)
 				GameInterface.(_tabName).(row).td1.icon.width = 80;
 				GameInterface.(_tabName).(row).td1.icon.height = 80;
 				GameInterface.(_tabName).(row).td1.textoffset = "80,0";
-				GameInterface.(_tabName).(row).td2.str = GetItemDescribe(FindItem(Items[i].id));
+				GameInterface.(_tabName).(row).td2.str = GetItemDescribe(Items[i].id);
 				GameInterface.(_tabName).(row).td2.scale = 0.8;
 				break;
 			}

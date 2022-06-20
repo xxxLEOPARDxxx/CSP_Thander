@@ -120,6 +120,8 @@ void InitInterfaceTables()
 	Interfaces[INTERFACE_CANNONS].IniFile = "RESOURCE\INI\INTERFACES\cannons.ini";
 	Interfaces[INTERFACE_STORE].SectionName = "interface\store.c";
 	Interfaces[INTERFACE_STORE].IniFile = "RESOURCE\INI\INTERFACES\store.ini";
+	Interfaces[INTERFACE_STORE_GOOD_OLD].SectionName = "interface\store_good_old.c";
+	Interfaces[INTERFACE_STORE_GOOD_OLD].IniFile = "RESOURCE\INI\INTERFACES\store_good_old.ini";
 	Interfaces[INTERFACE_SHIP_CHOOSE].SectionName = "interface\ship.c";
 	Interfaces[INTERFACE_SHIP_CHOOSE].IniFile = "RESOURCE\INI\INTERFACES\ship.ini";
 	Interfaces[INTERFACE_SHIPYARD].SectionName = "interface\shipyard.c";

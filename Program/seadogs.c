@@ -491,12 +491,9 @@ void LoadGame()
 	SetTimeScale(1.0);
 	TimeScaleCounter = 0;
 
-    string loadScr="";
-	loadScr = "loading\StartGame.tga";
-
 	CreateEntity(&LanguageObject,"obj_strservice");
 	CreateEntity(&reload_fader, "fader");
-	SendMessage(&reload_fader, "ls",FADER_PICTURE0, loadScr);
+	SendMessage(&reload_fader, "ls",FADER_PICTURE0, "loading\StartGame.tga");
 	SendMessage(&reload_fader, "lfl", FADER_IN, RELOAD_TIME_FADE_IN, true);
 	ReloadProgressStart();
 	pchar.savegamename = saveName;
@@ -1018,8 +1015,6 @@ void InitGame()
 		UnloadSegment("items\initItems.c");
 	}
 	ReloadProgressUpdate();
-	GenerateGenerableItems(); // <-- ugeen генерация предметов
-	ReloadProgressUpdate();
 	//Boyer change #20170301-6...CharactersInit assigns RealShips, and after a bunch of 'New' games in a
 	//session, RealShips array overflows, so call new function to reset
 	ResetRealShipArray();
@@ -1241,15 +1236,15 @@ void ProcessControls()
 				csmLootCollector();
 			break;
             case "BOAL_ActivateRush":  // boal KEY_F
-				if (bLandInterfaceStart && GetCharacterPerkUsing(pchar, "Rush") && PChar.location != "FencingTown_Arena" && PChar.location != "FencingTown_ExitTown")
+				if (bLandInterfaceStart)
 				{
-					ActivateCharacterPerk(pchar, "Rush");
-					PlayVoice(GetSexPhrase("interface\Bers_"+rand(5)+".wav","interface\Bersf_"+rand(4)+".wav"));
-					pchar.chr_ai.energy    = pchar.chr_ai.energyMax;
-				}
-                else
-                {
-                    if (bLandInterfaceStart && curKeyGroupName == "FightModeControls")
+					if (GetCharacterPerkUsing(pchar, "Rush") && LAi_IsFightMode(pchar) && PChar.location != "FencingTown_Arena" && PChar.location != "FencingTown_ExitTown")
+					{
+						ActivateCharacterPerk(pchar, "Rush");
+						PlayVoice(GetSexPhrase("interface\Bers_"+rand(5)+".wav","interface\Bersf_"+rand(4)+".wav"));
+						pchar.chr_ai.energy    = pchar.chr_ai.energyMax;
+					}
+					else
                     {
                         PlaySound("knock");
                     }
@@ -1669,15 +1664,15 @@ void ProcessControls()
 		break;
 
         case "BOAL_ActivateRush":  // boal KEY_F
-			if (bLandInterfaceStart && GetCharacterPerkUsing(pchar, "Rush"))
+			if (bLandInterfaceStart)
             {
-		        ActivateCharacterPerk(pchar, "Rush");
-				PlayVoice(GetSexPhrase("interface\Bers_"+rand(5)+".wav","interface\Bersf_"+rand(4)+".wav"));
-				pchar.chr_ai.energy    = pchar.chr_ai.energyMax;
-		    }
-            else
-            {
-                if (bLandInterfaceStart && curKeyGroupName == "FightModeControls")
+				if (GetCharacterPerkUsing(pchar, "Rush") && LAi_IsFightMode(pchar))
+				{
+					ActivateCharacterPerk(pchar, "Rush");
+					PlayVoice(GetSexPhrase("interface\Bers_"+rand(5)+".wav","interface\Bersf_"+rand(4)+".wav"));
+					pchar.chr_ai.energy    = pchar.chr_ai.energyMax;
+				}
+				else
                 {
                     PlaySound("interface\knock.wav");
                 }

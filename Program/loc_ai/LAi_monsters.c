@@ -133,9 +133,9 @@ bool LAi_CreateEncounters(ref location)
 {
 	aref grp, st, at;
 	ref chr, rCharacter;
-	string encGroup, str, locator, sAreal, sCity;
-	int num, i, iChar, iNation, iRank, n, iTemp, iMassive, iRnd, iRand;
-	string model[25];
+	string encGroup, str, locator, sAreal, sCity, sTemp;
+	int num, i, iChar, iNation, iRank, n, iTemp, iRnd, iRand;
+	object models;
 	if (!bLandEncountersGen) //если прерывание на локацию, энкаунтеров не генерим
 	{
 		bLandEncountersGen = true;
@@ -220,35 +220,35 @@ bool LAi_CreateEncounters(ref location)
 			else iRank = sti(pchar.rank);
 			//<-- генерим ранг
 
-			// Mett: -->
-			for(int m = 1; m < 26; m++)
+			for(i = 1; i <= 25; i++)
 			{
-				model[m-1] = "pirate_" + m;
+				sTemp = "s" + (i - 1);
+				models.(sTemp) = "pirate_" + i;
 			}
-			// Mett: <--
+			RandomShuffle(&models);
 
 			LAi_grp_alarmactive = false;
 			LAi_group_ClearAllTargets();
-			for(i=0;i < num; i++)
+			for (i = 0; i < num; i++)
 			{
-					iMassive = rand(24);
-					chr = GetCharacter(NPC_GenerateCharacter(str + i, model[iMassive], "man", "man", iRank, iNation, 1, true));
-					SetFantomParamFromRank(chr, iRank, true);
-					//Получим локатор для логина
-					locator = GetAttributeName(GetAttributeN(grp, 1)); // LEO
-					ChangeCharacterAddressGroup(chr, location.id, encGroup, locator);
-					chr.dialog.filename = "Enc_Raiders_dialog.c";
-					chr.greeting = "Enc_Raiders";
-					chr.EncQty = num;
-					LAi_SetStayType(chr);
-					LAi_SetCheckMinHP(chr, LAi_GetCharacterHP(chr)-1, true, "LandEnc_RaidersBeforeDialog");
-					LAi_group_MoveCharacter(chr, "RaidersGroup_" + location.index);
-					if (i == 0)
-					{
-						sAreal = "Raiders_" + location.index;
-						pchar.GenQuest.(sAreal).name = GetFullName(chr); //имя бандита, будет главарем
-						pchar.GenQuest.(sAreal).nation = iNation; //нация для слухов
-					}
+				sTemp = "s" + (i % 25);
+				chr = GetCharacter(NPC_GenerateCharacter(str + i, models.(sTemp), "man", "man", iRank, iNation, 1, true));
+				SetFantomParamFromRank(chr, iRank, true);
+				//Получим локатор для логина
+				locator = GetAttributeName(GetAttributeN(grp, 1)); // LEO
+				ChangeCharacterAddressGroup(chr, location.id, encGroup, locator);
+				chr.dialog.filename = "Enc_Raiders_dialog.c";
+				chr.greeting = "Enc_Raiders";
+				chr.EncQty = num;
+				LAi_SetStayType(chr);
+				LAi_SetCheckMinHP(chr, LAi_GetCharacterHP(chr)-1, true, "LandEnc_RaidersBeforeDialog");
+				LAi_group_MoveCharacter(chr, "RaidersGroup_" + location.index);
+				if (i == 0)
+				{
+					sAreal = "Raiders_" + location.index;
+					pchar.GenQuest.(sAreal).name = GetFullName(chr); //имя бандита, будет главарем
+					pchar.GenQuest.(sAreal).nation = iNation; //нация для слухов
+				}
 			}
 			str = "EncRaiders_" + location.index;
 			pchar.quest.(str).win_condition.l1        = "locator";
@@ -276,20 +276,21 @@ bool LAi_CreateEncounters(ref location)
 			{
 				if (!CheckAttribute(pchar,"OldSpawn"))
 				{
-					model[0] = "capitan_3";
-					model[1] = "officer_13";
-					model[2] = "officer_32";
-					model[3] = "PGG_Black_0";
-					model[4] = "pirate_12";
-					model[5] = "pirate_25";
-					model[6] = "ozg_horn";
-					model[7] = "pirate_15";
-					model[8] = "pirate_11";
-					model[9] = "PKM_rab_1";
-					model[10] = "PKM_rab_2";
-					for(i=0; i < num; i++)
+					models.s0 = "capitan_3";
+					models.s1 = "officer_13";
+					models.s2 = "officer_32";
+					models.s3 = "PGG_Black_0";
+					models.s4 = "pirate_12";
+					models.s5 = "pirate_25";
+					models.s6 = "ozg_horn";
+					models.s7 = "pirate_15";
+					models.s8 = "pirate_11";
+					models.s9 = "PKM_rab_1";
+					models.s10 = "PKM_rab_2";
+					RandomShuffle(&models);
+
+					for (i = 0; i < num; i++)
 					{
-						iMassive = rand(10);
 						//Получим локатор для логина
 						locator = GetAttributeName(GetAttributeN(grp, i));
 						if (i == 0)
@@ -309,7 +310,8 @@ bool LAi_CreateEncounters(ref location)
 							chr.city = sCity;
 							continue;
 						}
-						chr = GetCharacter(NPC_GenerateCharacter("GangRapersMan_" + i, model[iMassive], "man", "man", iRank, PIRATE, 1, true));
+						sTemp = "s" + (i % 11);
+						chr = GetCharacter(NPC_GenerateCharacter("GangRapersMan_" + i, models.(sTemp), "man", "man", iRank, PIRATE, 1, true));
 						SetFantomParamFromRank(chr, iRank, true);
 						chr.dialog.filename = "Old.c";
 						chr.dialog.currentnode = "Second";
@@ -342,94 +344,73 @@ bool LAi_CreateEncounters(ref location)
 				LAi_LockFightMode(pchar, true);
 				chrDisableReloadToLocation = true;
 
-				model[0] = "pirate_1";
-				model[1] = "pirate_2";
-				model[2] = "pirate_3";
-				model[3] = "pirate_4";
-				model[4] = "pirate_5";
-				model[5] = "pirate_6";
-				model[6] = "pirate_7";
-				model[7] = "pirate_8";
-				model[8] = "pirate_9";
-				model[9] = "pirate_10";
-				model[10] = "pirate_11";
-				model[11] = "pirate_12";
-				model[12] = "pirate_13";
-				model[13] = "pirate_14";
-				model[14] = "pirate_15";
-				model[15] = "pirate_16";
-				model[16] = "pirate_17";
-				model[17] = "pirate_18";
-				model[18] = "pirate_19";
-				model[19] = "pirate_20";
-				model[20] = "pirate_21";
-				model[21] = "pirate_22";
-				model[22] = "pirate_23";
-				model[23] = "pirate_24";
-				model[24] = "pirate_25";
-
-				for(i=0; i < num; i++)
+				for(i = 1; i <= 25; i++)
 				{
-					iMassive = rand(24);
-						//Получим локатор для логина
-						locator = GetAttributeName(GetAttributeN(grp, i));
-						if (i == 0)
+					sTemp = "s" + (i - 1);
+					models.(sTemp) = "pirate_" + i;
+				}
+				RandomShuffle(&models);
+
+				for (i = 0; i < num; i++)
+				{
+					locator = GetAttributeName(GetAttributeN(grp, i));
+					if (i == 0)
+					{
+						switch(rand(2)) // генерим один из вариантов начала квеста
 						{
-							switch(rand(2)) // генерим один из вариантов начала квеста
-							{
-								case 0:
-									Log_TestInfo("Девица в джунглях : сгенерился вариант 1");
-									iChar =	NPC_GenerateCharacter("CangGirl", "girl_"+(rand(7)+1), "woman", "towngirl", 5, iNation, -1, false);
-									chr = &characters[iChar];
-									chr.dialog.filename = "Enc_RapersGirl_dialog.c";
-									chr.dialog.currentnode = "Begin_1";
-									pchar.GenQuest.EncGirl = "Begin_1";
-								break;
-								case 1:
-									Log_TestInfo("Девица в джунглях : сгенерился вариант 2");
-									iChar =	NPC_GenerateCharacter("CangGirl", "whore_"+(rand(3)+1), "woman", "towngirl3", 5, iNation, -1, false);
-									chr = &characters[iChar];
-									chr.dialog.filename = "Enc_RapersGirl_dialog.c";
-									chr.dialog.currentnode = "Begin_2";
-									pchar.GenQuest.EncGirl = "Begin_2";
-									pchar.GenQuest.EncGirl.Horse = true;
-								break;
-								case 2:
-									Log_TestInfo("Девица в джунглях : сгенерился вариант 3");
-									iChar =	NPC_GenerateCharacter("CangGirl", "girl_"+(rand(7)+1), "woman", "towngirl", 5, iNation, -1, false);
-									chr = &characters[iChar];
-									chr.dialog.filename = "Enc_RapersGirl_dialog.c";
-									chr.dialog.currentnode = "Begin_3";
-									pchar.GenQuest.EncGirl = "Begin_3";
-								break;
-							}
-							chr.name = GenerateRandomName_Generator(iNation, "woman");
-							chr.lastname = "";
-							chr.greeting = "Enc_RapersGirl_1";
-							ChangeCharacterAddressGroup(chr, location.id, encGroup, locator);
-							LAi_SetActorType(chr);
-							LAi_group_MoveCharacter(chr, "LandEncGroup");
-							LAi_ActorDialog(chr, pchar, "", -1, 0);
-							LAi_SetCheckMinHP(chr, LAi_GetCharacterHP(chr)-1, false, "LandEnc_RapersBeforeDialog");
-							str = location.index;
-							pchar.GenQuest.EncGirl.city = sCity; //  город девицы
-							pchar.GenQuest.EncGirl.nation = iNation; //нация для слухов
-							pchar.GenQuest.EncGirl.name = GetFullName(chr); //имя девицы
-							pchar.GenQuest.EncGirl.LocIdx = location.index;
-							chr.city = sCity;
-							//i++;
-							continue;
+							case 0:
+								Log_TestInfo("Девица в джунглях : сгенерился вариант 1");
+								iChar =	NPC_GenerateCharacter("CangGirl", "girl_"+(rand(7)+1), "woman", "towngirl", 5, iNation, -1, false);
+								chr = &characters[iChar];
+								chr.dialog.filename = "Enc_RapersGirl_dialog.c";
+								chr.dialog.currentnode = "Begin_1";
+								pchar.GenQuest.EncGirl = "Begin_1";
+							break;
+							case 1:
+								Log_TestInfo("Девица в джунглях : сгенерился вариант 2");
+								iChar =	NPC_GenerateCharacter("CangGirl", "whore_"+(rand(3)+1), "woman", "towngirl3", 5, iNation, -1, false);
+								chr = &characters[iChar];
+								chr.dialog.filename = "Enc_RapersGirl_dialog.c";
+								chr.dialog.currentnode = "Begin_2";
+								pchar.GenQuest.EncGirl = "Begin_2";
+								pchar.GenQuest.EncGirl.Horse = true;
+							break;
+							case 2:
+								Log_TestInfo("Девица в джунглях : сгенерился вариант 3");
+								iChar =	NPC_GenerateCharacter("CangGirl", "girl_"+(rand(7)+1), "woman", "towngirl", 5, iNation, -1, false);
+								chr = &characters[iChar];
+								chr.dialog.filename = "Enc_RapersGirl_dialog.c";
+								chr.dialog.currentnode = "Begin_3";
+								pchar.GenQuest.EncGirl = "Begin_3";
+							break;
 						}
-						chr = GetCharacter(NPC_GenerateCharacter("GangMan_" + i, model[iMassive], "man", "man", iRank, PIRATE, 1, true));
-						SetFantomParamFromRank(chr, iRank, true);
-						chr.dialog.filename = "Enc_Rapers_dialog.c";
-						chr.dialog.currentnode = "First time";
-						chr.greeting = "Enc_Raiders";
+						chr.name = GenerateRandomName_Generator(iNation, "woman");
+						chr.lastname = "";
+						chr.greeting = "Enc_RapersGirl_1";
 						ChangeCharacterAddressGroup(chr, location.id, encGroup, locator);
 						LAi_SetActorType(chr);
-						LAi_group_MoveCharacter(chr, "EnemyFight");
-						LAi_ActorFollow(chr, &characters[iChar], "", -1);
+						LAi_group_MoveCharacter(chr, "LandEncGroup");
+						LAi_ActorDialog(chr, pchar, "", -1, 0);
 						LAi_SetCheckMinHP(chr, LAi_GetCharacterHP(chr)-1, false, "LandEnc_RapersBeforeDialog");
+						str = location.index;
+						pchar.GenQuest.EncGirl.city = sCity; //  город девицы
+						pchar.GenQuest.EncGirl.nation = iNation; //нация для слухов
+						pchar.GenQuest.EncGirl.name = GetFullName(chr); //имя девицы
+						pchar.GenQuest.EncGirl.LocIdx = location.index;
+						chr.city = sCity;
+						continue;
+					}
+					sTemp = "s" + (i % 25);
+					chr = GetCharacter(NPC_GenerateCharacter("GangMan_" + i, models.(sTemp), "man", "man", iRank, PIRATE, 1, true));
+					SetFantomParamFromRank(chr, iRank, true);
+					chr.dialog.filename = "Enc_Rapers_dialog.c";
+					chr.dialog.currentnode = "First time";
+					chr.greeting = "Enc_Raiders";
+					ChangeCharacterAddressGroup(chr, location.id, encGroup, locator);
+					LAi_SetActorType(chr);
+					LAi_group_MoveCharacter(chr, "EnemyFight");
+					LAi_ActorFollow(chr, &characters[iChar], "", -1);
+					LAi_SetCheckMinHP(chr, LAi_GetCharacterHP(chr)-1, false, "LandEnc_RapersBeforeDialog");
 				}
 				iRnd = 1;
 				if(sti(pchar.rank) > 1) iRnd = 2;
@@ -646,77 +627,72 @@ bool LAi_CreateEncounters(ref location)
 			DeleteAttribute(pchar, "catorga");
 			return false;
 		}
-			if(rand(15) > 3 || CheckAttribute(pchar, "GenQuest.Convict") || location.type == "seashore" || location.type == "mayak" ) return false; // LEO
+			if(CheckAttribute(pchar, "GenQuest.Convict") || location.type == "seashore" || location.type == "mayak" ) return false; // LEO
 			if(CheckAttribute(location, "onUninhabitedIsland")) return false; // На необитаемых нельзя
 			if (sAreal == "Panama") return false;
 			num = LAi_CalculateRaidersQuantity(GetAttributesNum(grp)); //кол-во человек в группе // LEO
 			if(num <= 1) return false;
 			if (num <= 2) num = 2;
 			iRank = 2 + rand(3); //ранг каторжан
-            model[0] = "prizon_1";
-            model[1] = "prizon_2";
-            model[2] = "prizon_3";
-            model[3] = "prizon_4";
-            model[4] = "prizon_5";
-            model[5] = "prizon_6";
-            model[6] = "prizon_7";
-            model[7] = "prizon_8";
-            model[8] = "pirate_1";
-            model[9] = "prison_5";
-            model[10] = "pirate_1";
-            model[11] = "pirate_11";
-            model[12] = "pirate_12";
-            model[13] = "pirate_13";
-            model[14] = "pirate_14";
-            model[15] = "pirate_15";
-            model[16] = "pirate_16";
-            model[17] = "pirate_21";
-            model[18] = "pirate_25";
-            model[19] = "PKM_rab_1";
-            model[20] = "PKM_rab_2";
-            model[21] = "PKM_rab_3";
-            model[22] = "PKM_rab_4";
 
-			i = 0;
+            models.s0 = "prizon_1";
+            models.s1 = "prizon_2";
+            models.s2 = "prizon_3";
+            models.s3 = "prizon_4";
+            models.s4 = "prizon_5";
+            models.s5 = "prizon_6";
+            models.s6 = "prizon_7";
+            models.s7 = "prizon_8";
+            models.s8 = "pirate_1";
+            models.s9 = "prison_5";
+            models.s10 = "pirate_1";
+            models.s11 = "pirate_11";
+            models.s12 = "pirate_12";
+            models.s13 = "pirate_13";
+            models.s14 = "pirate_14";
+            models.s15 = "pirate_15";
+            models.s16 = "pirate_16";
+            models.s17 = "pirate_21";
+            models.s18 = "pirate_25";
+            models.s19 = "PKM_rab_1";
+            models.s20 = "PKM_rab_2";
+            models.s21 = "PKM_rab_3";
+            models.s22 = "PKM_rab_4";
+			RandomShuffle(&models);
+
 			pchar.GenQuest.Convict.ConvictQty = num;
 			pchar.GenQuest.Convict.city = sCity;
 
 			chrDisableReloadToLocation = true;
 
-			while(i < num)
+			for (i = 0; i < num; i++)
 			{
-				iMassive = rand(22);
+				sTemp = "s" + (i % 23);
 				string sAnime;
-				if(model[iMassive] != "")
+				sAnime = "man";
+				chr = GetCharacter(NPC_GenerateCharacter("Convict_" + i, models.(sTemp), "man", sAnime, iRank, PIRATE, -1, true));
+				SetFantomParamFromRank(chr, iRank, true);
+				// locator = GetAttributeName(GetAttributeN(grp, i));
+				locator = GetAttributeName(GetAttributeN(grp, 1)); // LEO
+				ChangeCharacterAddressGroup(chr, location.id, encGroup, locator);
+				chr.dialog.filename = "GenQuests_Dialog.c";
+				chr.dialog.currentnode = "First time";
+				chr.greeting = "Gr_Slave";
+				chr.city = sCity;
+				LAi_SetImmortal(chr, true); // До поры нельзя убить
+				LAi_SetActorTypeNoGroup(chr);
+
+				if(i == 0)
 				{
-					sAnime = "man"
-					chr = GetCharacter(NPC_GenerateCharacter("Convict_" + i, model[iMassive], "man", sAnime, iRank, PIRATE, -1, true));
-					SetFantomParamFromRank(chr, iRank, true);
-					// locator = GetAttributeName(GetAttributeN(grp, i));
-					locator = GetAttributeName(GetAttributeN(grp, 1)); // LEO
-					ChangeCharacterAddressGroup(chr, location.id, encGroup, locator);
-					chr.dialog.filename = "GenQuests_Dialog.c";
-					chr.dialog.currentnode = "First time";
-					chr.greeting = "Gr_Slave";
-					chr.city = sCity;
-					LAi_SetImmortal(chr, true); // До поры нельзя убить
-					LAi_SetActorTypeNoGroup(chr);
-
-					if(i == 0)
-					{
-						LAi_ActorDialog(chr, pchar, "", -1, 0.0);
-					}
-					else
-					{
-						LAi_ActorFollow(chr, pchar, "", -1);
-					}
-
-					LAi_Group_MoveCharacter(chr, "ConvictGroup");
-					LAi_Group_SetRelation("ConvictGroup", LAI_GROUP_PLAYER, LAI_GROUP_NEITRAL);
-
-					i++;
-					model[iMassive] = "";
+					LAi_ActorDialog(chr, pchar, "", -1, 0.0);
 				}
+				else
+				{
+					LAi_ActorFollow(chr, pchar, "", -1);
+				}
+
+				LAi_Group_MoveCharacter(chr, "ConvictGroup");
+				LAi_Group_SetRelation("ConvictGroup", LAI_GROUP_PLAYER, LAI_GROUP_NEITRAL);
 			}
 
 			SetFunctionExitFromLocationCondition("Convict_LocExit", pchar.location, false);
@@ -863,72 +839,45 @@ bool LAi_CreateEncounters(ref location)
 			// Если reload_cur_island_index > -1 значит, ГГ пришел с моря
 			if(rand(4) == 1 && CheckAttribute(location, "onUninhabitedIsland") && !CheckAttribute(location, "deadlocked") && !CheckAttribute(PChar, "GenQuest.PiratesOnUninhabited") && !CheckAttribute(pchar, "GenQuest.ShipWreck") && reload_cur_island_index > -1)
 			{
-				model[0] = "pirate_1";
-				model[1] = "pirate_2";
-				model[2] = "pirate_3";
-				model[3] = "pirate_4";
-				model[4] = "pirate_5";
-				model[5] = "pirate_6";
-				model[6] = "pirate_7";
-				model[7] = "pirate_8";
-				model[8] = "pirate_9";
-				model[9] = "pirate_10";
-				model[10] = "pirate_11";
-				model[11] = "pirate_12";
-				model[12] = "pirate_13";
-				model[13] = "pirate_14";
-				model[14] = "pirate_15";
-				model[15] = "pirate_16";
-				model[16] = "pirate_17";
-				model[17] = "pirate_18";
-				model[18] = "pirate_19";
-				model[19] = "pirate_20";
-				model[20] = "pirate_21";
-				model[21] = "pirate_22";
-				model[22] = "pirate_23";
-				model[23] = "pirate_24";
-				model[24] = "pirate_25";
+				for(i = 1; i <= 25; i++)
+				{
+					sTemp = "s" + (i - 1);
+					models.(sTemp) = "pirate_" + i;
+				}
+				RandomShuffle(&models);
 
-				i = 0;
 				iRank = sti(PChar.rank) + MOD_SKILL_ENEMY_RATE;
 
 				num = rand(10) + makeint(MOD_SKILL_ENEMY_RATE / 3) + dRand(5); // Кол-во пиратов
 				PChar.GenQuest.PiratesOnUninhabited.PiratesQty = num;
 
-				if(num <= 0) return false;
+				if (num <= 0) return false;
 
-				while(i < num)
+				for (i = 0; i < num; i++)
 				{
-					iMassive = rand(24);
+					sTemp = "s" + (i % 25);
+					chr = GetCharacter(NPC_GenerateCharacter("PirateOnUninhabited_" + i, models.(sTemp), "man", "man", iRank, PIRATE, -1, true));
+					SetFantomParamFromRank(chr, iRank, true);
+					locator = GetAttributeName(GetAttributeN(grp, 1));
+					ChangeCharacterAddressGroup(chr, location.id, encGroup, locator);
+					//ChangeCharacterAddressGroup(chr, location.id, "goto", "goto" + (i + 1));
+					chr.dialog.filename = "GenQuests_Dialog.c";
+					chr.dialog.currentnode = "First time";
+					chr.greeting = "Gr_MiddPirate"; // Enc_Raiders
+					LAi_SetImmortal(chr, true); // До поры нельзя убить
+					LAi_SetActorTypeNoGroup(chr);
 
-					if(model[iMassive] != "")
+					if(i == 0)
 					{
-						chr = GetCharacter(NPC_GenerateCharacter("PirateOnUninhabited_" + i, model[iMassive], "man", "man", iRank, PIRATE, -1, true));
-						SetFantomParamFromRank(chr, iRank, true);
-						locator = GetAttributeName(GetAttributeN(grp, 1));
-						ChangeCharacterAddressGroup(chr, location.id, encGroup, locator);
-						//ChangeCharacterAddressGroup(chr, location.id, "goto", "goto" + (i + 1));
-						chr.dialog.filename = "GenQuests_Dialog.c";
-						chr.dialog.currentnode = "First time";
-						chr.greeting = "Gr_MiddPirate"; // Enc_Raiders
-						LAi_SetImmortal(chr, true); // До поры нельзя убить
-						LAi_SetActorTypeNoGroup(chr);
-
-						if(i == 0)
-						{
-							LAi_ActorDialog(chr, PChar, "", -1, 0.0);
-						}
-						else
-						{
-							LAi_ActorFollow(chr, PChar, "", -1);
-						}
-
-						LAi_Group_MoveCharacter(chr, "PiratesOnUninhabitedGroup");
-						LAi_Group_SetRelation("PiratesOnUninhabitedGroup", LAI_GROUP_PLAYER, LAI_GROUP_NEITRAL);
-
-						i++;
-						model[iMassive] = "";
+						LAi_ActorDialog(chr, PChar, "", -1, 0.0);
 					}
+					else
+					{
+						LAi_ActorFollow(chr, PChar, "", -1);
+					}
+
+					LAi_Group_MoveCharacter(chr, "PiratesOnUninhabitedGroup");
+					LAi_Group_SetRelation("PiratesOnUninhabitedGroup", LAI_GROUP_PLAYER, LAI_GROUP_NEITRAL);
 				}
 
 				PChar.quest.PiratesOnUninhabited_LocExit.win_condition.l1 = "ExitFromLocation";
@@ -944,33 +893,13 @@ bool LAi_CreateEncounters(ref location)
 			if(num <= 0) return false;
 			if(rand(4) == 1 && !CheckAttribute(pchar, "GenQuest.PiratesOnUninhabited") && !CheckAttribute(pchar, "GenQuest.ShipWreck") && pchar.location == pchar.location.from_sea)
 			{
-				model[0] = "pirate_1";
-				model[1] = "pirate_2";
-				model[2] = "pirate_3";
-				model[3] = "pirate_4";
-				model[4] = "pirate_5";
-				model[5] = "pirate_6";
-				model[6] = "pirate_7";
-				model[7] = "pirate_8";
-				model[8] = "pirate_9";
-				model[9] = "pirate_10";
-				model[10] = "pirate_11";
-				model[11] = "pirate_12";
-				model[12] = "pirate_13";
-				model[13] = "pirate_14";
-				model[14] = "pirate_15";
-				model[15] = "pirate_16";
-				model[16] = "pirate_17";
-				model[17] = "pirate_18";
-				model[18] = "pirate_19";
-				model[19] = "pirate_20";
-				model[20] = "pirate_21";
-				model[21] = "pirate_22";
-				model[22] = "pirate_23";
-				model[23] = "pirate_24";
-				model[24] = "pirate_25";
+				for(i = 1; i <= 25; i++)
+				{
+					sTemp = "s" + (i - 1);
+					models.(sTemp) = "pirate_" + i;
+				}
+				RandomShuffle(&models);
 
-				i = 0;
 				iRank = sti(pchar.rank) + MOD_SKILL_ENEMY_RATE;
 
 				num = 5 + dRand(10); // Кол-во кораблекрушенцев
@@ -978,42 +907,35 @@ bool LAi_CreateEncounters(ref location)
 				pchar.GenQuest.ShipWreck.Nation = drand(3); // нация
 				pchar.GenQuest.ShipWreck.Prize = GenQuest_GenerateTotem();
 
-				while(i < num)
+				for (i = 0; i < num; i++)
 				{
-					iMassive = rand(24);
+					sTemp = "s" + (i % 25);
+					chr = GetCharacter(NPC_GenerateCharacter("ShipWreck_" + i, models.(sTemp), "man", "man", iRank, sti(pchar.GenQuest.ShipWreck.nation), -1, true));
+					SetFantomParamFromRank(chr, iRank, true);
+					locator = GetAttributeName(GetAttributeN(grp, 1));
+					ChangeCharacterAddressGroup(chr, location.id, encGroup, locator);
+					//ChangeCharacterAddressGroup(chr, location.id, "goto", "goto" + (i + 1));
+					FaceMaker(chr);
+					chr.dialog.filename = "GenQuests_Dialog.c";
+					chr.dialog.currentnode = "First time";
+					chr.greeting = "Gr_MiddPirate"; // Enc_Raiders
+					LAi_SetImmortal(chr, true); // До поры нельзя убить
+					LAi_SetActorTypeNoGroup(chr);
 
-					if(model[iMassive] != "")
+					if(i == 0)
 					{
-						chr = GetCharacter(NPC_GenerateCharacter("ShipWreck_" + i, model[iMassive], "man", "man", iRank, sti(pchar.GenQuest.ShipWreck.nation), -1, true));
-						SetFantomParamFromRank(chr, iRank, true);
-						locator = GetAttributeName(GetAttributeN(grp, 1));
-						ChangeCharacterAddressGroup(chr, location.id, encGroup, locator);
-						//ChangeCharacterAddressGroup(chr, location.id, "goto", "goto" + (i + 1));
-						FaceMaker(chr);
-						chr.dialog.filename = "GenQuests_Dialog.c";
-						chr.dialog.currentnode = "First time";
-						chr.greeting = "Gr_MiddPirate"; // Enc_Raiders
-						LAi_SetImmortal(chr, true); // До поры нельзя убить
-						LAi_SetActorTypeNoGroup(chr);
-
-						if(i == 0)
-						{
-							pchar.GenQuest.ShipWreck.Name = GenerateRandomName_Generator(sti(pchar.GenQuest.ShipWreck.Nation), "man");
-							chr.name = pchar.GenQuest.ShipWreck.Name;
-							chr.lastname = "";
-							LAi_ActorDialog(chr, pchar, "", -1, 0);
-						}
-						else
-						{
-							LAi_ActorFollow(chr, pchar, "", -1);
-						}
-
-						LAi_Group_MoveCharacter(chr, "ShipWreckGroup");
-						LAi_Group_SetRelation("ShipWreckGroup", LAI_GROUP_PLAYER, LAI_GROUP_NEITRAL);
-
-						i++;
-						model[iMassive] = "";
+						pchar.GenQuest.ShipWreck.Name = GenerateRandomName_Generator(sti(pchar.GenQuest.ShipWreck.Nation), "man");
+						chr.name = pchar.GenQuest.ShipWreck.Name;
+						chr.lastname = "";
+						LAi_ActorDialog(chr, pchar, "", -1, 0);
 					}
+					else
+					{
+						LAi_ActorFollow(chr, pchar, "", -1);
+					}
+
+					LAi_Group_MoveCharacter(chr, "ShipWreckGroup");
+					LAi_Group_SetRelation("ShipWreckGroup", LAI_GROUP_PLAYER, LAI_GROUP_NEITRAL);
 				}
 				SetFunctionExitFromLocationCondition("ShipWreck_LocationExit", pchar.location, false);
 				Log_TestInfo("Кораблекрушенцы: сгенерился квест");

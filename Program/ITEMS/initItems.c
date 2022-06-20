@@ -43,7 +43,6 @@
 
 int InitItems()
 {
-	InitButtons();
 	InitRandItems();
 	ref itm;
 	int n;
@@ -492,14 +491,6 @@ int InitItems()
 	itm.FencingType = "FencingLight";
 	itm.ItemType = "WEAPON";
 	itm.special.valueSS = 2; 	// Резкий удар
-	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
-	itm.Generation.dmg_min.min = 1.0;
-	itm.Generation.dmg_min.max = 1.0;
-	itm.Generation.dmg_max.min = 15.0;
-	itm.Generation.dmg_max.max = 15.0;
-	itm.Generation.Weight.min = 0.0;
-	itm.Generation.Weight.max = 0.0;
 	n++;
 
     makeref(itm,Items[n]);
@@ -528,14 +519,6 @@ int InitItems()
 	itm.special.valueSS = 5; 	// Резкий удар
 	itm.special.valueStS = 5; // Стан
 	itm.special.valueT = 1; 	// Травмы
-	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
-	itm.Generation.dmg_min.min = 1.0;
-	itm.Generation.dmg_min.max = 1.0;
-	itm.Generation.dmg_max.min = 25.0;
-	itm.Generation.dmg_max.max = 25.0;
-	itm.Generation.Weight.min = 4.0;
-	itm.Generation.Weight.max = 4.0;
 	n++;
 
     makeref(itm,Items[n]);
@@ -601,11 +584,6 @@ int InitItems()
 	itm.picIndex = 9;
 	itm.picTexture = "ITEMS_6";
 	// boal 19.01.2004 -->
-	itm.price = 80;
-	itm.Weight = 0.8 + fRandSmall(0.2); // 1;
-	// boal 19.01.2004 <--
-	itm.dmg_min = 1.0 + fRandSmall(2.0); // 3.0;
-	itm.dmg_max = 7.0 + fRandSmall(3.0); // 35.0;
 	itm.piercing = 25;
 	itm.minlevel = 0;
 	itm.rare = 0.1;
@@ -618,7 +596,6 @@ int InitItems()
 	itm.quality = "poor";
 	itm.special.valueB = 5; 	// Кровоток
 	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
 	itm.Generation.price = true; // Флаг "генерить цену"
 	itm.Generation.dmg_min.min = 1.0;
 	itm.Generation.dmg_min.max = 3.0;
@@ -639,11 +616,6 @@ int InitItems()
 	itm.picIndex = 10;
 	itm.picTexture = "ITEMS_6";
 	// boal 19.01.2004 -->
-	itm.price = 120;
-	itm.Weight = 2.8 + fRandSmall(0.2); // 3;
-	// boal 19.01.2004 <--
-	itm.dmg_min = 5.0 + rand(5); // 5.0;
-	itm.dmg_max = 40.0 + rand(3); // 40.0;
 	itm.piercing = 15;
 	itm.minlevel = 0;
 	itm.rare = 0.1;
@@ -655,7 +627,6 @@ int InitItems()
 	itm.ItemType = "WEAPON";
 	itm.quality = "poor";
 	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
 	itm.Generation.price = true; // Флаг "генерить цену"
 	itm.Generation.dmg_min.min = 5.0;
 	itm.Generation.dmg_min.max = 10.0;
@@ -676,11 +647,6 @@ int InitItems()
 	itm.picIndex = 12;
 	itm.picTexture = "ITEMS_6";
 	// boal 19.01.2004 -->
-	itm.price = 200;
-	itm.Weight = 2.7 + fRandSmall(0.2); // 2.5;
-	// boal 19.01.2004 <--
-	itm.dmg_min = 10.0 + rand(2); // 8.0;
-	itm.dmg_max = 45.0 + rand(5); // 46.0;
 	itm.piercing = 15;
 	itm.special.valueCrB = 4; //Буст крита
 	itm.minlevel = 1;
@@ -693,7 +659,6 @@ int InitItems()
 	itm.ItemType = "WEAPON";
 	itm.quality = "ordinary";
 	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
 	itm.Generation.price = true; // Флаг "генерить цену"
 	itm.Generation.dmg_min.min = 10.0;
 	itm.Generation.dmg_min.max = 12.0;
@@ -714,11 +679,6 @@ int InitItems()
 	itm.picIndex = 2;
 	itm.picTexture = "ITEMS_3";
 	// boal 19.01.2004 -->
-	itm.price = 600;
-	itm.Weight = 2.5 + fRandSmall(0.4); // 2.8;
-	// boal 19.01.2004 <--
-	itm.dmg_min = 10.0 + rand(2); // 10.0;
-	itm.dmg_max = 45.0 + rand(5); // 45.0;
 	itm.piercing = 20;
 	itm.special.valueSS = 4; //Резкий удар
 	itm.minlevel = 1;
@@ -731,7 +691,6 @@ int InitItems()
 	itm.ItemType = "WEAPON";
 	itm.quality = "ordinary";
 	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
 	itm.Generation.price = true; // Флаг "генерить цену"
 	itm.Generation.dmg_min.min = 10.0;
 	itm.Generation.dmg_min.max = 12.0;
@@ -752,7 +711,7 @@ int InitItems()
 	itm.picIndex = 7;
 	itm.picTexture = "ITEMS_3";
 	// boal 19.01.2004 -->
-	itm.price = 400;
+	itm.price = 1760;
 	itm.Weight = 3.0;// 3.5;
 	// boal 19.01.2004 <--
 	itm.dmg_min = 20.0;// 20.0;
@@ -770,8 +729,6 @@ int InitItems()
     itm.FencingType = "FencingLight";
     itm.ItemType = "WEAPON";
 	itm.quality = "excellent";
-	// для патча 1.2.5 фиксируем статы
-
 	n++;
 
 	// ГПК Маринера
@@ -785,11 +742,6 @@ int InitItems()
 	itm.picIndex = 12;
 	itm.picTexture = "ITEMS_3";
 	// boal 19.01.2004 -->
-	itm.price = 700;
-	itm.Weight = 2.5 + fRandSmall(0.2); // 2.6;
-	// boal 19.01.2004 <--
-	itm.dmg_min = 12.0 + rand(2);// 12.0;
-	itm.dmg_max = 50.0 + rand(5);// 50.0;
 	itm.piercing = 20;
 	itm.special.valueCrB = 7; //Буст крита
 	itm.special.valueStS = 4; //Стан
@@ -803,7 +755,6 @@ int InitItems()
 	itm.ItemType = "WEAPON";
 	itm.quality = "good";
 	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
 	itm.Generation.price = true; // Флаг "генерить цену"
 	itm.Generation.dmg_min.min = 12.0;
 	itm.Generation.dmg_min.max = 14.0;
@@ -824,11 +775,6 @@ int InitItems()
 	itm.picIndex = 15;
 	itm.picTexture = "ITEMS_3";
 	// boal 19.01.2004 -->
-	itm.price = 900;
-	itm.Weight = 2.5 + fRandSmall(0.2); // 2.7;
-	// boal 19.01.2004 <--
-	itm.dmg_min = 12.0 + rand(2); // 13.0;
-	itm.dmg_max = 50.0 + rand(5); // 53.0;
 	itm.piercing = 44;
 	itm.special.valueCrB = 4; //Буст крита
 	itm.special.valueStS = 7; //Стан
@@ -842,7 +788,6 @@ int InitItems()
 	itm.ItemType = "WEAPON";
 	itm.quality = "good";
 	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
 	itm.Generation.price = true; // Флаг "генерить цену"
 	itm.Generation.dmg_min.min = 12.0;
 	itm.Generation.dmg_min.max = 14.0;
@@ -863,11 +808,6 @@ int InitItems()
 	itm.picIndex = 16;
 	itm.picTexture = "ITEMS_3";
 	// boal 19.01.2004 -->
-	itm.price = 1300;
-	itm.Weight = 2.4 + fRandSmall(0.2);// 2.5;
-	// boal 19.01.2004 <--
-	itm.dmg_min = 16.0 + rand(2); // 14.0;
-	itm.dmg_max = 56.0 + rand(9); // 55.0;
 	itm.piercing = 50;
 	itm.special.valueCrB = 12; //Буст крита
 	itm.special.valueSS = 6; //Резкий удар
@@ -881,7 +821,6 @@ int InitItems()
 	itm.ItemType = "WEAPON";
 	itm.quality = "excellent";
 	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
 	itm.Generation.price = true; // Флаг "генерить цену"
 	itm.Generation.dmg_min.min = 16.0;
 	itm.Generation.dmg_min.max = 18.0;
@@ -902,11 +841,6 @@ int InitItems()
 	itm.picIndex = 3;
 	itm.picTexture = "ITEMS_8";
 	// boal 19.01.2004 -->
-	itm.price = 10000;
-	itm.Weight = 2.4 + fRandSmall(0.2); //2.9;
-	// boal 19.01.2004 <--
-	itm.dmg_min = 17.0 + rand(2); // 18.0;
-	itm.dmg_max = 64.0 + rand(3); // 65.0;
 	itm.piercing = 99.0;
 	itm.special.valueStS = 9; //Стан
 	itm.special.valueSS = 9; //Резкий удар
@@ -920,7 +854,6 @@ int InitItems()
 	itm.ItemType = "WEAPON";
 	itm.quality = "excellent";
 	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
 	itm.Generation.price = true; // Флаг "генерить цену"
 	itm.Generation.dmg_min.min = 17.0;
 	itm.Generation.dmg_min.max = 19.0;
@@ -941,11 +874,6 @@ int InitItems()
 	itm.picIndex = 4;
 	itm.picTexture = "ITEMS_10";
 	// boal 19.01.2004 -->
-	itm.price = 3000;
-	itm.Weight = 3.0 + fRandSmall(0.4); // 4.4;
-	// boal 19.01.2004 <--
-	itm.dmg_min = 15.0 + rand(3); // 18.0;
-	itm.dmg_max = 65.0 + rand(5); // 70.0;
 	itm.piercing = 90.0;
 	itm.special.valueBB = 4; //Пролом блока
 	itm.special.valueSS = 4; //Резкий удар
@@ -960,7 +888,6 @@ int InitItems()
 	itm.ItemType = "WEAPON";
 	itm.quality = "excellent";
 	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
 	itm.Generation.price = true; // Флаг "генерить цену"
 	itm.Generation.dmg_min.min = 15.0;
 	itm.Generation.dmg_min.max = 18.0;
@@ -981,11 +908,6 @@ int InitItems()
 	itm.picIndex = 9;
 	itm.picTexture = "ITEMS_18";
 	// boal 19.01.2004 -->
-	itm.price = 10000;
-	itm.Weight = 2.3 + fRandSmall(0.2);
-	// boal 19.01.2004 <--
-	itm.dmg_min = 12.0 + rand(4);
-	itm.dmg_max = 45.0 + rand(10);
 	itm.piercing = 99.0;
 	itm.special.valueBB = 7; //Пролом блока
 	itm.special.valueSS = 4; //Резкий удар
@@ -999,7 +921,6 @@ int InitItems()
 	itm.ItemType = "WEAPON";
 	itm.quality = "good";
 	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
 	itm.Generation.price = true; // Флаг "генерить цену"
 	itm.Generation.dmg_min.min = 12.0;
 	itm.Generation.dmg_min.max = 16.0;
@@ -1020,11 +941,6 @@ int InitItems()
 	itm.picIndex = 10;
 	itm.picTexture = "ITEMS_18";
 	// boal 19.01.2004 -->
-	itm.price = 10000;
-	itm.Weight = 2.6 + fRandSmall(0.2);
-	// boal 19.01.2004 <--
-	itm.dmg_min = 10.0 + rand(4);
-	itm.dmg_max = 55.0 + rand(5);
 	itm.piercing = 99.0;
 	itm.special.valueCB = 6; //Пролом кирасы
 	itm.special.valueStS = 6; //Стан
@@ -1038,7 +954,6 @@ int InitItems()
 	itm.ItemType = "WEAPON";
 	itm.quality = "good";
 	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
 	itm.Generation.price = true; // Флаг "генерить цену"
 	itm.Generation.dmg_min.min = 10.0;
 	itm.Generation.dmg_min.max = 14.0;
@@ -1059,11 +974,6 @@ int InitItems()
 	itm.picIndex = 11;
 	itm.picTexture = "ITEMS_18";
 	// boal 19.01.2004 -->
-	itm.price = 10000;
-	itm.Weight = 2.2 + fRandSmall(0.3);
-	// boal 19.01.2004 <--
-	itm.dmg_min = 15.0 + rand(3);
-	itm.dmg_max = 65.0 + rand(4);
 	itm.piercing = 99.0;
 	itm.special.valueCrB = 18; //Буст крита
 	itm.minlevel = 1;
@@ -1076,7 +986,6 @@ int InitItems()
 	itm.ItemType = "WEAPON";
 	itm.quality = "excellent";
 	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
 	itm.Generation.price = true; // Флаг "генерить цену"
 	itm.Generation.dmg_min.min = 15.0;
 	itm.Generation.dmg_min.max = 18.0;
@@ -1097,11 +1006,6 @@ int InitItems()
 	itm.picIndex = 9;
 	itm.picTexture = "ITEMS_16";
 	// boal 19.01.2004 -->
-	itm.price = 10000;
-	itm.Weight = 2.6 + fRandSmall(0.3);
-	// boal 19.01.2004 <--
-	itm.dmg_min = 10.0 + rand(2);
-	itm.dmg_max = 45.0 + rand(5);
 	itm.piercing = 99.0;
 	itm.special.valueStS = 4; // Стан
 	itm.minlevel = 1;
@@ -1114,7 +1018,6 @@ int InitItems()
 	itm.ItemType = "WEAPON";
 	itm.quality = "ordinary";
 	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
 	itm.Generation.price = true; // Флаг "генерить цену"
 	itm.Generation.dmg_min.min = 10.0;
 	itm.Generation.dmg_min.max = 12.0;
@@ -1135,11 +1038,6 @@ int InitItems()
 	itm.picIndex = 2;
 	itm.picTexture = "ITEMS_8";
 	// boal 19.01.2004 -->
-	itm.price = 2500;
-	itm.Weight = 2.4 + fRandSmall(0.4); // 4.7;
-	// boal 19.01.2004 <--
-	itm.dmg_min = 16.0 + rand(3); // 24.0;
-	itm.dmg_max = 63.0 + rand(5); // 70.0;
 	itm.piercing = 88.0;
 	itm.special.valueCrB = 6; //Буст крита
 	itm.special.valueStS = 6; //Стан
@@ -1154,7 +1052,6 @@ int InitItems()
 	itm.ItemType = "WEAPON";
 	itm.quality = "excellent";
 	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
 	itm.Generation.price = true; // Флаг "генерить цену"
 	itm.Generation.dmg_min.min = 16.0;
 	itm.Generation.dmg_min.max = 19.0;
@@ -1162,6 +1059,67 @@ int InitItems()
 	itm.Generation.dmg_max.max = 68.0;
 	itm.Generation.Weight.min = 2.4;
 	itm.Generation.Weight.max = 2.8;
+	n++;
+
+	// ККС Нааб-те
+	makeref(itm,Items[n]);
+	itm.id = "blade_01";
+	itm.groupID = BLADE_ITEM_TYPE;
+	itm.name = "itmname_blade_01";
+	itm.describe = "itmdescr_blade_01";
+	itm.folder = "items";
+	itm.model = "blade_01";
+	itm.picIndex = 13;
+	itm.picTexture = "ITEMS_16";
+	// boal 19.01.2004 -->
+	itm.price = 280;
+	itm.piercing = 25;
+	itm.special.valueP = 5; 	//Отравление
+	itm.minlevel = 0;
+	itm.rare = 0.1;
+	itm.block = 45;
+	itm.param.time = 0.1;
+	itm.param.colorstart = argb(64, 64, 64, 64);
+	itm.param.colorend = argb(0, 32, 32, 32);
+	itm.FencingType = "FencingLight";
+	itm.ItemType = "WEAPON";
+	itm.quality = "poor";
+	// Warship 08.05.09 - Новая система предметов, параметры для генерации
+	itm.Generation.dmg_min.min = 4.0;
+	itm.Generation.dmg_min.max = 6.0;
+	itm.Generation.dmg_max.min = 33.0;
+	itm.Generation.dmg_max.max = 38.0;
+	itm.Generation.Weight.min = 2.0;
+	itm.Generation.Weight.max = 3.0;
+    n++;
+
+	// Клинок Виспер
+	makeref(itm,Items[n]);
+	itm.id = "blade_whisper";
+	itm.groupID = BLADE_ITEM_TYPE;
+	itm.name = "itmname_blade_whisper";
+	itm.describe = "itmdescr_blade_whisper";
+	itm.folder = "items";
+	itm.model = "blade_whisper";
+	itm.picIndex = 12;
+	itm.picTexture = "ITEMS_14";
+	itm.price = 2150;
+	itm.Weight = 2.7;
+	itm.dmg_min = 20.0;
+	itm.dmg_max = 72.0;
+	itm.piercing = 100;
+	itm.special.valueStS = 12; //Стан
+	itm.special.valueSS = 6; //Резкий удар
+	//itm.special.valueBB = 15; //Пролом блока
+	itm.minlevel = 1;
+	itm.rare = 0.0001;
+	itm.block = 95;
+	itm.param.time = 0.1;
+	itm.param.colorstart = argb(64, 64, 64, 64);
+	itm.param.colorend = argb(0, 32, 32, 32);
+	itm.FencingType = "FencingLight";
+	itm.ItemType = "WEAPON";
+	itm.quality = "excellent";
 	n++;
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1179,11 +1137,6 @@ int InitItems()
 	itm.picIndex = 11;
 	itm.picTexture = "ITEMS_6";
 	// boal 19.01.2004 -->
-	itm.price = 50;
-	itm.Weight = 4.5 + fRandSmall(1.5); // 4.5;
-	// boal 19.01.2004 <--
-	itm.dmg_min = 6.0 + rand(6); // 6.0;
-	itm.dmg_max = 45.0 + rand(5); // 45.0;
 	itm.piercing = 10;
 	itm.minlevel = 0;
 	itm.rare = 0.1;
@@ -1195,7 +1148,6 @@ int InitItems()
 	itm.ItemType = "WEAPON";
 	itm.quality = "poor";
 	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
 	itm.Generation.price = true; // Флаг "генерить цену"
 	itm.Generation.dmg_min.min = 6.0;
 	itm.Generation.dmg_min.max = 12.0;
@@ -1216,11 +1168,6 @@ int InitItems()
 	itm.picIndex = 7;
 	itm.picTexture = "ITEMS_6";
 	// boal 19.01.2004 -->
-	itm.price = 100;
-	itm.Weight = 4.5 + fRandSmall(1.5); // 4.6;
-	// boal 19.01.2004 <--
-	itm.dmg_min = 6.0 + rand(6); // 8.0;
-	itm.dmg_max = 45.0 + rand(5); // 50.0;
 	itm.piercing = 30;
 	itm.minlevel = 0;
 	itm.rare = 0.1;
@@ -1232,7 +1179,6 @@ int InitItems()
 	itm.ItemType = "WEAPON";
 	itm.quality = "poor";
 	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
 	itm.Generation.price = true; // Флаг "генерить цену"
 	itm.Generation.dmg_min.min = 6.0;
 	itm.Generation.dmg_min.max = 12.0;
@@ -1253,11 +1199,6 @@ int InitItems()
 	itm.picIndex = 8;
 	itm.picTexture = "ITEMS_10";
 	// boal 19.01.2004 -->
-	itm.price = 150;
-	itm.Weight = 4.5 + fRandSmall(1.5); // 6;
-	// boal 19.01.2004 <--
-	itm.dmg_min = 6.0 + rand(6); // 10.0;
-	itm.dmg_max = 45.0 + rand(5); // 60.0;
 	itm.piercing = 14.0;
 	itm.minlevel = 1;
 	itm.rare = 0.01;
@@ -1269,7 +1210,6 @@ int InitItems()
 	itm.ItemType = "WEAPON";
 	itm.quality = "poor";
 	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
 	itm.Generation.price = true; // Флаг "генерить цену"
 	itm.Generation.dmg_min.min = 6.0;
 	itm.Generation.dmg_min.max = 12.0;
@@ -1290,11 +1230,6 @@ int InitItems()
 	itm.picIndex = 8;
 	itm.picTexture = "ITEMS_6";
 	// boal 19.01.2004 -->
-	itm.price = 200;
-	itm.Weight = 4.5 + fRandSmall(1.5); // 5.3;
-	// boal 19.01.2004 <--
-	itm.dmg_min = 6.0 + rand(6); // 12.0;
-	itm.dmg_max = 45.0 + rand(5); // 55.0;
 	itm.piercing = 60;
 	itm.minlevel = 0;
 	itm.rare = 0.1;
@@ -1306,7 +1241,6 @@ int InitItems()
 	itm.ItemType = "WEAPON";
 	itm.quality = "poor";
 	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
 	itm.Generation.price = true; // Флаг "генерить цену"
 	itm.Generation.dmg_min.min = 6.0;
 	itm.Generation.dmg_min.max = 12.0;
@@ -1327,11 +1261,6 @@ int InitItems()
 	itm.picIndex = 13;
 	itm.picTexture = "ITEMS_6";
 	// boal 19.01.2004 -->
-	itm.price = 250;
-	itm.Weight = 4.5 + fRandSmall(0.5); // 4.5;
-	// boal 19.01.2004 <--
-	itm.dmg_min = 12.0 + rand(3); // 13.0;
-	itm.dmg_max = 55.0 + rand(5); // 55.0;
 	itm.piercing = 18;
 	itm.special.valueSS = 3; //Резкий удар
 	itm.special.valueBB = 3; //Пролом блока
@@ -1345,7 +1274,6 @@ int InitItems()
 	itm.ItemType = "WEAPON";
 	itm.quality = "ordinary";
 	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
 	itm.Generation.price = true; // Флаг "генерить цену"
 	itm.Generation.dmg_min.min = 12.0;
 	itm.Generation.dmg_min.max = 15.0;
@@ -1366,11 +1294,6 @@ int InitItems()
 	itm.picIndex = 5;
 	itm.picTexture = "ITEMS_3";
 	// boal 19.01.2004 -->
-	itm.price = 300;
-	itm.Weight = 4.5 + fRandSmall(0.5); // 6;
-	// boal 19.01.2004 <--
-	itm.dmg_min = 12.0 + rand(3); // 14.0;
-	itm.dmg_max = 55.0 + rand(5); // 65.0;
 	itm.piercing = 30;
 	itm.special.valueStS = 6; //Стан
 	itm.minlevel = 1;
@@ -1383,7 +1306,6 @@ int InitItems()
 	itm.ItemType = "WEAPON";
 	itm.quality = "ordinary";
 	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
 	itm.Generation.price = true; // Флаг "генерить цену"
 	itm.Generation.dmg_min.min = 12.0;
 	itm.Generation.dmg_min.max = 15.0;
@@ -1404,11 +1326,6 @@ int InitItems()
 	itm.picIndex = 11;
 	itm.picTexture = "ITEMS_3";
 	// boal 19.01.2004 -->
-	itm.price = 400;
-	itm.Weight = 4.5 + fRandSmall(0.5); // 5.4;
-	// boal 19.01.2004 <--
-	itm.dmg_min = 12.0 + rand(3); // 16.0;
-	itm.dmg_max = 55.0 + rand(5); // 60.0;
 	itm.piercing = 35;
 	itm.special.valueCrB = 4; //Буст крита
 	itm.special.valueSS = 2; //Резкий удар
@@ -1422,7 +1339,6 @@ int InitItems()
 	itm.ItemType = "WEAPON";
 	itm.quality = "ordinary";
 	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
 	itm.Generation.price = true; // Флаг "генерить цену"
 	itm.Generation.dmg_min.min = 12.0;
 	itm.Generation.dmg_min.max = 15.0;
@@ -1443,11 +1359,6 @@ int InitItems()
 	itm.picIndex = 2;
 	itm.picTexture = "ITEMS_10";
 	// boal 19.01.2004 -->
-	itm.price = 600;
-	itm.Weight = 4.1 + fRandSmall(0.4); // 4.1;
-	// boal 19.01.2004 <--
-	itm.dmg_min = 20.0 + rand(5); // 18.0;
-	itm.dmg_max = 80.0 + rand(10); // 63.0;
 	itm.piercing = 55.0;
 	itm.special.valueCrB = 8; //Буст крита
 	itm.special.valueCB = 8; //Пролом кирасы
@@ -1462,7 +1373,6 @@ int InitItems()
 	itm.ItemType = "WEAPON";
 	itm.quality = "excellent";
 	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
 	itm.Generation.price = true; // Флаг "генерить цену"
 	itm.Generation.dmg_min.min = 20.0;
 	itm.Generation.dmg_min.max = 25.0;
@@ -1483,11 +1393,6 @@ int InitItems()
 	itm.picIndex = 3;
 	itm.picTexture = "ITEMS_10";
 	// boal 19.01.2004 -->
-	itm.price = 800;
-	itm.Weight = 4.6 + fRandSmall(0.2); // 4.5;
-	// boal 19.01.2004 <--
-	itm.dmg_min = 18.0 + rand(5); // 19.0;
-	itm.dmg_max = 65.0 + rand(10); // 64.0;
 	itm.piercing = 50.0;
 	itm.special.valueBB = 7; //Пролом блока
 	itm.special.valueCrB = 7; //Буст крита
@@ -1501,7 +1406,6 @@ int InitItems()
 	itm.ItemType = "WEAPON";
 	itm.quality = "good";
 	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
 	itm.Generation.price = true; // Флаг "генерить цену"
 	itm.Generation.dmg_min.min = 18.0;
 	itm.Generation.dmg_min.max = 23.0;
@@ -1522,11 +1426,6 @@ int InitItems()
 	itm.picIndex = 5;
 	itm.picTexture = "ITEMS_8";
 	// boal 19.01.2004 -->
-	itm.price = 1500;
-	itm.Weight = 4.1 + fRandSmall(0.4); // 4.3;
-	// boal 19.01.2004 <--
-	itm.dmg_min = 20.0 + rand(5); // 20.0;
-	itm.dmg_max = 80.0 + rand(10); // 66.0;
 	itm.piercing = 58.0;
 	itm.special.valueSS = 12; //Резкий удар
 	itm.special.valueStS = 12; //Стан
@@ -1540,7 +1439,6 @@ int InitItems()
 	itm.ItemType = "WEAPON";
 	itm.quality = "excellent";
 	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
 	itm.Generation.price = true; // Флаг "генерить цену"
 	itm.Generation.dmg_min.min = 20.0;
 	itm.Generation.dmg_min.max = 25.0;
@@ -1561,11 +1459,6 @@ int InitItems()
 	itm.picIndex = 1;
 	itm.picTexture = "ITEMS_8";
 	// boal 19.01.2004 -->
-	itm.price = 1700;
-	itm.Weight = 4.1 + fRandSmall(0.4); // 4.2;
-	// boal 19.01.2004 <--
-	itm.dmg_min = 20.0 + rand(5); // 21.0;
-	itm.dmg_max = 80.0 + rand(5); // 65.0;
 	itm.piercing = 60.0;
 	itm.special.valueCB = 12; //Пролом кирасы
 	itm.special.valueBB = 12; //Пролом блока
@@ -1579,7 +1472,6 @@ int InitItems()
 	itm.ItemType = "WEAPON";
 	itm.quality = "excellent";
 	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
 	itm.Generation.price = true; // Флаг "генерить цену"
 	itm.Generation.dmg_min.min = 20.0;
 	itm.Generation.dmg_min.max = 25.0;
@@ -1600,11 +1492,6 @@ int InitItems()
 	itm.picIndex = 5;
 	itm.picTexture = "ITEMS_10";
 	// boal 19.01.2004 -->
-	itm.price = 2000;
-	itm.Weight = 4.6 + fRandSmall(0.2); // 5.5;
-	// boal 19.01.2004 <--
-	itm.dmg_min = 18.0 + rand(5); // 23.0;
-	itm.dmg_max = 65.0 + rand(10); // 70.0;
 	itm.piercing = 90.0;
 	itm.special.valueStS = 5; //Стан
 	itm.special.valueSS = 9; //Резкий удар
@@ -1618,7 +1505,6 @@ int InitItems()
 	itm.ItemType = "WEAPON";
 	itm.quality = "good";
 	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
 	itm.Generation.price = true; // Флаг "генерить цену"
 	itm.Generation.dmg_min.min = 18.0;
 	itm.Generation.dmg_min.max = 23.0;
@@ -1638,7 +1524,7 @@ int InitItems()
 	itm.folder = "items";
 	itm.picIndex = 7;
 	itm.picTexture = "ITEMS_14";
-	itm.price = 50;
+	itm.price = 3500;
 	itm.Weight = 4.5;
 	itm.dmg_min = 35.0;
 	itm.dmg_max = 90.0;
@@ -1667,7 +1553,7 @@ int InitItems()
 	itm.folder = "items";
 	itm.picIndex = 4;
 	itm.picTexture = "ITEMS_20";
-	itm.price = 50;
+	itm.price = 3300;
 	itm.Weight = 4.0;
 	itm.dmg_min = 31.0;
 	itm.dmg_max = 85.0;
@@ -1697,11 +1583,6 @@ int InitItems()
 	itm.picIndex = 5;
 	itm.picTexture = "ITEMS_18";
 	// boal 19.01.2004 -->
-	itm.price = 2500;
-	itm.Weight = 4.0 + fRandSmall(0.6);
-	// boal 19.01.2004 <--
-	itm.dmg_min = 18.0 + rand(7);
-	itm.dmg_max = 60.0 + rand(10);
 	itm.piercing = 88.0;
 	itm.special.valueCB = 5; //Пролом кирасы
 	itm.special.valueBB = 5; //Пролом блока
@@ -1716,7 +1597,6 @@ int InitItems()
 	itm.ItemType = "WEAPON";
 	itm.quality = "good";
 	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
 	itm.Generation.price = true; // Флаг "генерить цену"
 	itm.Generation.dmg_min.min = 18.0;
 	itm.Generation.dmg_min.max = 25.0;
@@ -1737,11 +1617,6 @@ int InitItems()
 	itm.picIndex = 6;
 	itm.picTexture = "ITEMS_18";
 	// boal 19.01.2004 -->
-	itm.price = 2500;
-	itm.Weight = 4.6 + fRandSmall(0.8);
-	// boal 19.01.2004 <--
-	itm.dmg_min = 18.0 + rand(5);
-	itm.dmg_max = 65.0 + rand(15);
 	itm.piercing = 88.0;
 	itm.special.valueStS = 14; //Стан
 	itm.minlevel = 1;
@@ -1754,7 +1629,6 @@ int InitItems()
 	itm.ItemType = "WEAPON";
 	itm.quality = "good";
 	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
 	itm.Generation.price = true; // Флаг "генерить цену"
 	itm.Generation.dmg_min.min = 18.0;
 	itm.Generation.dmg_min.max = 23.0;
@@ -1775,11 +1649,6 @@ int InitItems()
 	itm.picIndex = 7;
 	itm.picTexture = "ITEMS_18";
 	// boal 19.01.2004 -->
-	itm.price = 2500;
-	itm.Weight = 4.2 + fRandSmall(0.6);
-	// boal 19.01.2004 <--
-	itm.dmg_min = 24.0 + rand(2);
-	itm.dmg_max = 80.0 + rand(10);
 	itm.piercing = 88.0;
 	itm.special.valueStS = 10; //Стан
 	itm.special.valueSS = 10; //Резкий удар
@@ -1794,7 +1663,6 @@ int InitItems()
 	itm.ItemType = "WEAPON";
 	itm.quality = "excellent";
 	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
 	itm.Generation.price = true; // Флаг "генерить цену"
 	itm.Generation.dmg_min.min = 24.0;
 	itm.Generation.dmg_min.max = 26.0;
@@ -1814,7 +1682,7 @@ int InitItems()
 	itm.model = "blade201";
 	itm.picIndex = 2;
 	itm.picTexture = "ITEMS_19";
-	itm.price = 3000;
+	itm.price = 3200;
 	itm.Weight = 4.2;
 	itm.dmg_min = 33.0;
 	itm.dmg_max = 80.0;
@@ -1844,11 +1712,6 @@ int InitItems()
 	itm.picIndex = 10;
 	itm.picTexture = "ITEMS_16";
 	// boal 19.01.2004 -->
-	itm.price = 2500;
-	itm.Weight = 4.3 + fRandSmall(0.6);
-	// boal 19.01.2004 <--
-	itm.dmg_min = 18.0 + rand(5);
-	itm.dmg_max = 68.0 + rand(10);
 	itm.piercing = 88.0;
 	itm.special.valueStS = 4; //Стан
 	itm.special.valueCrB = 10; //Буст крита
@@ -1862,7 +1725,6 @@ int InitItems()
 	itm.ItemType = "WEAPON";
 	itm.quality = "good";
 	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
 	itm.Generation.price = true; // Флаг "генерить цену"
 	itm.Generation.dmg_min.min = 18.0;
 	itm.Generation.dmg_min.max = 23.0;
@@ -1870,6 +1732,70 @@ int InitItems()
 	itm.Generation.dmg_max.max = 78.0;
 	itm.Generation.Weight.min = 4.3;
 	itm.Generation.Weight.max = 4.9;
+	n++;
+
+	// ККС Тлакоман
+	makeref(itm,Items[n]);
+	itm.id = "blade_02";
+	itm.groupID = BLADE_ITEM_TYPE;
+	itm.name = "itmname_blade_02";
+	itm.describe = "itmdescr_blade_02";
+	itm.folder = "items";
+	itm.model = "blade_02";
+	itm.picIndex = 14;
+	itm.picTexture = "ITEMS_16";
+	// boal 19.01.2004 -->
+	itm.price = 560;
+	itm.piercing = 25;
+	itm.special.valueP = 5; 	//Отравление
+	itm.minlevel = 0;
+	itm.rare = 0.1;
+	itm.block = 45;
+	itm.param.time = 0.1;
+	itm.param.colorstart = argb(64, 64, 64, 64);
+	itm.param.colorend = argb(0, 32, 32, 32);
+	itm.FencingType = "Fencing";
+	itm.ItemType = "WEAPON";
+	itm.quality = "poor";
+	// Warship 08.05.09 - Новая система предметов, параметры для генерации
+	itm.Generation.dmg_min.min = 6.0;
+	itm.Generation.dmg_min.max = 10.0;
+	itm.Generation.dmg_max.min = 40.0;
+	itm.Generation.dmg_max.max = 45.0;
+	itm.Generation.Weight.min = 2.5;
+	itm.Generation.Weight.max = 3.5;
+    n++;
+
+	// ККС Томагавк
+	makeref(itm,Items[n]);
+	itm.id = "topor_05";
+	itm.groupID = BLADE_ITEM_TYPE;
+	itm.name = "itmname_topor_05";
+	itm.describe = "itmdescr_topor_05";
+	itm.folder = "items";
+	itm.model = "topor_05";
+	itm.picIndex = 15;
+	itm.picTexture = "ITEMS_16";
+	// boal 19.01.2004 -->
+	itm.price = 800;
+	itm.piercing = 24.0;
+	itm.special.valueCB = 6; //Пролом кирасы
+	itm.minlevel = 1;
+	itm.rare = 0.01;
+	itm.block = 12;
+	itm.param.time = 0.1;
+	itm.param.colorstart = argb(64, 64, 64, 64);
+	itm.param.colorend = argb(0, 32, 32, 32);
+	itm.FencingType = "Fencing";
+	itm.ItemType = "WEAPON";
+	itm.quality = "ordinary";
+	// Warship 08.05.09 - Новая система предметов, параметры для генерации
+	itm.Generation.dmg_min.min = 14.0;
+	itm.Generation.dmg_min.max = 19.0;
+	itm.Generation.dmg_max.min = 50.0;
+	itm.Generation.dmg_max.max = 55.0;
+	itm.Generation.Weight.min = 4.5;
+	itm.Generation.Weight.max = 6.0;
 	n++;
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1887,11 +1813,6 @@ int InitItems()
 	itm.picIndex = 3;
 	itm.picTexture = "ITEMS_3";
 	// boal 19.01.2004 -->
-	itm.price = 300;
-	itm.Weight = 9.0 + fRandSmall(2.0);  // 7;
-	// boal 19.01.2004 <--
-	itm.dmg_min = 12.0 + rand(3); // 10.0;
-	itm.dmg_max = 50.0 + rand(10); // 60.0;
 	itm.piercing = 50;
 	itm.minlevel = 1;
 	itm.rare = 0.1;
@@ -1903,7 +1824,6 @@ int InitItems()
 	itm.ItemType = "WEAPON";
 	itm.quality = "poor";
 	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
 	itm.Generation.price = true; // Флаг "генерить цену"
 	itm.Generation.dmg_min.min = 12.0;
 	itm.Generation.dmg_min.max = 15.0;
@@ -1924,11 +1844,6 @@ int InitItems()
 	itm.picIndex = 10;
 	itm.picTexture = "ITEMS_10";
 	// boal 19.01.2004 -->
-	itm.price = 400;
-	itm.Weight = 9.0 + fRandSmall(2.0); // 9;
-	// boal 19.01.2004 <--
-	itm.dmg_min = 12.0 + rand(3); // 10.0;
-	itm.dmg_max = 50.0 + rand(10); // 60.0;
 	itm.piercing = 65.0;
 	itm.minlevel = 1;
 	itm.rare = 0.1;
@@ -1940,7 +1855,6 @@ int InitItems()
 	itm.ItemType = "WEAPON";
 	itm.quality = "poor";
 	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
 	itm.Generation.price = true; // Флаг "генерить цену"
 	itm.Generation.dmg_min.min = 12.0;
 	itm.Generation.dmg_min.max = 15.0;
@@ -1961,11 +1875,6 @@ int InitItems()
 	itm.picIndex = 1;
 	itm.picTexture = "ITEMS_3";
 	// boal 19.01.2004 -->
-	itm.price = 450;
-	itm.Weight = 8.5 + fRandSmall(1.5); // 7.5;
-	// boal 19.01.2004 <--
-	itm.dmg_min = 15.0 + rand(5); // 14.0;
-	itm.dmg_max = 60.0 + rand(10); // 65.0;
 	itm.piercing = 35;
 	itm.special.valueT = 3; //Травмы
 	itm.special.valueBB = 7; //Пролом блока
@@ -1979,7 +1888,6 @@ int InitItems()
 	itm.ItemType = "WEAPON";
 	itm.quality = "ordinary";
 	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
 	itm.Generation.price = true; // Флаг "генерить цену"
 	itm.Generation.dmg_min.min = 15.0;
 	itm.Generation.dmg_min.max = 20.0;
@@ -2000,11 +1908,6 @@ int InitItems()
 	itm.picIndex = 4;
 	itm.picTexture = "ITEMS_3";
 	// boal 19.01.2004 -->
-	itm.price = 500;
-	itm.Weight = 8.5 + fRandSmall(1.5); // 8;
-	// boal 19.01.2004 <--
-	itm.dmg_min = 15.0 + rand(5); // 16.0;
-	itm.dmg_max = 60.0 + rand(10); // 70.0;
 	itm.piercing = 60;
 	itm.special.valueT = 3; //Травмы
 	itm.special.valueSS = 7; //Резкий удар
@@ -2018,7 +1921,6 @@ int InitItems()
 	itm.ItemType = "WEAPON";
 	itm.quality = "ordinary";
 	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
 	itm.Generation.price = true; // Флаг "генерить цену"
 	itm.Generation.dmg_min.min = 15.0;
 	itm.Generation.dmg_min.max = 20.0;
@@ -2039,11 +1941,6 @@ int InitItems()
 	itm.picIndex = 6;
 	itm.picTexture = "ITEMS_3";
 	// boal 19.01.2004 -->
-	itm.price = 600;
-	itm.Weight = 9.0 + fRandSmall(0.5);
-	// boal 19.01.2004 <--
-	itm.dmg_min = 35.0 + rand(10);
-	itm.dmg_max = 100.0 + rand(10);
 	itm.piercing = 65;
 	itm.special.valueT = 10; //Травмы
 	itm.special.valueSS = 10; //Резкий удар
@@ -2058,7 +1955,6 @@ int InitItems()
 	itm.ItemType = "WEAPON";
 	itm.quality = "excellent";
 	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
 	itm.Generation.price = true; // Флаг "генерить цену"
 	itm.Generation.dmg_min.min = 35.0;
 	itm.Generation.dmg_min.max = 45.0;
@@ -2079,11 +1975,6 @@ int InitItems()
 	itm.picIndex = 6;
 	itm.picTexture = "ITEMS_10";
 	// boal 19.01.2004 -->
-	itm.price = 650;
-	itm.Weight = 9.0 + fRandSmall(2.0); // 10;
-	// boal 19.01.2004 <--
-	itm.dmg_min = 12.0 + rand(3); // 10.0;
-	itm.dmg_max = 50.0 + rand(10); // 60.0;
 	itm.piercing = 70.0;
 	itm.minlevel = 1;
 	itm.rare = 0.1;
@@ -2095,7 +1986,6 @@ int InitItems()
 	itm.ItemType = "WEAPON";
 	itm.quality = "poor";
 	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
 	itm.Generation.price = true; // Флаг "генерить цену"
 	itm.Generation.dmg_min.min = 12.0;
 	itm.Generation.dmg_min.max = 15.0;
@@ -2116,11 +2006,6 @@ int InitItems()
 	itm.picIndex = 8;
 	itm.picTexture = "ITEMS_3";
 	// boal 19.01.2004 -->
-	itm.price = 700;
-	itm.Weight = 8.5 + fRandSmall(1.5); // 8.5;
-	// boal 19.01.2004 <--
-	itm.dmg_min = 24.0 + rand(6); // 22.0;
-	itm.dmg_max = 75.0 + rand(15); // 75.0;
 	itm.piercing = 55;
 	itm.special.valueT = 6; //Травмы
 	itm.special.valueCrB = 4; //Буст крита
@@ -2135,7 +2020,6 @@ int InitItems()
 	itm.ItemType = "WEAPON";
 	itm.quality = "good";
 	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
 	itm.Generation.price = true; // Флаг "генерить цену"
 	itm.Generation.dmg_min.min = 24.0;
 	itm.Generation.dmg_min.max = 30.0;
@@ -2156,11 +2040,6 @@ int InitItems()
 	itm.picIndex = 9;
 	itm.picTexture = "ITEMS_3";
 	// boal 19.01.2004 -->
-	itm.price = 800;
-	itm.Weight = 8.5 + fRandSmall(1.5); // 9.5;
-	// boal 19.01.2004 <--
-	itm.dmg_min = 15.0 + rand(5); // 22.0;
-	itm.dmg_max = 60.0 + rand(10); // 80.0;
 	itm.piercing = 45;
 	itm.special.valueT = 3; //Травмы
 	itm.special.valueCrB = 7; //Буст крита
@@ -2174,7 +2053,6 @@ int InitItems()
 	itm.ItemType = "WEAPON";
 	itm.quality = "ordinary";
 	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
 	itm.Generation.price = true; // Флаг "генерить цену"
 	itm.Generation.dmg_min.min = 15.0;
 	itm.Generation.dmg_min.max = 20.0;
@@ -2195,11 +2073,6 @@ int InitItems()
 	itm.picIndex = 10;
 	itm.picTexture = "ITEMS_3";
 	// boal 19.01.2004 -->
-	itm.price = 900;
-	itm.Weight = 9.0 + fRandSmall(2.0); // 11.5;
-	// boal 19.01.2004 <--
-	itm.dmg_min = 12.0 + rand(3); // 24.0;
-	itm.dmg_max = 50.0 + rand(10); // 90.0;
 	itm.piercing = 65;
 	itm.minlevel = 1;
 	itm.rare = 0.1;
@@ -2211,7 +2084,6 @@ int InitItems()
 	itm.ItemType = "WEAPON";
 	itm.quality = "poor";
 	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
 	itm.Generation.price = true; // Флаг "генерить цену"
 	itm.Generation.dmg_min.min = 12.0;
 	itm.Generation.dmg_min.max = 15.0;
@@ -2232,11 +2104,6 @@ int InitItems()
 	itm.picIndex = 13;
 	itm.picTexture = "ITEMS_3";
 	// boal 19.01.2004 -->
-	itm.price = 1000;
-	itm.Weight = 9.0 + fRandSmall(0.5); // 8.5;
-	// boal 19.01.2004 <--
-	itm.dmg_min = 35.0 + rand(10); // 25.0;
-	itm.dmg_max = 100.0 + rand(10); // 93.0;
 	itm.piercing = 65;
 	itm.special.valueT = 10; //Травмы
 	itm.special.valueSS = 15; //Резкий удар
@@ -2251,7 +2118,6 @@ int InitItems()
 	itm.ItemType = "WEAPON";
 	itm.quality = "excellent";
 	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
 	itm.Generation.price = true; // Флаг "генерить цену"
 	itm.Generation.dmg_min.min = 35.0;
 	itm.Generation.dmg_min.max = 45.0;
@@ -2272,11 +2138,6 @@ int InitItems()
 	itm.picIndex = 14;
 	itm.picTexture = "ITEMS_3";
 	// boal 19.01.2004 -->
-	itm.price = 1100;
-	itm.Weight = 8.5 + fRandSmall(1.5); // 10.5;
-	// boal 19.01.2004 <--
-	itm.dmg_min = 25.0 + rand(7); // 26.0;
-	itm.dmg_max = 70.0 + rand(20); // 100.0;
 	itm.piercing = 75;
 	itm.special.valueT = 10; //Травмы
 	itm.special.valueCB = 5; //Пролом кирасы
@@ -2291,7 +2152,6 @@ int InitItems()
 	itm.ItemType = "WEAPON";
 	itm.quality = "good";
 	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
 	itm.Generation.price = true; // Флаг "генерить цену"
 	itm.Generation.dmg_min.min = 25.0;
 	itm.Generation.dmg_min.max = 32.0;
@@ -2312,11 +2172,6 @@ int InitItems()
 	itm.picIndex = 9;
 	itm.picTexture = "ITEMS_10";
 	// boal 19.01.2004 -->
-	itm.price = 1300;
-	itm.Weight = 9.0 + fRandSmall(0.5); // 9;
-	// boal 19.01.2004 <--
-	itm.dmg_min = 35.0 + rand(10); // 27.0;
-	itm.dmg_max = 100.0 + rand(10); // 95.0;
 	itm.piercing = 70.0;
 	itm.special.valueT = 5; //Травмы
 	itm.special.valueCB = 15; //Пролом кирасы
@@ -2331,7 +2186,6 @@ int InitItems()
 	itm.ItemType = "WEAPON";
 	itm.quality = "excellent";
 	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
 	itm.Generation.price = true; // Флаг "генерить цену"
 	itm.Generation.dmg_min.min = 35.0;
 	itm.Generation.dmg_min.max = 45.0;
@@ -2352,11 +2206,6 @@ int InitItems()
 	itm.picIndex = 16;
 	itm.picTexture = "ITEMS_10";
 	// boal 19.01.2004 -->
-	itm.price = 3000;
-	itm.Weight = 9.4 + fRandSmall(0.3); // 9.3;
-	// boal 19.01.2004 <--
-	itm.dmg_min = 40.0 + rand(10); // 28.0;
-	itm.dmg_max = 90.0 + rand(10); // 100.0;
 	itm.piercing = 85.0;
 	itm.special.valueT = 15; //Травмы
 	itm.special.valueCB = 10; //Пролом кирасы
@@ -2371,7 +2220,6 @@ int InitItems()
 	itm.ItemType = "WEAPON";
 	itm.quality = "excellent";
 	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
 	itm.Generation.price = true; // Флаг "генерить цену"
 	itm.Generation.dmg_min.min = 40.0;
 	itm.Generation.dmg_min.max = 50.0;
@@ -2391,10 +2239,6 @@ int InitItems()
 	itm.model = "blade202";
 	itm.picIndex = 3;
 	itm.picTexture = "ITEMS_19";
-	itm.price = 3000;
-	itm.Weight = 9.4 + fRandSmall(0.3); // 9.3;
-	itm.dmg_min = 28.0 + rand(7); // 28.0;
-	itm.dmg_max = 90.0 + rand(10); // 100.0;
 	itm.piercing = 85.0;
 	itm.special.valueBB = 7; //Пролом блока
 	itm.special.valueSS = 6; //Резкий удар
@@ -2408,7 +2252,6 @@ int InitItems()
 	itm.FencingType = "FencingHeavy";
 	itm.ItemType = "WEAPON";
 	itm.quality = "good";
-	itm.Generation.qty = 5;
 	itm.Generation.price = true; // Флаг "генерить цену"
 	itm.Generation.dmg_min.min = 28.0;
 	itm.Generation.dmg_min.max = 35.0;
@@ -2429,11 +2272,6 @@ int InitItems()
 	itm.picIndex = 1;
 	itm.picTexture = "ITEMS_18";
 	// boal 19.01.2004 -->
-	itm.price = 3000;
-	itm.Weight = 10.0 + fRandSmall(1.0);
-	// boal 19.01.2004 <--
-	itm.dmg_min = 35.0 + rand(5);
-	itm.dmg_max = 85.0 + rand(5);
 	itm.piercing = 85.0;
 	itm.special.valueCrB = 10; //Буст крита
 	itm.special.valueT = 10; //Травмы
@@ -2447,7 +2285,6 @@ int InitItems()
 	itm.ItemType = "WEAPON";
 	itm.quality = "good";
 	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
 	itm.Generation.price = true; // Флаг "генерить цену"
 	itm.Generation.dmg_min.min = 35.0;
 	itm.Generation.dmg_min.max = 40.0;
@@ -2467,7 +2304,7 @@ int InitItems()
 	itm.model = "blade43";
 	itm.picIndex = 2;
 	itm.picTexture = "ITEMS_18";
-	itm.price = 3000;
+	itm.price = 4000;
 	itm.Weight = 9.0;
 	itm.dmg_min = 44.0;
 	itm.dmg_max = 115.0;
@@ -2496,7 +2333,7 @@ int InitItems()
 	itm.model = "blade44";
 	itm.picIndex = 3;
 	itm.picTexture = "ITEMS_18";
-	itm.price = 3000;
+	itm.price = 4400;
 	itm.Weight = 9.6;
 	itm.dmg_min = 48.0;
 	itm.dmg_max = 125.0;
@@ -2526,11 +2363,6 @@ int InitItems()
 	itm.picIndex = 7;
 	itm.picTexture = "ITEMS_10";
 	// boal 19.01.2004 -->
-	itm.price = 3500;
-	itm.Weight = 12.5 + fRandSmall(1.5); // 12.5;
-	// boal 19.01.2004 <--
-	itm.dmg_min = 32.0 + rand(8); // 35.0;
-	itm.dmg_max = 100.0 + rand(15); // 120.0;
 	itm.piercing = 95.0;
 	itm.special.valueT = 5; //Травмы
 	itm.special.valueCB = 15; //Пролом кирасы
@@ -2544,7 +2376,6 @@ int InitItems()
 	itm.ItemType = "WEAPON";
 	itm.quality = "good";
 	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
 	itm.Generation.price = true; // Флаг "генерить цену"
 	itm.Generation.dmg_min.min = 32.0;
 	itm.Generation.dmg_min.max = 40.0;
@@ -2565,11 +2396,6 @@ int InitItems()
 	itm.picIndex = 12;
 	itm.picTexture = "ITEMS_13";
 	// boal 19.01.2004 -->
-	itm.price = 17500;
-	itm.Weight = 12.5 + fRandSmall(1.5); // 15.0;
-	// boal 19.01.2004 <--
-	itm.dmg_min = 32.0 + rand(8); // 45.0;
-	itm.dmg_max = 100.0 + rand(15); // 140.0;
 	itm.piercing = 95.0;
 	itm.special.valueT = 6; //Травмы
 	itm.special.valueCrB = 6; //Буст крита
@@ -2584,7 +2410,6 @@ int InitItems()
 	itm.ItemType = "WEAPON";
 	itm.quality = "good";
 	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
 	itm.Generation.price = true; // Флаг "генерить цену"
 	itm.Generation.dmg_min.min = 32.0;
 	itm.Generation.dmg_min.max = 40.0;
@@ -2594,7 +2419,133 @@ int InitItems()
 	itm.Generation.Weight.max = 14.0;
 	n++;
 
-	//GUNS
+	// ККС Макуауитль
+	makeref(itm,Items[n]);
+	itm.id = "topor_01";
+	itm.groupID = BLADE_ITEM_TYPE;
+	itm.name = "itmname_toporAZ";
+	itm.describe = "itmdescr_toporAZ";
+	itm.folder = "items";
+	itm.model = "topor_01";
+	itm.picIndex = 16;
+	itm.picTexture = "ITEMS_16";
+	// boal 19.01.2004 -->
+	itm.price = 3600;
+	itm.piercing = 105.0;
+	itm.special.valueSS = 15; //Резкий удар
+	itm.special.valueCrB = 5; //Буст крита
+	itm.special.valueT = 10; //Травмы
+	itm.minlevel = 1;
+	itm.rare = 0.0001;
+	itm.block = 40.0;
+	itm.param.time = 0.1;
+	itm.param.colorstart = argb(64, 64, 64, 64);
+	itm.param.colorend = argb(0, 32, 32, 32);
+	itm.FencingType = "FencingHeavy";
+	itm.ItemType = "WEAPON";
+	itm.quality = "excellent";
+	// Warship 08.05.09 - Новая система предметов, параметры для генерации
+	itm.Generation.dmg_min.min = 50.0;
+	itm.Generation.dmg_min.max = 60.0;
+	itm.Generation.dmg_max.min = 120.0;
+	itm.Generation.dmg_max.max = 130.0;
+	itm.Generation.Weight.min = 12.0;
+	itm.Generation.Weight.max = 14.5;
+	n++;
+
+	// Топор Викинга
+	makeref(itm,Items[n]);
+	itm.id = "topor_viking";
+	itm.groupID = BLADE_ITEM_TYPE;
+	itm.name = "itmname_topor_viking";
+	itm.describe = "itmdescr_topor_viking";
+	itm.folder = "items";
+	itm.model = "topor_viking";
+	itm.picIndex = 11;
+	itm.picTexture = "ITEMS_14";
+	itm.price = 4900;
+	itm.Weight = 12.0;
+	itm.dmg_min = 60.0;
+	itm.dmg_max = 140.0;
+	itm.piercing = 110.0;
+	itm.special.valueT = 5; //Травмы
+	itm.special.valueStS = 5; //Стан
+	itm.special.valueCB = 20; //Пролом кирасы
+	itm.minlevel = 99;
+	itm.rare = 0.0001;
+	itm.block = 40.0;
+	itm.param.time = 0.1;
+	itm.param.colorstart = argb(64, 64, 64, 64);
+	itm.param.colorend = argb(0, 32, 32, 32);
+	itm.FencingType = "FencingHeavy";
+	itm.ItemType = "WEAPON";
+	itm.quality = "excellent";
+	n++;
+
+	// Дадао
+	makeref(itm,Items[n]);
+	itm.id = "blade_china";
+	itm.groupID = BLADE_ITEM_TYPE;
+	itm.name = "itmname_blade_china";
+	itm.describe = "itmdescr_blade_china";
+	itm.folder = "items";
+	itm.model = "blade_china";
+	itm.picIndex = 13;
+	itm.picTexture = "ITEMS_14";
+	itm.price = 4200;
+	itm.Weight = 10.0;
+	itm.dmg_min = 50.0;
+	itm.dmg_max = 120.0;
+	itm.piercing = 100;
+	itm.special.valueT = 10; //Травмы
+	itm.special.valueSS = 5; //Резкий удар
+	itm.special.valueBB = 15; //Пролом блока
+	itm.minlevel = 1;
+	itm.rare = 0.1;
+	itm.block = 60;
+	itm.param.time = 0.1;
+	itm.param.colorstart = argb(64, 64, 64, 64);
+	itm.param.colorend = argb(0, 32, 32, 32);
+    itm.FencingType = "FencingHeavy";
+    itm.ItemType = "WEAPON";
+	itm.quality = "excellent";
+	n++;
+
+	//Императорский топор
+    makeref(itm,Items[n]);
+	itm.id = "topor_emperor";  //Топор
+	itm.groupID = BLADE_ITEM_TYPE;
+	itm.name = "itmname_topor_emperor";
+	itm.describe = "itmdescr_topor_emperor";
+	itm.folder = "items";
+	itm.model = "topor_emperor";
+	itm.picIndex = 14;
+	itm.picTexture = "ITEMS_14";
+	itm.piercing = 100.0;
+	itm.special.valueT = 5; //Травмы
+	itm.special.valueStS = 10; //Стан
+	itm.special.valueCB = 15; //Пролом кирасы
+	itm.minlevel = 1;
+	itm.rare = 0.0001;
+	itm.block = 30.0;
+	itm.param.time = 0.1;
+	itm.param.colorstart = argb(64, 64, 64, 64);
+	itm.param.colorend = argb(0, 32, 32, 32);
+	itm.FencingType = "FencingHeavy";
+	itm.ItemType = "WEAPON";
+	itm.quality = "excellent";
+	itm.Generation.price = true; // Флаг "генерить цену"
+	itm.Generation.dmg_min.min = 40.0;
+	itm.Generation.dmg_min.max = 50.0;
+	itm.Generation.dmg_max.min = 80.0;
+	itm.Generation.dmg_max.max = 90.0;
+	itm.Generation.Weight.min = 9.0;
+	itm.Generation.Weight.max = 11.0;
+	n++;
+
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//													ОГНЕСТРЕЛЬНОЕ ОРУЖИЕ
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	makeref(itm,Items[n]);
 	itm.id = "pistol1";	//Пистоль
@@ -7769,282 +7720,6 @@ int InitItems()
 	itm.minlevel = 1;
 	itm.rare = 0.001;
 	n++;
-
-	// ККС Нааб-те
-	makeref(itm,Items[n]);
-	itm.id = "blade_01";
-	itm.groupID = BLADE_ITEM_TYPE;
-	itm.name = "itmname_blade_01";
-	itm.describe = "itmdescr_blade_01";
-	itm.folder = "items";
-	itm.model = "blade_01";
-	itm.picIndex = 13;
-	itm.picTexture = "ITEMS_16";
-	// boal 19.01.2004 -->
-	itm.price = 300;
-	itm.Weight = 2.0 + fRandSmall(1.0); // 1;
-	// boal 19.01.2004 <--
-	itm.dmg_min = 4.0 + Rand(2); // 7.0;
-	itm.dmg_max = 33.0 + Rand(5); // 15.0;
-	itm.piercing = 25;
-	itm.special.valueP = 5; 	//Отравление
-	itm.minlevel = 0;
-	itm.rare = 0.1;
-	itm.block = 45;
-	itm.param.time = 0.1;
-	itm.param.colorstart = argb(64, 64, 64, 64);
-	itm.param.colorend = argb(0, 32, 32, 32);
-	itm.FencingType = "FencingLight";
-	itm.ItemType = "WEAPON";
-	itm.quality = "poor";
-	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
-	// Флаг "генерить цену"
-	itm.Generation.dmg_min.min = 4.0;
-	itm.Generation.dmg_min.max = 6.0;
-	itm.Generation.dmg_max.min = 33.0;
-	itm.Generation.dmg_max.max = 38.0;
-	itm.Generation.Weight.min = 2.0;
-	itm.Generation.Weight.max = 3.0;
-    n++;
-
-	// ККС Тлакоман
-	makeref(itm,Items[n]);
-	itm.id = "blade_02";
-	itm.groupID = BLADE_ITEM_TYPE;
-	itm.name = "itmname_blade_02";
-	itm.describe = "itmdescr_blade_02";
-	itm.folder = "items";
-	itm.model = "blade_02";
-	itm.picIndex = 14;
-	itm.picTexture = "ITEMS_16";
-	// boal 19.01.2004 -->
-	itm.price = 300;
-	itm.Weight = 2.5 + fRandSmall(1.0); // 1;
-	// boal 19.01.2004 <--
-	itm.dmg_min = 6.0 + Rand(4); // 7.0;
-	itm.dmg_max = 40.0 + Rand(5); // 15.0;
-	itm.piercing = 25;
-	itm.special.valueP = 5; 	//Отравление
-	itm.minlevel = 0;
-	itm.rare = 0.1;
-	itm.block = 45;
-	itm.param.time = 0.1;
-	itm.param.colorstart = argb(64, 64, 64, 64);
-	itm.param.colorend = argb(0, 32, 32, 32);
-	itm.FencingType = "Fencing";
-	itm.ItemType = "WEAPON";
-	itm.quality = "poor";
-	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
-	// Флаг "генерить цену"
-	itm.Generation.dmg_min.min = 6.0;
-	itm.Generation.dmg_min.max = 10.0;
-	itm.Generation.dmg_max.min = 40.0;
-	itm.Generation.dmg_max.max = 45.0;
-	itm.Generation.Weight.min = 2.5;
-	itm.Generation.Weight.max = 3.5;
-    n++;
-
-	// ККС Томагавк
-	makeref(itm,Items[n]);
-	itm.id = "topor_05";
-	itm.groupID = BLADE_ITEM_TYPE;
-	itm.name = "itmname_topor_05";
-	itm.describe = "itmdescr_topor_05";
-	itm.folder = "items";
-	itm.model = "topor_05";
-	itm.picIndex = 15;
-	itm.picTexture = "ITEMS_16";
-	// boal 19.01.2004 -->
-	itm.price = 150;
-	itm.Weight = 4.5 + fRandSmall(1.5); // 6;
-	// boal 19.01.2004 <--
-	itm.dmg_min = 14.0 + rand(5); // 10.0;
-	itm.dmg_max = 50.0 + rand(5); // 60.0;
-	itm.piercing = 24.0;
-	itm.special.valueCB = 6; //Пролом кирасы
-	itm.minlevel = 1;
-	itm.rare = 0.01;
-	itm.block = 12;
-	itm.param.time = 0.1;
-	itm.param.colorstart = argb(64, 64, 64, 64);
-	itm.param.colorend = argb(0, 32, 32, 32);
-	itm.FencingType = "Fencing";
-	itm.ItemType = "WEAPON";
-	itm.quality = "ordinary";
-	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
-	itm.Generation.dmg_min.min = 14.0;
-	itm.Generation.dmg_min.max = 19.0;
-	itm.Generation.dmg_max.min = 50.0;
-	itm.Generation.dmg_max.max = 55.0;
-	itm.Generation.Weight.min = 4.5;
-	itm.Generation.Weight.max = 6.0;
-	n++;
-
-	// ККС Макуауитль
-	makeref(itm,Items[n]);
-	itm.id = "topor_01";
-	itm.groupID = BLADE_ITEM_TYPE;
-	itm.name = "itmname_toporAZ";
-	itm.describe = "itmdescr_toporAZ";
-	itm.folder = "items";
-	itm.model = "topor_01";
-	itm.picIndex = 16;
-	itm.picTexture = "ITEMS_16";
-	// boal 19.01.2004 -->
-	itm.price = 17500;
-	itm.Weight = 12.0 + fRandSmall(2.5); // 15.0;
-	// boal 19.01.2004 <--
-	itm.dmg_min = 50.0 + rand(10); // 45.0;
-	itm.dmg_max = 120.0 + rand(10); // 140.0;
-	itm.piercing = 105.0;
-	itm.special.valueSS = 15; //Резкий удар
-	itm.special.valueCrB = 5; //Буст крита
-	itm.special.valueT = 10; //Травмы
-	itm.minlevel = 1;
-	itm.rare = 0.0001;
-	itm.block = 40.0;
-	itm.param.time = 0.1;
-	itm.param.colorstart = argb(64, 64, 64, 64);
-	itm.param.colorend = argb(0, 32, 32, 32);
-	itm.FencingType = "FencingHeavy";
-	itm.ItemType = "WEAPON";
-	itm.quality = "excellent";
-	// Warship 08.05.09 - Новая система предметов, параметры для генерации
-	itm.Generation.qty = 5;
-	itm.Generation.dmg_min.min = 50.0;
-	itm.Generation.dmg_min.max = 60.0;
-	itm.Generation.dmg_max.min = 120.0;
-	itm.Generation.dmg_max.max = 130.0;
-	itm.Generation.Weight.min = 12.0;
-	itm.Generation.Weight.max = 14.5;
-	n++;
-
-	// Топор Викинга
-	makeref(itm,Items[n]);
-	itm.id = "topor_viking";
-	itm.groupID = BLADE_ITEM_TYPE;
-	itm.name = "itmname_topor_viking";
-	itm.describe = "itmdescr_topor_viking";
-	itm.folder = "items";
-	itm.model = "topor_viking";
-	itm.picIndex = 11;
-	itm.picTexture = "ITEMS_14";
-	itm.price = 17500;
-	itm.Weight = 12.0;
-	itm.dmg_min = 60.0;
-	itm.dmg_max = 140.0;
-	itm.piercing = 110.0;
-	itm.special.valueT = 5; //Травмы
-	itm.special.valueStS = 5; //Стан
-	itm.special.valueCB = 20; //Пролом кирасы
-	itm.minlevel = 99;
-	itm.rare = 0.0001;
-	itm.block = 40.0;
-	itm.param.time = 0.1;
-	itm.param.colorstart = argb(64, 64, 64, 64);
-	itm.param.colorend = argb(0, 32, 32, 32);
-	itm.FencingType = "FencingHeavy";
-	itm.ItemType = "WEAPON";
-	itm.quality = "excellent";
-	n++;
-
-	// Клинок Виспер
-	makeref(itm,Items[n]);
-	itm.id = "blade_whisper";
-	itm.groupID = BLADE_ITEM_TYPE;
-	itm.name = "itmname_blade_whisper";
-	itm.describe = "itmdescr_blade_whisper";
-	itm.folder = "items";
-	itm.model = "blade_whisper";
-	itm.picIndex = 12;
-	itm.picTexture = "ITEMS_14";
-	itm.price = 10000;
-	itm.Weight = 2.7;
-	itm.dmg_min = 20.0;
-	itm.dmg_max = 72.0;
-	itm.piercing = 100;
-	itm.special.valueStS = 12; //Стан
-	itm.special.valueSS = 6; //Резкий удар
-	//itm.special.valueBB = 15; //Пролом блока
-	itm.minlevel = 1;
-	itm.rare = 0.0001;
-	itm.block = 95;
-	itm.param.time = 0.1;
-	itm.param.colorstart = argb(64, 64, 64, 64);
-	itm.param.colorend = argb(0, 32, 32, 32);
-	itm.FencingType = "FencingLight";
-	itm.ItemType = "WEAPON";
-	itm.quality = "excellent";
-	n++;
-
-	// Дадао
-	makeref(itm,Items[n]);
-	itm.id = "blade_china";
-	itm.groupID = BLADE_ITEM_TYPE;
-	itm.name = "itmname_blade_china";
-	itm.describe = "itmdescr_blade_china";
-	itm.folder = "items";
-	itm.model = "blade_china";
-	itm.picIndex = 13;
-	itm.picTexture = "ITEMS_14";
-	itm.price = 400;
-	itm.Weight = 10.0;
-	itm.dmg_min = 50.0;
-	itm.dmg_max = 120.0;
-	itm.piercing = 100;
-	itm.special.valueT = 10; //Травмы
-	itm.special.valueSS = 5; //Резкий удар
-	itm.special.valueBB = 15; //Пролом блока
-	itm.minlevel = 1;
-	itm.rare = 0.1;
-	itm.block = 60;
-	itm.param.time = 0.1;
-	itm.param.colorstart = argb(64, 64, 64, 64);
-	itm.param.colorend = argb(0, 32, 32, 32);
-    itm.FencingType = "FencingHeavy";
-    itm.ItemType = "WEAPON";
-	itm.quality = "excellent";
-	n++;
-
-	//Императорский топор
-    makeref(itm,Items[n]);
-	itm.id = "topor_emperor";  //Топор
-	itm.groupID = BLADE_ITEM_TYPE;
-	itm.name = "itmname_topor_emperor";
-	itm.describe = "itmdescr_topor_emperor";
-	itm.folder = "items";
-	itm.model = "topor_emperor";
-	itm.picIndex = 14;
-	itm.picTexture = "ITEMS_14";
-	itm.price = 100000;
-	itm.Weight = 9.0 + fRandSmall(2.0);
-	itm.dmg_min = 40.0 + rand(10);
-	itm.dmg_max = 80.0+ rand(10);
-	itm.piercing = 100.0;
-	itm.special.valueT = 5; //Травмы
-	itm.special.valueStS = 10; //Стан
-	itm.special.valueCB = 15; //Пролом кирасы
-	itm.minlevel = 1;
-	itm.rare = 0.0001;
-	itm.block = 30.0;
-	itm.param.time = 0.1;
-	itm.param.colorstart = argb(64, 64, 64, 64);
-	itm.param.colorend = argb(0, 32, 32, 32);
-	itm.FencingType = "FencingHeavy";
-	itm.ItemType = "WEAPON";
-	itm.quality = "excellent";
-	itm.Generation.qty = 5;
-	itm.Generation.price = true; // Флаг "генерить цену"
-	itm.Generation.dmg_min.min = 40.0;
-	itm.Generation.dmg_min.max = 50.0;
-	itm.Generation.dmg_max.min = 80.0;
-	itm.Generation.dmg_max.max = 90.0;
-	itm.Generation.Weight.min = 9.0;
-	itm.Generation.Weight.max = 11.0;
-	n++;
 	/////////////////////////////////////////////////////////
 	/////		-->		CSP Книги 56 штук				/////
 	/////////////////////////////////////////////////////////
@@ -9494,6 +9169,8 @@ int InitItems()
 	InitGunExt(		"mushket6", "t2", 	              "GunEchin",               "", 115.0, 180.0,  65.0, 115.0, 20.0, 20.0, 1, 1, 1, 0, 0, 1,  60,  45, 0);
 	InitGunExt(		"mushket_seadevil", "t1","shotgun_cartridge", 				"", 200.0, 375.0, 200.0, 375.0,  0.0,  0.0, 1, 0, 0, 2, 0, 0, 100,  65, 1);
 
+	FillGenerableItemsDefaults(n);
+
 	trace("Всего предметов (размерность массива) "+n);
 	trace("Всего заскриптованных предметов - " + iScriptItemCount);
 	trace("Начальный специальный предмет: " + Items[ItemsForLocators_start].id);
@@ -9543,44 +9220,39 @@ void InitGunExt(string id,
 	if(Stun_NC || Stun_C) gun.stun = true;
 }
 
-// Warship 24.10.08 ГПК 1.2.3 Рандом статов холодного оружия
-// Рудмент - нигде не используется
-void SetRandomBladesStates()
+void FillGenerableItemsDefaults(int itemsQ)
 {
-	/*int iDamageMin, iDamageMax;
-	ref rItem;
+	// Рандомим дефолтные характеристики для сабель для того чтобы уменьшить необходимые изменения.
+	// TODO: убрать и сделать все предметы рандомными.
 
-	for(int i=0; i<ITEMS_QUANTITY; i++)
+	int minValue, maxValue;
+	ref item;
+
+	for (int i = 0; i < itemsQ; i++)
 	{
-		rItem = &items[i];
-
-		if(GetAttrValue(rItem, "groupID") == BLADE_ITEM_TYPE) // Значит холодное оружие
+		if (IsGenerableItemIndex(i))
 		{
-			// Новые значения
-			iDamageMin = sti(rItem.dmg_min) - rand(MakeInt(sti(rItem.dmg_min)/3)) + rand(MakeInt(sti(rItem.dmg_min)/3));
-			iDamageMax = sti(rItem.dmg_max) - rand(MakeInt(sti(rItem.dmg_max)/2)) + rand(MakeInt(sti(rItem.dmg_max)/2));
+			makeref(item, Items[i]);
 
-			// Запомним прежние
-			rItem.dmg_min.old = rItem.dmg_min;
-			rItem.dmg_max.old = rItem.dmg_max;
+			// Минимальный урон
+			minValue = sti(item.Generation.dmg_min.min) * GEN_ITEM_DISCRET; // Нижняя граница атрибута
+			maxValue = sti(item.Generation.dmg_min.max) * GEN_ITEM_DISCRET; // Верхняя граница атрибута
+			item.dmg_min = stf(minValue + rand(maxValue - minValue)) / GEN_ITEM_DISCRET;
 
-			rItem.dmg_min = iDamageMin;
-			rItem.dmg_max = iDamageMax;
+			// Максимальный урон
+			minValue = sti(item.Generation.dmg_max.min) * GEN_ITEM_DISCRET; // Нижняя граница атрибута
+			maxValue = sti(item.Generation.dmg_max.max) * GEN_ITEM_DISCRET; // Верхняя граница атрибута
+			item.dmg_max = stf(minValue + rand(maxValue - minValue)) / GEN_ITEM_DISCRET;
+
+			// Вес
+			minValue = sti(item.Generation.Weight.min) * GEN_ITEM_DISCRET; // Нижняя граница атрибута
+			maxValue = sti(item.Generation.Weight.max) * GEN_ITEM_DISCRET; // Верхняя граница атрибута
+			item.weight = stf(minValue + rand(maxValue - minValue)) / GEN_ITEM_DISCRET;
+
+			item.price = CalculateBladePrice(item.FencingType,
+				stf(item.dmg_min), stf(item.dmg_max), stf(item.weight));
 		}
-	}*/
-}
-
-void InitButtons()
-{
-	/*aref lab3;
-	makearef(lab3, Locations[FindLocation("Labirint_3")]);
-
-	lab3.items.b_1.locator = "button01";
-	lab3.items.b_1.model   = "b1";
-	lab3.items.b_1.itemDeltaY  = 0.0;
-	lab3.items.b_1.deltaY  = -0.05;
-	lab3.items.b_1.trigged  = false;
-	*/
+	}
 }
 
 void InitRandItems()

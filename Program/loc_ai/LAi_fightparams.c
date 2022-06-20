@@ -688,7 +688,7 @@ void LAi_ApplyCharacterAttackDamage(aref attack, aref enemy, string attackType, 
 	if (IsCharacterPerkOn(attack, "CriticalHit")) critchance += 5;
 	if (IsCharacterPerkOn(attack, "Fencer")) critchance += 5;
 	if (attackType == "feint" && IsCharacterPerkOn(attack, "Agent")) critchance += 33;
-	if(critchance >= 0)
+	if(critchance > 0)
 	{
 		critchance += GetCharacterSPECIALSimple(attack, SPECIAL_L);
 		critchance += valueCrB;//доп крит

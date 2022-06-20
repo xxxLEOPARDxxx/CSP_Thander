@@ -225,12 +225,13 @@ int Reload(aref reload_group, string locator_name, string current_location)
 	{
 		if(!CheckAttribute(mc, "todeck"))
 		{
-			SendMessage(&reload_fader, "ls",FADER_PICTURE0,"loading\seaStand_" + rand(13) + ".tga");
+			pchar.loadscreen = "loading\seaStand_" + rand(13) + ".tga";
 		}
 		else
 		{
-			SendMessage(&reload_fader, "ls",FADER_PICTURE0,"loading\cabine.tga");
+			pchar.loadscreen = "loading\cabine.tga";
 		}
+		SendMessage(&reload_fader, "ls", FADER_PICTURE0, pchar.loadscreen);
 	}
 	else
 	{
@@ -244,14 +245,14 @@ int Reload(aref reload_group, string locator_name, string current_location)
 				{
 				    //Boyer add #20170401-02
                     pchar.loadscreen = "loading\rescue.tga";
-					SendMessage(&reload_fader, "ls",FADER_PICTURE0,"loading\rescue.tga");
 					sGlobalTemp = "";
 				}
-				else {
+				else
+				{
                     //Boyer add #20170401-02
                     pchar.loadscreen = Locations[loc_pict_index].image;
-					SendMessage(&reload_fader, "ls", FADER_PICTURE0, Locations[loc_pict_index].image);
 				}
+				SendMessage(&reload_fader, "ls", FADER_PICTURE0, pchar.loadscreen);
 			}
 		}
 	}

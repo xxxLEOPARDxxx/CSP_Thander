@@ -278,7 +278,7 @@ int CreateStoryCharacters(int n)
 	n = n + 1;
 
 	makeref(ch,Characters[n]);			// Билетёр :)
-	ch.id		= "ArenaBileter";
+	ch.id = "ArenaBileter";
 	ch.model	= "trader_9";
 	ch.sex 		= "man";
 	ch.City 	= "";
@@ -299,6 +299,33 @@ int CreateStoryCharacters(int n)
 	LAi_RemoveLoginTime(ch);
 	LAi_group_MoveCharacter(ch, "FENCING_TOWN_CITIZENS");
 	LAi_SetImmortal(ch, true);
+	n = n + 1;
+
+    makeref(ch,Characters[n]);
+	ch.name = "Уицилопочтли";
+	ch.lastname = "";
+	ch.id = "Uicilopochtli";
+	ch.model = "Uchilopochi";
+	ch.sex = "skeleton";
+	ch.location	= "none";
+	ch.location.group = "";
+	ch.location.locator = "";
+	ch.Dialog.Filename = "Quest\Mictlantecuhtli.c";
+	ch.Dialog.CurrentNode = "Uicilopochtli_F_0";
+	ch.nation = PIRATE;
+	GiveItem2Character(ch, "topor_01");
+	ch.equip.gun = "topor_01";
+	GiveItem2Character(ch, "pistol7");
+	ch.equip.blade = "pistol7";
+    ch.rank = 300;
+	SetSPECIAL(ch, 10,10,10,10,10,10,10);
+    SetSelfSkill(ch, 100, 100, 100, 100, 100);
+    SetShipSkill(ch, 100, 100, 100, 100, 100, 100, 100, 100, 100);
+	ch.money = "666";
+	LAi_SetImmortal(ch, true);
+	LAi_SetActorType(ch);
+	LAi_SetLoginTime(ch, 0.0, 24.0);
+	LAi_group_MoveCharacter(ch, "AztecCitizenGroup");
 	n = n + 1;
 
 	return n;
