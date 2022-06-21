@@ -1020,6 +1020,10 @@ void QuestComplete(string sQuestName, string qname)
                 RefreshBattleInterface();
             }
 		break;
+
+        case "pir_flag_rise":
+			Flag_Change(PIRATE);
+		break;
 		// агенты в тавернах -->
         case "any_patent_take":
             AddMoneyToCharacter(pchar, -sti(pchar.PatentPrice));
@@ -1032,6 +1036,23 @@ void QuestComplete(string sQuestName, string qname)
             Items[sti(pchar.EquipedPatentId)].TitulCur = 1; // текущ звание сбросим
         	Items[sti(pchar.EquipedPatentId)].TitulCurNext = 0; // счетчик звание сбросим
 		break;
+
+        case "fra_flag_rise":
+            Flag_Change(FRANCE);
+        break;
+
+        case "eng_flag_rise":
+            Flag_Change(ENGLAND);
+        break;
+
+        case "spa_flag_rise":
+            Flag_Change(SPAIN);
+        break;
+
+        case "hol_flag_rise":
+            Flag_Change(HOLLAND);
+        break;
+
         case "QuestAboardCabinDialog":  // диалог в абордаже, в каюте при достижении минНР
 			sld = &Characters[sti(pchar.GenQuest.QuestAboardCabinDialogIdx)]; // фантом, тень отца капитана
 			LAi_SetActorType(pchar);
