@@ -154,7 +154,7 @@ void ProcessDialogEvent()
 			Log_info("Получены чертежи от Альбрехта Цальпфера.");
 			PlaySound("Interface\important_item.wav");
 			GiveItem2Character(PChar, "Ship_Print_6");
-			AddCharacterSkill(pchar, "Repair", 1);
+			AddCharacterSkillDontClearExp(pchar, "Repair", 1);
 			Log_SetStringToLog("Починка + 1");
 			ChangeCharacterReputation(pchar, 3);
 			LAi_SetCitizenType(npchar);

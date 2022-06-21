@@ -201,7 +201,7 @@ void ProcessDialogEvent()
 		case "Prines_Rom_2":
 			ChangeCharacterNationReputation(pchar, FRANCE, 5);
 			TakeItemFromCharacter(pchar, "PDM_PJ_Rom");
-			dialog.text = "Хорошая шутка, "+ GetSexPhrase("месье","мадмуазэль") +". И большое вам спасибо за ром. Вы "+ GetSexPhrase("простой и симпатичный джентльмен","простая и симпатичная девушка") +", не то, что эти заносчивые аристократы. Хотелось бы мне, чтобы у меня был такой командир.";
+			dialog.text = "Хорошая шутка, "+ GetSexPhrase("месье","мадмуазэль") +". И большое вам спасибо за ром. Вы "+ GetSexPhrase("сильный мужчина","симпатичная девушка") +" с добрым сердцем, не то, что эти заносчивые аристократы. Хотелось бы мне, чтобы у меня был такой командир.";
 			link.l1 = "Хорошо, солдат, вам лучше вернуться на пост. И помалкивайте насчёт рома, а не то моя шутка может оказаться слишком похожей на правду...";
 			link.l1.go = "Prines_Rom_3";
 		break;
@@ -216,7 +216,8 @@ void ProcessDialogEvent()
 			DialogExit();
 			CloseQuestHeader("PDM_Proklyataya_Jara");
 			AddQuestRecord("PDM_Proklyataya_Jara", "5");
-			AddCharacterExpToSkill(pchar, "Leadership", 100);
+			AddCharacterSkillDontClearExp(pchar, "Leadership", 1);
+			Log_SetStringToLog("Авторитет + 1");
 		break;
 
 	}

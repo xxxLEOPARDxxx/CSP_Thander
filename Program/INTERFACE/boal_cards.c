@@ -682,13 +682,15 @@ bool CheckGame()
 			zhuhlo = 33;
 			zhuhlo1 = 33
 		}
-        if (GetCharacterSkillToOld(pchar, SKILL_FORTUNE) < zhuhlo)
+		//if (GetCharacterSkillToOld(pchar, SKILL_FORTUNE) < zhuhlo)
+		if (GetCharacterSkillToOld(pchar, SKILL_FORTUNE) + makeint(isEquippedArtefactUse(pchar, "Joker", 0.0, 2.0)) < zhuhlo)
         {
             if (ok1 && (CountCardsN() + NextCardPack()) <= 21)
             {
                 ok1 = false;
             }
-            if (GetCharacterSkillToOld(pchar, SKILL_FORTUNE) < zhuhlo1 && CountCardsN() < 17 &&  (CountCardsN() + NextCardPack()) > 21)
+			//if (GetCharacterSkillToOld(pchar, SKILL_FORTUNE) < zhuhlo1 && CountCardsN() < 17 &&  (CountCardsN() + NextCardPack()) > 21)
+			if (GetCharacterSkillToOld(pchar, SKILL_FORTUNE) - makeint(isEquippedArtefactUse(pchar, "Joker", 0.0, 2.0)) < zhuhlo1 && CountCardsN() < 17 &&  (CountCardsN() + NextCardPack()) > 21)          
             {
                 ok1 = true;
             }
