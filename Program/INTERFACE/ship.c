@@ -400,10 +400,7 @@ void FillShipsScroll()
 				ref rBaseShip = GetRealShip(iShipType);
 				iShipType = rBaseShip.basetype;
                 //#20170430-03 Companion ships are appended with a "1"
-                if(strlen(rBaseShip.Name)>2)
-                    shipName = strcut(rBaseShip.Name, 0, strlen(rBaseShip.Name)-2);
-                else
-                    shipName = "";
+				shipName = rBaseShip.BaseName;
 				string shipClass = rBaseShip.Class;
 
 				GameInterface.SHIPS_SCROLL.(attributeName).character = cn;

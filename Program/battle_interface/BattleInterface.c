@@ -1652,8 +1652,9 @@ void SetShipPictureDataByShipTypeName(string sType)
 	case "frigatequeen":		BI_intNRetValue[0] = 10+8*32;	BI_intNRetValue[1] = 10+8*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Фрегат
 	case "Catherine":			BI_intNRetValue[0] = 12+8*32;	BI_intNRetValue[1] = 12+8*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Королева-Катрин
 	case "flyingdutchman":		BI_intNRetValue[0] = 14+8*32;	BI_intNRetValue[1] = 14+8*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Варшип
-	case "santisima":			BI_intNRetValue[0] = 16+8*32;	BI_intNRetValue[1] = 16+8*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Быстрый мановар
-	case "soleyru":				BI_intNRetValue[0] = 18+8*32;	BI_intNRetValue[1] = 18+8*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Сулей Руаяль
+	case "flyingdutchman_n":	BI_intNRetValue[0] = 16+8*32;	BI_intNRetValue[1] = 16+8*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Варшип
+	case "santisima":			BI_intNRetValue[0] = 18+8*32;	BI_intNRetValue[1] = 18+8*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Быстрый мановар
+	case "soleyru":				BI_intNRetValue[0] = 20+8*32;	BI_intNRetValue[1] = 20+8*32 + 1;	BI_intNRetValue[2] = BI_ICONS_TEXTURE_SHIP1;	break;	// Сулей Руаяль
 	}
 	BI_intNRetValue[3] = false;
 }
