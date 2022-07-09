@@ -70,72 +70,65 @@ bool Ship_AutoAbordage(ref rCharacter, float fMinEnemyDistance)
             { // победа
                 if (bIsEnemyCompanion)
 			    {
-			        Log_SetStringToLog("Наш корабль " + rEnemyCharacter.Ship.Name + " взят на абордаж ");
+			        Log_SetStringToLog("Наш корабль '" + rEnemyCharacter.Ship.Name + "' взят на абордаж");
 			    }
 			    else
 			    {
 			        iNation = sti(rEnemyCharacter.nation);
-					Log_SetStringToLog("Корабль " + rEnemyCharacter.Ship.Name + " под флагом " + NationNameGenitive(iNation) + " взят на абордаж ");
+					Log_SetStringToLog("Корабль '" + rEnemyCharacter.Ship.Name + "' под флагом " + NationNameGenitive(iNation) + " взят на абордаж");
 			    }
 			    deadCrew = sti(rCharacter.Ship.Crew.Quantity) * fEnCrewFencing / (fOurCrewFencing*1.8);
 				if (bIsCharCompanion) Statistic_AddValue(pchar, "Sailors_dead", deadCrew);
 				if (bIsEnemyCompanion) Statistic_AddValue(pchar, "Sailors_dead", sti(rEnemyCharacter.Ship.Crew.Quantity));
 			    SetCrewQuantity(rCharacter, makeint(sti(rCharacter.Ship.Crew.Quantity) - deadCrew));
+				SetCrewQuantity(rEnemyCharacter, 0);
 			    if (bIsCharCompanion)
 			    {
 			        RemoveCharacterGoodsSelf(rCharacter, GOOD_WEAPON, deadCrew);
-			    }
-				//navy-->
-				if (CheckChanceOfBetterShip(rCharacter, rEnemyCharacter))
-				{
-					SeaExchangeCharactersShips(rCharacter, rEnemyCharacter, true, true);
+					LAi_SetCurHP(rEnemyCharacter, 0.0);
+					LaunchRansackMain(rCharacter, rEnemyCharacter, "companion_captured");
 				}
-				DoTakeAbordageGoods(rCharacter, rEnemyCharacter);
-				//#20180126-01 rCharacter winner and was initiator
-				if (bIsCharCompanion) {
+				else
+				{
+					if (CheckChanceOfBetterShip(rCharacter, rEnemyCharacter))
+					{
+						SeaExchangeCharactersShips(rCharacter, rEnemyCharacter, true, true);
+					}
+					DoTakeAbordageGoods(rCharacter, rEnemyCharacter);
 					ShipDead(sti(rEnemyCharacter.index), KILL_BY_ABORDAGE, sti(rCharacter.index));
 				}
-			    else { //Change to consider group power
-                    //#20190706-01
-                   // PostBoardDecision(rCharacter, rCharIdx, rEnemyCharacter, rEnemyCharIdx, rCharCrew);
-                }
-				//navy <--
-			    //Ship_SetTaskRunaway(SECONDARY_TASK, sti(rCharacter.index), nMainCharacterIndex);// валим в сад  -1 не жрет, потому пусть от vv все бегут, даже свои - команды раздаст игрок.
             }
             else
             { // поражение
                 if (bIsCharCompanion)
 			    {
-			        Log_SetStringToLog("Наш корабль " + rCharacter.Ship.Name + " взят на абордаж ");
+			        Log_SetStringToLog("Наш корабль '" + rCharacter.Ship.Name + "' проиграл абордаж");
 			    }
 			    else
 			    {
 			        iNation = sti(rCharacter.nation);
-					Log_SetStringToLog("Корабль " + rCharacter.Ship.Name + " под флагом " + NationNameGenitive(iNation) + " взят на абордаж ");
+					Log_SetStringToLog("Корабль '" + rCharacter.Ship.Name + "' под флагом " + NationNameGenitive(iNation) + " проиграл абордаж");
 			    }
 			    deadCrew = sti(rEnemyCharacter.Ship.Crew.Quantity) * fOurCrewFencing/ (fEnCrewFencing*1.8);
 				if (bIsCharCompanion) Statistic_AddValue(pchar, "Sailors_dead", sti(rCharacter.Ship.Crew.Quantity));
 				if (bIsEnemyCompanion) Statistic_AddValue(pchar, "Sailors_dead", deadCrew);
 			    SetCrewQuantity(rEnemyCharacter, makeint(sti(rEnemyCharacter.Ship.Crew.Quantity) - deadCrew));
+				SetCrewQuantity(rCharacter, 0);
 			    if (bIsEnemyCompanion)
 			    {
 			        RemoveCharacterGoodsSelf(rEnemyCharacter, GOOD_WEAPON, deadCrew);
-			    }
-				//navy-->
-				if (CheckChanceOfBetterShip(rEnemyCharacter, rCharacter))
-				{
-					SeaExchangeCharactersShips(rEnemyCharacter, rCharacter, true, true);
+					LAi_SetCurHP(rCharacter, 0.0);
+					LaunchRansackMain(rEnemyCharacter, rCharacter, "companion_captured");
 				}
-				DoTakeAbordageGoods(rEnemyCharacter, rCharacter);
-				//#20180126-01 rEnemyCharacter winner, rChar was initiator
-				if (bIsEnemyCompanion) {
+				else
+				{
+					if (CheckChanceOfBetterShip(rEnemyCharacter, rCharacter))
+					{
+						SeaExchangeCharactersShips(rEnemyCharacter, rCharacter, true, true);
+					}
+					DoTakeAbordageGoods(rEnemyCharacter, rCharacter);
 					ShipDead(sti(rCharacter.index), KILL_BY_ABORDAGE, sti(rEnemyCharacter.index));
 				}
-			    else {
-                    //#20190706-01
-                    //PostBoardDecision(rEnemyCharacter, rEnemyCharIdx, rCharacter, rCharIdx, rEnemyCharCrew);
-                }
-				//navy <--
             }
 		}
 	}

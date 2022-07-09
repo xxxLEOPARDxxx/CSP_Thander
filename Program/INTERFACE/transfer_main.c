@@ -33,9 +33,9 @@ void InitInterface_RRS(string iniName, ref rLeftChar, ref rRightChar, string _ty
 
 	slastvideo1 = "";
 	slastvideo2 = "";
-	xi_refCharacter   = rRightChar;
-	refEnemyCharacter = rRightChar; // изначальный кэп
-	refCharacter = rLeftChar;
+	xi_refCharacter   = &Characters[sti(rRightChar.index)];
+	refEnemyCharacter = xi_refCharacter; // изначальный кэп
+	refCharacter = &Characters[sti(rLeftChar.index)];
 
 	if(refEnemyCharacter.id == "ShipWreck_BadPirate")
 	{
@@ -162,6 +162,20 @@ void InitInterface_RRS(string iniName, ref rLeftChar, ref rRightChar, string _ty
 	sMessageMode = "";
 	SetGoodsArrows();
 	trace("xi_refCharacter.id : " + xi_refCharacter.id);
+
+	if (_type == "companion_captured")
+	{
+		SetFormatedText("REMOVE_WINDOW_CAPTION", XI_ConvertString("Auto_Captured_Management_Caption"));
+		string sMessage =
+			XI_ConvertString("Auto_Captured_Management_Question_0") + refCharacter.Ship.Name +
+			XI_ConvertString("Auto_Captured_Management_Question_1") + refEnemyCharacter.Ship.Name +
+			XI_ConvertString("Auto_Captured_Management_Question_2");
+		SetFormatedText("REMOVE_WINDOW_TEXT", sMessage);
+		SetSelectable("REMOVE_ACCEPT_OFFICER", true);
+		sMessageMode = "AskEnterCompanionCapturedTransfer";
+		ShowShipChangeMenu();
+	}
+
 	// сообщение о захвате
 	if(!bTransferMode && !LAi_IsDead(xi_refCharacter) && _type != "MaryCelesteTransfer" && xi_refCharacter.Id != "ShipWreck_0" &&
 		xi_refCharacter.Id != "PiratesOnUninhabited_BadPirate" && !CheckAttribute(refCharacter,"GenQuest.ShipSituation")) //пленный
@@ -1662,6 +1676,16 @@ void GoToShipChange() // нажатие ОК на табличке ок-отме
 			{
 				IDoExit(RC_INTERFACE_RANSACK_MAIN_EXIT);
 			}
+		break;
+
+		case "AskEnterCompanionCapturedTransfer": // возможность автоматически распорядиться добычей компаньона
+			if (CheckChanceOfBetterShip(refCharacter, xi_refCharacter))
+			{
+				SeaExchangeCharactersShips(refCharacter, xi_refCharacter, true, true);
+			}
+			DoTakeAbordageGoods(refCharacter, xi_refCharacter);
+			ShipDead(sti(xi_refCharacter.index), KILL_BY_ABORDAGE, sti(refCharacter.index));
+			IDoExit(RC_INTERFACE_RANSACK_MAIN_EXIT);
 		break;
 	}
 }
