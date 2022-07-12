@@ -6,7 +6,7 @@ int LocationInitPuertoPrincipe(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "PuertoPrincipe_port";
 	locations[n].id.label = "PuertoPrincipe Port";
-	locations[n].image = "loading\outside\harbor_" + rand(14) + ".tga";
+	locations[n].image = "loading\jonny_load\shores\Shore01_Shore04.tga";
 	locations[n].worldmap = "PuertoPrincipe_port";
 	//Town sack
 	locations[n].townsack = "PuertoPrincipe";
@@ -63,7 +63,7 @@ int LocationInitPuertoPrincipe(int n)
 	locations[n].id = "PuertoPrincipe_ExitTown";
 	locations[n].fastreload = "PuertoPrincipe";
 	locations[n].id.label = "ExitTown";
-	locations[n].image = "loading\Gate_"+rand(1)+".tga";
+	locations[n].image = "loading\jonny_load\outside\smugglerLairExit.tga";
 	//Town sack
 	locations[n].townsack = "PuertoPrincipe";
 	//Sound
@@ -123,7 +123,7 @@ int LocationInitPuertoPrincipe(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "PuertoPrincipe_town";
 	locations[n].id.label = "Street";
-	locations[n].image = "loading\towns\pearl1.tga";
+	locations[n].image = "loading\jonny_load\outside\smugglerLairTown_(pirate_town).tga";
 	locations[n].worldmap = "PuertoPrincipe_town";
 	locations[n].citizens = true;
 	locations[n].soldiers = true;
@@ -213,7 +213,7 @@ int LocationInitPuertoPrincipe(int n)
  	locations[n].id = "PuertoPrincipe_tavern";
 	locations[n].id.label = "Tavern";
 	locations[n].filespath.models = "locations\inside\Tavern09\";
-	locations[n].image = "loading\inside\Tavern_"+rand(7)+".tga";
+	locations[n].image = "loading\jonny_load\inside\Tavern09.tga";
 	locations[n].habitues = 1;
 	//Town sack
 	locations[n].townsack = "PuertoPrincipe";
@@ -259,7 +259,7 @@ int LocationInitPuertoPrincipe(int n)
 	locations[n].id = "PuertoPrincipe_tavern_upstairs";
 	locations[n].filespath.models = "locations\inside\Tavern_room";
 	locations[n].id.label = "Tavern upstairs";
-	locations[n].image = "loading\inside\TavernCommon.tga";
+	locations[n].image = "loading\jonny_load\inside\Tavern_room.tga";
 	//Town sack
 	locations[n].townsack = "PuertoPrincipe";
 	locations[n].lockWeather = "Inside";
@@ -300,7 +300,7 @@ int LocationInitPuertoPrincipe(int n)
 	locations[n].id = "PuertoPrincipe_store";
 	locations[n].id.label = "Store";
 	locations[n].filespath.models = "locations\inside\Store01\";
-	locations[n].image = "loading\inside\shop_"+rand(3)+".tga";
+	locations[n].image = "loading\jonny_load\inside\StoreSmall.tga";
 	//Town sack
 	locations[n].townsack = "PuertoPrincipe";
 	locations[n].lockWeather = "Inside";
@@ -346,7 +346,7 @@ int LocationInitPuertoPrincipe(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "PuertoPrincipe_townhall";
 	locations[n].id.label = "Townhall";
-	locations[n].image = "loading\inside\smallresidence.tga";
+	locations[n].image = "loading\jonny_load\inside\smallresidence.tga";
 	//Town sack
 	locations[n].townsack = "PuertoPrincipe";
 	locations[n].lockWeather = "Inside";

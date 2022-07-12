@@ -14,7 +14,7 @@ int LocationInitPortoBello(int n)
 	locations[n].islandId = "Mein";
 
 	locations[n].filespath.models = "locations\Town_PortoBello\Town\";
-	locations[n].image = "loading\Town_"+rand(8)+".tga";
+	locations[n].image = "loading\jonny_load\city\Town_PortoBello.tga";
 	locations[n].citizens = true;
 	locations[n].soldiers = true;
 	locations[n].carrier = true;
@@ -238,7 +238,7 @@ int LocationInitPortoBello(int n)
 	locations[n].id = "PortoBello_tavern";
 	locations[n].id.label = "Tavern";
 	locations[n].filespath.models = "locations\inside\Tavern08\";
-	locations[n].image = "loading\inside\Tavern_"+rand(7)+".tga";
+	locations[n].image = "loading\jonny_load\inside\Tavern08.tga";
 	locations[n].habitues = 1;
 	//Town sack
 	locations[n].townsack = "PortoBello";
@@ -299,7 +299,7 @@ int LocationInitPortoBello(int n)
 	locations[n].id = "PortoBello_tavern_upstairs";
 	locations[n].id.label = "Tavern upstairs";
 	locations[n].filespath.models = "locations\inside\Tavern_room";
-	locations[n].image = "loading\inside\TavernCommon.tga";
+	locations[n].image = "loading\jonny_load\inside\Tavern_room.tga";
 	//Town sack
 	locations[n].townsack = "PortoBello";
 	locations[n].lockWeather = "Inside";
@@ -340,7 +340,7 @@ int LocationInitPortoBello(int n)
 	locations[n].id = "PortoBello_store";
 	locations[n].id.label = "Store";
 	locations[n].filespath.models = "locations\inside\Store04\";
-	locations[n].image = "loading\inside\shop_"+rand(3)+".tga";
+	locations[n].image = "loading\jonny_load\inside\Store04.tga";
 	//Town sack
 	locations[n].townsack = "PortoBello";
 	locations[n].lockWeather = "Inside";
@@ -379,7 +379,7 @@ int LocationInitPortoBello(int n)
 	locations[n].id = "PortoBello_bank";
 	locations[n].id.label = "Usurer House";
 	locations[n].filespath.models = "locations\inside\Bank01\";
-	locations[n].image = "loading\inside\bank_"+rand(3)+".tga";
+	locations[n].image = "loading\jonny_load\inside\bank01.tga";
 	//Town sack
 	locations[n].townsack = "PortoBello";
 	locations[n].lockWeather = "Inside";
@@ -425,7 +425,7 @@ int LocationInitPortoBello(int n)
 	locations[n].id = "PortoBello_Shipyard";
 	locations[n].id.label = "Shipyard";
 	locations[n].filespath.models = "locations\inside\Shipyard03\";
-	locations[n].image = "loading\inside\Shipyard_"+rand(4)+".tga";
+	locations[n].image = "loading\jonny_load\inside\Shipyard03.tga";
 	//Town sack
 	locations[n].townsack = "PortoBello";
 	locations[n].lockWeather = "Inside";
@@ -471,7 +471,7 @@ int LocationInitPortoBello(int n)
 	locations[n].id = "PortoBello_townhall";
 	locations[n].id.label = "Townhall";
 	locations[n].filespath.models = "locations\inside\Residence02";
-	locations[n].image = "loading\inside\residence_0.tga";
+	locations[n].image = "loading\jonny_load\inside\residence02.tga";
 	//Town sack
 	locations[n].townsack = "PortoBello";
 	locations[n].lockWeather = "Inside";
@@ -516,7 +516,7 @@ int LocationInitPortoBello(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "PortoBello_TownhallRoom";
 	locations[n].id.label = "TownhallRoom";
-	locations[n].image = "loading\inside\CommonResidence_1.tga";
+	locations[n].image = "loading\jonny_load\inside\BigHouse01_(BigHouse01_2Door).tga";
 	//Town sack
 	locations[n].townsack = "PortoBello";
 	locations[n].lockWeather = "Inside";
@@ -565,7 +565,7 @@ int LocationInitPortoBello(int n)
 	locations[n].id = "PortoBello_church";
 	locations[n].id.label = "Church";
 	locations[n].filespath.models = "locations\inside\Church01";
-	locations[n].image = "loading\inside\Church01.tga";
+	locations[n].image = "loading\jonny_load\inside\Church01.tga";
 	//Town sack
 	locations[n].townsack = "PortoBello";
 	locations[n].lockWeather = "Inside";
@@ -610,7 +610,7 @@ int LocationInitPortoBello(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "PortoBello_PortOffice";
 	locations[n].id.label = "PortOffice";
-	locations[n].image = "loading\inside\portoffice.tga";
+	locations[n].image = "loading\jonny_load\inside\portoffice.tga";
 	//Town sack
 	locations[n].townsack = "PortoBello";
 	locations[n].lockWeather = "Inside";
@@ -652,7 +652,7 @@ int LocationInitPortoBello(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "PortoBello_houseF2";
 	locations[n].id.label = "House";
-	locations[n].image = "loading\inside\CommonRoom_MH2.tga";
+	locations[n].image = "loading\jonny_load\inside\mediumhouse02.tga";
 	//Town sack
 	locations[n].townsack = "PortoBello";
 	locations[n].lockWeather = "Inside";
@@ -696,7 +696,7 @@ int LocationInitPortoBello(int n)
 	locations[n].id = "PortoBello_ExitTown";
 	locations[n].fastreload = "PortoBello";
 	locations[n].id.label = "ExitTown";
-	locations[n].image = "loading\Gate_"+rand(1)+".tga";
+	locations[n].image = "loading\jonny_load\jungle\TownExitY.tga";
 	//Town sack
 	locations[n].townsack = "PortoBello";
 	//Sound
@@ -759,7 +759,7 @@ int LocationInitPortoBello(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "PortoBello_Jungle_01";
 	locations[n].id.label = "Jungle";
-	locations[n].image = "loading\outside\Jungle_"+rand(5)+".tga";
+	locations[n].image = "loading\jonny_load\jungle\Jungle7.tga";
 	//Sound
 	locations[n].type = "jungle";
 	locations[n].islandId = "Mein";
@@ -815,7 +815,7 @@ int LocationInitPortoBello(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     locations[n].id = "PortoBello_Jungle_02";
 	locations[n].id.label = "Jungle";
-	locations[n].image = "loading\outside\Jungle_"+rand(5)+".tga";
+	locations[n].image = "loading\jonny_load\jungle\Jungle4.tga";
  	//Sound
 	locations[n].type = "jungle";
 	locations[n].islandId = "Mein";
@@ -871,7 +871,7 @@ int LocationInitPortoBello(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "PortoBello_CaveEntrance";
 	locations[n].id.label = "Cave entrance";
-	locations[n].image = "loading\outside\Jungle_"+rand(5)+".tga";
+	locations[n].image = "loading\jonny_load\jungle\caveEnt1.tga";
 	//Sound
 	locations[n].type = "jungle";
 	locations[n].islandId = "Mein";
@@ -920,7 +920,7 @@ int LocationInitPortoBello(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "PortoBello_Cave";
 	locations[n].id.label = "Cave";
-    locations[n].image = "loading\inside\Dange_"+rand(2)+".tga";
+    locations[n].image = "loading\jonny_load\inside\DungeonDuffer2.tga";
 	//Sound
 	locations[n].type = "cave";
 	locations[n].islandId = "Mein";
@@ -961,7 +961,7 @@ int LocationInitPortoBello(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Shore47";
 	locations[n].id.label = "Shore47";
-	locations[n].image = "loading\outside\harbor_" + rand(14) + ".tga";
+	locations[n].image = "loading\jonny_load\shores\shore06.tga";
 	locations[n].worldmap = "Shore47";
 	//Sound
 	locations[n].type = "seashore";
@@ -1015,7 +1015,7 @@ int LocationInitPortoBello(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Shore48";
 	locations[n].id.label = "Shore48";
-	locations[n].image = "loading\outside\harbor_" + rand(14) + ".tga";
+	locations[n].image = "loading\jonny_load\shores\shore02.tga";
 	locations[n].worldmap = "Shore48";
 	//Sound
 	locations[n].type = "seashore";
@@ -1069,7 +1069,7 @@ int LocationInitPortoBello(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Shore46";
 	locations[n].id.label = "Shore46";
-	locations[n].image = "loading\outside\harbor_" + rand(14) + ".tga";
+	locations[n].image = "loading\jonny_load\shores\shore03.tga";
 	locations[n].worldmap = "Shore46";
 	//Sound
 	locations[n].type = "seashore";

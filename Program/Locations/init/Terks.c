@@ -10,7 +10,7 @@ int LocationInitTerks(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Shore57";
 	locations[n].id.label = "Shore57";
-	locations[n].image = "loading\outside\harbor_" + rand(14) + ".tga";
+	locations[n].image = "loading\jonny_load\shores\Shore09_Shore10.tga";
 	locations[n].worldmap = "Terks";
 	//Sound
 	locations[n].type = "seashore";
@@ -65,7 +65,7 @@ int LocationInitTerks(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Terks_Jungle_01";
 	locations[n].id.label = "Jungle";
-	locations[n].image = "loading\outside\Jungle_"+rand(5)+".tga";
+	locations[n].image = "loading\jonny_load\jungle\Jungle6.tga";
 	//Sound
 	locations[n].type = "jungle";
 	locations[n].islandId = "Terks";
@@ -122,7 +122,7 @@ int LocationInitTerks(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Shore56";
 	locations[n].id.label = "Shore56";
-	locations[n].image = "loading\outside\harbor_" + rand(14) + ".tga";
+	locations[n].image = "loading\jonny_load\shores\shore08.tga";
 	locations[n].worldmap = "Terks";
 	//Sound
 	locations[n].type = "seashore";
@@ -175,7 +175,7 @@ int LocationInitTerks(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Terks_CaveEntrance";
 	locations[n].id.label = "Cave entrance";
-	locations[n].image = "loading\outside\Jungle_"+rand(5)+".tga";
+	locations[n].image = "loading\jonny_load\jungle\caveEnt1.tga";
 	//Sound
 	locations[n].type = "jungle";
 	locations[n].islandId = "Terks";
@@ -225,7 +225,7 @@ int LocationInitTerks(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Terks_Grot";
 	locations[n].id.label = "Grot";
-    locations[n].image = "loading\inside\Grot_"+rand(2)+".tga";
+    locations[n].image = "loading\jonny_load\inside\grotto1.tga";
 	//Sound
 	locations[n].type = "cave";
 	locations[n].islandId = "Terks";

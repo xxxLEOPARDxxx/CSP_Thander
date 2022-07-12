@@ -75,7 +75,7 @@ string LAi_GetBoardingImage(ref echr, bool isMCAttack)
 			}
 		}
 	}
-	return "loading\battle_" + rand(24) + ".tga";
+	return "loading\jonny_load\abordage\abord_0"+rand(1)+".tga";
 }
 
 //Начать абордаж с главным персонажем

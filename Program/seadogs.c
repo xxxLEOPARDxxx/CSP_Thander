@@ -493,7 +493,7 @@ void LoadGame()
 
 	CreateEntity(&LanguageObject,"obj_strservice");
 	CreateEntity(&reload_fader, "fader");
-	SendMessage(&reload_fader, "ls",FADER_PICTURE0, "loading\StartGame.tga");
+	SendMessage(&reload_fader, "ls",FADER_PICTURE0, "loading\jonny_load\load\load_03.tga");
 	SendMessage(&reload_fader, "lfl", FADER_IN, RELOAD_TIME_FADE_IN, true);
 	ReloadProgressStart();
 	pchar.savegamename = saveName;
@@ -884,7 +884,7 @@ void NewGame()
 
 	CreateEntity(&LanguageObject,"obj_strservice");
 	CreateEntity(&reload_fader, "fader");
-	SendMessage(&reload_fader, "ls",FADER_PICTURE0, "loading\StartGame.tga");
+	SendMessage(&reload_fader, "ls",FADER_PICTURE0, "loading\jonny_load\load\load_03.tga");
 	SendMessage(&reload_fader, "lfl", FADER_IN, RELOAD_TIME_FADE_IN, true);
 
 	bYesBoardStatus=false;
@@ -1979,31 +1979,31 @@ void GameOver(string sName)
 	switch(sName)
 	{
 		case "sea":
-			StartPictureAsVideo( "loading\seadeath_"+rand(3)+".tga", 4 );
+			StartPictureAsVideo( "loading\jonny_load\death\end_game_sea_"+rand(1)+".tga", 4 );
 			PlayStereoOGG("music_ship_dead");
 		break;
 		case "boarding":
-			StartPictureAsVideo( "loading\seadeath_"+rand(3)+".tga", 4 );
+			StartPictureAsVideo( "loading\jonny_load\death\end_game_sea_"+rand(2)+".tga", 4 );
 			PlayStereoOGG("music_ship_dead");
 		break;
 		case "land":
-			if (mc.sex != "woman") StartPictureAsVideo( "loading\DeathMan_"+rand(1)+".tga", 4 );
-			else StartPictureAsVideo( "loading\DeathWoman_"+rand(1)+".tga", 4 );
+			if (mc.sex != "woman") StartPictureAsVideo( "loading\jonny_load\death\end_game_"+rand(1)+".tga", 4 );
+			else StartPictureAsVideo( "loading\jonny_load\death\end_game_"+rand(1)+".tga", 4 );
 			PlayStereoOGG("music_death");
 		break;
 		case "mutiny":
-			if (mc.sex != "woman") StartPictureAsVideo( "loading\DeathMan_"+rand(1)+".tga", 4 );
-			else StartPictureAsVideo( "loading\DeathWoman_"+rand(1)+".tga", 4 );
+			if (mc.sex != "woman") StartPictureAsVideo( "loading\jonny_load\death\end_game_"+rand(1)+".tga", 4 );
+			else StartPictureAsVideo( "loading\jonny_load\death\end_game_"+rand(1)+".tga", 4 );
 			PlayStereoOGG("music_death");
 		break;
 		case "town":
-			if (mc.sex != "woman") StartPictureAsVideo( "loading\DeathMan_"+rand(1)+".tga", 4 );
-			else StartPictureAsVideo( "loading\DeathWoman_"+rand(1)+".tga", 4 );
+			if (mc.sex != "woman") StartPictureAsVideo( "loading\jonny_load\death\end_game_"+rand(1)+".tga", 4 );
+			else StartPictureAsVideo( "loading\jonny_load\death\end_game_"+rand(1)+".tga", 4 );
 			PlayStereoOGG("music_death");
 		break;
 		case "blood":
-			if (mc.sex != "woman") StartPictureAsVideo( "loading\DeathMan_"+rand(1)+".tga", 4 );
-			else StartPictureAsVideo( "loading\DeathWoman_"+rand(1)+".tga", 4 );
+			if (mc.sex != "woman") StartPictureAsVideo( "loading\jonny_load\death\end_game_"+rand(1)+".tga", 4 );
+			else StartPictureAsVideo( "loading\jonny_load\death\end_game_"+rand(1)+".tga", 4 );
 			PlayStereoOGG("music_death");
 		break;
 	}

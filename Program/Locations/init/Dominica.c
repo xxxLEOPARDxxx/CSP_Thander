@@ -10,7 +10,7 @@ int LocationInitDominica(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Shore27";
 	locations[n].id.label = "Shore27";
-	locations[n].image = "loading\outside\harbor_" + rand(14) + ".tga";
+	locations[n].image = "loading\jonny_load\shores\Shore05.tga";
 	locations[n].worldmap = "Dominica";
 	//Sound
 	locations[n].type = "seashore";
@@ -65,7 +65,7 @@ int LocationInitDominica(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Dominica_Jungle_01";
 	locations[n].id.label = "Jungle";
-	locations[n].image = "loading\outside\Jungle_"+rand(5)+".tga";
+	locations[n].image = "loading\jonny_load\jungle\Jungle6.tga";
 	//Sound
 	locations[n].type = "jungle";
 	locations[n].islandId = "Dominica";
@@ -122,7 +122,7 @@ int LocationInitDominica(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Shore26";
 	locations[n].id.label = "Shore26";
-	locations[n].image = "loading\outside\harbor_" + rand(14) + ".tga";
+	locations[n].image = "loading\jonny_load\jungle\Jungle8.tga";
 	locations[n].worldmap = "Dominica";
 	//Sound
 	locations[n].type = "seashore";
@@ -175,7 +175,7 @@ int LocationInitDominica(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Dominica_CaveEntrance";
 	locations[n].id.label = "Cave entrance";
-	locations[n].image = "loading\outside\Jungle_"+rand(5)+".tga";
+	locations[n].image = "loading\jonny_load\jungle\CaveEnt1.tga";
 	//Sound
 	locations[n].type = "jungle";
 	locations[n].islandId = "Dominica";
@@ -225,7 +225,7 @@ int LocationInitDominica(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Dominica_Grot";
 	locations[n].id.label = "Grot";
-    locations[n].image = "loading\inside\Grot_"+rand(2)+".tga";
+    locations[n].image = "loading\jonny_load\inside\grotto2.tga";
 	//Sound
 	locations[n].type = "Cave";
 	locations[n].islandId = "Dominica";
@@ -264,13 +264,13 @@ int LocationInitDominica(int n)
 	locations[n].locators_radius.reload.reload1_back = 2;
 	n = n + 1;
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// Џоселение фехтовальщиков
+	// Поселение фехтовальщиков
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// ‚ыход из поселениЯ
+	// Выход из поселения
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "FencingTown_ExitTown";
 	locations[n].id.label = "ExitTown";
-	locations[n].image = "loading\Gate_"+rand(1)+".tga";
+	locations[n].image = "loading\jonny_load\jungle\TownExitW.tga";
 	//Town sack
 	locations[n].townsack = "FencingTown";
 	//Sound
@@ -343,7 +343,7 @@ int LocationInitDominica(int n)
 	locations[n].id.label = "";
 	//Info
 	Locations[n].filespath.models = "locations\Fort_inside\Fort_2";
-	Locations[n].image = "loading\towns\Arena.tga";
+	Locations[n].image = "loading\jonny_load\outside\Fort_2_(arena).tga";
 	//Sound
 	locations[n].type = "arena";
 	locations[n].islandId = "Dominica";
@@ -373,11 +373,11 @@ int LocationInitDominica(int n)
 	n = n + 1;
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// Џоселение фехтовальщиков
+	// Поселение фехтовальщиков
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     	Locations[n].id = "FencingTown_Fort";
 	locations[n].id.label = "";
-	locations[n].image = "loading\towns\pearl1.tga";
+	locations[n].image = "loading\jonny_load\outside\pirateFort.tga";
 	//Sound
 	locations[n].type = "jungle";
 	locations[n].islandId = "Dominica";
@@ -436,11 +436,11 @@ int LocationInitDominica(int n)
 	n = n + 1;
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// ђезиденциЯ
+	// Резиденция
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "FencingTown_Townhall";
 	locations[n].id.label = "house";
-	locations[n].image = "loading\inside\CommonRoom_MH.tga";
+	locations[n].image = "loading\jonny_load\inside\mediumhouse01.tga";
 	//Town sack
 	locations[n].townsack = "FencingTown";
 	locations[n].lockWeather = "Inside";

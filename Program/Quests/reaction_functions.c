@@ -6900,7 +6900,7 @@ void Winterwood_Prepare_Fight()
 		PChar.Quest.Duel_Fight_Right_Now.function = "Winterwood_Fight_Right_Now";
 
 		LocationMakeClone(pchar.location);
-		Locations[FindLocation("Clone_location")].image = "loading\TavernFight_"+rand(1)".tga";
+		Locations[FindLocation("Clone_location")].image = "loading\jonny_load\inside\fight_taverna_"+rand(1)+".tga";
 		DoReloadCharacterToLocation("Clone_location", pchar.location.group, pchar.location.locator);
 		PlaceCharacter(npchar, "goto", "Clone_location")
 	}
@@ -10437,7 +10437,7 @@ void PDM_PI_Skelety_v_more_paluba(string qName)
 	int i;
 	MakeCloneShipDeck(pchar, true); // подмена палубы
 	i = FindLocation("Ship_deck");
-	Locations[i].image = "loading\Mutiny_"+rand(3)".tga";
+	Locations[i].image = "loading\jonny_load\load\rebel.tga";
 	DoQuestReloadToLocation("Ship_deck", "reload", "reload1", "PDM_PI_Skelety_on_Ship");
 }
 void PDM_PI_Vykl_Music(string qName)

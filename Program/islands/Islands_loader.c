@@ -93,7 +93,7 @@ void CheckIslandChange()
         float fadeOutTime = 0.5;
         SendMessage(&wdm_fader, "lfl", FADER_OUT, fadeOutTime, true);
         SendMessage(&wdm_fader, "l", FADER_STARTFRAME);
-        pchar.loadscreen = "loading\sea_" + rand(31) + ".tga";
+        pchar.loadscreen = "loading\jonny_load\sea\sea_"+rand(3)+".tga";
         SendMessage(&wdm_fader, "ls",FADER_PICTURE0, pchar.loadscreen);
 		break;
 	}

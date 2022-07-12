@@ -14,7 +14,7 @@ int LocationInitSantoDomingo(int n)
 	locations[n].islandId = "Hispaniola";
 
 	locations[n].filespath.models = "locations\Town_SantoDomingo\Town\";
-	locations[n].image = "loading\Town_"+rand(8)+".tga";
+	locations[n].image = "loading\jonny_load\city\Town_SantoDomingo.tga";
 	locations[n].citizens = true;
 	locations[n].soldiers = true;
 	locations[n].carrier = true;
@@ -182,7 +182,7 @@ int LocationInitSantoDomingo(int n)
 	locations[n].id = "SantoDomingo_tavern";
 	locations[n].id.label = "Tavern";
 	locations[n].filespath.models = "locations\inside\Tavern08\";
-	locations[n].image = "loading\inside\Tavern_"+rand(7)+".tga";
+	locations[n].image = "loading\jonny_load\inside\Tavern08.tga";
 	locations[n].habitues = 1;
 	//Town sack
 	locations[n].townsack = "SantoDomingo";
@@ -229,7 +229,7 @@ int LocationInitSantoDomingo(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "SantoDomingo_tavern_upstairs";
 	locations[n].id.label = "Tavern upstairs";
-	locations[n].image = "loading\inside\TavernCommon.tga";
+	locations[n].image = "loading\jonny_load\inside\Tavern_room.tga";
 	//Town sack
 	locations[n].townsack = "SantoDomingo";
 	locations[n].lockWeather = "Inside";
@@ -271,7 +271,7 @@ int LocationInitSantoDomingo(int n)
 	locations[n].id = "SantoDomingo_store";
 	locations[n].id.label = "Store";
 	locations[n].filespath.models = "locations\inside\store02\";
-	locations[n].image = "loading\inside\shop_"+rand(3)+".tga";
+	locations[n].image = "loading\jonny_load\inside\Store02.tga";
 	//Town sack
 	locations[n].townsack = "SantoDomingo";
 	locations[n].lockWeather = "Inside";
@@ -318,7 +318,7 @@ int LocationInitSantoDomingo(int n)
 	locations[n].id = "SantoDomingo_Bank";
 	locations[n].id.label = "Usurer House";
 	locations[n].filespath.models = "locations\inside\Bank02\";
-	locations[n].image = "loading\inside\bank_"+rand(3)+".tga";
+	locations[n].image = "loading\jonny_load\inside\bank02.tga";
 	//Town sack
 	locations[n].townsack = "SantoDomingo";
 	locations[n].lockWeather = "Inside";
@@ -363,7 +363,7 @@ int LocationInitSantoDomingo(int n)
 	locations[n].id = "SantoDomingo_Shipyard";
 	locations[n].id.label = "Shipyard";
 	locations[n].filespath.models = "locations\inside\Shipyard03\";
-	locations[n].image = "loading\inside\Shipyard_"+rand(4)+".tga";
+	locations[n].image = "loading\jonny_load\inside\Shipyard03.tga";
 	//Town sack
 	locations[n].townsack = "SantoDomingo";
 	locations[n].lockWeather = "Inside";
@@ -409,7 +409,7 @@ int LocationInitSantoDomingo(int n)
 	locations[n].id = "SantoDomingo_townhall";
 	locations[n].id.label = "Townhall";
 	locations[n].filespath.models = "locations\inside\Residence03";
-	locations[n].image = "loading\inside\residence_3.tga";
+	locations[n].image = "loading\jonny_load\inside\residence03.tga";
 	//Town sack
 	locations[n].townsack = "SantoDomingo";
 	locations[n].lockWeather = "Inside";
@@ -457,7 +457,7 @@ int LocationInitSantoDomingo(int n)
 	locations[n].id = "SantoDomingo_church";
 	locations[n].id.label = "Church";
 	locations[n].filespath.models = "locations\inside\Church01";
-	locations[n].image = "loading\inside\Church01.tga";
+	locations[n].image = "loading\jonny_load\inside\Church01.tga";
     //Town sack
 	locations[n].townsack = "SantoDomingo";
 	locations[n].lockWeather = "Inside";
@@ -497,7 +497,7 @@ int LocationInitSantoDomingo(int n)
 	locations[n].id = "SantoDomingo_Brothel";
 	locations[n].id.label = "SantoDomingo Brothel";
 	locations[n].filespath.models = "locations\inside\Brothel\";
-	locations[n].image = "loading\inside\brothell_hall_"+rand(3)+".tga";
+	locations[n].image = "loading\jonny_load\inside\brothel.tga";
 	//Town sack
 	locations[n].townsack = "SantoDomingo";
 	locations[n].lockWeather = "Inside";
@@ -550,7 +550,7 @@ int LocationInitSantoDomingo(int n)
 	locations[n].id = "SantoDomingo_Brothel_room";
 	locations[n].id.label = "Brothel Room";
 	locations[n].filespath.models = "locations\inside\Brothel_room\";
-	locations[n].image = "loading\inside\brothell_room_0.tga";
+	locations[n].image = "loading\jonny_load\inside\brothel_room.tga";
 	//Town sack
 	locations[n].townsack = "SantoDomingo";
 	locations[n].lockWeather = "Inside";
@@ -587,7 +587,7 @@ int LocationInitSantoDomingo(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "SantoDomingo_SecBrRoom"; // вторая комната борделя
 	locations[n].id.label = "Room";
-	locations[n].image = "loading\inside\CommonResidence_3.tga";
+	locations[n].image = "loading\jonny_load\inside\BigHouse03.tga";
  	//Town sack
 	locations[n].townsack = "SantoDomingo";
 	locations[n].lockWeather = "Inside";
@@ -636,7 +636,7 @@ int LocationInitSantoDomingo(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "SantoDomingo_PortOffice";
 	locations[n].id.label = "PortOffice";
-	locations[n].image = "loading\inside\portoffice.tga";
+	locations[n].image = "loading\jonny_load\inside\portoffice.tga";
 	//Town sack
 	locations[n].townsack = "SantoDomingo";
 	locations[n].lockWeather = "Inside";
@@ -679,7 +679,7 @@ int LocationInitSantoDomingo(int n)
 	locations[n].id = "SantoDomingo_ExitTown";
 	locations[n].fastreload = "SantoDomingo";
 	locations[n].id.label = "ExitTown";
-	locations[n].image = "loading\Gate_"+rand(1)+".tga";
+	locations[n].image = "loading\jonny_load\jungle\townExitT.tga";
 	//Town sack
 	locations[n].townsack = "SantoDomingo";
 	//Sound
@@ -742,7 +742,7 @@ int LocationInitSantoDomingo(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Hispaniola_Jungle_01";
 	locations[n].id.label = "Jungle";
-	locations[n].image = "loading\outside\Jungle_"+rand(5)+".tga";
+	locations[n].image = "loading\jonny_load\jungle\Jungle2.tga";
 	//Sound
 	locations[n].type = "jungle";
 	locations[n].islandId = "Hispaniola";
@@ -799,7 +799,7 @@ int LocationInitSantoDomingo(int n)
 	locations[n].id = "Mayak8";
 	locations[n].id.label = "Mayak8";
 	locations[n].worldmap = "Mayak8";
-	locations[n].image = "loading\outside\lighthouse_"+rand(1)+".tga";
+	locations[n].image = "loading\jonny_load\shores\lighthouse.tga";
 	//Sound
 	locations[n].type = "mayak";
 	locations[n].islandId = "Hispaniola";
@@ -886,7 +886,7 @@ int LocationInitSantoDomingo(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Hispaniola_Jungle_02";
 	locations[n].id.label = "Jungle";
-	locations[n].image = "loading\outside\Jungle_"+rand(5)+".tga";
+	locations[n].image = "loading\jonny_load\jungle\Jungle6.tga";
 	//Sound
 	locations[n].type = "jungle";
 	locations[n].islandId = "Hispaniola";
@@ -954,7 +954,7 @@ int LocationInitSantoDomingo(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Shore33";
 	locations[n].id.label = "Shore33";
-	locations[n].image = "loading\outside\harbor_" + rand(14) + ".tga";
+	locations[n].image = "loading\jonny_load\shores\Shore09_Shore10.tga";
 	locations[n].worldmap = "Shore33";
 	//Sound
 	locations[n].type = "seashore";
@@ -1008,7 +1008,7 @@ int LocationInitSantoDomingo(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     locations[n].id = "Hispaniola_Jungle_03";
 	locations[n].id.label = "Jungle";
-	locations[n].image = "loading\outside\Jungle_"+rand(5)+".tga";
+	locations[n].image = "loading\jonny_load\jungle\Jungle5.tga";
 	//Sound
 	locations[n].type = "jungle";
 	locations[n].islandId = "Hispaniola";
@@ -1064,7 +1064,7 @@ int LocationInitSantoDomingo(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Hispaniola_Jungle_04";
 	locations[n].id.label = "Jungle";
-	locations[n].image = "loading\outside\Jungle_"+rand(5)+".tga";
+	locations[n].image = "loading\jonny_load\jungle\Jungle7.tga";
 	//Sound
 	locations[n].type = "jungle";
 	locations[n].islandId = "Hispaniola";
@@ -1120,7 +1120,7 @@ int LocationInitSantoDomingo(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Shore32";
 	locations[n].id.label = "Shore32";
-	locations[n].image = "loading\outside\harbor_" + rand(14) + ".tga";
+	locations[n].image = "loading\jonny_load\shores\shore06.tga";
 	locations[n].worldmap = "Shore32";
 	//Sound
 	locations[n].type = "seashore";
@@ -1174,7 +1174,7 @@ int LocationInitSantoDomingo(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     locations[n].id = "Hispaniola_Jungle_05";
 	locations[n].id.label = "Jungle";
-	locations[n].image = "loading\outside\Jungle_"+rand(5)+".tga";
+	locations[n].image = "loading\jonny_load\jungle\Jungle3.tga";
 	//Sound
 	locations[n].type = "jungle";
 	locations[n].islandId = "Hispaniola";
@@ -1230,7 +1230,7 @@ int LocationInitSantoDomingo(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Hispaniola_CaveEntrance";
 	locations[n].id.label = "Cave entrance";
-	locations[n].image = "loading\outside\Jungle_"+rand(5)+".tga";
+	locations[n].image = "loading\jonny_load\jungle\CaveEnt2.tga";
 	//Sound
 	locations[n].type = "jungle";
 	locations[n].islandId = "Hispaniola";
@@ -1281,7 +1281,7 @@ int LocationInitSantoDomingo(int n)
 	// Пещера
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Hispaniola_Cave";
-	locations[n].image = "loading\inside\Cave_"+(rand(1)+1)+".tga";
+	locations[n].image = "loading\jonny_load\inside\cavernMedium1.tga";
 	locations[n].id.label = "Cave";
 	//Sound
 	locations[n].type = "cave";

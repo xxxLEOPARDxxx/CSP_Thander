@@ -6,7 +6,7 @@ int LocationInitLaVega(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "LaVega_port";
 	locations[n].id.label = "LaVega Port";
-	locations[n].image = "loading\outside\harbor_" + rand(14) + ".tga";
+	locations[n].image = "loading\jonny_load\shores\Shore01_Shore04.tga";
 	locations[n].worldmap = "LaVega_port";
 	//Town sack
 	locations[n].townsack = "LaVega";
@@ -63,7 +63,7 @@ int LocationInitLaVega(int n)
 	locations[n].id = "LaVega_ExitTown";
 	locations[n].fastreload = "LaVega";
 	locations[n].id.label = "ExitTown";
-	locations[n].image = "loading\Gate_"+rand(1)+".tga";
+	locations[n].image = "loading\jonny_load\outside\smugglerLairExit.tga";
 	//Town sack
 	locations[n].townsack = "LaVega";
 	//Sound
@@ -123,7 +123,7 @@ int LocationInitLaVega(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "LaVega_town";
 	locations[n].id.label = "Street";
-	locations[n].image = "loading\towns\pearl1.tga";
+	locations[n].image = "loading\jonny_load\outside\smugglerLairTown_(pirate_town).tga";
 	locations[n].worldmap = "LaVega_town";
 	locations[n].citizens = true;
 	locations[n].soldiers = true;
@@ -212,7 +212,7 @@ int LocationInitLaVega(int n)
  	locations[n].id = "LaVega_tavern";
 	locations[n].id.label = "Tavern";
 	locations[n].filespath.models = "locations\inside\Tavern09\";
-	locations[n].image = "loading\inside\Tavern_"+rand(7)+".tga";
+	locations[n].image = "loading\jonny_load\inside\Tavern09.tga";
 	locations[n].habitues = 1;
 	//Town sack
 	locations[n].townsack = "LaVega";
@@ -258,7 +258,7 @@ int LocationInitLaVega(int n)
 	locations[n].id = "LaVega_tavern_upstairs";
 	locations[n].filespath.models = "locations\inside\Tavern_room";
 	locations[n].id.label = "Tavern upstairs";
-	locations[n].image = "loading\inside\TavernCommon.tga";
+	locations[n].image = "loading\jonny_load\inside\Tavern_room.tga";
 	//Town sack
 	locations[n].townsack = "LaVega";
 	locations[n].lockWeather = "Inside";
@@ -298,7 +298,7 @@ int LocationInitLaVega(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "LaVega_store";
 	locations[n].id.label = "Store";
-	locations[n].image = "loading\inside\shop_"+rand(3)+".tga";
+	locations[n].image = "loading\jonny_load\inside\StoreSmall.tga";
 	//Town sack
 	locations[n].townsack = "LaVega";
 	locations[n].lockWeather = "Inside";
@@ -344,7 +344,7 @@ int LocationInitLaVega(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "LaVega_townhall";
 	locations[n].id.label = "Townhall";
-	locations[n].image = "loading\inside\smallresidence.tga";
+	locations[n].image = "loading\jonny_load\inside\smallresidence.tga";
 	//Town sack
 	locations[n].townsack = "LaVega";
 	locations[n].lockWeather = "Inside";

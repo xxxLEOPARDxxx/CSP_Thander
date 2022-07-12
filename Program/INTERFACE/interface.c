@@ -1690,7 +1690,7 @@ void procInfoShow()
 			break;
 
 			case "game prepare":
-				objInfoList[nInfoIdx].picbackfilename = "loading\StartLoading_"+rand(29)+".tga";
+				objInfoList[nInfoIdx].picbackfilename = "loading\jonny_load\load\load_0"+rand(8)+".tga";
 			break;
 
 			case "MainMenuLaunch":

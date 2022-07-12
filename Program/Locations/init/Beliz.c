@@ -9,7 +9,7 @@ int LocationInitBeliz(int n)
 	locations[n].id.label = "Street";
 	locations[n].worldmap = "Beliz";
 	locations[n].filespath.models = "locations\Town_Beliz\Town\";
-	locations[n].image = "loading\Town_"+rand(8)+".tga";
+	locations[n].image = "loading\jonny_load\city\Town_Beliz.tga";
 	locations[n].citizens = true;
 	locations[n].soldiers = true;
 	locations[n].carrier = true;
@@ -223,7 +223,7 @@ int LocationInitBeliz(int n)
 	locations[n].id = "Beliz_tavern";
 	locations[n].id.label = "Tavern";
 	locations[n].filespath.models = "locations\inside\Tavern02\";
-	locations[n].image = "loading\inside\Tavern_"+rand(7)+".tga";
+	locations[n].image = "loading\jonny_load\inside\Tavern02.tga";
 	locations[n].habitues = 1;
 	//Town sack
 	locations[n].townsack = "Beliz";
@@ -271,7 +271,7 @@ int LocationInitBeliz(int n)
 	locations[n].id = "Beliz_tavern_upstairs";
 	locations[n].filespath.models = "locations\inside\Tavern_room";
 	locations[n].id.label = "Tavern upstairs";
-	locations[n].image = "loading\inside\TavernCommon.tga";
+	locations[n].image = "loading\jonny_load\inside\Tavern_room.tga";
 	//Town sack
 	locations[n].townsack = "Beliz";
 	locations[n].lockWeather = "Inside";
@@ -312,7 +312,7 @@ int LocationInitBeliz(int n)
 	locations[n].id = "Beliz_store";
 	locations[n].id.label = "Store";
 	locations[n].filespath.models = "locations\inside\Store01\";
-	locations[n].image = "loading\inside\shop_"+rand(3)+".tga";
+	locations[n].image = "loading\jonny_load\inside\store01.tga";
 	//Town sack
 	locations[n].townsack = "Beliz";
 	locations[n].lockWeather = "Inside";
@@ -358,7 +358,7 @@ int LocationInitBeliz(int n)
 	locations[n].id = "Beliz_bank";
 	locations[n].id.label = "Usurer House";
 	locations[n].filespath.models = "locations\inside\Bank01\";
-	locations[n].image = "loading\inside\bank_"+rand(3)+".tga";
+	locations[n].image = "loading\jonny_load\inside\bank01.tga";
 	//Town sack
 	locations[n].townsack = "Beliz";
 	locations[n].lockWeather = "Inside";
@@ -404,7 +404,7 @@ int LocationInitBeliz(int n)
 	locations[n].id = "Beliz_Shipyard";
 	locations[n].id.label = "Shipyard";
 	locations[n].filespath.models = "locations\inside\Shipyard02\";
-	locations[n].image = "loading\inside\Shipyard_"+rand(4)+".tga";
+	locations[n].image = "loading\jonny_load\inside\shipyard02.tga";
 	//Town sack
 	locations[n].townsack = "Beliz";
 	locations[n].lockWeather = "Inside";
@@ -450,7 +450,7 @@ int LocationInitBeliz(int n)
 	locations[n].id = "Beliz_townhall";
 	locations[n].id.label = "Townhall";
 	locations[n].filespath.models = "locations\inside\Residence01";
-	locations[n].image = "loading\inside\residence_2.tga";
+	locations[n].image = "loading\jonny_load\inside\residence01.tga";
 	//Town sack
 	locations[n].townsack = "Beliz";
 	locations[n].lockWeather = "Inside";
@@ -503,7 +503,7 @@ int LocationInitBeliz(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Beliz_TownhallRoom"; //кабинет со спальней и выходом в город сбоку
 	locations[n].id.label = "TownhallRoom";
-	locations[n].image = "loading\inside\BigHouseBack.tga";
+	locations[n].image = "loading\jonny_load\inside\BigHouseBack.tga";
 	//Town sack
 	locations[n].townsack = "Beliz";
 	locations[n].lockWeather = "Inside";
@@ -556,7 +556,7 @@ int LocationInitBeliz(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Beliz_church";
 	locations[n].id.label = "Church";
-	locations[n].image = "loading\inside\churchInside3.tga";
+	locations[n].image = "loading\jonny_load\inside\churchInside3.tga";
 	//Town sack
 	locations[n].townsack = "Beliz";
 	locations[n].lockWeather = "Inside";
@@ -598,7 +598,7 @@ int LocationInitBeliz(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Beliz_PortOffice";
 	locations[n].id.label = "PortOffice";
-	locations[n].image = "loading\inside\portoffice.tga";
+	locations[n].image = "loading\jonny_load\inside\PortOffice.tga";
 	//Town sack
 	locations[n].townsack = "Beliz";
 	locations[n].lockWeather = "Inside";
@@ -641,7 +641,7 @@ int LocationInitBeliz(int n)
 	locations[n].id = "Beliz_houseS4";
 	locations[n].filespath.models = "locations\inside\StoneHouse";
 	locations[n].id.label = "Rosita's House";
-	locations[n].image = "loading\inside\stonehouse.tga";
+	locations[n].image = "loading\jonny_load\inside\stonehouse.tga";
 	//Town sack
 	locations[n].townsack = "Beliz";
 	locations[n].lockWeather = "Inside";
@@ -688,7 +688,7 @@ int LocationInitBeliz(int n)
 	Locations[n].id = "Beliz_ExitTown";
 	locations[n].fastreload = "Beliz";
 	locations[n].id.label = "ExitTown";
-	locations[n].image = "loading\Gate_"+rand(1)+".tga";
+	locations[n].image = "loading\jonny_load\jungle\TownExitY.tga";
 	//Town sack
 	Locations[n].townsack = "Beliz";
 	//Sound
@@ -752,7 +752,7 @@ int LocationInitBeliz(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Beliz_Jungle_01";
 	locations[n].id.label = "Jungle";
-	locations[n].image = "loading\outside\Jungle_"+rand(5)+".tga";
+	locations[n].image = "loading\jonny_load\jungle\Jungle6.tga";
 	//Sound
 	locations[n].type = "jungle";
 	locations[n].islandId = "Mein";
@@ -808,7 +808,7 @@ int LocationInitBeliz(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Beliz_CaveEntrance_1";
 	locations[n].id.label = "Cave entrance";
-	locations[n].image = "loading\outside\Jungle_"+rand(5)+".tga";
+	locations[n].image = "loading\jonny_load\jungle\CaveEnt1.tga";
 	//Sound
 	locations[n].type = "jungle";
 	locations[n].islandId = "Mein";
@@ -856,7 +856,7 @@ int LocationInitBeliz(int n)
 	// Пещера
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Beliz_Cave";
-	locations[n].image = "loading\inside\Cave_"+(rand(1)+1)+".tga";
+	locations[n].image = "loading\jonny_load\inside\cavernMedium1.tga";
 	locations[n].id.label = "Cave";
 	//Sound
 	locations[n].type = "cave";
@@ -907,7 +907,7 @@ int LocationInitBeliz(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Beliz_CaveEntrance_2";
 	locations[n].id.label = "Cave entrance";
-	locations[n].image = "loading\outside\Jungle_"+rand(5)+".tga";
+	locations[n].image = "loading\jonny_load\jungle\CaveEnt2.tga";
 	//Sound
 	locations[n].type = "jungle";
 	locations[n].islandId = "Mein";
@@ -959,7 +959,7 @@ int LocationInitBeliz(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Beliz_Cave_2";
 	locations[n].id.label = "Cave";
-    locations[n].image = "loading\inside\Dange_"+rand(2)+".tga";
+    locations[n].image = "loading\jonny_load\inside\DungeonDuffer2.tga";
 	//Sound
 	locations[n].type = "cave";
 	locations[n].islandId = "Mein";
@@ -1001,7 +1001,7 @@ int LocationInitBeliz(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Shore_ship2";
 	locations[n].id.label = "Shore_ship2";
-	locations[n].image = "loading\outside\harbor_" + rand(14) + ".tga";
+	locations[n].image = "loading\jonny_load\shores\ShoreShip1.tga";
 	locations[n].worldmap = "Shore_ship2";
 	//Sound
 	locations[n].type = "seashore";
@@ -1053,7 +1053,7 @@ int LocationInitBeliz(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Shore6";
 	locations[n].id.label = "Shore6";
-	locations[n].image = "loading\outside\harbor_" + rand(14) + ".tga";
+	locations[n].image = "loading\jonny_load\shores\Shore01_Shore04.tga";
 	locations[n].worldmap = "Shore6";
 	//Sound
 	locations[n].type = "seashore";
@@ -1109,7 +1109,7 @@ int LocationInitBeliz(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Shore7";
 	locations[n].id.label = "Shore7";
-	locations[n].image = "loading\outside\harbor_" + rand(14) + ".tga";
+	locations[n].image = "loading\jonny_load\shores\Shore02.tga";
 	locations[n].worldmap = "Shore7";
 	//Sound
 	locations[n].type = "seashore";
@@ -1164,7 +1164,7 @@ int LocationInitBeliz(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Shore8";
 	locations[n].id.label = "Shore8";
-	locations[n].image = "loading\outside\harbor_" + rand(14) + ".tga";
+	locations[n].image = "loading\jonny_load\shores\Shore03.tga";
 	locations[n].worldmap = "Shore8";
 	//Sound
 	locations[n].type = "seashore";
@@ -1218,7 +1218,7 @@ int LocationInitBeliz(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     locations[n].id = "Beliz_jungle_03";
 	locations[n].id.label = "Jungle";
-	locations[n].image = "loading\outside\Jungle_"+rand(5)+".tga";
+	locations[n].image = "loading\jonny_load\jungle\Jungle1.tga";
  	//Sound
 	locations[n].type = "jungle";
 	locations[n].islandId = "Mein";
@@ -1267,7 +1267,7 @@ int LocationInitBeliz(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Beliz_CaveEntrance_3";
 	locations[n].id.label = "Cave entrance";
-	locations[n].image = "loading\outside\Jungle_"+rand(5)+".tga";
+	locations[n].image = "loading\jonny_load\jungle\CaveEnt2.tga";
 	//Sound
 	locations[n].type = "jungle";
 	locations[n].islandId = "Mein";
@@ -1319,7 +1319,7 @@ int LocationInitBeliz(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Shore10";
 	locations[n].id.label = "Shore10";
-	locations[n].image = "loading\outside\harbor_" + rand(14) + ".tga";
+	locations[n].image = "loading\jonny_load\shores\Shore09_Shore10.tga";
 	locations[n].worldmap = "Shore10";
 	//Sound
 	locations[n].type = "seashore";
@@ -1374,7 +1374,7 @@ int LocationInitBeliz(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Shore9";
 	locations[n].id.label = "Shore9";
-	locations[n].image = "loading\outside\harbor_" + rand(14) + ".tga";
+	locations[n].image = "loading\jonny_load\shores\grottoBig2.tga";
 	locations[n].worldmap = "Shore9";
 	//Sound
 	locations[n].type = "seashore";
@@ -1426,7 +1426,7 @@ int LocationInitBeliz(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     locations[n].id = "Beliz_jungle_02";
 	locations[n].id.label = "Jungle";
-	locations[n].image = "loading\outside\Jungle_"+rand(5)+".tga";
+	locations[n].image = "loading\jonny_load\jungle\Jungle8.tga";
  	//Sound
 	locations[n].type = "jungle";
 	locations[n].islandId = "Mein";

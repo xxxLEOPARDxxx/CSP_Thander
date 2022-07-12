@@ -191,7 +191,7 @@ void Return2SeaAfterCabin()
 	SetEventHandler("FaderEvent_EndFade", "Cabin_ReloadEndFadeAfter", 0);
 	//Создаём фейдер и запускаем
 	CreateEntity(&boarding_fader, "fader");
-	pchar.loadscreen = "loading\sea_" + rand(31) + ".tga";
+	pchar.loadscreen = "loading\jonny_load\sea\sea_"+rand(3)+".tga";
 	SendMessage(&boarding_fader, "ls", FADER_PICTURE0, pchar.loadscreen);
 
 	float fadeOutTime = RELOAD_TIME_FADE_OUT;
@@ -363,8 +363,8 @@ void Cabin_ReloadEndFadeAfter()
 /////////// диалог на палубе ////////////
 void Sea_DeckBoatStartNow(ref _iShipsCharacter)
 {
-	string boat_pic = "loading\boat_"+rand(2)+".tga";
-	if(CheckAttribute(pchar, "TownEscape")) boat_pic = "loading\StartGame.tga";
+	string boat_pic = "loading\jonny_load\load\Boat.tga";
+	if(CheckAttribute(pchar, "TownEscape")) boat_pic = "loading\jonny_load\load\load_0"+rand(8)+".tga";
 
 	if (!bAbordageStarted)
 	{

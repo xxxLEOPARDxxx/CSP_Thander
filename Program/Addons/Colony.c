@@ -3598,7 +3598,7 @@ void CreateModificyColonyCaiman()
 	//rResidence.fastreload = "Caiman";
 	//rResidence.townsack = "Caiman";
 
-	rResidence.image = "loading\inside\residence_3.tga";
+	rResidence.image = "loading\jonny_load\inside\residence03.tga";
 	rResidence.filespath.models = "locations\inside\" + sTownhall;
 	rResidence.models.always.locators = sTownhall + "_locators";
 	rResidence.models.always.l1 = sTownhall;
@@ -3911,7 +3911,7 @@ void CreateTownCaiman()
 
 	rTown.id.label = "Street";
 	rTown.worldmap = "Caiman";
-	rTown.image = "loading\Town_"+rand(8)+".tga";
+	rTown.image = "loading\jonny_load\outside\smugglerLairTown_(pirate_town).tga";
 	rTown.citizens = true;
 	rTown.soldiers = true;
 	rTown.carrier = true;

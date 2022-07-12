@@ -50,7 +50,7 @@ int LocationInitQuestLocations(int n)
 	/// Корабельная палуба  для карта - море
 	////////////////////////////////////////////////////////////
 	Locations[n].id = "Ship_deck";
-	Locations[n].image = "loading\art\open_sea_clear.tga";
+	Locations[n].image = "loading\jonny_load\inside ship\deckMedium.tga";
 	locations[n].id.label = "Boarding deck";
 	//Sound
 	Locations[n].type = "deck";
@@ -81,7 +81,7 @@ int LocationInitQuestLocations(int n)
 	Locations[n].id = "Deck_Near_Ship";   // выслать туда шлюпку
 	Locations[n].id.label = "Boarding deck";
 	//Info
-	Locations[n].image = "loading\art\open_sea_clear.tga";
+	Locations[n].image = "loading\jonny_load\inside ship\deckMedium.tga";
 	//Sound
 	Locations[n].type = "residence";
 	Locations[n].boarding = "true";
@@ -111,7 +111,7 @@ int LocationInitQuestLocations(int n)
 	locations[n].id = "Estate";
 	locations[n].id.label = "Estate";
 	locations[n].filespath.models = "locations\Estate";
-	locations[n].image = "loading\EstateN.tga";
+	locations[n].image = "loading\jonny_load\quest\Estate.tga";
 	//Sound
 	locations[n].type = "land";
 	//Models
@@ -177,7 +177,7 @@ int LocationInitQuestLocations(int n)
 	locations[n].id = "EstateBadRoom1";
 	locations[n].id.label = "Bedroom";
 	locations[n].filespath.models = "locations\EstateRooms\EstateBadRoom1";
-	locations[n].image = "loading\EstateRoomN.tga";
+	locations[n].image = "loading\jonny_load\quest\estateBadRoom1.tga";
 	//Models
 	//Sound
 	locations[n].type = "house";
@@ -219,7 +219,7 @@ int LocationInitQuestLocations(int n)
 	locations[n].id = "EstateBadRoom2";
 	locations[n].id.label = "Bedroom";
 	locations[n].filespath.models = "locations\EstateRooms\EstateBadRoom2";
-	locations[n].image = "loading\EstateRoomN.tga";
+	locations[n].image = "loading\jonny_load\quest\EstateBadRoom1.tga";
 	//Sound
 	locations[n].type = "house";
 	//Models
@@ -261,7 +261,7 @@ int LocationInitQuestLocations(int n)
 	locations[n].id = "EstateOffice";
 	locations[n].id.label = "Cabinet";
 	locations[n].filespath.models = "locations\EstateRooms\EstateOffice";
-	locations[n].image = "loading\EstateRoomN.tga";
+	locations[n].image = "loading\jonny_load\quest\EstateOffice.tga";
 	//Sound
 	locations[n].type = "residence";
 	//Models
@@ -303,7 +303,7 @@ int LocationInitQuestLocations(int n)
 	locations[n].id = "UnderWater";
 	locations[n].id.label = "UnderWater";
 	locations[n].filespath.models = "locations\UnderWater";
-	locations[n].image = "loading\seadeath_"+rand(3)+".tga";
+	locations[n].image = "loading\jonny_load\quest\underwater.tga";
 	//Sound
 	locations[n].type = "underwater";
 	locations[n].type.LSC = true; //локация ГПК
@@ -436,7 +436,7 @@ int LocationInitQuestLocations(int n)
 	Locations[n].id = "SelectMainCharacter_Cabine";   // Lugger: Выбор ГГ
     	locations[n].id.label = "cabine2";
 	locations[n].filespath.models = "locations\inside\cabin02\";
-	locations[n].image = "loading\capdeck.tga";
+	locations[n].image = "loading\jonny_load\inside\cabin02.tga";
 	//Sound
 	locations[n].type = "residence";
 	locations[n].LoadCabinType.Type = "Cabin";

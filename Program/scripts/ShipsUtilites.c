@@ -2185,7 +2185,7 @@ void MakeCloneFortBoarding(string fromLocId)
 	rClone.boarding.locatorNum = 15;
 	rClone.boarding = "false";
 	rClone.boarding.nextdeck = "Boarding_fortyard"; // Jason
-	rClone.image = "loading\FortShturm_" + rand(2) + ".tga";
+	rClone.image = "loading\jonny_load\outside\Fort_2_(shturm).tga";
 }
 
 int GetPortManPrice(int Price, ref NPChar)

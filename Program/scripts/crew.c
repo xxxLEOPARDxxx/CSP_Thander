@@ -363,7 +363,7 @@ void MunityOnShip(string _stat)
 	Statistic_AddValue(pchar, _stat, 1);
     MakeCloneShipDeck(pchar, true); // подмена палубы
     i = FindLocation("Ship_deck");
-    Locations[i].image = "loading\Mutiny_"+rand(3)".tga"; // это клоновая локация, вернется само при перетирании другим
+    Locations[i].image = "loading\jonny_load\load\rebel.tga"; // это клоновая локация, вернется само при перетирании другим
     DoQuestReloadToLocation("Ship_deck", "reload", "reload1", "Munity_on_Ship");
 }
 /* 20.01.08 Дележ добычи =======================================================================
