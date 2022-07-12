@@ -9059,7 +9059,7 @@ int InitItems()
 	itm.ItemType = "QUESTITEMS";
 	n++;
 
-	//Для генераторного квеста "Проигравшийся игрок"
+	//Кошелёк "Проигравшийся игрок"
 	makeref(itm,Items[n]);
 	itm.id = "Bag_with_money";
 	itm.name = "itmname_Bag_with_money";
@@ -9068,6 +9068,19 @@ int InitItems()
 	itm.picTexture = "ITEMS_20";
 	itm.price = 0;
 	itm.weight = 0.5;
+	itm.ItemType = "QUESTITEMS";
+	n++;
+	
+	//Джокер "Проигравшийся игрок"
+	makeref(itm,Items[n]);
+	itm.id = "Joker";
+	itm.groupID = IDOLS_LEFT_ITEM_TYPE;
+	itm.name = "itmname_Joker";
+	itm.describe = "itmdescr_Joker";
+	itm.picIndex = 7;
+	itm.picTexture = "ITEMS_20";
+	itm.price = 5000;
+	itm.weight = 0.1;
 	itm.ItemType = "QUESTITEMS";
 	n++;
 
