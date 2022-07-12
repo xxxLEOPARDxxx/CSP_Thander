@@ -1983,27 +1983,23 @@ void GameOver(string sName)
 			PlayStereoOGG("music_ship_dead");
 		break;
 		case "boarding":
-			StartPictureAsVideo( "loading\jonny_load\death\end_game_sea_"+rand(2)+".tga", 4 );
+			StartPictureAsVideo( "loading\jonny_load\death\end_game_sea_"+rand(1)+".tga", 4 );
 			PlayStereoOGG("music_ship_dead");
 		break;
 		case "land":
-			if (mc.sex != "woman") StartPictureAsVideo( "loading\jonny_load\death\end_game_"+rand(1)+".tga", 4 );
-			else StartPictureAsVideo( "loading\jonny_load\death\end_game_"+rand(1)+".tga", 4 );
+			StartPictureAsVideo( "loading\jonny_load\death\end_game_"+rand(1)+".tga", 4 );
 			PlayStereoOGG("music_death");
 		break;
 		case "mutiny":
-			if (mc.sex != "woman") StartPictureAsVideo( "loading\jonny_load\death\end_game_"+rand(1)+".tga", 4 );
-			else StartPictureAsVideo( "loading\jonny_load\death\end_game_"+rand(1)+".tga", 4 );
+			StartPictureAsVideo( "loading\jonny_load\death\end_game_"+rand(1)+".tga", 4 );
 			PlayStereoOGG("music_death");
 		break;
 		case "town":
-			if (mc.sex != "woman") StartPictureAsVideo( "loading\jonny_load\death\end_game_"+rand(1)+".tga", 4 );
-			else StartPictureAsVideo( "loading\jonny_load\death\end_game_"+rand(1)+".tga", 4 );
+			StartPictureAsVideo( "loading\jonny_load\death\end_game_"+rand(1)+".tga", 4 );
 			PlayStereoOGG("music_death");
 		break;
 		case "blood":
-			if (mc.sex != "woman") StartPictureAsVideo( "loading\jonny_load\death\end_game_"+rand(1)+".tga", 4 );
-			else StartPictureAsVideo( "loading\jonny_load\death\end_game_"+rand(1)+".tga", 4 );
+			StartPictureAsVideo( "loading\jonny_load\death\end_game_"+rand(1)+".tga", 4 );
 			PlayStereoOGG("music_death");
 		break;
 	}
