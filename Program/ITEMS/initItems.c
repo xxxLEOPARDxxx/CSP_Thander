@@ -9070,8 +9070,6 @@ int InitItems()
 	itm.weight = 0.5;
 	itm.ItemType = "QUESTITEMS";
 	n++;
-<<<<<<< Updated upstream
-=======
 	
 	//Джокер "Проигравшийся игрок"
 	makeref(itm,Items[n]);
@@ -9085,7 +9083,6 @@ int InitItems()
 	itm.weight = 0.1;
 	itm.ItemType = "QUESTITEMS";
 	n++;
->>>>>>> Stashed changes
 
 	makeref(itm,Items[n]);	//Квест "Аптекарь"
 	itm.id = "PDM_Heal_Poroshok";	//Целебный порошок
