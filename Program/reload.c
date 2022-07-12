@@ -225,7 +225,7 @@ int Reload(aref reload_group, string locator_name, string current_location)
 	{
 		if(!CheckAttribute(mc, "todeck"))
 		{
-			pchar.loadscreen = "loading\seaStand_" + rand(13) + ".tga";
+			pchar.loadscreen = "loading\jonny_load\port\port_" + rand(4) + ".tga";
 		}
 		else
 		{
@@ -244,7 +244,7 @@ int Reload(aref reload_group, string locator_name, string current_location)
 				if (sGlobalTemp == "afterFDsink")
 				{
 				    //Boyer add #20170401-02
-                    pchar.loadscreen = "loading\rescue.tga";
+                    pchar.loadscreen = "loading\jonny_load\load\lifeboat.tga";
 					sGlobalTemp = "";
 				}
 				else

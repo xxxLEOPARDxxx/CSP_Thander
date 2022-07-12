@@ -14,7 +14,7 @@ int LocationInitBermudes(int n)
  	locations[n].islandId = "Bermudes";
 
 	locations[n].filespath.models = "locations\Town_IslaMona\Town\";
-	locations[n].image = "loading\towns\pearl1.tga";
+	locations[n].image = "loading\jonny_load\city\Town_IslaMona.tga";
 	locations[n].citizens = true;
 	locations[n].soldiers = true;
 
@@ -132,7 +132,7 @@ int LocationInitBermudes(int n)
 	locations[n].id = "Pirates_tavern";
 	locations[n].id.label = "Tavern";
 	locations[n].filespath.models = "locations\inside\Tavern08\";
-	locations[n].image = "loading\inside\Tavern_"+rand(7)+".tga";
+	locations[n].image = "loading\jonny_load\inside\Tavern08.tga";
 	locations[n].habitues = 1;
 	//Town sack
 	locations[n].townsack = "Pirates";
@@ -179,7 +179,7 @@ int LocationInitBermudes(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Pirates_tavern_upstairs";
 	locations[n].id.label = "Tavern upstairs";
-	locations[n].image = "loading\inside\TavernCommon.tga";
+	locations[n].image = "loading\jonny_load\inside\Tavern_room.tga";
 	//Town sack
 	locations[n].townsack = "Pirates";
 	locations[n].lockWeather = "Inside";
@@ -221,7 +221,7 @@ int LocationInitBermudes(int n)
 	locations[n].id = "Pirates_store";
 	locations[n].id.label = "Store";
 	locations[n].filespath.models = "locations\inside\Store02\";
-	locations[n].image = "loading\inside\shop_"+rand(3)+".tga";
+	locations[n].image = "loading\jonny_load\inside\store02.tga";
 	//Town sack
 	locations[n].townsack = "Pirates";
 	locations[n].lockWeather = "Inside";
@@ -261,7 +261,7 @@ int LocationInitBermudes(int n)
 	locations[n].id = "Pirates_Shipyard";
 	locations[n].id.label = "Shipyard";
 	locations[n].filespath.models = "locations\inside\ShipyardPirates\";
-	locations[n].image = "loading\inside\Shipyard_"+rand(4)+".tga";
+	locations[n].image = "loading\jonny_load\inside\shipyardpirates.tga";
 	//Town sack
 	locations[n].townsack = "Pirates";
 	//locations[n].lockWeather = "Inside";
@@ -308,7 +308,7 @@ int LocationInitBermudes(int n)
 	locations[n].id = "Pirates_townhall";
 	locations[n].id.label = "Townhall";
 	locations[n].filespath.models = "locations\inside\Residence05";
-	locations[n].image = "loading\inside\Pirates_townhall.tga";
+	locations[n].image = "loading\jonny_load\inside\residence05_(JackmanHouse).tga";
 	//Town sack
 	locations[n].townsack = "Pirates";
 	locations[n].lockWeather = "Inside";
@@ -353,7 +353,7 @@ int LocationInitBermudes(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Pirates_PortOffice";
 	locations[n].id.label = "PortOffice";
-	locations[n].image = "loading\inside\portoffice.tga";
+	locations[n].image = "loading\jonny_load\inside\portoffice.tga";
 	//Town sack
 	locations[n].townsack = "Pirates";
 	locations[n].lockWeather = "Inside";
@@ -401,7 +401,7 @@ int LocationInitBermudes(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Pirates_houseF1";
 	locations[n].id.label = "Room";
-	locations[n].image = "loading\inside\CommonRoom_MH.tga";
+	locations[n].image = "loading\jonny_load\inside\mediumhouse01.tga";
 	//Town sack
 	locations[n].townsack = "Pirates";
 	locations[n].lockWeather = "Inside";
@@ -447,7 +447,7 @@ int LocationInitBermudes(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Pirates_houseS1"; //с комнатой на втором этаже
 	locations[n].id.label = "Orry_House";
-	locations[n].image = "loading\inside\CommonDoubleflourHouse.tga";
+	locations[n].image = "loading\jonny_load\inside\largehouse01.tga";
 	//Town sack
 	locations[n].townsack = "Pirates";
 	locations[n].lockWeather = "Inside";
@@ -495,7 +495,7 @@ int LocationInitBermudes(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Bermudes_Dungeon";
 	locations[n].id.label = "Dungeon";
-	locations[n].image = "loading\inside\Vault_"+rand(2)+".tga";
+	locations[n].image = "loading\jonny_load\inside\DungeonVault1.tga";
 	//Town sack
 	locations[n].townsack = "Pirates";
 	//Sound
@@ -545,7 +545,7 @@ int LocationInitBermudes(int n)
 	locations[n].id = "Shore3";
 	locations[n].id.label = "Shore3";
 	locations[n].worldmap = "Shore3";
-	locations[n].image = "loading\outside\harbor_" + rand(14) + ".tga";
+	locations[n].image = "loading\jonny_load\shores\Shore01_Shore04.tga";
 	//Sound
 	locations[n].type = "seashore";
  	locations[n].islandId = "Bermudes";
@@ -604,7 +604,7 @@ int LocationInitBermudes(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     locations[n].id = "Bermudes_jungle_01";
 	locations[n].id.label = "Jungle";
-	locations[n].image = "loading\outside\Jungle_"+rand(5)+".tga";
+	locations[n].image = "loading\jonny_load\jungle\Jungle8.tga";
  	//Sound
 	locations[n].type = "jungle";
 	locations[n].islandId = "Bermudes";
@@ -652,7 +652,7 @@ int LocationInitBermudes(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Bermudes_CaveEntrance";
 	locations[n].id.label = "Cave entrance";
-	locations[n].image = "loading\outside\Jungle_"+rand(5)+".tga";
+	locations[n].image = "loading\jonny_load\jungle\CaveEnt1.tga";
 	//Sound
 	locations[n].type = "jungle";
  	locations[n].islandId = "Bermudes";
@@ -701,7 +701,7 @@ int LocationInitBermudes(int n)
 
 	locations[n].id = "Bermudes_Cavern";
 	locations[n].id.label = "Cave";
-	locations[n].image = "loading\inside\Cave_0.tga";
+	locations[n].image = "loading\jonny_load\inside\cavernLow1.tga";
 	//Sound
 	locations[n].type = "cave";
  	locations[n].islandId = "Bermudes";
@@ -766,7 +766,7 @@ int LocationInitBermudes(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Shore_ship1";
 	locations[n].id.label = "Shore_ship1";
-	locations[n].image = "loading\outside\harbor_" + rand(14) + ".tga";
+	locations[n].image = "loading\jonny_load\shores\ShoreShip1.tga";
 	locations[n].worldmap = "Shore_ship1";
     //Sound
 	locations[n].type = "seashore";

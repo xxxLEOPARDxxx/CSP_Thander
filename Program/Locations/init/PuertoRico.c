@@ -14,7 +14,7 @@ int LocationInitPuertoRico(int n)
 	locations[n].islandId = "PuertoRico";
 
 	locations[n].filespath.models = "locations\Town_PuertoRico\Town\";
-	locations[n].image = "loading\Town_"+rand(8)+".tga";
+	locations[n].image = "loading\jonny_load\city\Town_PuertoRico.tga";
 	locations[n].citizens = true;
 	locations[n].soldiers = true;
 	locations[n].carrier = true;
@@ -233,7 +233,7 @@ int LocationInitPuertoRico(int n)
 	locations[n].id = "SanJuan_tavern";
 	locations[n].id.label = "Tavern";
 	locations[n].filespath.models = "locations\inside\tavern03\";
-	locations[n].image = "loading\inside\Tavern_"+rand(7)+".tga";
+	locations[n].image = "loading\jonny_load\inside\Tavern03.tga";
 	locations[n].habitues = 1;
 	//Town sack
 	locations[n].townsack = "SanJuan";
@@ -280,7 +280,7 @@ int LocationInitPuertoRico(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "SanJuan_tavern_upstairs";
 	locations[n].id.label = "Tavern upstairs";
-	locations[n].image = "loading\inside\TavernCommon.tga";
+	locations[n].image = "loading\jonny_load\inside\Tavern_room.tga";
 	//Town sack
 	locations[n].townsack = "SanJuan";
 	locations[n].lockWeather = "Inside";
@@ -322,7 +322,7 @@ int LocationInitPuertoRico(int n)
 	locations[n].id = "SanJuan_store";
 	locations[n].id.label = "Store";
 	locations[n].filespath.models = "locations\inside\store02\";
-	locations[n].image = "loading\inside\shop_"+rand(3)+".tga";
+	locations[n].image = "loading\jonny_load\inside\store02.tga";
 	//Town sack
 	locations[n].townsack = "SanJuan";
 	locations[n].lockWeather = "Inside";
@@ -370,7 +370,7 @@ int LocationInitPuertoRico(int n)
 	locations[n].id = "SanJuan_Bank";
 	locations[n].id.label = "Usurer House";
 	locations[n].filespath.models = "locations\inside\bank01\";
-	locations[n].image = "loading\inside\bank_"+rand(3)+".tga";
+	locations[n].image = "loading\jonny_load\inside\bank01.tga";
 	//Town sack
 	locations[n].townsack = "SanJuan";
 	locations[n].lockWeather = "Inside";
@@ -416,7 +416,7 @@ int LocationInitPuertoRico(int n)
 	locations[n].id = "SanJuan_Shipyard";
 	locations[n].id.label = "Shipyard";
 	locations[n].filespath.models = "locations\inside\Shipyard01\";
-	locations[n].image = "loading\inside\Shipyard_"+rand(4)+".tga";
+	locations[n].image = "loading\jonny_load\inside\Shipyard01.tga";
 	//Town sack
 	locations[n].townsack = "SanJuan";
 	locations[n].lockWeather = "Inside";
@@ -462,7 +462,7 @@ int LocationInitPuertoRico(int n)
 	locations[n].id = "SanJuan_townhall";
 	locations[n].id.label = "Townhall";
 	locations[n].filespath.models = "locations\inside\Residence03";
-	locations[n].image = "loading\inside\residence_3.tga";
+	locations[n].image = "loading\jonny_load\inside\residence03.tga";
 	//Town sack
 	locations[n].townsack = "SanJuan";
 	locations[n].lockWeather = "Inside";
@@ -509,7 +509,7 @@ int LocationInitPuertoRico(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "SanJuan_church";
 	locations[n].id.label = "Church";
-	locations[n].image = "loading\inside\churchInsideBig1.tga";
+	locations[n].image = "loading\jonny_load\inside\churchInsideBig1.tga";
 	//Town sack
 	locations[n].townsack = "SanJuan";
 	locations[n].lockWeather = "Inside";
@@ -561,7 +561,7 @@ int LocationInitPuertoRico(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "SanJuan_PortOffice";
 	locations[n].id.label = "PortOffice";
-	locations[n].image = "loading\inside\portoffice.tga";
+	locations[n].image = "loading\jonny_load\inside\portoffice.tga";
 	//Town sack
 	locations[n].townsack = "SanJuan";
 	locations[n].lockWeather = "Inside";
@@ -604,7 +604,7 @@ int LocationInitPuertoRico(int n)
 	locations[n].id = "SanJuan_houseSp6";
 	locations[n].filespath.models = "locations\inside\CobHouse";
 	locations[n].id.label = "Isabella's House";
-	locations[n].image = "loading\inside\CobHouse.tga";
+	locations[n].image = "loading\jonny_load\inside\CobHouse.tga";
 	//Town sack
 	locations[n].townsack = "SanJuan";
 	locations[n].lockWeather = "Inside";
@@ -648,7 +648,7 @@ int LocationInitPuertoRico(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "SanJuan_houseS1Bedroom";
 	locations[n].id.label = "Bedroom";
-	locations[n].image = "loading\inside\Bedroom.tga";
+	locations[n].image = "loading\jonny_load\inside\Bedroom1.tga";
 	//Town sack
 	locations[n].townsack = "SanJuan";
 	locations[n].lockWeather = "Inside";
@@ -690,7 +690,7 @@ int LocationInitPuertoRico(int n)
 	locations[n].id = "SanJuan_ExitTown";
 	locations[n].fastreload = "SanJuan";
 	locations[n].id.label = "ExitTown";
-	locations[n].image = "loading\Gate_"+rand(1)+".tga";
+	locations[n].image = "loading\jonny_load\jungle\TownExitY.tga";
 	//Town sack
 	locations[n].townsack = "SanJuan";
 	//Sound
@@ -752,7 +752,7 @@ int LocationInitPuertoRico(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "SanJuan_jungle_01";
 	locations[n].id.label = "Jungle";
-	locations[n].image = "loading\outside\Jungle_"+rand(5)+".tga";
+	locations[n].image = "loading\jonny_load\jungle\Jungle7.tga";
 	//Sound
 	locations[n].type = "jungle";
 	locations[n].islandId = "PuertoRico";
@@ -807,7 +807,7 @@ int LocationInitPuertoRico(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Shore45";
 	locations[n].id.label = "Shore45";
-	locations[n].image = "loading\outside\harbor_" + rand(14) + ".tga";
+	locations[n].image = "loading\jonny_load\shores\shore02.tga";
 	locations[n].worldmap = "Shore45";
 	//Sound
 	locations[n].type = "seashore";
@@ -860,7 +860,7 @@ int LocationInitPuertoRico(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "SanJuan_Jungle_02";
 	locations[n].id.label = "Jungle";
-	locations[n].image = "loading\outside\Jungle_"+rand(5)+".tga";
+	locations[n].image = "loading\jonny_load\jungle\Jungle4.tga";
 	//Sound
 	locations[n].type = "jungle";
 	locations[n].islandId = "PuertoRico";
@@ -915,7 +915,7 @@ int LocationInitPuertoRico(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "SanJuan_CaveEntrance";
 	locations[n].id.label = "Cave entrance";
-	locations[n].image = "loading\outside\Jungle_"+rand(5)+".tga";
+	locations[n].image = "loading\jonny_load\jungle\caveEnt2.tga";
 	//Sound
 	locations[n].type = "jungle";
 	locations[n].islandId = "PuertoRico";
@@ -965,7 +965,7 @@ int LocationInitPuertoRico(int n)
 	// Пещера
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "SanJuan_Cave";
-	locations[n].image = "loading\inside\Cave_"+(rand(1)+1)+".tga";
+	locations[n].image = "loading\jonny_load\inside\CavernMedium1.tga";
 	locations[n].id.label = "Cave";
 	//Sound
 	locations[n].type = "cave";
@@ -1018,7 +1018,7 @@ int LocationInitPuertoRico(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "SanJuan_Jungle_03";
 	locations[n].id.label = "Jungle";
-	locations[n].image = "loading\outside\Jungle_"+rand(5)+".tga";
+	locations[n].image = "loading\jonny_load\jungle\Jungle1.tga";
 	//Sound
 	locations[n].type = "jungle";
 	locations[n].islandId = "PuertoRico";
@@ -1078,7 +1078,7 @@ int LocationInitPuertoRico(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Shore44";
 	locations[n].id.label = "Shore44";
-	locations[n].image = "loading\outside\harbor_" + rand(14) + ".tga";
+	locations[n].image = "loading\jonny_load\shores\shore05.tga";
 	locations[n].worldmap = "Shore44";
 	//Sound
 	locations[n].type = "seashore";

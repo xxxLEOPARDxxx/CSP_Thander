@@ -7616,7 +7616,7 @@ void QuestComplete(string sQuestName, string qname)
 			//LAi_FadeDelay(fTemp, "loading\inside\censored1.tga");
 			//StartPictureAsVideo( "loading\inside\censored1.tga", fTemp );
 			SetLaunchFrameFormParam("", "", 0, fTemp);
-			SetLaunchFrameFormPic("loading\inside\censored1.tga");
+			SetLaunchFrameFormPic("loading\jonny_load\inside\censored1.tga");
             LaunchFrameForm();
 			DoQuestCheckDelay("PlaySex_2", 1.0);
 		break;

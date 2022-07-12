@@ -14,7 +14,7 @@ int LocationInitCuracao(int n)
 	locations[n].islandId = "Curacao";
 
 	locations[n].filespath.models = "locations\Town_Curacao\Town\";
-	locations[n].image = "loading\Town_"+rand(8)+".tga";
+	locations[n].image = "loading\jonny_load\city\Town_Curacao.tga";
 	locations[n].citizens = true;
 	locations[n].soldiers = true;
 	locations[n].carrier = true;
@@ -242,7 +242,7 @@ int LocationInitCuracao(int n)
 	locations[n].id = "Villemstad_tavern";
 	locations[n].id.label = "Tavern";
 	locations[n].filespath.models = "locations\inside\Tavern07\";
-	locations[n].image = "loading\inside\Tavern_"+rand(7)+".tga";
+	locations[n].image = "loading\jonny_load\inside\Tavern07.tga";
 	locations[n].habitues = 1;
 	//Town sack
 	locations[n].townsack = "Villemstad";
@@ -290,7 +290,7 @@ int LocationInitCuracao(int n)
 	locations[n].id = "Villemstad_tavern_upstairs";
 	locations[n].filespath.models = "locations\inside\Tavern_room";
 	locations[n].id.label = "Tavern upstairs";
-	locations[n].image = "loading\inside\TavernCommon.tga";
+	locations[n].image = "loading\jonny_load\inside\Tavern_room.tga";
 	//Town sack
 	locations[n].townsack = "Villemstad";
 	locations[n].lockWeather = "Inside";
@@ -331,7 +331,7 @@ int LocationInitCuracao(int n)
 	locations[n].id = "Villemstad_store";
 	locations[n].id.label = "Store";
 	locations[n].filespath.models = "locations\inside\Store04\";
-	locations[n].image = "loading\inside\shop_"+rand(3)+".tga";
+	locations[n].image = "loading\jonny_load\inside\store04.tga";
 	//Town sack
 	locations[n].townsack = "Villemstad";
 	locations[n].lockWeather = "Inside";
@@ -377,7 +377,7 @@ int LocationInitCuracao(int n)
 	locations[n].id = "Villemstad_Shipyard";
 	locations[n].id.label = "Shipyard";
 	locations[n].filespath.models = "locations\inside\Shipyard03\";
-	locations[n].image = "loading\inside\Shipyard_"+rand(4)+".tga";
+	locations[n].image = "loading\jonny_load\inside\Shipyard03.tga";
 	//Town sack
 	locations[n].townsack = "Villemstad";
 	locations[n].lockWeather = "Inside";
@@ -423,7 +423,7 @@ int LocationInitCuracao(int n)
 	locations[n].id = "Villemstad_townhall";
 	locations[n].id.label = "Townhall";
 	locations[n].filespath.models = "locations\inside\Residence02";
-	locations[n].image = "loading\inside\residence_0.tga";
+	locations[n].image = "loading\jonny_load\inside\residence02.tga";
 	//Town sack
 	locations[n].townsack = "Villemstad";
 	locations[n].lockWeather = "Inside";
@@ -469,7 +469,7 @@ int LocationInitCuracao(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Villemstad_TownhallRoom";
 	locations[n].id.label = "TownhallRoom";
-	locations[n].image = "loading\inside\CommonResidence_1.tga";
+	locations[n].image = "loading\jonny_load\inside\BigHouse01_(BigHouse01_2Door).tga";
 	//Town sack
 	locations[n].townsack = "Villemstad";
 	locations[n].lockWeather = "Inside";
@@ -528,7 +528,7 @@ int LocationInitCuracao(int n)
 	locations[n].id = "Villemstad_church";
 	locations[n].filespath.models = "locations\inside\Church01";
 	locations[n].id.label = "Church";
-	locations[n].image = "loading\inside\Church01.tga";
+	locations[n].image = "loading\jonny_load\inside\Church01.tga";
 	//Town sack
 	locations[n].townsack = "Villemstad";
 	locations[n].lockWeather = "Inside";
@@ -568,7 +568,7 @@ int LocationInitCuracao(int n)
 	locations[n].id = "Villemstad_bank";
 	locations[n].id.label = "Usurer House";
 	locations[n].filespath.models = "locations\inside\Bank01\";
-	locations[n].image = "loading\inside\bank_"+rand(3)+".tga";
+	locations[n].image = "loading\jonny_load\inside\bank01.tga";
 	//Town sack
 	locations[n].townsack = "Villemstad";
 	locations[n].lockWeather = "Inside";
@@ -615,7 +615,7 @@ int LocationInitCuracao(int n)
 	locations[n].id = "GWIK";
 	locations[n].id.label = "GWIKshort";
 	locations[n].filespath.models = "locations\Inside\BigHouse05\";
-	locations[n].image = "loading\inside\CommonResidence_5.tga";
+	locations[n].image = "loading\jonny_load\inside\BigHouse05.tga";
 	//Town sack
 	locations[n].townsack = "Villemstad";
 	locations[n].lockWeather = "Inside";
@@ -653,7 +653,7 @@ int LocationInitCuracao(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Villemstad_PortOffice";
 	locations[n].id.label = "PortOffice";
-	locations[n].image = "loading\inside\portoffice.tga";
+	locations[n].image = "loading\jonny_load\inside\portoffice.tga";
 	//Town sack
 	locations[n].townsack = "Villemstad";
 	locations[n].lockWeather = "Inside";
@@ -696,7 +696,7 @@ int LocationInitCuracao(int n)
 	locations[n].id = "Villemstad_houseS3";
 	locations[n].filespath.models = "locations\inside\CobHouse";
 	locations[n].id.label = "Aaron's House";
-	locations[n].image = "loading\inside\CobHouse.tga";
+	locations[n].image = "loading\jonny_load\inside\CobHouse.tga";
 	//Town sack
 	locations[n].townsack = "Villemstad";
 	locations[n].lockWeather = "Inside";
@@ -743,7 +743,7 @@ int LocationInitCuracao(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Villemstad_houseSp5";
 	locations[n].id.label = "MK_House";
-	locations[n].image = "loading\inside\TwoFloorHouse.tga";
+	locations[n].image = "loading\jonny_load\inside\TwoFloorHouse.tga";
 	//Town sack
 	locations[n].townsack = "Villemstad";
 	locations[n].lockWeather = "Inside";
@@ -787,7 +787,7 @@ int LocationInitCuracao(int n)
 
 	locations[n].id = "Villemstad_Graveyard";
 	locations[n].id.label = "Graveyard";
-	locations[n].image = "loading\Graveyard.tga";
+	locations[n].image = "loading\jonny_load\outside\Graveyard.tga";
 	//Town sack
 	locations[n].townsack = "Villemstad";
 	locations[n].fastreload = "Villemstad";
@@ -863,7 +863,7 @@ int LocationInitCuracao(int n)
 	/////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Villemstad_KeepersHouse";
 	locations[n].id.label = "KeepersHouse";
-	locations[n].image = "loading\inside\KeepersHouse.tga";
+	locations[n].image = "loading\jonny_load\inside\SmallHouse_inside.tga";
 	//Town sack
 	locations[n].townsack = "Villemstad";
 	locations[n].lockWeather = "Inside";
@@ -901,7 +901,7 @@ int LocationInitCuracao(int n)
 	/////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Villemstad_Chapel";
 	locations[n].id.label = "Chapel";
-	locations[n].image = "loading\inside\Chapel.tga";
+	locations[n].image = "loading\jonny_load\inside\church_IM.tga";
 	//Town sack
 	locations[n].townsack = "Villemstad";
 	locations[n].lockWeather = "Inside";
@@ -939,7 +939,7 @@ int LocationInitCuracao(int n)
 	/////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Villemstad_CryptBig1";
 	locations[n].id.label = "CryptBig2";
-	locations[n].image = "loading\inside\CryptBig1.tga";
+	locations[n].image = "loading\jonny_load\inside\crypt_2_2_inside.tga";
 	//Town sack
 	locations[n].townsack = "Villemstad";
 	locations[n].lockWeather = "Inside";
@@ -987,7 +987,7 @@ int LocationInitCuracao(int n)
 	locations[n].id = "Villemstad_ExitTown";
 	locations[n].fastreload = "Villemstad";
 	locations[n].id.label = "ExitTown";
-	locations[n].image = "loading\Gate_"+rand(1)+".tga";
+	locations[n].image = "loading\jonny_load\jungle\TownExitW.tga";
 	//Town sack
 	locations[n].townsack = "Villemstad";
 	//Sound
@@ -1056,7 +1056,7 @@ int LocationInitCuracao(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Shore24";
 	locations[n].id.label = "Shore24";
-	locations[n].image = "loading\outside\harbor_" + rand(14) + ".tga";
+	locations[n].image = "loading\jonny_load\shores\Shore09_Shore10.tga";
 	locations[n].worldmap = "Shore24";
 	//Sound
 	locations[n].type = "seashore";
@@ -1109,7 +1109,7 @@ int LocationInitCuracao(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Curacao_jungle_01";
 	locations[n].id.label = "Jungle";
-	locations[n].image = "loading\outside\Jungle_"+rand(5)+".tga";
+	locations[n].image = "loading\jonny_load\jungle\Jungle5.tga";
 	//Sound
 	locations[n].type = "jungle";
 	locations[n].islandId = "Curacao";
@@ -1164,7 +1164,7 @@ int LocationInitCuracao(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Curacao_CaveEntrance";
 	locations[n].id.label = "Cave entrance";
-	locations[n].image = "loading\outside\Jungle_"+rand(5)+".tga";
+	locations[n].image = "loading\jonny_load\jungle\CaveEnt2.tga";
 	//Sound
 	locations[n].type = "jungle";
 	locations[n].islandId = "Curacao";
@@ -1214,7 +1214,7 @@ int LocationInitCuracao(int n)
 	// Пещера
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Curacao_Cave";
-	locations[n].image = "loading\inside\Cave_"+(rand(1)+1)+".tga";
+	locations[n].image = "loading\jonny_load\inside\cavernMedium2.tga";
 	locations[n].id.label = "Cave";
 	//Sound
 	locations[n].type = "cave";
@@ -1261,7 +1261,7 @@ int LocationInitCuracao(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     locations[n].id = "Curacao_jungle_02";
 	locations[n].id.label = "Jungle";
-	locations[n].image = "loading\outside\Jungle_"+rand(5)+".tga";
+	locations[n].image = "loading\jonny_load\jungle\Jungle8.tga";
  	//Sound
 	locations[n].type = "jungle";
 	locations[n].islandId = "Curacao";
@@ -1309,7 +1309,7 @@ int LocationInitCuracao(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Curacao_jungle_03";
 	locations[n].id.label = "Jungle";
-	locations[n].image = "loading\outside\Jungle_"+rand(5)+".tga";
+	locations[n].image = "loading\jonny_load\jungle\Jungle6.tga";
 	//Sound
 	locations[n].type = "jungle";
 	locations[n].islandId = "Curacao";
@@ -1376,7 +1376,7 @@ int LocationInitCuracao(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Shore23";
 	locations[n].id.label = "Shore23";
-	locations[n].image = "loading\outside\harbor_" + rand(14) + ".tga";
+	locations[n].image = "loading\jonny_load\Shores\Shore09_Shore10.tga";
 	locations[n].worldmap = "Shore23";
 	//Sound
 	locations[n].type = "seashore";
@@ -1429,7 +1429,7 @@ int LocationInitCuracao(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Shore22";
 	locations[n].id.label = "Shore22";
-	locations[n].image = "loading\outside\harbor_" + rand(14) + ".tga";
+	locations[n].image = "loading\jonny_load\shores\Shore05.tga";
 	locations[n].worldmap = "Shore22";
 	//Sound
 	locations[n].type = "seashore";

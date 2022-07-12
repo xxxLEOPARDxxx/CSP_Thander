@@ -1373,16 +1373,16 @@ void ShowInfo()
 			sHeader = XI_ConvertString("QuestMark Mode");
 			sText1 = XI_ConvertString("QuestMark Mode_descr");
             sPicture = "INTERFACES\FaqPictures\QUESTMARK_CHECKBOX.png";
-			xx = 256;
-			yy = 256;
+			xx = 448;
+			yy = 448;
 		break;
 
 		case "FXMARK_CHECKBOX":
 			sHeader = XI_ConvertString("FXMark Mode");
 			sText1 = XI_ConvertString("FXMark Mode_descr");
             sPicture = "INTERFACES\FaqPictures\FXMARK_CHECKBOX.png";
-			xx = 256;
-			yy = 256;
+			xx = 448;
+			yy = 448;
 		break;
 
 		case "CM_CONTROLS_CHECKBOX":
@@ -1410,8 +1410,8 @@ void ShowInfo()
 			sHeader = XI_ConvertString("ShipMark Mode");
 			sText1 = XI_ConvertString("ShipMark Mode_descr");
             sPicture = "INTERFACES\FaqPictures\SHIPMARK_CHECKBOX.png";
-			xx = 256;
-			yy = 256;
+			xx = 448;
+			yy = 448;
 		break;
 
 		case "SIMPLESEA_CHECKBOX":
@@ -1447,16 +1447,16 @@ void ShowInfo()
 			sHeader = XI_ConvertString("CannonsHUD_title");
 			sText1 = XI_ConvertString("CannonsHUD_desc");
             sPicture = "INTERFACES\FaqPictures\CannonsHUD_CHECKBOX.png";
-			xx = 256;
-			yy = 256;
+			xx = 448;
+			yy = 448;
 		break;
 
 		case "DEADBOXTEXT_CHECKBOX":
 			sHeader = XI_ConvertString("DeadBoxText_title");
 			sText1 = XI_ConvertString("DeadBoxText_desc");
             sPicture = "INTERFACES\FaqPictures\DEADBOXTEXT_CHECKBOX.png";
-			xx = 256;
-			yy = 256;
+			xx = 448;
+			yy = 448;
 		break;
 
 		case "ALTFONT_CHECKBOX":
@@ -1481,8 +1481,8 @@ void ShowInfo()
 			sHeader = XI_ConvertString("AltIntIcons_title");
 			sText1 = XI_ConvertString("AltIntIcons_desc");
             sPicture = "INTERFACES\FaqPictures\ALT_INT_ICONS_CHECKBOX.png";
-			xx = 256;
-			yy = 256;
+			xx = 448;
+			yy = 448;
 		break;
 
 		case "CHAR_VOICE_CHECKBOX":

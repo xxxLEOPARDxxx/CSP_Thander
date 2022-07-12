@@ -5,7 +5,7 @@ int LocationInitBoarding(int n)
     //ID
 	Locations[n].id = "BOARDING_FORT";
 	locations[n].type = "fort_attack";
-	Locations[n].image = "loading\FortShturm_" + rand(3) + ".tga";
+	Locations[n].image = "loading\jonny_load\outside\Fort_2_(shturm).tga";
 	LAi_LocationFantomsGen(&locations[n], false);
 	// тереть .reload
 	Locations[n].boarding.locatorNum = 15;
@@ -15,7 +15,7 @@ int LocationInitBoarding(int n)
 	// Jason: дополнительные абордажные локации форта
 	//------------------------------------------ двор ---------------------------------------------------
 	Locations[n].id = "Boarding_fortyard";
-	Locations[n].image = "loading\FortShturm_" + rand(3) + ".tga";
+	Locations[n].image = "loading\jonny_load\inside\Fort_1.tga";
 	LAi_LocationFantomsGen(&locations[n], false);
 	Locations[n].boarding.locatorNum = 15;
 	Locations[n].boarding = "false";
@@ -43,7 +43,7 @@ int LocationInitBoarding(int n)
 
 	//------------------------------------------ бастион ---------------------------------------------------
 	Locations[n].id = "Boarding_bastion1";
-	Locations[n].image = "loading\FortShturm_" + rand(3) + ".tga";
+	Locations[n].image = "loading\jonny_load\outside\Fort_2_(shturm).tga";
 	LAi_LocationFantomsGen(&locations[n], false);
 	Locations[n].boarding.locatorNum = 15;
 	Locations[n].boarding = "false";
@@ -70,7 +70,7 @@ int LocationInitBoarding(int n)
 
 	//------------------------------------------ бастион ---------------------------------------------------
 	Locations[n].id = "Boarding_bastion2";
-	Locations[n].image = "loading\FortShturm_" + rand(3) + ".tga";
+	Locations[n].image = "loading\jonny_load\inside\Fort_3.tga";
 	LAi_LocationFantomsGen(&locations[n], false);
 	Locations[n].boarding.locatorNum = 15;
 	Locations[n].boarding = "false";
@@ -101,7 +101,7 @@ int LocationInitBoarding(int n)
 	Locations[n].id = "SentJons_fort";
 	locations[n].id.label = "SentJons Fort";
 	//Info
-	Locations[n].image = "loading\outside\Fort_"+rand(3)+".tga";
+	Locations[n].image = "loading\jonny_load\outside\FortV.tga";
 	locations[n].fastreload = "SentJons";
 	locations[n].townsack = "SentJons";
 	//Sound
@@ -149,7 +149,7 @@ int LocationInitBoarding(int n)
 	////////////////////// prison ////////////////////////////
 	Locations[n].id = "SentJons_prison";
 	locations[n].id.label = "Prison";
-	Locations[n].image = "loading\inside\prison_"+rand(6)+".tga";
+	Locations[n].image = "loading\jonny_load\inside\prison1.tga";
 	locations[n].townsack = "SentJons";
 	locations[n].fastreload = "SentJons";
     locations[n].parent_colony = "SentJons";
@@ -186,7 +186,7 @@ int LocationInitBoarding(int n)
 	Locations[n].id = "Bridgetown_fort";
 	locations[n].id.label = "Bridgetown Fort";
 	//Info
-	Locations[n].image = "loading\outside\Fort_"+rand(3)+".tga";
+	Locations[n].image = "loading\jonny_load\outside\FortVRight.tga";
 	locations[n].townsack = "Bridgetown";
 	locations[n].fastreload = "Bridgetown";
 	//Sound
@@ -234,7 +234,7 @@ int LocationInitBoarding(int n)
 	////////////////////// prison ////////////////////////////
 	Locations[n].id = "Bridgetown_prison";
 	locations[n].id.label = "Prison";
-	Locations[n].image = "loading\inside\prison_"+rand(6)+".tga";
+	Locations[n].image = "loading\jonny_load\inside\prison1.tga";
 	locations[n].townsack = "Bridgetown";
 	locations[n].parent_colony = "Bridgetown";
 	locations[n].fastreload = "Bridgetown";
@@ -271,7 +271,7 @@ int LocationInitBoarding(int n)
 	Locations[n].id = "PortRoyal_fort";
 	locations[n].id.label = "PortRoyal Fort";
 	//Info
-	Locations[n].image = "loading\outside\Fort_"+rand(3)+".tga";
+	Locations[n].image = "loading\jonny_load\outside\FortV.tga";
 	locations[n].townsack = "PortRoyal";
 	//Sound
 	locations[n].type = "fort";
@@ -319,7 +319,7 @@ int LocationInitBoarding(int n)
 	////////////////////// prison ////////////////////////////
 	Locations[n].id = "PortRoyal_prison";
 	locations[n].id.label = "Prison";
-	Locations[n].image = "loading\inside\prison_"+rand(6)+".tga";
+	Locations[n].image = "loading\jonny_load\inside\prison1.tga";
 	locations[n].townsack = "PortRoyal";
 	locations[n].parent_colony = "PortRoyal";
 	locations[n].fastreload = "PortRoyal";
@@ -356,7 +356,7 @@ int LocationInitBoarding(int n)
 	Locations[n].id = "Villemstad_fort";
 	locations[n].id.label = "Villemstad Fort";
 	//Info
-	Locations[n].image = "loading\outside\Fort_"+rand(3)+".tga";
+	Locations[n].image = "loading\jonny_load\outside\FortVRight.tga";
 	locations[n].townsack = "Villemstad";
 	//Sound
 	locations[n].type = "fort";
@@ -404,7 +404,7 @@ int LocationInitBoarding(int n)
 	////////////////////// prison ////////////////////////////
 	Locations[n].id = "Villemstad_prison";
 	locations[n].id.label = "Prison";
-	Locations[n].image = "loading\inside\prison_"+rand(6)+".tga";
+	Locations[n].image = "loading\jonny_load\inside\prison1.tga";
 	locations[n].townsack = "Villemstad";
 	locations[n].parent_colony = "Villemstad";
 	locations[n].fastreload = "Villemstad";
@@ -441,7 +441,7 @@ int LocationInitBoarding(int n)
 	Locations[n].id = "BasTer_Fort";
 	locations[n].id.label = "BasTer Fort";
 	//Info
-	Locations[n].image = "loading\outside\Fort_"+rand(3)+".tga";
+	Locations[n].image = "loading\jonny_load\outside\FortVRight.tga";
 	locations[n].townsack = "BasTer";
 	//Sound
 	locations[n].type = "fort";
@@ -489,7 +489,7 @@ int LocationInitBoarding(int n)
 	////////////////////// prison ////////////////////////////
 	Locations[n].id = "BasTer_prison";
 	locations[n].id.label = "Prison";
-	Locations[n].image = "loading\inside\prison_"+rand(6)+".tga";
+	Locations[n].image = "loading\jonny_load\inside\prison1.tga";
 	locations[n].townsack = "BasTer";
 	locations[n].parent_colony = "BasTer";
 	locations[n].fastreload = "BasTer";
@@ -526,7 +526,7 @@ int LocationInitBoarding(int n)
 	Locations[n].id = "Santiago_fort";
 	locations[n].id.label = "Santiago Fort";
 	//Info
-	Locations[n].image = "loading\outside\Fort_"+rand(3)+".tga";
+	Locations[n].image = "loading\jonny_load\outside\FortVRight.tga";
 	locations[n].townsack = "Santiago";
 	//Sound
 	locations[n].type = "fort";
@@ -574,7 +574,7 @@ int LocationInitBoarding(int n)
 	////////////////////// prison ////////////////////////////
 	Locations[n].id = "Santiago_prison";
 	locations[n].id.label = "Prison";
-	Locations[n].image = "loading\inside\prison_"+rand(6)+".tga";
+	Locations[n].image = "loading\jonny_load\inside\prison1.tga";
 	locations[n].townsack = "Santiago";
 	locations[n].parent_colony = "Santiago";
 	locations[n].fastreload = "Santiago";
@@ -611,7 +611,7 @@ int LocationInitBoarding(int n)
 	Locations[n].id = "FortFrance_fort";
 	locations[n].id.label = "FortFrance Fort";
 	//Info
-	Locations[n].image = "loading\outside\Fort_"+rand(3)+".tga";
+	Locations[n].image = "loading\jonny_load\outside\FortVRight.tga";
 	locations[n].townsack = "FortFrance";
 	//Sound
 	locations[n].type = "fort";
@@ -659,7 +659,7 @@ int LocationInitBoarding(int n)
 	////////////////////// prison ////////////////////////////
 	Locations[n].id = "FortFrance_prison";
 	locations[n].id.label = "Prison";
-	Locations[n].image = "loading\inside\prison_"+rand(6)+".tga";
+	Locations[n].image = "loading\jonny_load\inside\prison1.tga";
 	locations[n].townsack = "FortFrance";
 	locations[n].parent_colony = "FortFrance";
 	locations[n].fastreload = "FortFrance";
@@ -696,7 +696,7 @@ int LocationInitBoarding(int n)
 	Locations[n].id = "Havana_Fort";
 	locations[n].id.label = "Havana Fort";
 	//Info
-	Locations[n].image = "loading\outside\Fort_"+rand(3)+".tga";
+	Locations[n].image = "loading\jonny_load\outside\FortVRight.tga";
 	locations[n].townsack = "Havana";
 	//Sound
 	locations[n].type = "fort";
@@ -744,7 +744,7 @@ int LocationInitBoarding(int n)
 	////////////////////// prison ////////////////////////////
 	Locations[n].id = "Havana_prison";
 	locations[n].id.label = "Prison";
-	Locations[n].image = "loading\inside\prison_"+rand(6)+".tga";
+	Locations[n].image = "loading\jonny_load\inside\prison1.tga";
 	locations[n].townsack = "Havana";
 	locations[n].parent_colony = "Havana";
 	locations[n].fastreload = "Havana";
@@ -781,7 +781,7 @@ int LocationInitBoarding(int n)
 	Locations[n].id = "Charles_fort";
 	locations[n].id.label = "Charles Fort";
 	//Info
-	Locations[n].image = "loading\outside\Fort_"+rand(3)+".tga";
+	Locations[n].image = "loading\jonny_load\outside\FortVRight.tga";
 	locations[n].townsack = "Charles";
 	//Sound
 	locations[n].type = "fort";
@@ -829,7 +829,7 @@ int LocationInitBoarding(int n)
 	////////////////////// prison ////////////////////////////
 	Locations[n].id = "Charles_prison";
 	locations[n].id.label = "Prison";
-	Locations[n].image = "loading\inside\prison_"+rand(6)+".tga";
+	Locations[n].image = "loading\jonny_load\inside\prison1.tga";
 	locations[n].townsack = "Charles";
 	locations[n].parent_colony = "Charles";
 	locations[n].fastreload = "Charles";
@@ -866,7 +866,7 @@ int LocationInitBoarding(int n)
 	Locations[n].id = "SanJuan_fort";
 	locations[n].id.label = "SanJuan Fort";
 	//Info
-	Locations[n].image = "loading\outside\Fort_"+rand(3)+".tga";
+	Locations[n].image = "loading\jonny_load\outside\FortV.tga";
 	locations[n].townsack = "SanJuan";
 	//Sound
 	locations[n].type = "fort";
@@ -914,7 +914,7 @@ int LocationInitBoarding(int n)
 	////////////////////// prison ////////////////////////////
 	Locations[n].id = "SanJuan_prison";
 	locations[n].id.label = "Prison";
-	Locations[n].image = "loading\inside\prison_"+rand(6)+".tga";
+	Locations[n].image = "loading\jonny_load\inside\prison1.tga";
 	locations[n].townsack = "SanJuan";
 	locations[n].parent_colony = "SanJuan";
 	locations[n].fastreload = "SanJuan";
@@ -951,7 +951,7 @@ int LocationInitBoarding(int n)
 	Locations[n].id = "SantoDomingo_Fort";
 	locations[n].id.label = "SantoDomingo Fort";
 	//Info
-	Locations[n].image = "loading\outside\Fort_"+rand(3)+".tga";
+	Locations[n].image = "loading\jonny_load\outside\FortV.tga";
 	locations[n].townsack = "SantoDomingo";
 	//Sound
 	locations[n].type = "fort";
@@ -999,7 +999,7 @@ int LocationInitBoarding(int n)
 	////////////////////// prison ////////////////////////////
 	Locations[n].id = "SantoDomingo_prison";
 	locations[n].id.label = "Prison";
-	Locations[n].image = "loading\inside\prison_"+rand(6)+".tga";
+	Locations[n].image = "loading\jonny_load\inside\prison1.tga";
 	locations[n].townsack = "SantoDomingo";
 	locations[n].parent_colony = "SantoDomingo";
 	locations[n].fastreload = "SantoDomingo";
@@ -1036,7 +1036,7 @@ int LocationInitBoarding(int n)
 	Locations[n].id = "Panama_fort";
 	locations[n].id.label = "Panama Fort";
 	//Info
-	Locations[n].image = "loading\outside\Fort_"+rand(3)+".tga";
+	Locations[n].image = "loading\jonny_load\outside\FortVRight.tga";
 	locations[n].townsack = "Panama";
 	//Sound
 	locations[n].type = "fort";
@@ -1084,7 +1084,7 @@ int LocationInitBoarding(int n)
 	////////////////////// prison ////////////////////////////
 	Locations[n].id = "Panama_prison";
 	locations[n].id.label = "Prison";
-	Locations[n].image = "loading\inside\prison_"+rand(6)+".tga";
+	Locations[n].image = "loading\jonny_load\inside\prison1.tga";
 	locations[n].townsack = "Panama";
 	locations[n].parent_colony = "Panama";
 	locations[n].fastreload = "Panama";
@@ -1122,7 +1122,7 @@ int LocationInitBoarding(int n)
 	Locations[n].id = "PortoBello_fort";
 	locations[n].id.label = "PortoBello Fort";
 	//Info
-	Locations[n].image = "loading\outside\Fort_"+rand(3)+".tga";
+	Locations[n].image = "loading\jonny_load\outside\FortVRight.tga";
 	locations[n].townsack = "PortoBello";
 	//Sound
 	locations[n].type = "fort";
@@ -1170,7 +1170,7 @@ int LocationInitBoarding(int n)
 	////////////////////// prison ////////////////////////////
 	Locations[n].id = "PortoBello_prison";
 	locations[n].id.label = "Prison";
-	Locations[n].image = "loading\inside\prison_"+rand(6)+".tga";
+	Locations[n].image = "loading\jonny_load\inside\prison1.tga";
 	locations[n].townsack = "PortoBello";
 	locations[n].parent_colony = "PortoBello";
 	locations[n].fastreload = "PortoBello";
@@ -1207,7 +1207,7 @@ int LocationInitBoarding(int n)
 	Locations[n].id = "Cartahena_fort";
 	locations[n].id.label = "Cartahena Fort";
 	//Info
-	Locations[n].image = "loading\outside\Fort_"+rand(3)+".tga";
+	Locations[n].image = "loading\jonny_load\outside\FortVRight.tga";
 	locations[n].townsack = "Cartahena";
 	//Sound
 	locations[n].type = "fort";
@@ -1254,7 +1254,7 @@ int LocationInitBoarding(int n)
 	////////////////////// prison ////////////////////////////
 	Locations[n].id = "Cartahena_prison";
 	locations[n].id.label = "Prison";
-	Locations[n].image = "loading\inside\prison_"+rand(6)+".tga";
+	Locations[n].image = "loading\jonny_load\inside\prison1.tga";
 	locations[n].townsack = "Cartahena";
 	locations[n].parent_colony = "Cartahena";
 	locations[n].fastreload = "Cartahena";
@@ -1291,7 +1291,7 @@ int LocationInitBoarding(int n)
 	Locations[n].id = "PortSpein_Fort";
 	locations[n].id.label = "PortSpein Fort";
 	//Info
-	Locations[n].image = "loading\outside\Fort_"+rand(3)+".tga";
+	Locations[n].image = "loading\jonny_load\outside\FortV.tga";
 	locations[n].townsack = "PortSpein";
 	//Sound
 	locations[n].type = "fort";
@@ -1339,7 +1339,7 @@ int LocationInitBoarding(int n)
 	////////////////////// prison ////////////////////////////
 	Locations[n].id = "PortSpein_prison";
 	locations[n].id.label = "Prison";
-	Locations[n].image = "loading\inside\prison_"+rand(6)+".tga";
+	Locations[n].image = "loading\jonny_load\inside\prison1.tga";
 	locations[n].townsack = "PortSpein";
 	locations[n].parent_colony = "PortSpein";
 	locations[n].fastreload = "PortSpein";
@@ -1376,7 +1376,7 @@ int LocationInitBoarding(int n)
 	Locations[n].id = "Marigo_fort";
 	locations[n].id.label = "Marigo Fort";
 	//Info
-	Locations[n].image = "loading\outside\Fort_"+rand(3)+".tga";
+	Locations[n].image = "loading\jonny_load\outside\FortVRight.tga";
 	locations[n].townsack = "Marigo";
 	//Sound
 	locations[n].type = "fort";
@@ -1423,7 +1423,7 @@ int LocationInitBoarding(int n)
 	////////////////////// prison ////////////////////////////
 	Locations[n].id = "Marigo_prison";
 	locations[n].id.label = "Prison";
-	Locations[n].image = "loading\inside\prison_"+rand(6)+".tga";
+	Locations[n].image = "loading\jonny_load\inside\prison1.tga";
 	locations[n].townsack = "Marigo";
 	locations[n].parent_colony = "Marigo";
 	locations[n].fastreload = "Marigo";
@@ -1460,7 +1460,7 @@ int LocationInitBoarding(int n)
 	Locations[n].id = "Tortuga_Fort";
 	locations[n].id.label = "Tortuga Fort";
 	//Info
-	Locations[n].image = "loading\outside\Fort_"+rand(3)+".tga";
+	Locations[n].image = "loading\jonny_load\outside\FortV.tga";
 	locations[n].townsack = "Tortuga";
 	//Sound
 	locations[n].type = "fort";
@@ -1508,7 +1508,7 @@ int LocationInitBoarding(int n)
 	////////////////////// prison ////////////////////////////
 	Locations[n].id = "Tortuga_prison";
 	locations[n].id.label = "Prison";
-	Locations[n].image = "loading\inside\prison_"+rand(6)+".tga";
+	Locations[n].image = "loading\jonny_load\inside\prison1.tga";
 	locations[n].townsack = "Tortuga";
 	locations[n].parent_colony = "Tortuga";
 	locations[n].fastreload = "Tortuga";
@@ -1545,7 +1545,7 @@ int LocationInitBoarding(int n)
 	Locations[n].id = "Maracaibo_Fort";
 	locations[n].id.label = "Maracaibo Fort";
 	//Info
-	Locations[n].image = "loading\outside\Fort_"+rand(3)+".tga";
+	Locations[n].image = "loading\jonny_load\outside\FortVRight.tga";
 	locations[n].townsack = "Maracaibo";
 	//Sound
 	locations[n].type = "fort";
@@ -1592,7 +1592,7 @@ int LocationInitBoarding(int n)
 	////////////////////// prison ////////////////////////////
 	Locations[n].id = "Maracaibo_prison";
 	locations[n].id.label = "Prison";
-	Locations[n].image = "loading\inside\prison_"+rand(6)+".tga";
+	Locations[n].image = "loading\jonny_load\inside\prison1.tga";
 	locations[n].townsack = "Maracaibo";
 	locations[n].parent_colony = "Maracaibo";
 	locations[n].fastreload = "Maracaibo";
@@ -1629,7 +1629,7 @@ int LocationInitBoarding(int n)
 	Locations[n].id = "Caracas_Fort";
 	locations[n].id.label = "Caracas Fort";
 	//Info
-	Locations[n].image = "loading\outside\Fort_"+rand(3)+".tga";
+	Locations[n].image = "loading\jonny_load\outside\FortVRight.tga";
 	locations[n].townsack = "Caracas";
 	//Sound
 	locations[n].type = "fort";
@@ -1676,7 +1676,7 @@ int LocationInitBoarding(int n)
 	////////////////////// prison ////////////////////////////
 	Locations[n].id = "Caracas_prison";
 	locations[n].id.label = "Prison";
-	Locations[n].image = "loading\inside\prison_"+rand(6)+".tga";
+	Locations[n].image = "loading\jonny_load\inside\prison1.tga";
 	locations[n].townsack = "Caracas";
 	locations[n].parent_colony = "Caracas";
 	locations[n].fastreload = "Caracas";
@@ -1713,7 +1713,7 @@ int LocationInitBoarding(int n)
 	Locations[n].id = "Cumana_Fort";
 	locations[n].id.label = "Cumana Fort";
 	//Info
-	Locations[n].image = "loading\outside\Fort_"+rand(3)+".tga";
+	Locations[n].image = "loading\jonny_load\outside\FortVRight.tga";
 	locations[n].townsack = "Cumana";
 	//Sound
 	locations[n].type = "fort";
@@ -1760,7 +1760,7 @@ int LocationInitBoarding(int n)
 	////////////////////// prison ////////////////////////////
 	Locations[n].id = "Cumana_prison";
 	locations[n].id.label = "Prison";
-	Locations[n].image = "loading\inside\prison_"+rand(6)+".tga";
+	Locations[n].image = "loading\jonny_load\inside\prison1.tga";
 	locations[n].townsack = "Cumana";
 	locations[n].parent_colony = "Cumana";
 	locations[n].fastreload = "Cumana";
@@ -1797,7 +1797,7 @@ int LocationInitBoarding(int n)
 	Locations[n].id = "SantaCatalina_Fort";
 	locations[n].id.label = "SantaCatalina Fort";
 	//Info
-	Locations[n].image = "loading\outside\Fort_"+rand(3)+".tga";
+	Locations[n].image = "loading\jonny_load\outside\FortVRight.tga";
 	locations[n].townsack = "SantaCatalina";
 	//Sound
 	locations[n].type = "fort";
@@ -1844,7 +1844,7 @@ int LocationInitBoarding(int n)
 	////////////////////// prison ////////////////////////////
 	Locations[n].id = "SantaCatalina_prison";
 	locations[n].id.label = "Prison";
-	Locations[n].image = "loading\inside\prison_"+rand(6)+".tga";
+	Locations[n].image = "loading\jonny_load\inside\prison1.tga";
 	locations[n].townsack = "SantaCatalina";
 	locations[n].parent_colony = "SantaCatalina";
 	locations[n].fastreload = "SantaCatalina";
@@ -1881,7 +1881,7 @@ int LocationInitBoarding(int n)
 	Locations[n].id = "Beliz_Fort";
 	locations[n].id.label = "Beliz Fort";
 	//Info
-	Locations[n].image = "loading\outside\Fort_"+rand(3)+".tga";
+	Locations[n].image = "loading\jonny_load\outside\FortVRight.tga";
 	locations[n].townsack = "Beliz";
 	//Sound
 	locations[n].type = "fort";
@@ -1928,7 +1928,7 @@ int LocationInitBoarding(int n)
 	////////////////////// prison ////////////////////////////
 	Locations[n].id = "Beliz_prison";
 	locations[n].id.label = "Prison";
-	Locations[n].image = "loading\inside\prison_"+rand(6)+".tga";
+	Locations[n].image = "loading\jonny_load\inside\prison1.tga";
 	locations[n].townsack = "Beliz";
 	locations[n].parent_colony = "Beliz";
 	locations[n].fastreload = "Beliz";
@@ -1965,7 +1965,7 @@ int LocationInitBoarding(int n)
 	Locations[n].id = "PortPax_Fort";
 	locations[n].id.label = "PortPax Fort";
 	//Info
-	Locations[n].image = "loading\outside\Fort_"+rand(3)+".tga";
+	Locations[n].image = "loading\jonny_load\outside\FortVRight.tga";
 	locations[n].townsack = "PortPax";
 	//Sound
 	locations[n].type = "fort";
@@ -2012,7 +2012,7 @@ int LocationInitBoarding(int n)
 	////////////////////// prison ////////////////////////////
 	Locations[n].id = "PortPax_prison";
 	locations[n].id.label = "Prison";
-	Locations[n].image = "loading\inside\prison_"+rand(6)+".tga";
+	Locations[n].image = "loading\jonny_load\inside\prison1.tga";
 	locations[n].townsack = "PortPax";
 	locations[n].parent_colony = "PortPax";
 	locations[n].fastreload = "PortPax";
@@ -2051,7 +2051,7 @@ int LocationInitBoarding(int n)
     Locations[n].id = "Cabin";   // каюта большая
     locations[n].id.label = "cabine";
 	locations[n].filespath.models = "locations\inside\cabin01";
-    Locations[n].image = "loading\Capdeck_" + rand(6) + ".tga";
+    Locations[n].image = "loading\jonny_load\inside\cabin01.tga";
 	//Sound
 	locations[n].type = "boarding_cabine";
 	//Models
@@ -2088,7 +2088,7 @@ int LocationInitBoarding(int n)
   	Locations[n].id = "CabineFDM";
     locations[n].id.label = "cabine";
 	locations[n].filespath.models = "locations\inside\cabinFDM";
-    Locations[n].image = "loading\Capdeck_" + rand(6) + ".tga";
+    Locations[n].image = "loading\jonny_load\inside\cabinFDM.tga";
 	//Sound
 	locations[n].type = "boarding_cabine";
 	//Models
@@ -2122,7 +2122,7 @@ int LocationInitBoarding(int n)
     Locations[n].id = "Cabin_Huge";   // совсем большая
     locations[n].id.label = "cabine2";
 	locations[n].filespath.models = "locations\inside\cabin02";
-    Locations[n].image = "loading\Capdeck_" + rand(6) + ".tga";
+    Locations[n].image = "loading\jonny_load\inside\cabin02.tga";
 	//Sound
 	locations[n].type = "boarding_cabine";
 	//Models
@@ -2157,7 +2157,7 @@ int LocationInitBoarding(int n)
 	Locations[n].id = "Cabin_Small";
 	Locations[n].id.label = "cabine";
 	Locations[n].filespath.models = "locations\decks\capsm";
-    Locations[n].image = "loading\Capdeck_" + rand(6) + ".tga";
+    Locations[n].image = "loading\jonny_load\inside ship\capsm.tga";
 	//Sound
 	locations[n].type = "boarding_cabine";
 	//Models
@@ -2207,7 +2207,7 @@ int LocationInitBoarding(int n)
 	Locations[n].id = "Cabin_Medium";
 	Locations[n].id.label = "cabine";
 	Locations[n].filespath.models = "locations\decks\capmd";
-    Locations[n].image = "loading\Capdeck_" + rand(6) + ".tga";
+    Locations[n].image = "loading\jonny_load\inside ship\capmd.tga";
 	//Sound
 	locations[n].type = "boarding_cabine";
 	//Models
@@ -2256,7 +2256,7 @@ int LocationInitBoarding(int n)
 	Locations[n].id = "Cabin_Medium2";
 	Locations[n].id.label = "cabine";
 	Locations[n].filespath.models = "locations\decks\capmd_2";
-    Locations[n].image = "loading\Capdeck_" + rand(6) + ".tga";
+    Locations[n].image = "loading\jonny_load\inside ship\capmd_2.tga";
 	//Sound
 	locations[n].type = "boarding_cabine";
 	//Models
@@ -2318,7 +2318,7 @@ int LocationInitBoarding(int n)
 	Locations[n].id = "Cabin_Quest";
 	Locations[n].id.label = "cabine";
 	Locations[n].filespath.models = "locations\decks\capquest";
-    Locations[n].image = "loading\Capdeck_" + rand(6) + ".tga";
+    Locations[n].image = "loading\jonny_load\inside ship\capquest.tga";
 	//Sound
 	locations[n].type = "residence";
 	//Models
@@ -2377,7 +2377,7 @@ int LocationInitBoarding(int n)
 	Locations[n].id = "New_Cabin1";
 	Locations[n].id.label = "cabine";
 	Locations[n].filespath.models = "locations\decks\nc_cabin1";
-    Locations[n].image = "loading\Capdeck_" + rand(6) + ".tga";
+    Locations[n].image = "loading\jonny_load\inside ship\nc_cabin1.tga";
 	//Sound
 	locations[n].type = "boarding_cabine";
 
@@ -2422,7 +2422,7 @@ int LocationInitBoarding(int n)
 	Locations[n].id = "My_New_Cabin1";
 	Locations[n].id.label = "cabine";
 	Locations[n].filespath.models = "locations\decks\nc_cabin1";
-    Locations[n].image = "loading\Capdeck_" + rand(6) + ".tga";
+    Locations[n].image = "loading\jonny_load\inside ship\nc_cabin1.tga";
 	//Sound
 	locations[n].type = "cap_cabine"; // nc_mod
 
@@ -2471,7 +2471,7 @@ int LocationInitBoarding(int n)
 	Locations[n].id = "New_Cabin2"; // Cabin2 fight
 	Locations[n].id.label = "cabine";
 	Locations[n].filespath.models = "locations\decks\nc_cabin2";
-    Locations[n].image = "loading\Capdeck_" + rand(6) + ".tga";
+    Locations[n].image = "loading\jonny_load\inside ship\nc_cabin2.tga";
 	//Sound
 	locations[n].type = "boarding_cabine";
 
@@ -2512,7 +2512,7 @@ int LocationInitBoarding(int n)
 	Locations[n].id = "My_New_Cabin2"; // Cabin2 peace
 	Locations[n].id.label = "cabine";
 	Locations[n].filespath.models = "locations\decks\nc_cabin2";
-    Locations[n].image = "loading\Capdeck_" + rand(6) + ".tga";
+    Locations[n].image = "loading\jonny_load\inside ship\nc_cabin2.tga";
 	//Sound
 	locations[n].type = "cap_cabine"; // nc_mod
 
@@ -2569,7 +2569,7 @@ int LocationInitBoarding(int n)
     Locations[n].id = "My_Cabin";   // наша каюта
     locations[n].id.label = "cabine";
 	locations[n].filespath.models = "locations\inside\cabin01";
-    Locations[n].image = "loading\Capdeck_" + rand(6) + ".tga";
+    Locations[n].image = "loading\jonny_load\inside\cabin01.tga";
 	//Sound
 	locations[n].type = "residence";
 	//Models
@@ -2616,7 +2616,7 @@ int LocationInitBoarding(int n)
   	Locations[n].id = "My_CabineFDM";
     locations[n].id.label = "cabine";
 	locations[n].filespath.models = "locations\inside\cabinFDM\";
-    Locations[n].image = "loading\Capdeck_" + rand(6) + ".tga";
+    Locations[n].image = "loading\jonny_load\inside\cabinFDM.tga";
 	//Sound
 	locations[n].type = "cap_cabine";
 	//Models
@@ -2657,7 +2657,7 @@ int LocationInitBoarding(int n)
 	Locations[n].id = "My_Cabin_Huge";   // совсем большая
     locations[n].id.label = "cabine2";
 	locations[n].filespath.models = "locations\inside\cabin02";
-    Locations[n].image = "loading\Capdeck_" + rand(6) + ".tga";
+    Locations[n].image = "loading\jonny_load\inside\cabin02.tga";
 	//Sound
 	locations[n].type = "cap_cabine";
 	//Models
@@ -2700,7 +2700,7 @@ int LocationInitBoarding(int n)
 	Locations[n].id = "My_Cabin_Small";
 	Locations[n].id.label = "cabine";
 	Locations[n].filespath.models = "locations\decks\capsm";
-    Locations[n].image = "loading\Capdeck_" + rand(6) + ".tga";
+    Locations[n].image = "loading\jonny_load\inside ship\capsm.tga";
 	//Sound
 	locations[n].type = "cap_cabine";
 	//Models
@@ -2759,7 +2759,7 @@ int LocationInitBoarding(int n)
 	Locations[n].id = "My_Cabin_Medium";
 	Locations[n].id.label = "cabine";
 	Locations[n].filespath.models = "locations\decks\capmd";
-    Locations[n].image = "loading\Capdeck_" + rand(6) + ".tga";
+    Locations[n].image = "loading\jonny_load\inside ship\capmd.tga";
 	//Sound
 	locations[n].type = "cap_cabine";
 	//Models
@@ -2816,7 +2816,7 @@ int LocationInitBoarding(int n)
 	Locations[n].id = "My_Cabin_Medium2";
 	Locations[n].id.label = "cabine";
 	Locations[n].filespath.models = "locations\decks\capmd_2";
-    Locations[n].image = "loading\Capdeck_" + rand(6) + ".tga";
+    Locations[n].image = "loading\jonny_load\inside ship\capmd_2.tga";
 	//Sound
 	locations[n].type = "cap_cabine";
 	//Models
@@ -2880,7 +2880,7 @@ int LocationInitBoarding(int n)
 	Locations[n].id = "My_Cabin_Quest";
 	Locations[n].id.label = "cabine";
 	Locations[n].filespath.models = "locations\decks\capquest";
-    Locations[n].image = "loading\Capdeck_" + rand(6) + ".tga";
+    Locations[n].image = "loading\jonny_load\inside ship\capquest.tga";
 	//Sound
 	locations[n].type = "cap_cabine";
 	//Models
@@ -2943,7 +2943,7 @@ int LocationInitBoarding(int n)
 	Locations[n].id = "My_Campus";
 	Locations[n].id.label = "My_Campus";
 	Locations[n].filespath.models = "locations\decks\camp_deck";
-    Locations[n].image = "loading\Campdeck_" + rand(2) + ".tga";
+    Locations[n].image = "loading\jonny_load\inside ship\camp_deck.tga";
 	//Sound
 	locations[n].type = "cap_cabine";
 	//Models
@@ -3000,7 +3000,7 @@ int LocationInitBoarding(int n)
 	Locations[n].id.label = "My_Deck_Medium";
 	//Info
 	Locations[n].filespath.models = "locations\decks\deck2"; //7
-	Locations[n].image = "loading\Gundeck_" + rand(5) + ".tga";
+	Locations[n].image = "loading\jonny_load\inside ship\Deck2.tga";
 	//Sound
 	Locations[n].type = "cap_cabine";
 
@@ -3055,7 +3055,7 @@ int LocationInitBoarding(int n)
 	Locations[n].id.label = "My_Deck";
 	//Info
 	Locations[n].filespath.models = "locations\decks\hold";
-	Locations[n].image = "loading\Hold_" + rand(1) + ".tga";
+	Locations[n].image = "loading\jonny_load\inside ship\Hold.tga";
 	//Sound
 	Locations[n].type = "cap_cabine";
 
@@ -3101,7 +3101,7 @@ int LocationInitBoarding(int n)
 	Locations[n].id = "Deck_Near_Ship_Medium";   // выслать туда шлюпку
 	Locations[n].id.label = "Boarding deck";
 	//Info
-	Locations[n].image = "loading\Quarter_" + rand(2) + ".tga";
+	Locations[n].image = "loading\jonny_load\inside ship\deckMedium.tga";
 	//Sound
 	Locations[n].type = "cap_cabine";
 	Locations[n].boarding = "true";
@@ -3129,7 +3129,7 @@ int LocationInitBoarding(int n)
 	Locations[n].id = "Deck_Near_Ship_Big";   // выслать туда шлюпку
 	Locations[n].id.label = "Boarding deck";
 	//Info
-	Locations[n].image = "loading\Quarter_" + rand(2) + ".tga";
+	Locations[n].image = "loading\jonny_load\inside ship\deckBig.tga";
 	//Sound
 	Locations[n].type = "cap_cabine";
 	Locations[n].boarding = "true";
@@ -3156,7 +3156,7 @@ int LocationInitBoarding(int n)
 	Locations[n].id = "Deck_Near_Ship_Low";   // выслать туда шлюпку
 	Locations[n].id.label = "Boarding deck";
 	//Info
-	Locations[n].image = "loading\Quarter_" + rand(2) + ".tga";
+	Locations[n].image = "loading\jonny_load\inside ship\deckLow.tga";
 	//Sound
 	Locations[n].type = "cap_cabine";
 	Locations[n].boarding = "true";
@@ -3184,7 +3184,7 @@ int LocationInitBoarding(int n)
 	Locations[n].id = "Deck_Near_Ship_Frigate";
 	Locations[n].id.label = "Boarding deck";
 	//Info
-	Locations[n].image = "loading\Quarter_" + rand(2) + ".tga";
+	Locations[n].image = "loading\jonny_load\inside ship\deckFrigate.tga";
 	//Sound
 	Locations[n].type = "cap_cabine";
 	Locations[n].boarding = "true";
@@ -3212,7 +3212,7 @@ int LocationInitBoarding(int n)
 	Locations[n].id = "Deck_Near_Ship_Lineship";
 	Locations[n].id.label = "Boarding deck";
 	//Info
-	Locations[n].image = "loading\Quarter_" + rand(2) + ".tga";
+	Locations[n].image = "loading\jonny_load\inside ship\deckLineship.tga";
 	//Sound
 	Locations[n].type = "cap_cabine";
 	Locations[n].boarding = "true";
@@ -3242,7 +3242,7 @@ int LocationInitBoarding(int n)
 	/// Корабельная палуба  для карта - море
 	////////////////////////////////////////////////////////////
 	Locations[n].id = "Ship_deck_Medium";
-	Locations[n].image = "loading\Quarter_" + rand(2) + ".tga";
+	Locations[n].image = "loading\jonny_load\inside ship\deckMedium.tga";
 	locations[n].id.label = "Boarding deck";
 	//Sound
 	Locations[n].type = "deck";
@@ -3271,7 +3271,7 @@ int LocationInitBoarding(int n)
 	n = n + 1;
 	///////////////////////////////
 	Locations[n].id = "Ship_deck_Big";
-	Locations[n].image = "loading\Quarter_" + rand(2) + ".tga";
+	Locations[n].image = "loading\jonny_load\inside ship\deckBig.tga";
 	locations[n].id.label = "Boarding deck";
 	//Sound
 	Locations[n].type = "deck";
@@ -3299,7 +3299,7 @@ int LocationInitBoarding(int n)
 	n = n + 1;
 	///////////////////////
 	Locations[n].id = "Ship_deck_Low";
-	Locations[n].image = "loading\Quarter_" + rand(2) + ".tga";
+	Locations[n].image = "loading\jonny_load\inside ship\deckLow.tga";
 	locations[n].id.label = "Boarding deck";
 	//Sound
 	Locations[n].type = "deck";
@@ -3333,7 +3333,7 @@ int LocationInitBoarding(int n)
 	//Info
 	Locations[n].type = "deck_fight";
 	Locations[n].filespath.models = "locations\decks\deckLowVSMedium";
-	Locations[n].image = "loading\BoardingA_" + rand(8) + ".tga";
+	Locations[n].image = "loading\jonny_load\abordage\abord_0" + rand(1) + ".tga";
 
 	Locations[n].lockCamAngle = 0.4;
 	Locations[n].camshuttle = 1;
@@ -3365,7 +3365,7 @@ int LocationInitBoarding(int n)
 	//Info
 	Locations[n].type = "deck_fight";
 	Locations[n].filespath.models = "locations\decks\deckLowVSBig";
-	Locations[n].image = "loading\BoardingA_" + rand(8) + ".tga";
+	Locations[n].image = "loading\jonny_load\abordage\abord_" + rand(2) + ".tga";
 
 	Locations[n].lockCamAngle = 0.4;
 	Locations[n].camshuttle = 1;
@@ -3398,7 +3398,7 @@ int LocationInitBoarding(int n)
 	//Info
 	Locations[n].type = "deck_fight";
 	Locations[n].filespath.models = "locations\decks\deckMediumVSBig";
-	Locations[n].image = "loading\BoardingA_" + rand(8) + ".tga";
+	Locations[n].image = "loading\jonny_load\abordage\abord_" + rand(2) + ".tga";
 
 	Locations[n].lockCamAngle = 0.4;
 	Locations[n].camshuttle = 1;
@@ -3432,7 +3432,7 @@ int LocationInitBoarding(int n)
 	//Info
 	Locations[n].type = "deck_fight";
 	Locations[n].filespath.models = "locations\decks\deckLineshipVSFrigate";
-	Locations[n].image = "loading\BoardingA_" + rand(8) + ".tga";
+	Locations[n].image = "loading\jonny_load\abordage\abord_" + rand(2) + ".tga";
 
 	Locations[n].lockCamAngle = 0.4;
 	Locations[n].camshuttle = 1;
@@ -3469,7 +3469,7 @@ int LocationInitBoarding(int n)
 	Locations[n].id.label = "My_Deck";
 	//Info
 	Locations[n].filespath.models = "locations\decks\holdb";
-	Locations[n].image = "loading\Hold_" + rand(1) + ".tga";
+	Locations[n].image = "loading\jonny_load\inside ship\Holdb.tga";
 	//Sound
 	Locations[n].type = "deck_fight";
 
@@ -3501,7 +3501,7 @@ int LocationInitBoarding(int n)
 	Locations[n].id = "Boarding_Campus";
 	Locations[n].id.label = "Orlop deck";
 	Locations[n].filespath.models = "locations\decks\oldeck";
-    Locations[n].image = "loading\OrplopDeck_0.tga";
+    Locations[n].image = "loading\jonny_load\inside ship\oldeck.tga";
 	//Sound
 	locations[n].type = "deck_fight";
 	//Models
@@ -3533,7 +3533,7 @@ int LocationInitBoarding(int n)
 	Locations[n].id.label = "My_Deck_Medium";
 	//Info
 	Locations[n].filespath.models = "locations\decks\GDeck";
-	Locations[n].image = "loading\Gundeck_" + rand(5) + ".tga";
+	Locations[n].image = "loading\jonny_load\inside ship\Gdeck.tga";
 	//Sound
 	Locations[n].type = "deck_fight";
 	//Models

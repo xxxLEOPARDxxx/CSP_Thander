@@ -10,7 +10,7 @@ void InitInterface(string iniName)
     SetFormatedText("MAP_CAPTION", XI_ConvertString("titleLeaveBattle"));
 
 	SetFormatedText("INFO_TEXT_QUESTION", XI_ConvertString("MapWhatYouWantToDo"));
-	SetNewPicture("INFO_PICTURE", "loading\Battle_0.tga");
+	SetNewPicture("INFO_PICTURE", "loading\jonny_load\battle\battle_0"+rand(5)+".tga");
 
 	CalculateInfoData();
 

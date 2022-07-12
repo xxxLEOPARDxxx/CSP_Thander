@@ -14,7 +14,7 @@ int LocationInitLostShipsCity(int n)
  	locations[n].islandId = "LostShipsCity";
 
 	locations[n].filespath.models = "locations\LostShipsCity\";
-	locations[n].image = "loading\OutsideLSC.tga";
+	locations[n].image = "loading\jonny_load\quest\LostShipsCity_"+rand(2)+".tga";
 	//Sound
 	locations[n].type = "LostShipsCity";
 	//locations[n].houseEnc = true; //для энкаунтеров в домах
@@ -716,7 +716,7 @@ int LocationInitLostShipsCity(int n)
 	locations[n].id = "AvaShipInside3";
 	locations[n].id.label = "Ava Cabin";
 	locations[n].filespath.models = "locations\LostShipsCityInsides\AvaShipInside3";
-	locations[n].image = "loading\SantaLuci\AvaShipInside3.tga";
+	locations[n].image = "loading\jonny_load\quest\AvaShipInside3.tga";
 	//Town sack
 	locations[n].townsack = "LostShipsCity";
 	locations[n].lockWeather = "Inside";
@@ -817,7 +817,7 @@ int LocationInitLostShipsCity(int n)
 	locations[n].id = "CarolineBank";
 	locations[n].id.label = "Caroline cabin";
 	locations[n].filespath.models = "locations\LostShipsCityInsides\CarolineBank";
-	locations[n].image = "loading\SantaLuci\CarolineBank.tga";
+	locations[n].image = "loading\jonny_load\quest\CarolineBank.tga";
 	//Town sack
 	locations[n].townsack = "LostShipsCity";
 	locations[n].lockWeather = "Inside";
@@ -901,7 +901,7 @@ int LocationInitLostShipsCity(int n)
 	locations[n].id = "CeresSmithy";
 	locations[n].id.label = "CeresSmithy cabin";
 	locations[n].filespath.models = "locations\LostShipsCityInsides\CeresSmithy";
-	locations[n].image = "loading\SantaLuci\CeresSmithy.tga";
+	locations[n].image = "loading\jonny_load\quest\CeresSmithy.tga";
 	//Town sack
 	locations[n].townsack = "LostShipsCity";
 	locations[n].lockWeather = "Inside";
@@ -1021,7 +1021,7 @@ int LocationInitLostShipsCity(int n)
 	locations[n].id = "EsmeraldaStoreBig";
 	locations[n].id.label = "EsmeraldaStoreBig cabin";
 	locations[n].filespath.models = "locations\LostShipsCityInsides\EsmeraldaStoreBig";
-	locations[n].image = "loading\SantaLuci\EsmeraldaStoreBig.tga";
+	locations[n].image = "loading\jonny_load\quest\EsmeraldaStoreBig.tga";
 	//Town sack
 	locations[n].townsack = "LostShipsCity";
 	locations[n].lockWeather = "Inside";
@@ -1138,7 +1138,7 @@ int LocationInitLostShipsCity(int n)
 	locations[n].id = "FenixPlatform";
 	locations[n].id.label = "FenixPlatform cabin";
 	locations[n].filespath.models = "locations\LostShipsCityInsides\FenixPlatform";
-	locations[n].image = "loading\SantaLuci\FenixPlatform.tga";
+	locations[n].image = "loading\jonny_load\quest\FenixPlatform.tga";
 	//Town sack
 	locations[n].townsack = "LostShipsCity";
 	locations[n].lockWeather = "Inside";
@@ -1210,7 +1210,7 @@ int LocationInitLostShipsCity(int n)
 	locations[n].id = "FernandaDiffIndoor";
 	locations[n].id.label = "FernandaDiffIndoor cabin";
 	locations[n].filespath.models = "locations\LostShipsCityInsides\FernandaDiffIndoor";
-	locations[n].image = "loading\SantaLuci\FernandaDiffIndoor.tga";
+	locations[n].image = "loading\jonny_load\quest\FernandaDiffIndoor.tga";
 	//Town sack
 	locations[n].townsack = "LostShipsCity";
 	locations[n].lockWeather = "Inside";
@@ -1285,7 +1285,7 @@ int LocationInitLostShipsCity(int n)
 	locations[n].id = "FleuronTavern";
 	locations[n].id.label = "FleuronTavern cabin";
 	locations[n].filespath.models = "locations\LostShipsCityInsides\FleuronTavern";
-	locations[n].image = "loading\SantaLuci\FleuronTavern.tga";
+	locations[n].image = "loading\jonny_load\quest\FleuronTavern.tga";
 	//Town sack
 	locations[n].townsack = "LostShipsCity";
 	locations[n].lockWeather = "Inside";
@@ -1416,7 +1416,7 @@ int LocationInitLostShipsCity(int n)
 	locations[n].id = "FurieShipInside2";
 	locations[n].id.label = "FurieShipInside2 cabin";
 	locations[n].filespath.models = "locations\LostShipsCityInsides\FurieShipInside2";
-	locations[n].image = "loading\SantaLuci\FurieShipInside2.tga";
+	locations[n].image = "loading\jonny_load\quest\FurieShipInside2.tga";
 	//Town sack
 	locations[n].townsack = "LostShipsCity";
 	locations[n].lockWeather = "Inside";
@@ -1526,7 +1526,7 @@ int LocationInitLostShipsCity(int n)
 	locations[n].id = "GloriaChurch";
 	locations[n].id.label = "GloriaChurch cabin";
 	locations[n].filespath.models = "locations\LostShipsCityInsides\GloriaChurch";
-	locations[n].image = "loading\SantaLuci\GloriaChurch.tga";
+	locations[n].image = "loading\jonny_load\quest\GloriaChurch.tga";
 	//Town sack
 	locations[n].townsack = "LostShipsCity";
 	locations[n].lockWeather = "Inside";
@@ -1619,7 +1619,7 @@ int LocationInitLostShipsCity(int n)
 	locations[n].id = "PlutoStoreSmall";
 	locations[n].id.label = "PlutoStoreSmall cabin";
 	locations[n].filespath.models = "locations\LostShipsCityInsides\PlutoStoreSmall";
-	locations[n].image = "loading\SantaLuci\PlutoStoreSmall.tga";
+	locations[n].image = "loading\jonny_load\quest\PlutoStoreSmall.tga";
 	//Town sack
 	locations[n].townsack = "LostShipsCity";
 	locations[n].lockWeather = "Inside";
@@ -1726,7 +1726,7 @@ int LocationInitLostShipsCity(int n)
 	locations[n].id = "ProtectorFisher";
 	locations[n].id.label = "ProtectorFisher cabin";
 	locations[n].filespath.models = "locations\LostShipsCityInsides\ProtectorFisher";
-	locations[n].image = "loading\SantaLuci\ProtectorFisher.tga";
+	locations[n].image = "loading\jonny_load\quest\ProtectorFisher.tga";
 	//Town sack
 	locations[n].townsack = "LostShipsCity";
 	locations[n].lockWeather = "Inside";
@@ -1798,7 +1798,7 @@ int LocationInitLostShipsCity(int n)
 	locations[n].id = "SanAugustineResidence";
 	locations[n].id.label = "SanAugustineResidence cabin";
 	locations[n].filespath.models = "locations\LostShipsCityInsides\SanAugustineResidence";
-	locations[n].image = "loading\SantaLuci\San_Augustin.tga";
+	locations[n].image = "loading\jonny_load\quest\SanAugustineResidence.tga";
 	//Town sack
 	locations[n].townsack = "LostShipsCity";
 	locations[n].lockWeather = "Inside";
@@ -1961,7 +1961,7 @@ int LocationInitLostShipsCity(int n)
 	locations[n].id = "SanGabrielMechanic";
 	locations[n].id.label = "SanGabrielMechanic cabin";
 	locations[n].filespath.models = "locations\LostShipsCityInsides\SanGabrielMechanic";
-	locations[n].image = "loading\SantaLuci\SanGabrielMechanic.tga";
+	locations[n].image = "loading\jonny_load\quest\SanGabrielMechanic.tga";
 	//Town sack
 	locations[n].townsack = "LostShipsCity";
 	locations[n].lockWeather = "Inside";
@@ -2076,7 +2076,7 @@ int LocationInitLostShipsCity(int n)
 	locations[n].id = "SantaFlorentinaShipInside4";
 	locations[n].id.label = "SantaFlorentinaShipInside4 cabin";
 	locations[n].filespath.models = "locations\LostShipsCityInsides\SantaFlorentinaShipInside4";
-	locations[n].image = "loading\SantaLuci\SantaFlorentinaShipInside4.tga";
+	locations[n].image = "loading\jonny_load\quest\SantaFlorentinaShipInside4.tga";
 	//Town sack
 	locations[n].townsack = "LostShipsCity";
 	locations[n].lockWeather = "Inside";
@@ -2194,7 +2194,7 @@ int LocationInitLostShipsCity(int n)
 	locations[n].id = "TartarusPrison";
 	locations[n].id.label = "TartarusPrison cabin";
 	locations[n].filespath.models = "locations\LostShipsCityInsides\TartarusPrison";
-	locations[n].image = "loading\SantaLuci\TartarusPrison.tga";
+	locations[n].image = "loading\jonny_load\quest\TartarusPrison.tga";
 	//Town sack
 	locations[n].townsack = "LostShipsCity";
 	locations[n].lockWeather = "Inside";
@@ -2284,7 +2284,7 @@ int LocationInitLostShipsCity(int n)
 	locations[n].id = "VelascoShipInside1";
 	locations[n].id.label = "VelascoShipInside1 cabin";
 	locations[n].filespath.models = "locations\LostShipsCityInsides\VelascoShipInside1";
-	locations[n].image = "loading\SantaLuci\VelascoShipInside1.tga";
+	locations[n].image = "loading\jonny_load\quest\VelascoShipInside1.tga";
 	//Town sack
 	locations[n].townsack = "LostShipsCity";
 	locations[n].lockWeather = "Inside";
@@ -2400,7 +2400,7 @@ int LocationInitLostShipsCity(int n)
 
 	Locations[n].id = "ExternalRingDeck";
 	Locations[n].id.label = "Boarding deck";
-	Locations[n].image = "loading\SantaLuci\ExternalRingDeck.tga";
+	Locations[n].image = "loading\jonny_load\inside ship\deck03.tga";
 	//Sound
 	Locations[n].type = "LostShipsCity";
 	Locations[n].lockCamAngle = 0.4;
@@ -2458,7 +2458,7 @@ int LocationInitLostShipsCity(int n)
 	locations[n].id = "ExternalRingInside";
 	locations[n].id.label = "";
 	locations[n].filespath.models = "locations\LostShipsCityInsides\PlutoStoreSmall";
-	locations[n].image = "loading\SantaLuci\ExternalRingInside.tga";
+	locations[n].image = "loading\jonny_load\quest\externalringinside.tga";
 	//Town sack
 	locations[n].townsack = "LostShipsCity";
 	locations[n].lockWeather = "Inside";
@@ -2541,7 +2541,7 @@ int LocationInitLostShipsCity(int n)
   	Locations[n].id = "ExternalRingCabin1";
     locations[n].id.label = "cabine";
 	locations[n].filespath.models = "locations\inside\cabinFDM\";
-	locations[n].image = "loading\SantaLuci\ExternalRingCabin1.tga";
+	locations[n].image = "loading\jonny_load\inside\cabinFDM.tga";
 	//Sound
 	locations[n].type = "LSC_inside";
 	locations[n].islandId = "LostShipsCity";

@@ -46,7 +46,7 @@ void InitLocations()
 		DeleteAttribute(loc, "");
 		loc.id = "";
 		loc.index = i;
-		loc.image = "loading\sea_" + rand(31) + ".tga";
+		loc.image = "jonny_load\sea\sea_"+rand(3)+".tga";
 		loc.music = "enplav.ogg";
 		loc.locators_radius.reload = 1.0;
 		loc.locators_radius.rld = 1.0;
