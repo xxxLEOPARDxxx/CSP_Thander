@@ -2638,7 +2638,8 @@ void ShipTaken(int iDeadCharacterIndex, int iKillStatus, int iKillerCharacterInd
             Log_SetStringToLog(sSunkShipType + " '" + rDead.Ship.Name + "' " + "был захвачен!");
         }
 	}
-    if (rand(8) < 3 && !bDeadCompanion && sti(rDead.nation) != PIRATE)  // 30 процентов повышаем награду
+	// 30 процентов повышаем награду
+    if (rand(8) < 3 && !bDeadCompanion && sti(rDead.nation) != PIRATE && (iKillerCharacterIndex == GetMainCharacterIndex()))
     {
         ChangeCharacterHunterScore(rKillerCharacter, NationShortName(sti(rDead.nation)) + "hunter", 1+rand(1));
     }
@@ -2688,7 +2689,8 @@ void ShipTakenFree(int iDeadCharacterIndex, int iKillStatus, int iKillerCharacte
 
         Log_SetStringToLog(sSunkShipType + " '" + rDead.Ship.Name + "' " + "был захвачен, но отпущен после грабежа.");
 	}
-    if (rand(20) < 3 && sti(rDead.nation) != PIRATE)  // 14 процентов повышаем награду
+	// 14 процентов повышаем награду
+    if (rand(20) < 3 && sti(rDead.nation) != PIRATE && (iKillerCharacterIndex == GetMainCharacterIndex()))
     {
         ChangeCharacterHunterScore(rKillerCharacter, NationShortName(sti(rDead.nation)) + "hunter", 1+rand(1));
     }

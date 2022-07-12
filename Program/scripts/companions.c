@@ -2,10 +2,7 @@
 // boal абордаж офицеров 27.01.2004 -->
 bool Ship_AutoAbordage(ref rCharacter, float fMinEnemyDistance)
 {
-    int     i;
-    float	fDistance;
-    bool    bSuccess = false;
-    int nIdx = -1;
+    bool bSuccess = false;
 
     //Log_SetStringToLog("Корабль " + rCharacter.Ship.Name + " cap="+rCharacter.id+" начинает абордаж " + Characters[sti(rCharacter.SeaAI.Task.Target)].Ship.Name+" cap="+Characters[sti(rCharacter.SeaAI.Task.Target)].id);
     if (fMinEnemyDistance < 70)
@@ -20,51 +17,50 @@ bool Ship_AutoAbordage(ref rCharacter, float fMinEnemyDistance)
 	    if (fMinEnemyDistance > fOurMaxAbordageDistance) return bSuccess;
 	    if (!CheckAttribute(rCharacter, "SeaAI.Task.Target")) return bSuccess;
 
-        ref  rShipCharacter = GetCharacter(sti(rCharacter.SeaAI.Task.Target));
-        if (LAi_IsDead(rShipCharacter)) return bSuccess;
+        ref rEnemyCharacter = GetCharacter(sti(rCharacter.SeaAI.Task.Target));
+        if (LAi_IsDead(rEnemyCharacter)) return bSuccess;
         //#20180524-01 Remove unneeded sqrt, was 90, now 90^2
-        if (Ship_GetDistance2DRel(rCharacter, rShipCharacter) > 8100.0) return bSuccess;// fix левых дистанций
+        if (Ship_GetDistance2DRel(rCharacter, rEnemyCharacter) > 8100.0) return bSuccess;// fix левых дистанций
 
         int rCharIdx = sti(rCharacter.index);
-        int rShipCharIdx = sti(rShipCharacter.index);
-	    int  iRelation = SeaAI_GetRelation(rCharIdx, rShipCharIdx);
+        int rEnemyCharIdx = sti(rEnemyCharacter.index);
+	    int iRelation = SeaAI_GetRelation(rCharIdx, rEnemyCharIdx);
 
-	    if (!Character_IsAbordageEnable(rShipCharacter) || rShipCharIdx == GetMainCharacterIndex()) return bSuccess;
+	    if (!Character_IsAbordageEnable(rEnemyCharacter) || rEnemyCharIdx == GetMainCharacterIndex()) return bSuccess;
 
 		if (iRelation != RELATION_ENEMY) return bSuccess;
 		// решение об абордаже
 		int rCharCrew = sti(rCharacter.Ship.Crew.Quantity);
-		int rShipCharCrew = sti(rShipCharacter.Ship.Crew.Quantity);
+		int rEnemyCharCrew = sti(rEnemyCharacter.Ship.Crew.Quantity);
 
-		if (rCharCrew < (stf(rShipCharCrew) * 0.6)) return bSuccess;
+		if (rCharCrew < (stf(rEnemyCharCrew) * 0.6)) return bSuccess;
 
-	    float fOurHP                = Ship_GetHP(rCharacter);
-	    float fOurFencing           = stf(rCharacter.TmpSkill.Grappling); //Fencing
-	    float fOurCrewFencing       = (0.1 + fOurFencing * stf(rCharacter.Ship.Crew.Quantity)*GetCrewExp(rCharacter, "Soldiers"));
+	    float fOurFencing = stf(rCharacter.TmpSkill.Grappling); //Fencing
+	    float fOurCrewFencing = (0.1 + fOurFencing * stf(rCharacter.Ship.Crew.Quantity)*GetCrewExp(rCharacter, "Soldiers"));
 
 	    //#20180126-01
 	    bool bIsCharCompanion = IsCompanion(rCharacter);
-	    bool bIsShipCompanion = IsCompanion(rShipCharacter);
+	    bool bIsEnemyCompanion = IsCompanion(rEnemyCharacter);
 	    if (bIsCharCompanion)
 	    {
-	       fOurCrewFencing       = (0.1 + fOurFencing * GetWeaponCrew(rCharacter, rCharCrew)*GetCrewExp(rCharacter, "Soldiers"));
+	       fOurCrewFencing = (0.1 + fOurFencing * GetWeaponCrew(rCharacter, rCharCrew)*GetCrewExp(rCharacter, "Soldiers"));
 	    }
-	    float fMorale  = GetCharacterCrewMorale(rCharacter);
+	    float fMorale = GetCharacterCrewMorale(rCharacter);
         fOurCrewFencing = fOurCrewFencing * (0.5 + fMorale / MORALE_MAX);
 
-	    float fEnHP                = Ship_GetHP(rShipCharacter);
-	    float fEnFencing           = stf(rShipCharacter.TmpSkill.Grappling); //Fencing
-	    float fEnCrewFencing       = (0.1 + fEnFencing * stf(rShipCharCrew) *GetCrewExp(rShipCharacter, "Soldiers"));
+	    float fEnFencing = stf(rEnemyCharacter.TmpSkill.Grappling); //Fencing
+	    float fEnCrewFencing = (0.1 + fEnFencing * stf(rEnemyCharCrew) *GetCrewExp(rEnemyCharacter, "Soldiers"));
 
-	    if (bIsShipCompanion)
+	    if (bIsEnemyCompanion)
 	    {   // учет оружия
-	       fEnCrewFencing       = (0.1 + fEnFencing * GetWeaponCrew(rShipCharacter, rShipCharCrew)*GetCrewExp(rShipCharacter, "Soldiers") );
+	       fEnCrewFencing = (0.1 + fEnFencing * GetWeaponCrew(rEnemyCharacter, rEnemyCharCrew)*GetCrewExp(rEnemyCharacter, "Soldiers") );
 	    }
-        fMorale  = GetCharacterCrewMorale(rShipCharacter);
+        fMorale  = GetCharacterCrewMorale(rEnemyCharacter);
         fEnCrewFencing = fEnCrewFencing * (0.5 + fMorale / MORALE_MAX);
 
 		bool bAngleTest = true;// пока всегда, что верно дл¤ тупого компа
         int deadCrew = 0;
+		int iNation;
 		if (bGrapplingProfessional || bAngleTest)
 		{
 			bSuccess = true;
@@ -72,73 +68,67 @@ bool Ship_AutoAbordage(ref rCharacter, float fMinEnemyDistance)
 
             if (fOurCrewFencing >= fEnCrewFencing)
             { // победа
-                if (bIsShipCompanion)
+                if (bIsEnemyCompanion)
 			    {
-			        Log_SetStringToLog("Наш корабль " + rShipCharacter.Ship.Name + " взят на абордаж ");
+			        Log_SetStringToLog("Наш корабль '" + rEnemyCharacter.Ship.Name + "' взят на абордаж");
 			    }
 			    else
 			    {
-			        int iNation = sti(rShipCharacter.nation);
-					Log_SetStringToLog("Корабль " + rShipCharacter.Ship.Name + " под флагом " + NationNameGenitive(iNation) + " взят на абордаж ");
+			        iNation = sti(rEnemyCharacter.nation);
+					Log_SetStringToLog("Корабль '" + rEnemyCharacter.Ship.Name + "' под флагом " + NationNameGenitive(iNation) + " взят на абордаж");
 			    }
 			    deadCrew = sti(rCharacter.Ship.Crew.Quantity) * fEnCrewFencing / (fOurCrewFencing*1.8);
-				if (IsCompanion(rShipCharacter))
-				{
-					Statistic_AddValue(pchar, "Sailors_dead", deadCrew);
-				}
+				if (bIsCharCompanion) Statistic_AddValue(pchar, "Sailors_dead", deadCrew);
+				if (bIsEnemyCompanion) Statistic_AddValue(pchar, "Sailors_dead", sti(rEnemyCharacter.Ship.Crew.Quantity));
 			    SetCrewQuantity(rCharacter, makeint(sti(rCharacter.Ship.Crew.Quantity) - deadCrew));
+				SetCrewQuantity(rEnemyCharacter, 0);
 			    if (bIsCharCompanion)
 			    {
 			        RemoveCharacterGoodsSelf(rCharacter, GOOD_WEAPON, deadCrew);
-			    }
-				//navy-->
-				if (CheckChanceOfBetterShip(rCharacter, rShipCharacter))
+					LAi_SetCurHP(rEnemyCharacter, 0.0);
+					LaunchRansackMain(rCharacter, rEnemyCharacter, "companion_captured");
+				}
+				else
 				{
-					SeaExchangeCharactersShips(rCharacter, rShipCharacter, true, true);
+					if (CheckChanceOfBetterShip(rCharacter, rEnemyCharacter))
+					{
+						SeaExchangeCharactersShips(rCharacter, rEnemyCharacter, true, true);
+					}
+					DoTakeAbordageGoods(rCharacter, rEnemyCharacter);
+					ShipDead(sti(rEnemyCharacter.index), KILL_BY_ABORDAGE, sti(rCharacter.index));
 				}
-				DoTakeAbordageGoods(rCharacter, rShipCharacter);
-				//#20180126-01 rCharacter winner and was initiator
-				if (bIsCharCompanion) {
-                    LeaveAbordageShipDrift(sti(rShipCharacter.index), sti(rCharacter.index));
-				}
-			    else { //Change to consider group power
-                    //#20190706-01
-                   // PostBoardDecision(rCharacter, rCharIdx, rShipCharacter, rShipCharIdx, rCharCrew);
-                }
-				//navy <--
-			    //Ship_SetTaskRunaway(SECONDARY_TASK, sti(rCharacter.index), nMainCharacterIndex);// валим в сад  -1 не жрет, потому пусть от vv все бегут, даже свои - команды раздаст игрок.
             }
             else
             { // поражение
                 if (bIsCharCompanion)
 			    {
-			        Log_SetStringToLog("Ваш корабль " + rCharacter.Ship.Name + " проиграл абордаж ");
+			        Log_SetStringToLog("Наш корабль '" + rCharacter.Ship.Name + "' проиграл абордаж");
 			    }
 			    else
 			    {
-			        Log_SetStringToLog(" корабль " + rCharacter.Ship.Name + " проиграл абордаж ");
+			        iNation = sti(rCharacter.nation);
+					Log_SetStringToLog("Корабль '" + rCharacter.Ship.Name + "' под флагом " + NationNameGenitive(iNation) + " проиграл абордаж");
 			    }
-			    deadCrew = sti(rShipCharacter.Ship.Crew.Quantity) * fOurCrewFencing/ (fEnCrewFencing*1.8);
-			    SetCrewQuantity(rShipCharacter, makeint(sti(rShipCharacter.Ship.Crew.Quantity) - deadCrew));
-			    if (bIsShipCompanion)
+			    deadCrew = sti(rEnemyCharacter.Ship.Crew.Quantity) * fOurCrewFencing/ (fEnCrewFencing*1.8);
+				if (bIsCharCompanion) Statistic_AddValue(pchar, "Sailors_dead", sti(rCharacter.Ship.Crew.Quantity));
+				if (bIsEnemyCompanion) Statistic_AddValue(pchar, "Sailors_dead", deadCrew);
+			    SetCrewQuantity(rEnemyCharacter, makeint(sti(rEnemyCharacter.Ship.Crew.Quantity) - deadCrew));
+				SetCrewQuantity(rCharacter, 0);
+			    if (bIsEnemyCompanion)
 			    {
-			        RemoveCharacterGoodsSelf(rShipCharacter, GOOD_WEAPON, deadCrew);
-			    }
-				//navy-->
-				if (CheckChanceOfBetterShip(rShipCharacter, rCharacter))
+			        RemoveCharacterGoodsSelf(rEnemyCharacter, GOOD_WEAPON, deadCrew);
+					LAi_SetCurHP(rCharacter, 0.0);
+					LaunchRansackMain(rEnemyCharacter, rCharacter, "companion_captured");
+				}
+				else
 				{
-					SeaExchangeCharactersShips(rShipCharacter, rCharacter, true, true);
+					if (CheckChanceOfBetterShip(rEnemyCharacter, rCharacter))
+					{
+						SeaExchangeCharactersShips(rEnemyCharacter, rCharacter, true, true);
+					}
+					DoTakeAbordageGoods(rEnemyCharacter, rCharacter);
+					ShipDead(sti(rCharacter.index), KILL_BY_ABORDAGE, sti(rEnemyCharacter.index));
 				}
-				DoTakeAbordageGoods(rShipCharacter, rCharacter);
-				//#20180126-01 rShipCharacter winner, rChar was initiator
-				if (bIsShipCompanion) {
-                    LeaveAbordageShipDrift(sti(rCharacter.index), sti(rShipCharacter.index));
-				}
-			    else {
-                    //#20190706-01
-                    //PostBoardDecision(rShipCharacter, rShipCharIdx, rCharacter, rCharIdx, rShipCharCrew);
-                }
-				//navy <--
             }
 		}
 	}
@@ -290,26 +280,7 @@ void DoTakeAbordageGoods(ref rOneChr, ref rSecChr)
 		}
 	}
 }
-//оставить абордированный корабль дрейфовать
-void LeaveAbordageShipDrift(int iDeadCharacterIndex, int iKillerCharacterIndex)
-{
-	//закрыл пока...
-	ShipDead(iDeadCharacterIndex, KILL_BY_ABORDAGE, iKillerCharacterIndex);
-	return;
-	//....
-	ref rDeadChar = GetCharacter(iDeadCharacterIndex);
 
-	//ставим атрибут "захвачен" (для дальнейшего грабежа) и индекс кем (для статистики)
-	rDeadChar.taken = true;
-	rDeadChar.taken.index = iKillerCharacterIndex;
-
-	//SetCharacterRelationBoth(GetMainCharacterIndex(), iDeadCharacterIndex, RELATION_FRIEND);
-
-	DoQuestCheckDelay("NationUpdate", 1.0);
-	Ship_SetTaskDrift(SECONDARY_TASK, iDeadCharacterIndex);
-	LAi_KillCharacter(rDeadChar);
-}
-//13.02.08
 void PlaceCompanionCloneNearMChr(int _index, bool _isCampus)
 {
 	int iTemp;
