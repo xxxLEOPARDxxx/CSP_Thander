@@ -1,852 +1,440 @@
 void ExternControlsInit(bool bFirst, bool standart)
 {
+	//Trace("ExternControlsInit");
+	if(bFirst)
+	{
+		ExternInitKeyCodes();
+		CI_CreateAndSetControls( "", "ICancel", CI_GetKeyCode("VK_ESCAPE"), 0, false );
+		CI_CreateAndSetControls( "", "IAction", CI_GetKeyCode("VK_SPACE"), 0, false );
+		ControlsTreeInit();
+		return;
+	}
+
+	ExternInitKeyCodes();
+
+	CI_CreateAndSetControls( "PrimaryLand", "Map_Best", CI_GetKeyCode("KEY_N"), 0, false); // Отличная карта
+	CI_CreateAndSetControls( "Sailing3Pers", "Map_Best", CI_GetKeyCode("KEY_N"), 0, false); // Отличная карта
+	CI_CreateAndSetControls( "PrimaryLand", "MapView", CI_GetKeyCode("KEY_M"), 0, true); // Атлас карт
+
+	// boal Не подведем :) -->
+	CI_CreateAndSetControls( "", "BOAL_Control", CI_GetKeyCode("VK_F11"), 0, false );
+	CI_CreateAndSetControls( "", "BOAL_Control2", CI_GetKeyCode("VK_F12"), 0, false );
+	CI_CreateAndSetControls( "", "BOAL_SetCamera", CI_GetKeyCode("VK_F10"), 0, false );
+	//CI_CreateAndSetControls( "", "BOAL_Control3", CI_GetKeyCode("VK_F9"), 0, false );
+	CI_CreateAndSetControls( "", "BOAL_ControF5", CI_GetKeyCode("VK_F5"), 0, false );
+	CI_CreateAndSetControls( "", "BOAL_ControF7", CI_GetKeyCode("VK_F7"), 0, false );
+	CI_CreateAndSetControls( "", "BOAL_ControlDebug", CI_GetKeyCode("VK_INSERT"), 0, false );
+
+	CI_CreateAndSetControls( "", "TimeScaleFaster", CI_GetKeyCode("VK_ADD"), 0, false );
+    CI_CreateAndSetControls( "", "TimeScaleSlower", CI_GetKeyCode("VK_SUBTRACT"), 0, false );
+	CI_CreateAndSetControls("", "TimeScaleFasterBA", CI_GetKeyCode("VK_A_PLUS"), 0, false );
+	CI_CreateAndSetControls("", "TimeScaleSlowerBA", CI_GetKeyCode("VK_A_MINUS"), 0, false );
+	CI_CreateAndSetControls( "", "VK_PAUSETimePause", CI_GetKeyCode("VK_PAUSE"), 0, false );
+
+	if (MOD_BETTATESTMODE == "On")
+	{
+		// Teleport
+		CI_CreateAndSetControls( "", "TeleportActive", CI_GetKeyCode("VK_F4"), 0, false );
+		CI_CreateAndSetControls( "", "TeleportUp", CI_GetKeyCode("VK_UP"), 0, false );
+		CI_CreateAndSetControls( "", "TeleportDown", CI_GetKeyCode("VK_DOWN"), 0, false );
+		CI_CreateAndSetControls( "", "TeleportSelect", CI_GetKeyCode("VK_RETURN"), 0, false );
+		// my scale
+		// weather
+		CI_CreateAndSetControls( "", "WhrPrevWeather", CI_GetKeyCode("VK_L_BREAKE"), 0, false );
+		CI_CreateAndSetControls( "", "WhrNextWeather", CI_GetKeyCode("VK_R_BREAKE"), 0, false );
+		CI_CreateAndSetControls( "", "WhrUpdateWeather", CI_GetKeyCode("VK_A_QUOTE"), 0, false );
+
+		CI_CreateAndSetControls( "", "CoastFoamLB", CI_GetKeyCode("VK_LBUTTON"), 0, true );
+		CI_CreateAndSetControls( "", "CoastFoamRB", CI_GetKeyCode("VK_RBUTTON"), 0, true );
+		CI_CreateAndSetControls( "", "CoastFoamINS", CI_GetKeyCode("VK_INSERT"), 0, true );
+		CI_CreateAndSetControls( "", "CoastFoamDEL", CI_GetKeyCode("VK_DELETE"), 0, true );
+		CI_CreateAndSetControls( "", "CoastFoamCopy", CI_GetKeyCode("KEY_C"), 0, true );
+	}
+	// boal <--
+
+	CI_CreateAndSetControls( "", "TimeScale", CI_GetKeyCode("KEY_R"), 0, false );
+
+	// Cameras =====================================================================
+		// character camera
+	CI_CreateAndSetControls( "", "ChrCamTurnV", 257, 0, false );
+	SetControlForInverting("ChrCamTurnV",false);
+	CI_CreateAndSetControls( "", "ChrCamTurnH", 256, 0, false );
+	CI_CreateAndSetControls( "", "ChrCamSpecMode", CI_GetKeyCode("VK_CONTROL"), 0, false );
+	CI_CreateAndSetControls( "", "Turn V", 257, INVERSE_CONTROL, false );
+	SetControlForInverting("Turn V",true);
+	CI_CreateAndSetControls( "", "Turn H", 256, 0, false );
+	CI_CreateAndSetControls( "PrimaryLand", "ChrCamCameraSwitch", CI_GetKeyCode("VK_TAB"), 0, true );
+		// ship follow camera
+	CI_CreateAndSetControls( "Sailing3Pers", "ShipCamera_Turn_V", 257, INVERSE_CONTROL, false );
+	MapControlToGroup("ShipCamera_Turn_V", "BattleInterfaceControls");
+	SetControlForInverting("ShipCamera_Turn_V",true);
+	CI_CreateAndSetControls( "Sailing3Pers", "ShipCamera_Turn_H", 256, 0, false );
+	MapControlToGroup("ShipCamera_Turn_H", "BattleInterfaceControls");
+	CI_CreateAndSetControls( "Sailing3Pers", "ShipCamera_Forward", CI_GetKeyCode("VK_MWHEEL_UP"), 0, true );
+	MapControlToGroup("ShipCamera_Forward", "Sailing1Pers");
+	CI_CreateAndSetControls( "Sailing3Pers", "ShipCamera_Backward", CI_GetKeyCode("VK_MWHEEL_DOWN"), 0, true );
+	MapControlToGroup("ShipCamera_Backward", "Sailing1Pers");
+
+		// deck camera
+	//Trace("DeckCamera_Turn_V");
+	CI_CreateAndSetControls( "Sailing1Pers", "DeckCamera_Turn_V", 257, 0, false );
+	SetControlForInverting("DeckCamera_Turn_V",false);
+	//#20190417-01
+	MapControlToGroup("DeckCamera_Turn_V","BattleInterfaceControls");
+	MapControlToGroup("DeckCamera_Turn_H","BattleInterfaceControls");
+	CI_CreateAndSetControls( "Sailing1Pers", "DeckCamera_Turn_H", 256, 0, false );
+	CI_CreateAndSetControls( "Sailing1Pers", "DeckCamera_Forward", CI_GetKeyCode("VK_RBUTTON"), 0, true );
+	CI_CreateAndSetControls( "Sailing1Pers", "DeckCamera_Backward", CI_GetKeyCode("VK_MBUTTON"), 0, true );
+
+		// free camera
+	CI_CreateAndSetControls( "", "FreeCamera_Turn_V", 257, INVERSE_CONTROL, false );
+	SetControlForInverting("FreeCamera_Turn_V",true);
+	CI_CreateAndSetControls( "", "FreeCamera_Turn_H", 256, 0, false );
+	CI_CreateAndSetControls( "", "FreeCamera_Forward", CI_GetKeyCode("VK_LBUTTON"), 0, false );  //VK_LBUTTON
+	if (standart)CI_CreateAndSetControls( "", "FreeCamera_Backward", CI_GetKeyCode("VK_RBUTTON"), 0, false );   //VK_RBUTTON
+	else CI_CreateAndSetControls( "Sailing1Pers", "DeckCamera_Backward", CI_GetKeyCode("VK_LBUTTON"), 0, true );
+
+// Character ===================================================================
+	CI_CreateAndSetControls( "", "ChrTurnH", 256, 0, false );
+	if (standart) CI_CreateAndSetControls( "PrimaryLand", "ChrAction", CI_GetKeyCode("VK_LBUTTON"), 0, true );
+	else CI_CreateAndSetControls( "PrimaryLand", "ChrAction", CI_GetKeyCode("VK_SPACE"), 0, true );
+	CI_CreateAndSetControls( "PrimaryLand", "ChrForward", CI_GetKeyCode("KEY_W"), 0, true );
+	CI_CreateAndSetControls( "PrimaryLand", "ChrForward2", CI_GetKeyCode("VK_RBUTTON"), 0, true ); // вторая команда
+	CI_CreateAndSetControls( "PrimaryLand", "ChrJump", CI_GetKeyCode("KEY_T"), 0, true );
+	MapControlToGroup("ChrForward","FightModeControls");
+	MapControlToGroup("ChrForward","BattleInterfaceControls");
+	CI_CreateAndSetControls( "PrimaryLand", "ChrBackward", CI_GetKeyCode("KEY_S"), 0, true );
+	MapControlToGroup("ChrBackward","FightModeControls");
+	MapControlToGroup("ChrBackward","BattleInterfaceControls");
+	CI_CreateAndSetControls( "PrimaryLand", "ChrStrafeLeft", CI_GetKeyCode("KEY_A"), 0, true );
+	MapControlToGroup("ChrStrafeLeft","FightModeControls");
+	MapControlToGroup("ChrStrafeLeft","BattleInterfaceControls");
+	CI_CreateAndSetControls( "PrimaryLand", "ChrStrafeRight", CI_GetKeyCode("KEY_D"), 0, true );
+	MapControlToGroup("ChrStrafeRight","FightModeControls");
+	MapControlToGroup("ChrStrafeRight","BattleInterfaceControls");
+	CI_CreateAndSetControls( "PrimaryLand", "ChrRun", CI_GetKeyCode("VK_SHIFT"), USE_AXIS_AS_BUTTON, true );
+	MapControlToGroup("ChrRun","FightModeControls");
+	MapControlToGroup("ChrRun","BattleInterfaceControls");
+	CI_CreateAndSetControls( "PrimaryLand", "ChrFightMode", CI_GetKeyCode("KEY_E"), 0, true );
+
+	// boal -->
+	CI_CreateAndSetControls( "PrimaryLand", "BOAL_UsePotion", CI_GetKeyCode("KEY_C"), 0, true ); // Warship 13.06.09 Дефолтом перевесил на "C"
+	MapControlToGroup("BOAL_UsePotion","FightModeControls");
+	CI_CreateAndSetControls( "PrimaryLand", "UseFood", CI_GetKeyCode("KEY_Z"), 0, true );
+	MapControlToGroup("UseFood","FightModeControls");
+	CI_CreateAndSetControls( "PrimaryLand", "CreateNotice", CI_GetKeyCode("KEY_I"), 0, true );
+	MapControlToGroup("CreateNotice","FightModeControls");
+	// Warship 13.06.09 Выпить противоядие
+	CI_CreateAndSetControls("PrimaryLand", "UseAntidote", CI_GetKeyCode("KEY_V"), 0, true);
+	MapControlToGroup("UseAntidote", "FightModeControls");
+
+	// --> Lipsar быстрый переход на горячую клавишу
+	CI_CreateAndSetControls( "PrimaryLand", "AltModificator", CI_GetKeyCode("Alt"), 0, false );// альт модификатор
+	CI_CreateAndSetControls( "PrimaryLand", "AltModificatorOff", CI_GetKeyCode("Alt"), INVERSE_CONTROL, false );
+	CI_CreateAndSetControls( "PrimaryLand", "Fast_Port", CI_GetKeyCode("KEY_1"), 0, false );
+	CI_CreateAndSetControls( "PrimaryLand", "Fast_store", CI_GetKeyCode("KEY_2"), 0, false );
+	CI_CreateAndSetControls( "PrimaryLand", "Fast_Shipyard", CI_GetKeyCode("KEY_3"), 0, false );
+	CI_CreateAndSetControls( "PrimaryLand", "Fast_tavern", CI_GetKeyCode("KEY_4"), 0, false );
+	CI_CreateAndSetControls( "PrimaryLand", "Fast_townhall", CI_GetKeyCode("KEY_5"), 0, false );
+	CI_CreateAndSetControls( "PrimaryLand", "Fast_bank", CI_GetKeyCode("KEY_6"), 0, false );
+	CI_CreateAndSetControls( "PrimaryLand", "Fast_church", CI_GetKeyCode("KEY_7"), 0, false );
+	CI_CreateAndSetControls( "PrimaryLand", "Fast_Brothel", CI_GetKeyCode("KEY_8"), 0, false );
+	CI_CreateAndSetControls( "PrimaryLand", "Fast_PortOffice", CI_GetKeyCode("KEY_9"), 0, false );
+	CI_CreateAndSetControls( "PrimaryLand", "Fast_prison", CI_GetKeyCode("KEY_0"), 0, false );
+	// <-- Lipsar
+
+	CI_CreateAndSetControls( "PrimaryLand", "BOAL_DeadSearch", CI_GetKeyCode("KEY_1"), 0, true );
+	MapControlToGroup("BOAL_DeadSearch","FightModeControls");
+
+	CI_CreateAndSetControls( "FightModeControls", "BOAL_ActivateRush", CI_GetKeyCode("KEY_F"), 0, true ); // boal ярость на суше
+	CI_CreateAndSetControls( "FightModeControls", "MushketHotkey", CI_GetKeyCode("KEY_U"), 0, true); // Мушкет
+	CI_CreateAndSetControls("PrimaryLand", "csmRunLootCollector", CI_GetKeyCode("VK_A_TILDA"), 0, true);
+	/* CI_CreateAndSetControls( "PrimaryLand", "PusherHotkey", CI_GetKeyCode("KEY_Y"), 0, true); // Громила
+	MapControlToGroup("PusherHotkey", "FightModeControls"); */
+	// boal <--
+
+	//Jonathan A 2009-08-19 -->
+	CI_CreateAndSetControls( "PrimaryLand", "OfficersCharge", CI_GetKeyCode("KEY_J"), 0, true );
+	MapControlToGroup("OfficersCharge","FightModeControls");
+	MapControlToGroup("OfficersCharge","BattleInterfaceControls");
+
+	CI_CreateAndSetControls( "PrimaryLand", "OfficersHold", CI_GetKeyCode("KEY_H"), 0, true );
+	MapControlToGroup("OfficersHold","FightModeControls");
+	MapControlToGroup("OfficersHold","BattleInterfaceControls");
+
+	CI_CreateAndSetControls( "PrimaryLand", "OfficersFollow", CI_GetKeyCode("KEY_G"), 0, true );
+	MapControlToGroup("OfficersFollow","FightModeControls");
+	MapControlToGroup("OfficersFollow","BattleInterfaceControls");
+
+	if (standart) CI_CreateAndSetControls( "PrimaryLand", "OfficersFree", CI_GetKeyCode("VK_NUMPAD8"), 0, true );
+	else CI_CreateAndSetControls( "PrimaryLand", "OfficersFree", CI_GetKeyCode("KEY_K"), 0, true );
+	MapControlToGroup("OfficersFree","FightModeControls");
+	MapControlToGroup("OfficersFree","BattleInterfaceControls");
+	// <-- JA
+
+	CI_CreateAndSetControls( "FightModeControls", "ChrAltAttackBase", CI_GetKeyCode("VK_LBUTTON"), 0, true );   //2
+	CI_CreateAndSetControls( "FightModeControls", "ChrAltAttackBaseA", CI_GetKeyCode("KEY_B"), 0, true );   //2
+	CI_CreateAndSetControls( "FightModeControls", "SoloParry", CI_GetKeyCode("KEY_5"), 0, true );
+	CI_CreateAndSetControls( "FightModeControls", "SoloFient", CI_GetKeyCode("KEY_6"), 0, true );
 	if (standart)
 	{
-		//Trace("ExternControlsInit");
-		if(bFirst)
-		{
-			ExternInitKeyCodes();
-			CI_CreateAndSetControls( "", "ICancel", CI_GetKeyCode("VK_ESCAPE"), 0, false );
-			CI_CreateAndSetControls( "", "IAction", CI_GetKeyCode("VK_SPACE"), 0, false );
-
-			ControlsTreeInit();
-			return;
-		}
-
-		ExternInitKeyCodes();
-
-		CI_CreateAndSetControls( "PrimaryLand", "Map_Best", CI_GetKeyCode("KEY_N"), 0, false); // Отличная карта
-		CI_CreateAndSetControls( "Sailing3Pers", "Map_Best", CI_GetKeyCode("KEY_N"), 0, false); // Отличная карта
-		CI_CreateAndSetControls( "PrimaryLand", "MapView", CI_GetKeyCode("KEY_M"), 0, true); // Атлас карт
-
-		// boal Не подведем :) -->
-		CI_CreateAndSetControls( "", "BOAL_Control", CI_GetKeyCode("VK_F11"), 0, false );
-		CI_CreateAndSetControls( "", "BOAL_Control2", CI_GetKeyCode("VK_F12"), 0, false );
-		CI_CreateAndSetControls( "", "BOAL_SetCamera", CI_GetKeyCode("VK_F10"), 0, false );
-		//CI_CreateAndSetControls( "", "BOAL_Control3", CI_GetKeyCode("VK_F9"), 0, false );
-		CI_CreateAndSetControls( "", "BOAL_ControF5", CI_GetKeyCode("VK_F5"), 0, false );
-		CI_CreateAndSetControls( "", "BOAL_ControF7", CI_GetKeyCode("VK_F7"), 0, false );
-		CI_CreateAndSetControls( "", "BOAL_ControlDebug", CI_GetKeyCode("VK_INSERT"), 0, false );
-
-		CI_CreateAndSetControls( "", "TimeScaleFaster", CI_GetKeyCode("VK_ADD"), 0, false );
-	    CI_CreateAndSetControls( "", "TimeScaleSlower", CI_GetKeyCode("VK_SUBTRACT"), 0, false );
-		CI_CreateAndSetControls("", "TimeScaleFasterBA", CI_GetKeyCode("VK_A_PLUS"), 0, false );
-		CI_CreateAndSetControls("", "TimeScaleSlowerBA", CI_GetKeyCode("VK_A_MINUS"), 0, false );
-		CI_CreateAndSetControls( "", "VK_PAUSETimePause", CI_GetKeyCode("VK_PAUSE"), 0, false );
-
-		if (MOD_BETTATESTMODE == "On")
-		{
-			// Teleport
-			CI_CreateAndSetControls( "", "TeleportActive", CI_GetKeyCode("VK_F4"), 0, false );
-			CI_CreateAndSetControls( "", "TeleportUp", CI_GetKeyCode("VK_UP"), 0, false );
-			CI_CreateAndSetControls( "", "TeleportDown", CI_GetKeyCode("VK_DOWN"), 0, false );
-			CI_CreateAndSetControls( "", "TeleportSelect", CI_GetKeyCode("VK_RETURN"), 0, false );
-			// my scale
-			// weather
-			CI_CreateAndSetControls( "", "WhrPrevWeather", CI_GetKeyCode("VK_L_BREAKE"), 0, false );
-			CI_CreateAndSetControls( "", "WhrNextWeather", CI_GetKeyCode("VK_R_BREAKE"), 0, false );
-			CI_CreateAndSetControls( "", "WhrUpdateWeather", CI_GetKeyCode("VK_A_QUOTE"), 0, false );
-
-			CI_CreateAndSetControls( "", "CoastFoamLB", CI_GetKeyCode("VK_LBUTTON"), 0, true );
-			CI_CreateAndSetControls( "", "CoastFoamRB", CI_GetKeyCode("VK_RBUTTON"), 0, true );
-			CI_CreateAndSetControls( "", "CoastFoamINS", CI_GetKeyCode("VK_INSERT"), 0, true );
-			CI_CreateAndSetControls( "", "CoastFoamDEL", CI_GetKeyCode("VK_DELETE"), 0, true );
-			CI_CreateAndSetControls( "", "CoastFoamCopy", CI_GetKeyCode("KEY_C"), 0, true );
-		}
-		// boal <--
-
-		CI_CreateAndSetControls( "", "TimeScale", CI_GetKeyCode("KEY_R"), 0, false );
-
-		// Cameras =====================================================================
-			// character camera
-		CI_CreateAndSetControls( "", "ChrCamTurnV", 257, 0, false );
-		SetControlForInverting("ChrCamTurnV",false);
-		CI_CreateAndSetControls( "", "ChrCamTurnH", 256, 0, false );
-		CI_CreateAndSetControls( "", "ChrCamSpecMode", CI_GetKeyCode("VK_CONTROL"), 0, false );
-		CI_CreateAndSetControls( "", "Turn V", 257, INVERSE_CONTROL, false );
-		SetControlForInverting("Turn V",true);
-		CI_CreateAndSetControls( "", "Turn H", 256, 0, false );
-		CI_CreateAndSetControls( "PrimaryLand", "ChrCamCameraSwitch", CI_GetKeyCode("VK_TAB"), 0, true );
-			// ship follow camera
-		CI_CreateAndSetControls( "Sailing3Pers", "ShipCamera_Turn_V", 257, INVERSE_CONTROL, false );
-		MapControlToGroup("ShipCamera_Turn_V", "BattleInterfaceControls");
-		SetControlForInverting("ShipCamera_Turn_V",true);
-		CI_CreateAndSetControls( "Sailing3Pers", "ShipCamera_Turn_H", 256, 0, false );
-		MapControlToGroup("ShipCamera_Turn_H", "BattleInterfaceControls");
-		CI_CreateAndSetControls( "Sailing3Pers", "ShipCamera_Forward", CI_GetKeyCode("VK_MWHEEL_UP"), 0, true );
-		MapControlToGroup("ShipCamera_Forward", "Sailing1Pers");
-		CI_CreateAndSetControls( "Sailing3Pers", "ShipCamera_Backward", CI_GetKeyCode("VK_MWHEEL_DOWN"), 0, true );
-		MapControlToGroup("ShipCamera_Backward", "Sailing1Pers");
-
-			// deck camera
-		//Trace("DeckCamera_Turn_V");
-		CI_CreateAndSetControls( "Sailing1Pers", "DeckCamera_Turn_V", 257, 0, false );
-		SetControlForInverting("DeckCamera_Turn_V",false);
-		//#20190417-01
-		MapControlToGroup("DeckCamera_Turn_V","BattleInterfaceControls");
-		MapControlToGroup("DeckCamera_Turn_H","BattleInterfaceControls");
-		CI_CreateAndSetControls( "Sailing1Pers", "DeckCamera_Turn_H", 256, 0, false );
-		CI_CreateAndSetControls( "Sailing1Pers", "DeckCamera_Forward", CI_GetKeyCode("VK_RBUTTON"), 0, true );
-		CI_CreateAndSetControls( "Sailing1Pers", "DeckCamera_Backward", CI_GetKeyCode("VK_MBUTTON"), 0, true );
-
-			// free camera
-		CI_CreateAndSetControls( "", "FreeCamera_Turn_V", 257, INVERSE_CONTROL, false );
-		SetControlForInverting("FreeCamera_Turn_V",true);
-		CI_CreateAndSetControls( "", "FreeCamera_Turn_H", 256, 0, false );
-		CI_CreateAndSetControls( "", "FreeCamera_Forward", CI_GetKeyCode("VK_LBUTTON"), 0, false );  //VK_LBUTTON
-		CI_CreateAndSetControls( "", "FreeCamera_Backward", CI_GetKeyCode("VK_RBUTTON"), 0, false );   //VK_RBUTTON
-
-
-	// Character ===================================================================
-		CI_CreateAndSetControls( "", "ChrTurnH", 256, 0, false );
-		CI_CreateAndSetControls( "PrimaryLand", "ChrAction", CI_GetKeyCode("VK_LBUTTON"), 0, true );
-		CI_CreateAndSetControls( "PrimaryLand", "ChrForward", CI_GetKeyCode("KEY_W"), 0, true );
-		CI_CreateAndSetControls( "PrimaryLand", "ChrForward2", CI_GetKeyCode("VK_RBUTTON"), 0, true ); // вторая команда
-		CI_CreateAndSetControls( "PrimaryLand", "ChrJump", CI_GetKeyCode("KEY_T"), 0, true );
-		MapControlToGroup("ChrForward","FightModeControls");
-		MapControlToGroup("ChrForward","BattleInterfaceControls");
-		CI_CreateAndSetControls( "PrimaryLand", "ChrBackward", CI_GetKeyCode("KEY_S"), 0, true );
-		MapControlToGroup("ChrBackward","FightModeControls");
-		MapControlToGroup("ChrBackward","BattleInterfaceControls");
-		CI_CreateAndSetControls( "PrimaryLand", "ChrStrafeLeft", CI_GetKeyCode("KEY_A"), 0, true );
-		MapControlToGroup("ChrStrafeLeft","FightModeControls");
-		MapControlToGroup("ChrStrafeLeft","BattleInterfaceControls");
-		CI_CreateAndSetControls( "PrimaryLand", "ChrStrafeRight", CI_GetKeyCode("KEY_D"), 0, true );
-		MapControlToGroup("ChrStrafeRight","FightModeControls");
-		MapControlToGroup("ChrStrafeRight","BattleInterfaceControls");
-		CI_CreateAndSetControls( "PrimaryLand", "ChrRun", CI_GetKeyCode("VK_SHIFT"), USE_AXIS_AS_BUTTON, true );
-		MapControlToGroup("ChrRun","FightModeControls");
-		MapControlToGroup("ChrRun","BattleInterfaceControls");
-		CI_CreateAndSetControls( "PrimaryLand", "ChrFightMode", CI_GetKeyCode("KEY_E"), 0, true );
-
-		// boal -->
-		CI_CreateAndSetControls( "PrimaryLand", "BOAL_UsePotion", CI_GetKeyCode("KEY_C"), 0, true ); // Warship 13.06.09 Дефолтом перевесил на "C"
-		MapControlToGroup("BOAL_UsePotion","FightModeControls");
-		CI_CreateAndSetControls( "PrimaryLand", "UseFood", CI_GetKeyCode("KEY_Z"), 0, true );
-		MapControlToGroup("UseFood","FightModeControls");
-		CI_CreateAndSetControls( "PrimaryLand", "CreateNotice", CI_GetKeyCode("KEY_I"), 0, true );
-		MapControlToGroup("CreateNotice","FightModeControls");
-		// Warship 13.06.09 Выпить противоядие
-		CI_CreateAndSetControls("PrimaryLand", "UseAntidote", CI_GetKeyCode("KEY_V"), 0, true);
-		MapControlToGroup("UseAntidote", "FightModeControls");
-
-		// --> Lipsar быстрый переход на горячую клавишу
-		CI_CreateAndSetControls( "PrimaryLand", "AltModificator", CI_GetKeyCode("Alt"), 0, false );// альт модификатор
-		CI_CreateAndSetControls( "PrimaryLand", "AltModificatorOff", CI_GetKeyCode("Alt"), INVERSE_CONTROL, false );
-		CI_CreateAndSetControls( "PrimaryLand", "Fast_Port", CI_GetKeyCode("KEY_1"), 0, false );
-		CI_CreateAndSetControls( "PrimaryLand", "Fast_store", CI_GetKeyCode("KEY_2"), 0, false );
-		CI_CreateAndSetControls( "PrimaryLand", "Fast_Shipyard", CI_GetKeyCode("KEY_3"), 0, false );
-		CI_CreateAndSetControls( "PrimaryLand", "Fast_tavern", CI_GetKeyCode("KEY_4"), 0, false );
-		CI_CreateAndSetControls( "PrimaryLand", "Fast_townhall", CI_GetKeyCode("KEY_5"), 0, false );
-		CI_CreateAndSetControls( "PrimaryLand", "Fast_bank", CI_GetKeyCode("KEY_6"), 0, false );
-		CI_CreateAndSetControls( "PrimaryLand", "Fast_church", CI_GetKeyCode("KEY_7"), 0, false );
-		CI_CreateAndSetControls( "PrimaryLand", "Fast_Brothel", CI_GetKeyCode("KEY_8"), 0, false );
-		CI_CreateAndSetControls( "PrimaryLand", "Fast_PortOffice", CI_GetKeyCode("KEY_9"), 0, false );
-		CI_CreateAndSetControls( "PrimaryLand", "Fast_prison", CI_GetKeyCode("KEY_0"), 0, false );
-		// <-- Lipsar
-
-		CI_CreateAndSetControls( "PrimaryLand", "BOAL_DeadSearch", CI_GetKeyCode("KEY_1"), 0, true );
-		MapControlToGroup("BOAL_DeadSearch","FightModeControls");
-
-		CI_CreateAndSetControls( "FightModeControls", "BOAL_ActivateRush", CI_GetKeyCode("KEY_F"), 0, true ); // boal ярость на суше
-		CI_CreateAndSetControls( "FightModeControls", "MushketHotkey", CI_GetKeyCode("KEY_U"), 0, true); // Мушкет
-		CI_CreateAndSetControls("PrimaryLand", "csmRunLootCollector", CI_GetKeyCode("VK_A_TILDA"), 0, true);
-		/* CI_CreateAndSetControls( "PrimaryLand", "PusherHotkey", CI_GetKeyCode("KEY_Y"), 0, true); // Громила
-		MapControlToGroup("PusherHotkey", "FightModeControls"); */
-		// boal <--
-
-		//Jonathan A 2009-08-19 -->
-		CI_CreateAndSetControls( "PrimaryLand", "OfficersCharge", CI_GetKeyCode("KEY_J"), 0, true );
-		MapControlToGroup("OfficersCharge","FightModeControls");
-		MapControlToGroup("OfficersCharge","BattleInterfaceControls");
-
-		CI_CreateAndSetControls( "PrimaryLand", "OfficersHold", CI_GetKeyCode("KEY_H"), 0, true );
-		MapControlToGroup("OfficersHold","FightModeControls");
-		MapControlToGroup("OfficersHold","BattleInterfaceControls");
-
-		CI_CreateAndSetControls( "PrimaryLand", "OfficersFollow", CI_GetKeyCode("KEY_G"), 0, true );
-		MapControlToGroup("OfficersFollow","FightModeControls");
-		MapControlToGroup("OfficersFollow","BattleInterfaceControls");
-
-		CI_CreateAndSetControls( "PrimaryLand", "OfficersFree", CI_GetKeyCode("VK_NUMPAD8"), 0, true );
-		MapControlToGroup("OfficersFree","FightModeControls");
-		MapControlToGroup("OfficersFree","BattleInterfaceControls");
-		// <-- JA
-
-
 		CI_CreateAndSetControls( "FightModeControls", "ChrBlock", CI_GetKeyCode("VK_SPACE"), 0, true );
-		CI_CreateAndSetControls( "FightModeControls", "ChrAltAttackBase", CI_GetKeyCode("VK_LBUTTON"), 0, true );   //2
-		CI_CreateAndSetControls( "FightModeControls", "ChrAltAttackBaseA", CI_GetKeyCode("KEY_B"), 0, true );
 		CI_CreateAndSetControls( "FightModeControls", "ChrAttackBreakBase", CI_GetKeyCode("VK_MBUTTON"), 0, true ); //ChrAttackRoundBase
 		CI_CreateAndSetControls( "FightModeControls", "ChrAttackBase", CI_GetKeyCode("VK_RBUTTON"), 0, true );   //1
-		CI_CreateAndSetControls( "FightModeControls", "SoloParry", CI_GetKeyCode("KEY_5"), 0, true );
-		CI_CreateAndSetControls( "FightModeControls", "SoloFient", CI_GetKeyCode("KEY_6"), 0, true );
-
-		CI_CreateAndSetControls( "FightModeControls", "ChrAttackChoseBase", CI_GetKeyCode("VK_SHIFT"), 0, true );
-
-
-		MapControlToGroup("ChrBlock","BattleInterfaceControls");
-
-		CI_CreateAndSetControls( "FightModeControls", "ChrFightMode", CI_GetKeyCode("KEY_E"), 0, true );
-		MapControlToGroup("ChrFightMode","BattleInterfaceControls");
-
-		CI_CreateAndSetControls( "FightModeControls", "ChrFire", CI_GetKeyCode("KEY_Q"), 0, true );
-
-		MapControlToGroup("ChrFire","BattleInterfaceControls");
-
-	// Ship ========================================================================
-
-		CI_CreateAndSetControls( "Sailing3Pers", "Ship_TurnLeft", CI_GetKeyCode("KEY_A"), 0, true );
-		MapControlToGroup("Ship_TurnLeft","Sailing1Pers");
-		CI_CreateAndSetControls( "Sailing3Pers", "Ship_TurnRight", CI_GetKeyCode("KEY_D"), 0, true );
-		MapControlToGroup("Ship_TurnRight","Sailing1Pers");
-		CI_CreateAndSetControls( "Sailing3Pers", "Ship_SailUp", CI_GetKeyCode("KEY_W"), 0, true );
-		MapControlToGroup("Ship_SailUp","Sailing1Pers");
-		CI_CreateAndSetControls( "Sailing3Pers", "Ship_SailDown", CI_GetKeyCode("KEY_S"), 0, true );
-		MapControlToGroup("Ship_SailDown","Sailing1Pers");
-		CI_CreateAndSetControls( "Sailing3Pers", "Ship_Fire", CI_GetKeyCode("VK_LBUTTON"), 0, true );
-		MapControlToGroup("Ship_Fire","Sailing1Pers");
-		CI_CreateAndSetControls( "Sailing3Pers", "Sea_CameraSwitch", CI_GetKeyCode("VK_TAB"), 0, true );
-		MapControlToGroup("Sea_CameraSwitch","Sailing1Pers");
-
-		CI_CreateAndSetControls( "Sailing3Pers", "BOAL_ActivateTurn180", CI_GetKeyCode("KEY_V"), 0, true );
-		MapControlToGroup("BOAL_ActivateTurn180","Sailing1Pers");
-		CI_CreateAndSetControls( "Sailing3Pers", "BOAL_ActivateImmediateReload", CI_GetKeyCode("KEY_B"), 0, true );
-		MapControlToGroup("BOAL_ActivateImmediateReload","Sailing1Pers");
-		CI_CreateAndSetControls( "Sailing3Pers", "BOAL_ActivateLightRepair", CI_GetKeyCode("VK_NUMPAD1"), 0, true );
-		MapControlToGroup("BOAL_ActivateLightRepair","Sailing1Pers");
-		CI_CreateAndSetControls( "Sailing3Pers", "BOAL_ActivateInstantRepair", CI_GetKeyCode("VK_NUMPAD2"), 0, true );
-		MapControlToGroup("BOAL_ActivateInstantRepair","Sailing1Pers");
-		CI_CreateAndSetControls( "Sailing1Pers", "TelescopeIn", CI_GetKeyCode("VK_CONTROL"), 0, true );
-		CI_CreateAndSetControls( "Sailing1Pers", "TelescopeOut", CI_GetKeyCode("VK_CONTROL"), INVERSE_CONTROL, true );
-
-		CI_CreateAndSetControls( "Sailing3Pers", "Ship_GetCoordinates", CI_GetKeyCode("KEY_V"), 0, true );
-		MapControlToGroup("Ship_GetCoordinates","Sailing1Pers");
-
-	// World map ===================================================================
-		CI_CreateAndSetControls( "", "WMapTurnH", 256, 0, false );
-		CI_CreateAndSetControls( "", "WMapTurnV", 257, INVERSE_CONTROL, false );
-		CI_CreateAndSetControls( "WorldMapControls", "WMapCameraRotate", CI_GetKeyCode("VK_CONTROL"), 0, true );
-		CI_CreateAndSetControls( "WorldMapControls", "WMapForward", CI_GetKeyCode("VK_MWHEEL_UP"), 0, true );
-		CI_CreateAndSetControls( "WorldMapControls", "WMapBackward", CI_GetKeyCode("VK_MWHEEL_DOWN"), 0, true );
-		CI_CreateAndSetControls( "WorldMapControls", "WMapCameraSwitch", CI_GetKeyCode("VK_TAB"), 0, true );
-
-		CI_CreateAndSetControls( "WorldMapControls", "WMapShipSailUp", CI_GetKeyCode("KEY_W"), 0, true );
-
-		CI_CreateAndSetControls( "WorldMapControls", "WMapShipSailDown", CI_GetKeyCode("KEY_S"), 0, true );
-
-		CI_CreateAndSetControls( "WorldMapControls", "WMapShipTurnLeft", CI_GetKeyCode("KEY_A"), 0, true );
-
-		CI_CreateAndSetControls( "WorldMapControls", "WMapShipTurnRight", CI_GetKeyCode("KEY_D"), 0, true );
-		CI_CreateAndSetControls( "WorldMapControls", "WMapCancel", CI_GetKeyCode("VK_SPACE"), 0, true );
-		CI_CreateAndSetControls( "WorldMapControls", "WMapSkipEncounter", CI_GetKeyCode("VK_RETURN"), 0, true );
-		CI_CreateAndSetControls( "WorldMapControls", "WMapGetCoords", CI_GetKeyCode("KEY_C"), 0, true );
-
-
-	// Interface ===================================================================
-		//				Main interface
-		CI_CreateAndSetControls( "", "ITurnH", 256, 0, false );
-		CI_CreateAndSetControls( "", "ITurnV", 257, INVERSE_CONTROL, false );
-		CI_CreateAndSetControls( "", "SaveDelete", CI_GetKeyCode("VK_DELETE"), 0, false );
-		CI_CreateAndSetControls( "", "ILClick", CI_GetKeyCode("VK_LBUTTON"), 0, false );
-		CI_CreateAndSetControls( "", "IRClick", CI_GetKeyCode("VK_RBUTTON"), 0, false );
-		CI_CreateAndSetControls( "Sailing1Pers", "Interface", CI_GetKeyCode("VK_F2"), 0, false );
-		MapControlToGroup("Interface","Sailing3Pers");
-		MapControlToGroup("Interface","PrimaryLand");
-		MapControlToGroup("Interface","WorldMapControls");
-		MapControlToGroup("Interface","FightModeControls");
-		CI_CreateAndSetControls( "", "MainMenu", CI_GetKeyCode("VK_F1"), 0, false );
-		CI_CreateAndSetControls( "Sailing1Pers", "MainMenuDouble", CI_GetKeyCode("VK_ESCAPE"), 0, false );
-		MapControlToGroup("MainMenuDouble","Sailing3Pers");
-		MapControlToGroup("MainMenuDouble","PrimaryLand");
-		MapControlToGroup("MainMenuDouble","WorldMapControls");
-		MapControlToGroup("MainMenuDouble","FightModeControls");
-		CI_CreateAndSetControls( "", "QuickSave", CI_GetKeyCode("VK_F6"), 0, false );
-		CI_CreateAndSetControls( "", "QuickLoad", CI_GetKeyCode("VK_F9"), 0, false );
-		CI_CreateAndSetControls( "", "IStartButton", CI_GetKeyCode("VK_RETURN"), 0, false );
-		CI_CreateAndSetControls( "", "ICancel", CI_GetKeyCode("VK_ESCAPE"), 0, false );
-		CI_CreateAndSetControls( "", "IAction", CI_GetKeyCode("VK_SPACE"), 0, false );
-		CI_CreateAndSetControls( "", "ILeftShift", CI_GetKeyCode("VK_SHIFT"), 0, false );
-		CI_CreateAndSetControls( "", "IRightShift", CI_GetKeyCode("VK_SHIFT"), 0, false );
-		CI_CreateAndSetControls( "", "IUp", CI_GetKeyCode("VK_UP"), 0, false );
-		CI_CreateAndSetControls( "", "IDown", CI_GetKeyCode("VK_DOWN"), 0, false );
-		CI_CreateAndSetControls( "", "IRight", CI_GetKeyCode("VK_RIGHT"), 0, false );
-		CI_CreateAndSetControls( "", "ILeft", CI_GetKeyCode("VK_LEFT"), 0, false );
-		CI_CreateAndSetControls( "", "IExit_F2", CI_GetKeyCode("VK_F2"), 0, false );
-		CI_CreateAndSetControls( "", "IExit_Escape", CI_GetKeyCode("VK_ESCAPE"), 0, false );
-		CI_CreateAndSetControls( "", "IExit_F1", CI_GetKeyCode("VK_F1"), 0, false );
-
-		//				Battle interface
-		CI_CreateAndSetControls( "Sailing3Pers", "BICommandsActivate", CI_GetKeyCode("VK_RETURN"), 0, true );
-		MapControlToGroup("BICommandsActivate","Sailing1Pers");
-		MapControlToGroup("BICommandsActivate","WorldMapControls");
-		CI_CreateAndSetControls( "PrimaryLand", "LICommandsActivate", CI_GetKeyCode("VK_RETURN"), 0, true );
-		CI_CreateAndSetControls( "BattleInterfaceControls", "BICommandsConfirm", CI_GetKeyCode("VK_RETURN"), 0, true );
-		CI_CreateAndSetControls( "BattleInterfaceControls", "BICommandsCancel", CI_GetKeyCode("VK_ESCAPE"), 0, false );
-		CI_CreateAndSetControls( "BattleInterfaceControls", "BICommandsLeft", CI_GetKeyCode("VK_LEFT"), 0, true );
-		CI_CreateAndSetControls( "BattleInterfaceControls", "BICommandsRight", CI_GetKeyCode("VK_RIGHT"), 0, true );
-
-		if(CheckAttribute(InterfaceStates, "EnabledCMControls") && sti(InterfaceStates.EnabledCMControls) == 1)
-		{
-			CI_CreateAndSetControls( "Sailing3Pers", "BICommandsActivate", CI_GetKeyCode("VK_MBUTTON"), 0, true );
-			CI_CreateAndSetControls( "PrimaryLand", "LICommandsActivate", CI_GetKeyCode("VK_MBUTTON"), 0, true );
-			CI_CreateAndSetControls( "BattleInterfaceControls", "BICommandsConfirm", CI_GetKeyCode("VK_LBUTTON"), 0, true );
-			CI_CreateAndSetControls( "BattleInterfaceControls", "BICommandsCancel", CI_GetKeyCode("VK_RBUTTON"), 0, false );
-			CI_CreateAndSetControls( "BattleInterfaceControls", "BICommandsLeft", CI_GetKeyCode("VK_MWHEEL_DOWN"), 0, true );
-			CI_CreateAndSetControls( "BattleInterfaceControls", "BICommandsRight", CI_GetKeyCode("VK_MWHEEL_UP"), 0, true );
-		}
-		MapControlToGroup("LICommandsActivate","FightModeControls");
-		CI_CreateAndSetControls( "BattleInterfaceControls", "BICommandsUp", CI_GetKeyCode("VK_UP"), 0, true );
-		CI_CreateAndSetControls( "BattleInterfaceControls", "BICommandsDown", CI_GetKeyCode("VK_DOWN"), 0, true );
-		CI_CreateAndSetControls( "Sailing3Pers", "MiniMapZoomIn", CI_GetKeyCode("KEY_E"), 0, true );
-		MapControlToGroup("MiniMapZoomIn","Sailing1Pers");
-		CI_CreateAndSetControls( "Sailing3Pers", "MiniMapZoomOut", CI_GetKeyCode("KEY_F"), 0, true );
-		MapControlToGroup("MiniMapZoomOut","Sailing1Pers");
-		CI_CreateAndSetControls( "Sailing3Pers", "BIFastCommand", CI_GetKeyCode("VK_SPACE"), 0, true ); //VK_F3
-		MapControlToGroup("BIFastCommand","Sailing1Pers");
-		MapControlToGroup("BIFastCommand","PrimaryLand");
-		MapControlToGroup("BIFastCommand","FightModeControls");
-		MapControlToGroup("BIFastCommand","WorldMapControls");
-		MapControlToGroup("BIFastCommand","BattleInterfaceControls");
-
-		// hot keys for cannon charge reload
-			// Balls
-		CI_CreateAndSetControls("Sailing3Pers","hk_charge1", CI_GetKeyCode("KEY_1"), 0, true );
-		MapControlToGroup("hk_charge1","Sailing1Pers");
-		MapControlToGroup("hk_charge1","BattleInterfaceControls");
-			// Grapes
-		CI_CreateAndSetControls("Sailing3Pers","hk_charge2", CI_GetKeyCode("KEY_2"), 0, true );
-		MapControlToGroup("hk_charge2","Sailing1Pers");
-		MapControlToGroup("hk_charge2","BattleInterfaceControls");
-			// Knippels
-		CI_CreateAndSetControls("Sailing3Pers","hk_charge3", CI_GetKeyCode("KEY_3"), 0, true );
-		MapControlToGroup("hk_charge3","Sailing1Pers");
-		MapControlToGroup("hk_charge3","BattleInterfaceControls");
-			// Bombs
-		CI_CreateAndSetControls("Sailing3Pers","hk_charge4", CI_GetKeyCode("KEY_4"), 0, true );
-		MapControlToGroup("hk_charge4","Sailing1Pers");
-		MapControlToGroup("hk_charge4","BattleInterfaceControls");
-
-		//// {*} BUHO-CIC - ADDED CODE - Key Mapping.
-		// All fleet load balls
-		CI_CreateAndSetControls( "Sailing3Pers", "CIC_LoadBalls", CI_GetKeyCode("KEY_5"), 0, true );
-		MapControlToGroup("CIC_LoadBalls","Sailing1Pers");
-		MapControlToGroup("CIC_LoadBalls","BattleInterfaceControls");
-		// All fleet load grapes
-		CI_CreateAndSetControls( "Sailing3Pers", "CIC_LoadGrapes", CI_GetKeyCode("KEY_6"), 0, true );
-		MapControlToGroup("CIC_LoadGrapes","Sailing1Pers");
-		MapControlToGroup("CIC_LoadGrapes","BattleInterfaceControls");
-		// All fleet load chain
-		CI_CreateAndSetControls( "Sailing3Pers", "CIC_LoadChain", CI_GetKeyCode("KEY_7"), 0, true );
-		MapControlToGroup("CIC_LoadChain","Sailing1Pers");
-		MapControlToGroup("CIC_LoadChain","BattleInterfaceControls");
-		// All fleet load bombs
-		CI_CreateAndSetControls( "Sailing3Pers", "CIC_LoadBombs", CI_GetKeyCode("KEY_8"), 0, true );
-		MapControlToGroup("CIC_LoadBombs","Sailing1Pers");
-		MapControlToGroup("CIC_LoadBombs","BattleInterfaceControls");
-		// All fleet load at will
-		CI_CreateAndSetControls( "Sailing3Pers", "CIC_LoadAtWill", CI_GetKeyCode("KEY_9"), 0, true );
-		MapControlToGroup("CIC_LoadAtWill","Sailing1Pers");
-		MapControlToGroup("CIC_LoadAtWill","BattleInterfaceControls");
-		// All fleet sail away
-		CI_CreateAndSetControls( "Sailing3Pers", "CIC_SailAway", CI_GetKeyCode("KEY_O"), 0, true );
-		MapControlToGroup("CIC_SailAway","Sailing1Pers");
-		MapControlToGroup("CIC_SailAway","BattleInterfaceControls");
-		// All fleet lower sails
-		CI_CreateAndSetControls( "Sailing3Pers", "CIC_LowerSails", CI_GetKeyCode("KEY_L"), 0, true );
-		MapControlToGroup("CIC_LowerSails","Sailing1Pers");
-		MapControlToGroup("CIC_LowerSails","BattleInterfaceControls");
-		// All fleet protect flagship
-		CI_CreateAndSetControls( "Sailing3Pers", "CIC_ProtFlagship", CI_GetKeyCode("KEY_P"), 0, true );
-		MapControlToGroup("CIC_ProtFlagship","Sailing1Pers");
-		MapControlToGroup("CIC_ProtFlagship","BattleInterfaceControls");
-		//// {*} BUHO END ADDITION
-
-	// Dialog =====================================================================
-		CI_CreateAndSetControls( "DialogControls", "DlgAction", CI_GetKeyCode("VK_SPACE"), 0, false );
-		CI_CreateAndSetControls( "DialogControls", "DlgAction1", CI_GetKeyCode("VK_LBUTTON"), 0, false );   // boal new engine
-		CI_CreateAndSetControls( "DialogControls", "DlgAction2", CI_GetKeyCode("VK_RETURN"), 0, false );
-		CI_CreateAndSetControls( "", "DlgCancel", CI_GetKeyCode("VK_ESCAPE"), 0, false );
-		CI_CreateAndSetControls( "DialogControls", "DlgUp", CI_GetKeyCode("VK_UP"), 0, false );
-		CI_CreateAndSetControls( "DialogControls", "DlgDown", CI_GetKeyCode("VK_DOWN"), 0, false );
-		CI_CreateAndSetControls( "DialogControls", "DlgUp2", CI_GetKeyCode("VK_MWHEEL_UP"), 0, false );
-		CI_CreateAndSetControls( "DialogControls", "DlgDown2", CI_GetKeyCode("VK_MWHEEL_DOWN"), 0, false );
-		CI_CreateAndSetControls( "DialogControls", "DlgUp3", CI_GetKeyCode("KEY_W"), 0, false );
-		CI_CreateAndSetControls( "DialogControls", "DlgDown3", CI_GetKeyCode("KEY_S"), 0, false );
-		CI_CreateAndSetControls( "DialogControls", "DlgScrollUp", CI_GetKeyCode("VK_PRIOR"), 0, false );
-		CI_CreateAndSetControls( "DialogControls", "DlgScrollDown", CI_GetKeyCode("VK_NEXT"), 0, false );
-
-		// Net Controls =====================================================================
-		CI_CreateAndSetControls( "NetShipControls", "Net_Menu", CI_GetKeyCode("VK_ESCAPE"), 0, true );
-		CI_CreateAndSetControls( "PrimaryLand", "Say", CI_GetKeyCode("KEY_O"), 0, true );
-		CI_CreateAndSetControls( "NetShipControls", "Team_Say", CI_GetKeyCode("KEY_O"), 0, true );
-		CI_CreateAndSetControls( "NetShipControls", "Person_Say", CI_GetKeyCode("KEY_T"), 0, true );
-		CI_CreateAndSetControls( "", "gamestat", CI_GetKeyCode("VK_F1"), 0, true );
-		CI_CreateAndSetControls( "", "toplist", CI_GetKeyCode("VK_F2"), 0, true );
-		//CI_CreateAndSetControls( "", "gamechat", CI_GetKeyCode("VK_F3"), 0, true );
-
-		MapControlToGroup("ShipCamera_Turn_H", "NetShipControls");
-		MapControlToGroup("ShipCamera_Turn_V", "NetShipControls");
-
-		MapControlToGroup("DeckCamera_Turn_H", "NetShipControls");
-		MapControlToGroup("DeckCamera_Turn_V", "NetShipControls");
-
-		MapControlToGroup("BICommandsActivate", "NetShipControls");
-
-		// temporary control
-		CI_CreateAndSetControls( "NetShipControls", "Ship_StartRepair", CI_GetKeyCode("KEY_L"), 0, true );
-
-		MapControlToGroup("Ship_TurnLeft", "NetShipControls");
-		MapControlToGroup("Ship_TurnRight", "NetShipControls");
-		MapControlToGroup("Ship_SailUp", "NetShipControls");
-		MapControlToGroup("Ship_SailDown", "NetShipControls");
-		MapControlToGroup("Ship_Fire", "NetShipControls");
-
-		MapControlToGroup("Sea_CameraSwitch", "NetShipControls");
-		MapControlToGroup("TelescopeIn", "NetShipControls");
-
-		MapControlToGroup("hk_charge1", "NetShipControls");
-		MapControlToGroup("hk_charge2", "NetShipControls");
-		MapControlToGroup("hk_charge3", "NetShipControls");
-		MapControlToGroup("hk_charge4", "NetShipControls");
-
-		MapControlToGroup("ShipCamera_Forward", "NetShipControls");
-		MapControlToGroup("ShipCamera_Backward", "NetShipControls");
-		MapControlToGroup("DeckCamera_Forward", "NetShipControls");
-		MapControlToGroup("DeckCamera_Backward", "NetShipControls");
-
-		CI_CreateAndSetControls( "PrimaryLand", "InterfaceDisabler", CI_GetKeyCode("VK_NUMPAD5"), 0, true );
-		MapControlToGroup("InterfaceDisabler","Sailing1Pers");
-		MapControlToGroup("InterfaceDisabler","Sailing3Pers");
-		MapControlToGroup("InterfaceDisabler","FightModeControls");
-		MapControlToGroup("InterfaceDisabler","BattleInterfaceControls");
 	}
-	if (!standart)
+	else 
 	{
-		//Trace("ExternControlsInit");
-		if(bFirst)
-		{
-			ExternInitKeyCodes();
-			CI_CreateAndSetControls( "", "ICancel", CI_GetKeyCode("VK_ESCAPE"), 0, false );
-			CI_CreateAndSetControls( "", "IAction", CI_GetKeyCode("VK_SPACE"), 0, false );
-
-			ControlsTreeInit();
-			return;
-		}
-
-		ExternInitKeyCodes();
-
-		CI_CreateAndSetControls( "PrimaryLand", "Map_Best", CI_GetKeyCode("KEY_N"), 0, false); // Отличная карта
-		CI_CreateAndSetControls( "Sailing3Pers", "Map_Best", CI_GetKeyCode("KEY_N"), 0, false); // Отличная карта
-		CI_CreateAndSetControls( "PrimaryLand", "MapView", CI_GetKeyCode("KEY_M"), 0, true); // Атлас карт
-
-
-		// boal Не подведем :) -->
-		CI_CreateAndSetControls( "", "BOAL_Control", CI_GetKeyCode("VK_F11"), 0, false );
-		CI_CreateAndSetControls( "", "BOAL_Control2", CI_GetKeyCode("VK_F12"), 0, false );
-		CI_CreateAndSetControls( "", "BOAL_SetCamera", CI_GetKeyCode("VK_F10"), 0, false );
-		//CI_CreateAndSetControls( "", "BOAL_Control3", CI_GetKeyCode("VK_F9"), 0, false );
-		CI_CreateAndSetControls( "", "BOAL_ControF5", CI_GetKeyCode("VK_F5"), 0, false );
-		CI_CreateAndSetControls( "", "BOAL_ControF7", CI_GetKeyCode("VK_F7"), 0, false );
-		CI_CreateAndSetControls( "", "BOAL_ControlDebug", CI_GetKeyCode("VK_INSERT"), 0, false );
-
-		CI_CreateAndSetControls( "", "TimeScaleFaster", CI_GetKeyCode("VK_ADD"), 0, false );
-	    CI_CreateAndSetControls( "", "TimeScaleSlower", CI_GetKeyCode("VK_SUBTRACT"), 0, false );
-		CI_CreateAndSetControls("", "TimeScaleFasterBA", CI_GetKeyCode("VK_A_PLUS"), 0, false );
-		CI_CreateAndSetControls("", "TimeScaleSlowerBA", CI_GetKeyCode("VK_A_MINUS"), 0, false );
-		CI_CreateAndSetControls( "", "VK_PAUSETimePause", CI_GetKeyCode("VK_PAUSE"), 0, false );
-
-		if (MOD_BETTATESTMODE == "On")
-		{
-			// Teleport
-			CI_CreateAndSetControls( "", "TeleportActive", CI_GetKeyCode("VK_F4"), 0, false );
-			CI_CreateAndSetControls( "", "TeleportUp", CI_GetKeyCode("VK_UP"), 0, false );
-			CI_CreateAndSetControls( "", "TeleportDown", CI_GetKeyCode("VK_DOWN"), 0, false );
-			CI_CreateAndSetControls( "", "TeleportSelect", CI_GetKeyCode("VK_RETURN"), 0, false );
-			// my scale
-
-			// weather
-			CI_CreateAndSetControls( "", "WhrPrevWeather", CI_GetKeyCode("VK_L_BREAKE"), 0, false );
-			CI_CreateAndSetControls( "", "WhrNextWeather", CI_GetKeyCode("VK_R_BREAKE"), 0, false );
-			CI_CreateAndSetControls( "", "WhrUpdateWeather", CI_GetKeyCode("VK_A_QUOTE"), 0, false );
-
-			CI_CreateAndSetControls( "", "CoastFoamLB", CI_GetKeyCode("VK_LBUTTON"), 0, true );
-			CI_CreateAndSetControls( "", "CoastFoamRB", CI_GetKeyCode("VK_RBUTTON"), 0, true );
-			CI_CreateAndSetControls( "", "CoastFoamINS", CI_GetKeyCode("VK_INSERT"), 0, true );
-			CI_CreateAndSetControls( "", "CoastFoamDEL", CI_GetKeyCode("VK_DELETE"), 0, true );
-			CI_CreateAndSetControls( "", "CoastFoamCopy", CI_GetKeyCode("KEY_C"), 0, true );
-		}
-		// boal <--
-
-		CI_CreateAndSetControls( "", "TimeScale", CI_GetKeyCode("KEY_R"), 0, false );
-
-		// Cameras =====================================================================
-			// character camera
-		CI_CreateAndSetControls( "", "ChrCamTurnV", 257, 0, false );
-		SetControlForInverting("ChrCamTurnV",false);
-		CI_CreateAndSetControls( "", "ChrCamTurnH", 256, 0, false );
-		CI_CreateAndSetControls( "", "ChrCamSpecMode", CI_GetKeyCode("VK_CONTROL"), 0, false );
-		CI_CreateAndSetControls( "", "Turn V", 257, INVERSE_CONTROL, false );
-		SetControlForInverting("Turn V",true);
-		CI_CreateAndSetControls( "", "Turn H", 256, 0, false );
-		CI_CreateAndSetControls( "PrimaryLand", "ChrCamCameraSwitch", CI_GetKeyCode("VK_TAB"), 0, true );
-			// ship follow camera
-		CI_CreateAndSetControls( "Sailing3Pers", "ShipCamera_Turn_V", 257, INVERSE_CONTROL, false );
-		MapControlToGroup("ShipCamera_Turn_V", "BattleInterfaceControls");
-		SetControlForInverting("ShipCamera_Turn_V",true);
-		CI_CreateAndSetControls( "Sailing3Pers", "ShipCamera_Turn_H", 256, 0, false );
-		MapControlToGroup("ShipCamera_Turn_H", "BattleInterfaceControls");
-		CI_CreateAndSetControls( "Sailing3Pers", "ShipCamera_Forward", CI_GetKeyCode("VK_MWHEEL_UP"), 0, true );
-		MapControlToGroup("ShipCamera_Forward", "Sailing1Pers");
-		CI_CreateAndSetControls( "Sailing3Pers", "ShipCamera_Backward", CI_GetKeyCode("VK_MWHEEL_DOWN"), 0, true );
-		MapControlToGroup("ShipCamera_Backward", "Sailing1Pers");
-
-			// deck camera
-		//Trace("DeckCamera_Turn_V");
-		CI_CreateAndSetControls( "Sailing1Pers", "DeckCamera_Turn_V", 257, 0, false );
-		SetControlForInverting("DeckCamera_Turn_V",false);
-		CI_CreateAndSetControls( "Sailing1Pers", "DeckCamera_Turn_H", 256, 0, false );
-		//#20190417-01
-		MapControlToGroup("DeckCamera_Turn_V","BattleInterfaceControls");
-		MapControlToGroup("DeckCamera_Turn_H","BattleInterfaceControls");
-		CI_CreateAndSetControls( "Sailing1Pers", "DeckCamera_Forward", CI_GetKeyCode("VK_RBUTTON"), 0, true );
-		CI_CreateAndSetControls( "Sailing1Pers", "DeckCamera_Backward", CI_GetKeyCode("VK_LBUTTON"), 0, true );
-
-			// free camera
-		CI_CreateAndSetControls( "", "FreeCamera_Turn_V", 257, INVERSE_CONTROL, false );
-		SetControlForInverting("FreeCamera_Turn_V",true);
-		CI_CreateAndSetControls( "", "FreeCamera_Turn_H", 256, 0, false );
-		CI_CreateAndSetControls( "", "FreeCamera_Forward", CI_GetKeyCode("VK_LBUTTON"), 0, false );  //VK_LBUTTON
-		CI_CreateAndSetControls( "", "FreeCamera_Backward", CI_GetKeyCode("VK_RBUTTON"), 0, false );   //VK_RBUTTON
-
-
-	// Character ===================================================================
-		CI_CreateAndSetControls( "", "ChrTurnH", 256, 0, false );
-		CI_CreateAndSetControls( "PrimaryLand", "ChrAction", CI_GetKeyCode("VK_SPACE"), 0, true );
-		CI_CreateAndSetControls( "PrimaryLand", "ChrForward", CI_GetKeyCode("KEY_W"), 0, true );
-		CI_CreateAndSetControls( "PrimaryLand", "ChrForward2", CI_GetKeyCode("VK_RBUTTON"), 0, true ); // вторая команда
-		CI_CreateAndSetControls( "PrimaryLand", "ChrJump", CI_GetKeyCode("KEY_T"), 0, true );
-		MapControlToGroup("ChrForward","FightModeControls");
-		MapControlToGroup("ChrForward","BattleInterfaceControls");
-		CI_CreateAndSetControls( "PrimaryLand", "ChrBackward", CI_GetKeyCode("KEY_S"), 0, true );
-		MapControlToGroup("ChrBackward","FightModeControls");
-		MapControlToGroup("ChrBackward","BattleInterfaceControls");
-		CI_CreateAndSetControls( "PrimaryLand", "ChrStrafeLeft", CI_GetKeyCode("KEY_A"), 0, true );
-		MapControlToGroup("ChrStrafeLeft","FightModeControls");
-		MapControlToGroup("ChrStrafeLeft","BattleInterfaceControls");
-		CI_CreateAndSetControls( "PrimaryLand", "ChrStrafeRight", CI_GetKeyCode("KEY_D"), 0, true );
-		MapControlToGroup("ChrStrafeRight","FightModeControls");
-		MapControlToGroup("ChrStrafeRight","BattleInterfaceControls");
-		CI_CreateAndSetControls( "PrimaryLand", "ChrRun", CI_GetKeyCode("VK_SHIFT"), USE_AXIS_AS_BUTTON, true );
-		MapControlToGroup("ChrRun","FightModeControls");
-		MapControlToGroup("ChrRun","BattleInterfaceControls");
-		CI_CreateAndSetControls( "PrimaryLand", "ChrFightMode", CI_GetKeyCode("KEY_E"), 0, true );
-
-		// --> Lipsar быстрый переход на горячую клавишу
-		CI_CreateAndSetControls( "PrimaryLand", "AltModificator", CI_GetKeyCode("Alt"), 0, false );// альт модификатор
-		CI_CreateAndSetControls( "PrimaryLand", "AltModificatorOff", CI_GetKeyCode("Alt"), INVERSE_CONTROL, false );
-		CI_CreateAndSetControls( "PrimaryLand", "Fast_Port", CI_GetKeyCode("KEY_1"), 0, false );
-		CI_CreateAndSetControls( "PrimaryLand", "Fast_store", CI_GetKeyCode("KEY_2"), 0, false );
-		CI_CreateAndSetControls( "PrimaryLand", "Fast_Shipyard", CI_GetKeyCode("KEY_3"), 0, false );
-		CI_CreateAndSetControls( "PrimaryLand", "Fast_tavern", CI_GetKeyCode("KEY_4"), 0, false );
-		CI_CreateAndSetControls( "PrimaryLand", "Fast_townhall", CI_GetKeyCode("KEY_5"), 0, false );
-		CI_CreateAndSetControls( "PrimaryLand", "Fast_bank", CI_GetKeyCode("KEY_6"), 0, false );
-		CI_CreateAndSetControls( "PrimaryLand", "Fast_church", CI_GetKeyCode("KEY_7"), 0, false );
-		CI_CreateAndSetControls( "PrimaryLand", "Fast_Brothel", CI_GetKeyCode("KEY_8"), 0, false );
-		CI_CreateAndSetControls( "PrimaryLand", "Fast_PortOffice", CI_GetKeyCode("KEY_9"), 0, false );
-		CI_CreateAndSetControls( "PrimaryLand", "Fast_prison", CI_GetKeyCode("KEY_0"), 0, false );
-		// <-- Lipsar
-
-		// boal -->
-		CI_CreateAndSetControls( "PrimaryLand", "BOAL_UsePotion", CI_GetKeyCode("KEY_C"), 0, true ); // Warship 13.06.09 Дефолтом перевесил на "C"
-		MapControlToGroup("BOAL_UsePotion","FightModeControls");
-
-		CI_CreateAndSetControls( "PrimaryLand", "UseFood", CI_GetKeyCode("KEY_Z"), 0, true );
-		MapControlToGroup("UseFood","FightModeControls");
-		CI_CreateAndSetControls( "PrimaryLand", "CreateNotice", CI_GetKeyCode("KEY_I"), 0, true );
-		MapControlToGroup("CreateNotice","FightModeControls");
-		// Warship 13.06.09 Выпить противоядие
-		CI_CreateAndSetControls("PrimaryLand", "UseAntidote", CI_GetKeyCode("KEY_V"), 0, true);
-		MapControlToGroup("UseAntidote", "FightModeControls");
-
-		CI_CreateAndSetControls( "PrimaryLand", "BOAL_DeadSearch", CI_GetKeyCode("KEY_1"), 0, true );
-		MapControlToGroup("BOAL_DeadSearch","FightModeControls");
-
-		CI_CreateAndSetControls( "FightModeControls", "BOAL_ActivateRush", CI_GetKeyCode("KEY_F"), 0, true ); // boal ярость на суше
-		CI_CreateAndSetControls("PrimaryLand", "csmRunLootCollector", CI_GetKeyCode("VK_A_TILDA"), 0, true);
-		CI_CreateAndSetControls( "FightModeControls", "MushketHotkey", CI_GetKeyCode("KEY_U"), 0, true); // Мушкет
-		/* CI_CreateAndSetControls( "PrimaryLand", "PusherHotkey", CI_GetKeyCode("KEY_Y"), 0, true); // Громила
-		MapControlToGroup("PusherHotkey", "FightModeControls"); */
-		// boal <--
-
-		//Jonathan A 2009-08-19 -->
-		CI_CreateAndSetControls( "PrimaryLand", "OfficersCharge", CI_GetKeyCode("KEY_J"), 0, true );
-		MapControlToGroup("OfficersCharge","FightModeControls");
-		MapControlToGroup("OfficersCharge","BattleInterfaceControls");
-
-		CI_CreateAndSetControls( "PrimaryLand", "OfficersHold", CI_GetKeyCode("KEY_H"), 0, true );
-		MapControlToGroup("OfficersHold","FightModeControls");
-		MapControlToGroup("OfficersHold","BattleInterfaceControls");
-
-		CI_CreateAndSetControls( "PrimaryLand", "OfficersFollow", CI_GetKeyCode("KEY_G"), 0, true );
-		MapControlToGroup("OfficersFollow","FightModeControls");
-		MapControlToGroup("OfficersFollow","BattleInterfaceControls");
-
-		CI_CreateAndSetControls( "PrimaryLand", "OfficersFree", CI_GetKeyCode("KEY_K"), 0, true );
-		MapControlToGroup("OfficersFree","FightModeControls");
-		MapControlToGroup("OfficersFree","BattleInterfaceControls");
-		// <-- JA
-
 		CI_CreateAndSetControls( "FightModeControls", "ChrBlock", CI_GetKeyCode("VK_RBUTTON"), 0, true );
-		CI_CreateAndSetControls( "FightModeControls", "ChrAltAttackBase", CI_GetKeyCode("VK_LBUTTON"), 0, true );   //2
-		CI_CreateAndSetControls( "FightModeControls", "ChrAltAttackBaseA", CI_GetKeyCode("KEY_B"), 0, true );   //2
 		CI_CreateAndSetControls( "FightModeControls", "ChrAttackBreakBase", CI_GetKeyCode("VK_SPACE"), 0, true ); //ChrAttackRoundBase
 		CI_CreateAndSetControls( "FightModeControls", "ChrAttackBase", CI_GetKeyCode("KEY_X"), 0, true );   //1
-		CI_CreateAndSetControls( "FightModeControls", "SoloParry", CI_GetKeyCode("KEY_5"), 0, true );
-		CI_CreateAndSetControls( "FightModeControls", "SoloFient", CI_GetKeyCode("KEY_6"), 0, true );
-
-		CI_CreateAndSetControls( "FightModeControls", "ChrAttackChoseBase", CI_GetKeyCode("VK_SHIFT"), 0, true );
-
-		MapControlToGroup("ChrBlock","BattleInterfaceControls");
-
-		CI_CreateAndSetControls( "FightModeControls", "ChrFightMode", CI_GetKeyCode("KEY_E"), 0, true );
-		MapControlToGroup("ChrFightMode","BattleInterfaceControls");
-
-		CI_CreateAndSetControls( "FightModeControls", "ChrFire", CI_GetKeyCode("KEY_Q"), 0, true );
-
-		MapControlToGroup("ChrFire","BattleInterfaceControls");
-
-	// Ship ========================================================================
-
-		CI_CreateAndSetControls( "Sailing3Pers", "Ship_TurnLeft", CI_GetKeyCode("KEY_A"), 0, true );
-		MapControlToGroup("Ship_TurnLeft","Sailing1Pers");
-		CI_CreateAndSetControls( "Sailing3Pers", "Ship_TurnRight", CI_GetKeyCode("KEY_D"), 0, true );
-		MapControlToGroup("Ship_TurnRight","Sailing1Pers");
-		CI_CreateAndSetControls( "Sailing3Pers", "Ship_SailUp", CI_GetKeyCode("KEY_W"), 0, true );
-		MapControlToGroup("Ship_SailUp","Sailing1Pers");
-		CI_CreateAndSetControls( "Sailing3Pers", "Ship_SailDown", CI_GetKeyCode("KEY_S"), 0, true );
-		MapControlToGroup("Ship_SailDown","Sailing1Pers");
-		CI_CreateAndSetControls( "Sailing3Pers", "Ship_Fire", CI_GetKeyCode("VK_SPACE"), 0, true );
-		MapControlToGroup("Ship_Fire","Sailing1Pers");
-		CI_CreateAndSetControls( "Sailing3Pers", "Sea_CameraSwitch", CI_GetKeyCode("VK_TAB"), 0, true );
-		MapControlToGroup("Sea_CameraSwitch","Sailing1Pers");
-
-		CI_CreateAndSetControls( "Sailing3Pers", "BOAL_ActivateTurn180", CI_GetKeyCode("KEY_V"), 0, true );
-		MapControlToGroup("BOAL_ActivateTurn180","Sailing1Pers");
-		CI_CreateAndSetControls( "Sailing3Pers", "BOAL_ActivateImmediateReload", CI_GetKeyCode("KEY_B"), 0, true );
-		MapControlToGroup("BOAL_ActivateImmediateReload","Sailing1Pers");
-		CI_CreateAndSetControls( "Sailing3Pers", "BOAL_ActivateLightRepair", CI_GetKeyCode("VK_NUMPAD1"), 0, true );
-		MapControlToGroup("BOAL_ActivateLightRepair","Sailing1Pers");
-		CI_CreateAndSetControls( "Sailing3Pers", "BOAL_ActivateInstantRepair", CI_GetKeyCode("VK_NUMPAD2"), 0, true );
-		MapControlToGroup("BOAL_ActivateInstantRepair","Sailing1Pers");
-		CI_CreateAndSetControls( "Sailing1Pers", "TelescopeIn", CI_GetKeyCode("VK_CONTROL"), 0, true );
-		CI_CreateAndSetControls( "Sailing1Pers", "TelescopeOut", CI_GetKeyCode("VK_CONTROL"), INVERSE_CONTROL, true );
-
-		CI_CreateAndSetControls( "Sailing3Pers", "Ship_GetCoordinates", CI_GetKeyCode("KEY_V"), 0, true );
-		MapControlToGroup("Ship_GetCoordinates","Sailing1Pers");
-
-	// World map ===================================================================
-		CI_CreateAndSetControls( "", "WMapTurnH", 256, 0, false );
-		CI_CreateAndSetControls( "", "WMapTurnV", 257, INVERSE_CONTROL, false );
-		//SetControlForInverting("WMapTurnV",true);
-		CI_CreateAndSetControls( "WorldMapControls", "WMapCameraRotate", CI_GetKeyCode("VK_CONTROL"), 0, true );
-		CI_CreateAndSetControls( "WorldMapControls", "WMapForward", CI_GetKeyCode("VK_MWHEEL_UP"), 0, true );
-		CI_CreateAndSetControls( "WorldMapControls", "WMapBackward", CI_GetKeyCode("VK_MWHEEL_DOWN"), 0, true );
-		CI_CreateAndSetControls( "WorldMapControls", "WMapCameraSwitch", CI_GetKeyCode("VK_TAB"), 0, true );
-
-		CI_CreateAndSetControls( "WorldMapControls", "WMapShipSailUp", CI_GetKeyCode("KEY_W"), 0, true );
-
-		CI_CreateAndSetControls( "WorldMapControls", "WMapShipSailDown", CI_GetKeyCode("KEY_S"), 0, true );
-
-		CI_CreateAndSetControls( "WorldMapControls", "WMapShipTurnLeft", CI_GetKeyCode("KEY_A"), 0, true );
-
-		CI_CreateAndSetControls( "WorldMapControls", "WMapShipTurnRight", CI_GetKeyCode("KEY_D"), 0, true );
-		CI_CreateAndSetControls( "WorldMapControls", "WMapCancel", CI_GetKeyCode("VK_SPACE"), 0, true );
-		CI_CreateAndSetControls( "WorldMapControls", "WMapSkipEncounter", CI_GetKeyCode("VK_RETURN"), 0, true );
-		CI_CreateAndSetControls( "WorldMapControls", "WMapGetCoords", CI_GetKeyCode("KEY_C"), 0, true );
-
-
-	// Interface ===================================================================
-		//				Main interface
-		CI_CreateAndSetControls( "", "ITurnH", 256, 0, false );
-		CI_CreateAndSetControls( "", "ITurnV", 257, INVERSE_CONTROL, false );
-		CI_CreateAndSetControls( "", "SaveDelete", CI_GetKeyCode("VK_DELETE"), 0, false );
-		CI_CreateAndSetControls( "", "ILClick", CI_GetKeyCode("VK_LBUTTON"), 0, false );
-		CI_CreateAndSetControls( "", "IRClick", CI_GetKeyCode("VK_RBUTTON"), 0, false );
-		CI_CreateAndSetControls( "Sailing1Pers", "Interface", CI_GetKeyCode("VK_F2"), 0, false );
-		MapControlToGroup("Interface","Sailing3Pers");
-		MapControlToGroup("Interface","PrimaryLand");
-		MapControlToGroup("Interface","WorldMapControls");
-		MapControlToGroup("Interface","FightModeControls");
-		CI_CreateAndSetControls( "", "MainMenu", CI_GetKeyCode("VK_F1"), 0, false );
-		CI_CreateAndSetControls( "Sailing1Pers", "MainMenuDouble", CI_GetKeyCode("VK_ESCAPE"), 0, false );
-		MapControlToGroup("MainMenuDouble","Sailing3Pers");
-		MapControlToGroup("MainMenuDouble","PrimaryLand");
-		MapControlToGroup("MainMenuDouble","WorldMapControls");
-		MapControlToGroup("MainMenuDouble","FightModeControls");
-		CI_CreateAndSetControls( "", "QuickSave", CI_GetKeyCode("VK_F6"), 0, false );
-		CI_CreateAndSetControls( "", "QuickLoad", CI_GetKeyCode("VK_F9"), 0, false );
-		CI_CreateAndSetControls( "", "IStartButton", CI_GetKeyCode("VK_RETURN"), 0, false );
-		CI_CreateAndSetControls( "", "ICancel", CI_GetKeyCode("VK_ESCAPE"), 0, false );
-		CI_CreateAndSetControls( "", "IAction", CI_GetKeyCode("VK_SPACE"), 0, false );
-		CI_CreateAndSetControls( "", "ILeftShift", CI_GetKeyCode("VK_SHIFT"), 0, false );
-		CI_CreateAndSetControls( "", "IRightShift", CI_GetKeyCode("VK_SHIFT"), 0, false );
-		CI_CreateAndSetControls( "", "IUp", CI_GetKeyCode("VK_UP"), 0, false );
-		CI_CreateAndSetControls( "", "IDown", CI_GetKeyCode("VK_DOWN"), 0, false );
-		CI_CreateAndSetControls( "", "IRight", CI_GetKeyCode("VK_RIGHT"), 0, false );
-		CI_CreateAndSetControls( "", "ILeft", CI_GetKeyCode("VK_LEFT"), 0, false );
-		CI_CreateAndSetControls( "", "IExit_F2", CI_GetKeyCode("VK_F2"), 0, false );
-		CI_CreateAndSetControls( "", "IExit_Escape", CI_GetKeyCode("VK_ESCAPE"), 0, false );
-		CI_CreateAndSetControls( "", "IExit_F1", CI_GetKeyCode("VK_F1"), 0, false );
-
-		//				Battle interface
-		CI_CreateAndSetControls( "Sailing3Pers", "BICommandsActivate", CI_GetKeyCode("VK_RETURN"), 0, true );
-		MapControlToGroup("BICommandsActivate","Sailing1Pers");
-		MapControlToGroup("BICommandsActivate","WorldMapControls");
-		CI_CreateAndSetControls( "PrimaryLand", "LICommandsActivate", CI_GetKeyCode("VK_RETURN"), 0, true );
-		CI_CreateAndSetControls( "BattleInterfaceControls", "BICommandsConfirm", CI_GetKeyCode("VK_RETURN"), 0, true );
-		CI_CreateAndSetControls( "BattleInterfaceControls", "BICommandsCancel", CI_GetKeyCode("VK_ESCAPE"), 0, false );
-		CI_CreateAndSetControls( "BattleInterfaceControls", "BICommandsLeft", CI_GetKeyCode("VK_LEFT"), 0, true );
-		CI_CreateAndSetControls( "BattleInterfaceControls", "BICommandsRight", CI_GetKeyCode("VK_RIGHT"), 0, true );
-
-		if(CheckAttribute(InterfaceStates, "EnabledCMControls") && sti(InterfaceStates.EnabledCMControls) == 1)
-		{
-			CI_CreateAndSetControls( "Sailing3Pers", "BICommandsActivate", CI_GetKeyCode("VK_MBUTTON"), 0, true );
-			CI_CreateAndSetControls( "PrimaryLand", "LICommandsActivate", CI_GetKeyCode("VK_MBUTTON"), 0, true );
-			CI_CreateAndSetControls( "BattleInterfaceControls", "BICommandsConfirm", CI_GetKeyCode("VK_LBUTTON"), 0, true );
-			CI_CreateAndSetControls( "BattleInterfaceControls", "BICommandsCancel", CI_GetKeyCode("VK_RBUTTON"), 0, false );
-			CI_CreateAndSetControls( "BattleInterfaceControls", "BICommandsLeft", CI_GetKeyCode("VK_MWHEEL_DOWN"), 0, true );
-			CI_CreateAndSetControls( "BattleInterfaceControls", "BICommandsRight", CI_GetKeyCode("VK_MWHEEL_UP"), 0, true );
-		}
-		MapControlToGroup("LICommandsActivate","FightModeControls");
-		CI_CreateAndSetControls( "BattleInterfaceControls", "BICommandsUp", CI_GetKeyCode("VK_UP"), 0, true );
-		CI_CreateAndSetControls( "BattleInterfaceControls", "BICommandsDown", CI_GetKeyCode("VK_DOWN"), 0, true );
-		CI_CreateAndSetControls( "Sailing3Pers", "MiniMapZoomIn", CI_GetKeyCode("KEY_E"), 0, true );
-		MapControlToGroup("MiniMapZoomIn","Sailing1Pers");
-		CI_CreateAndSetControls( "Sailing3Pers", "MiniMapZoomOut", CI_GetKeyCode("KEY_Q"), 0, true );
-		MapControlToGroup("MiniMapZoomOut","Sailing1Pers");
-		CI_CreateAndSetControls( "Sailing3Pers", "BIFastCommand", CI_GetKeyCode("VK_F3"), 0, true ); //VK_F3
-		MapControlToGroup("BIFastCommand","Sailing1Pers");
-		MapControlToGroup("BIFastCommand","PrimaryLand");
-		MapControlToGroup("BIFastCommand","FightModeControls");
-		MapControlToGroup("BIFastCommand","WorldMapControls");
-		MapControlToGroup("BIFastCommand","BattleInterfaceControls");
-
-		// hot keys for cannon charge reload
-			// Balls
-		CI_CreateAndSetControls("Sailing3Pers","hk_charge1", CI_GetKeyCode("KEY_1"), 0, true );
-		MapControlToGroup("hk_charge1","Sailing1Pers");
-		MapControlToGroup("hk_charge1","BattleInterfaceControls");
-			// Grapes
-		CI_CreateAndSetControls("Sailing3Pers","hk_charge2", CI_GetKeyCode("KEY_2"), 0, true );
-		MapControlToGroup("hk_charge2","Sailing1Pers");
-		MapControlToGroup("hk_charge2","BattleInterfaceControls");
-			// Knippels
-		CI_CreateAndSetControls("Sailing3Pers","hk_charge3", CI_GetKeyCode("KEY_3"), 0, true );
-		MapControlToGroup("hk_charge3","Sailing1Pers");
-		MapControlToGroup("hk_charge3","BattleInterfaceControls");
-			// Bombs
-		CI_CreateAndSetControls("Sailing3Pers","hk_charge4", CI_GetKeyCode("KEY_4"), 0, true );
-		MapControlToGroup("hk_charge4","Sailing1Pers");
-		MapControlToGroup("hk_charge4","BattleInterfaceControls");
-
-
-		//// {*} BUHO-CIC - ADDED CODE - Key Mapping.
-		// All fleet load balls
-		CI_CreateAndSetControls( "Sailing3Pers", "CIC_LoadBalls", CI_GetKeyCode("KEY_5"), 0, true );
-		MapControlToGroup("CIC_LoadBalls","Sailing1Pers");
-		MapControlToGroup("CIC_LoadBalls","BattleInterfaceControls");
-		// All fleet load grapes
-		CI_CreateAndSetControls( "Sailing3Pers", "CIC_LoadGrapes", CI_GetKeyCode("KEY_6"), 0, true );
-		MapControlToGroup("CIC_LoadGrapes","Sailing1Pers");
-		MapControlToGroup("CIC_LoadGrapes","BattleInterfaceControls");
-		// All fleet load chain
-		CI_CreateAndSetControls( "Sailing3Pers", "CIC_LoadChain", CI_GetKeyCode("KEY_7"), 0, true );
-		MapControlToGroup("CIC_LoadChain","Sailing1Pers");
-		MapControlToGroup("CIC_LoadChain","BattleInterfaceControls");
-		// All fleet load bombs
-		CI_CreateAndSetControls( "Sailing3Pers", "CIC_LoadBombs", CI_GetKeyCode("KEY_8"), 0, true );
-		MapControlToGroup("CIC_LoadBombs","Sailing1Pers");
-		MapControlToGroup("CIC_LoadBombs","BattleInterfaceControls");
-		// All fleet load at will
-		CI_CreateAndSetControls( "Sailing3Pers", "CIC_LoadAtWill", CI_GetKeyCode("KEY_9"), 0, true );
-		MapControlToGroup("CIC_LoadAtWill","Sailing1Pers");
-		MapControlToGroup("CIC_LoadAtWill","BattleInterfaceControls");
-		// All fleet sail away
-		CI_CreateAndSetControls( "Sailing3Pers", "CIC_SailAway", CI_GetKeyCode("KEY_O"), 0, true );
-		MapControlToGroup("CIC_SailAway","Sailing1Pers");
-		MapControlToGroup("CIC_SailAway","BattleInterfaceControls");
-		// All fleet lower sails
-		CI_CreateAndSetControls( "Sailing3Pers", "CIC_LowerSails", CI_GetKeyCode("KEY_L"), 0, true );
-		MapControlToGroup("CIC_LowerSails","Sailing1Pers");
-		MapControlToGroup("CIC_LowerSails","BattleInterfaceControls");
-		// All fleet protect flagship
-		CI_CreateAndSetControls( "Sailing3Pers", "CIC_ProtFlagship", CI_GetKeyCode("KEY_P"), 0, true );
-		MapControlToGroup("CIC_ProtFlagship","Sailing1Pers");
-		MapControlToGroup("CIC_ProtFlagship","BattleInterfaceControls");
-		//// {*} BUHO END ADDITION
-
-
-
-
-	// Dialog =====================================================================
-		CI_CreateAndSetControls( "DialogControls", "DlgAction", CI_GetKeyCode("VK_SPACE"), 0, false );
-		CI_CreateAndSetControls( "DialogControls", "DlgAction1", CI_GetKeyCode("VK_LBUTTON"), 0, false );   // boal new engine
-		CI_CreateAndSetControls( "DialogControls", "DlgAction2", CI_GetKeyCode("VK_RETURN"), 0, false );
-		CI_CreateAndSetControls( "", "DlgCancel", CI_GetKeyCode("VK_ESCAPE"), 0, false );
-		CI_CreateAndSetControls( "DialogControls", "DlgUp", CI_GetKeyCode("VK_UP"), 0, false );
-		CI_CreateAndSetControls( "DialogControls", "DlgDown", CI_GetKeyCode("VK_DOWN"), 0, false );
-		CI_CreateAndSetControls( "DialogControls", "DlgUp2", CI_GetKeyCode("VK_MWHEEL_UP"), 0, false );
-		CI_CreateAndSetControls( "DialogControls", "DlgDown2", CI_GetKeyCode("VK_MWHEEL_DOWN"), 0, false );
-		CI_CreateAndSetControls( "DialogControls", "DlgUp3", CI_GetKeyCode("KEY_W"), 0, false );
-		CI_CreateAndSetControls( "DialogControls", "DlgDown3", CI_GetKeyCode("KEY_S"), 0, false );
-		CI_CreateAndSetControls( "DialogControls", "DlgScrollUp", CI_GetKeyCode("VK_PRIOR"), 0, false );
-		CI_CreateAndSetControls( "DialogControls", "DlgScrollDown", CI_GetKeyCode("VK_NEXT"), 0, false );
-
-		// Net Controls =====================================================================
-		CI_CreateAndSetControls( "NetShipControls", "Net_Menu", CI_GetKeyCode("VK_ESCAPE"), 0, true );
-		CI_CreateAndSetControls( "PrimaryLand", "Say", CI_GetKeyCode("KEY_O"), 0, true );
-		CI_CreateAndSetControls( "NetShipControls", "Team_Say", CI_GetKeyCode("KEY_O"), 0, true );
-		CI_CreateAndSetControls( "NetShipControls", "Person_Say", CI_GetKeyCode("KEY_T"), 0, true );
-		CI_CreateAndSetControls( "", "gamestat", CI_GetKeyCode("VK_F1"), 0, true );
-		CI_CreateAndSetControls( "", "toplist", CI_GetKeyCode("VK_F2"), 0, true );
-
-		MapControlToGroup("ShipCamera_Turn_H", "NetShipControls");
-		MapControlToGroup("ShipCamera_Turn_V", "NetShipControls");
-
-		MapControlToGroup("DeckCamera_Turn_H", "NetShipControls");
-		MapControlToGroup("DeckCamera_Turn_V", "NetShipControls");
-
-		MapControlToGroup("BICommandsActivate", "NetShipControls");
-
-		// temporary control
-		CI_CreateAndSetControls( "NetShipControls", "Ship_StartRepair", CI_GetKeyCode("KEY_L"), 0, true );
-
-		MapControlToGroup("Ship_TurnLeft", "NetShipControls");
-		MapControlToGroup("Ship_TurnRight", "NetShipControls");
-		MapControlToGroup("Ship_SailUp", "NetShipControls");
-		MapControlToGroup("Ship_SailDown", "NetShipControls");
-		MapControlToGroup("Ship_Fire", "NetShipControls");
-
-		MapControlToGroup("Sea_CameraSwitch", "NetShipControls");
-		MapControlToGroup("TelescopeIn", "NetShipControls");
-
-		MapControlToGroup("hk_charge1", "NetShipControls");
-		MapControlToGroup("hk_charge2", "NetShipControls");
-		MapControlToGroup("hk_charge3", "NetShipControls");
-		MapControlToGroup("hk_charge4", "NetShipControls");
-
-		MapControlToGroup("ShipCamera_Forward", "NetShipControls");
-		MapControlToGroup("ShipCamera_Backward", "NetShipControls");
-		MapControlToGroup("DeckCamera_Forward", "NetShipControls");
-		MapControlToGroup("DeckCamera_Backward", "NetShipControls");
-
-		CI_CreateAndSetControls( "PrimaryLand", "InterfaceDisabler", CI_GetKeyCode("VK_NUMPAD5"), 0, true );
-		MapControlToGroup("InterfaceDisabler","Sailing1Pers");
-		MapControlToGroup("InterfaceDisabler","Sailing3Pers");
-		MapControlToGroup("InterfaceDisabler","FightModeControls");
-		MapControlToGroup("InterfaceDisabler","BattleInterfaceControls");
 	}
+	CI_CreateAndSetControls( "FightModeControls", "ChrAttackChoseBase", CI_GetKeyCode("VK_SHIFT"), 0, true );
+
+
+	MapControlToGroup("ChrBlock","BattleInterfaceControls");
+
+	CI_CreateAndSetControls( "FightModeControls", "ChrFightMode", CI_GetKeyCode("KEY_E"), 0, true );
+	MapControlToGroup("ChrFightMode","BattleInterfaceControls");
+
+	CI_CreateAndSetControls( "FightModeControls", "ChrFire", CI_GetKeyCode("KEY_Q"), 0, true );
+
+	MapControlToGroup("ChrFire","BattleInterfaceControls");
+
+// Ship ========================================================================
+
+	CI_CreateAndSetControls( "Sailing3Pers", "Ship_TurnLeft", CI_GetKeyCode("KEY_A"), 0, true );
+	MapControlToGroup("Ship_TurnLeft","Sailing1Pers");
+	CI_CreateAndSetControls( "Sailing3Pers", "Ship_TurnRight", CI_GetKeyCode("KEY_D"), 0, true );
+	MapControlToGroup("Ship_TurnRight","Sailing1Pers");
+	CI_CreateAndSetControls( "Sailing3Pers", "Ship_SailUp", CI_GetKeyCode("KEY_W"), 0, true );
+	MapControlToGroup("Ship_SailUp","Sailing1Pers");
+	CI_CreateAndSetControls( "Sailing3Pers", "Ship_SailDown", CI_GetKeyCode("KEY_S"), 0, true );
+	MapControlToGroup("Ship_SailDown","Sailing1Pers");
+	if (standart) CI_CreateAndSetControls( "Sailing3Pers", "Ship_Fire", CI_GetKeyCode("VK_LBUTTON"), 0, true );
+	else CI_CreateAndSetControls( "Sailing3Pers", "Ship_Fire", CI_GetKeyCode("VK_SPACE"), 0, true );
+	MapControlToGroup("Ship_Fire","Sailing1Pers");
+	CI_CreateAndSetControls( "Sailing3Pers", "Sea_CameraSwitch", CI_GetKeyCode("VK_TAB"), 0, true );
+	MapControlToGroup("Sea_CameraSwitch","Sailing1Pers");
+
+	CI_CreateAndSetControls( "Sailing3Pers", "BOAL_ActivateTurn180", CI_GetKeyCode("KEY_V"), 0, true );
+	MapControlToGroup("BOAL_ActivateTurn180","Sailing1Pers");
+	CI_CreateAndSetControls( "Sailing3Pers", "BOAL_ActivateImmediateReload", CI_GetKeyCode("KEY_B"), 0, true );
+	MapControlToGroup("BOAL_ActivateImmediateReload","Sailing1Pers");
+	CI_CreateAndSetControls( "Sailing3Pers", "BOAL_ActivateLightRepair", CI_GetKeyCode("VK_NUMPAD1"), 0, true );
+	MapControlToGroup("BOAL_ActivateLightRepair","Sailing1Pers");
+	CI_CreateAndSetControls( "Sailing3Pers", "BOAL_ActivateInstantRepair", CI_GetKeyCode("VK_NUMPAD2"), 0, true );
+	MapControlToGroup("BOAL_ActivateInstantRepair","Sailing1Pers");
+	CI_CreateAndSetControls( "Sailing1Pers", "TelescopeIn", CI_GetKeyCode("VK_CONTROL"), 0, true );
+	CI_CreateAndSetControls( "Sailing1Pers", "TelescopeOut", CI_GetKeyCode("VK_CONTROL"), INVERSE_CONTROL, true );
+
+	CI_CreateAndSetControls( "Sailing3Pers", "Ship_GetCoordinates", CI_GetKeyCode("KEY_V"), 0, true );
+	MapControlToGroup("Ship_GetCoordinates","Sailing1Pers");
+
+// World map ===================================================================
+	CI_CreateAndSetControls( "", "WMapTurnH", 256, 0, false );
+	CI_CreateAndSetControls( "", "WMapTurnV", 257, INVERSE_CONTROL, false );
+	CI_CreateAndSetControls( "WorldMapControls", "WMapCameraRotate", CI_GetKeyCode("VK_CONTROL"), 0, true );
+	CI_CreateAndSetControls( "WorldMapControls", "WMapForward", CI_GetKeyCode("VK_MWHEEL_UP"), 0, true );
+	CI_CreateAndSetControls( "WorldMapControls", "WMapBackward", CI_GetKeyCode("VK_MWHEEL_DOWN"), 0, true );
+	CI_CreateAndSetControls( "WorldMapControls", "WMapCameraSwitch", CI_GetKeyCode("VK_TAB"), 0, true );
+
+	CI_CreateAndSetControls( "WorldMapControls", "WMapShipSailUp", CI_GetKeyCode("KEY_W"), 0, true );
+
+	CI_CreateAndSetControls( "WorldMapControls", "WMapShipSailDown", CI_GetKeyCode("KEY_S"), 0, true );
+
+	CI_CreateAndSetControls( "WorldMapControls", "WMapShipTurnLeft", CI_GetKeyCode("KEY_A"), 0, true );
+
+	CI_CreateAndSetControls( "WorldMapControls", "WMapShipTurnRight", CI_GetKeyCode("KEY_D"), 0, true );
+	CI_CreateAndSetControls( "WorldMapControls", "WMapCancel", CI_GetKeyCode("VK_SPACE"), 0, true );
+	CI_CreateAndSetControls( "WorldMapControls", "WMapSkipEncounter", CI_GetKeyCode("VK_RETURN"), 0, true );
+	CI_CreateAndSetControls( "WorldMapControls", "WMapGetCoords", CI_GetKeyCode("KEY_C"), 0, true );
+
+
+// Interface ===================================================================
+	//				Main interface
+	CI_CreateAndSetControls( "", "ITurnH", 256, 0, false );
+	CI_CreateAndSetControls( "", "ITurnV", 257, INVERSE_CONTROL, false );
+	CI_CreateAndSetControls( "", "SaveDelete", CI_GetKeyCode("VK_DELETE"), 0, false );
+	CI_CreateAndSetControls( "", "ILClick", CI_GetKeyCode("VK_LBUTTON"), 0, false );
+	CI_CreateAndSetControls( "", "IRClick", CI_GetKeyCode("VK_RBUTTON"), 0, false );
+	CI_CreateAndSetControls( "Sailing1Pers", "Interface", CI_GetKeyCode("VK_F2"), 0, false );
+	MapControlToGroup("Interface","Sailing3Pers");
+	MapControlToGroup("Interface","PrimaryLand");
+	MapControlToGroup("Interface","WorldMapControls");
+	MapControlToGroup("Interface","FightModeControls");
+	CI_CreateAndSetControls( "", "MainMenu", CI_GetKeyCode("VK_F1"), 0, false );
+	CI_CreateAndSetControls( "Sailing1Pers", "MainMenuDouble", CI_GetKeyCode("VK_ESCAPE"), 0, false );
+	MapControlToGroup("MainMenuDouble","Sailing3Pers");
+	MapControlToGroup("MainMenuDouble","PrimaryLand");
+	MapControlToGroup("MainMenuDouble","WorldMapControls");
+	MapControlToGroup("MainMenuDouble","FightModeControls");
+	CI_CreateAndSetControls( "", "QuickSave", CI_GetKeyCode("VK_F6"), 0, false );
+	CI_CreateAndSetControls( "", "QuickLoad", CI_GetKeyCode("VK_F9"), 0, false );
+	CI_CreateAndSetControls( "", "IStartButton", CI_GetKeyCode("VK_RETURN"), 0, false );
+	CI_CreateAndSetControls( "", "ICancel", CI_GetKeyCode("VK_ESCAPE"), 0, false );
+	CI_CreateAndSetControls( "", "IAction", CI_GetKeyCode("VK_SPACE"), 0, false );
+	CI_CreateAndSetControls( "", "ILeftShift", CI_GetKeyCode("VK_SHIFT"), 0, false );
+	CI_CreateAndSetControls( "", "IRightShift", CI_GetKeyCode("VK_SHIFT"), 0, false );
+	CI_CreateAndSetControls( "", "IUp", CI_GetKeyCode("VK_UP"), 0, false );
+	CI_CreateAndSetControls( "", "IDown", CI_GetKeyCode("VK_DOWN"), 0, false );
+	CI_CreateAndSetControls( "", "IRight", CI_GetKeyCode("VK_RIGHT"), 0, false );
+	CI_CreateAndSetControls( "", "ILeft", CI_GetKeyCode("VK_LEFT"), 0, false );
+	CI_CreateAndSetControls( "", "IExit_F2", CI_GetKeyCode("VK_F2"), 0, false );
+	CI_CreateAndSetControls( "", "IExit_Escape", CI_GetKeyCode("VK_ESCAPE"), 0, false );
+	CI_CreateAndSetControls( "", "IExit_F1", CI_GetKeyCode("VK_F1"), 0, false );
+
+	//				Battle interface
+	CI_CreateAndSetControls( "Sailing3Pers", "BICommandsActivate", CI_GetKeyCode("VK_RETURN"), 0, true );
+	MapControlToGroup("BICommandsActivate","Sailing1Pers");
+	MapControlToGroup("BICommandsActivate","WorldMapControls");
+	CI_CreateAndSetControls( "PrimaryLand", "LICommandsActivate", CI_GetKeyCode("VK_RETURN"), 0, true );
+	CI_CreateAndSetControls( "BattleInterfaceControls", "BICommandsConfirm", CI_GetKeyCode("VK_RETURN"), 0, true );
+	CI_CreateAndSetControls( "BattleInterfaceControls", "BICommandsCancel", CI_GetKeyCode("VK_ESCAPE"), 0, false );
+	CI_CreateAndSetControls( "BattleInterfaceControls", "BICommandsLeft", CI_GetKeyCode("VK_LEFT"), 0, true );
+	CI_CreateAndSetControls( "BattleInterfaceControls", "BICommandsRight", CI_GetKeyCode("VK_RIGHT"), 0, true );
+
+	if(CheckAttribute(InterfaceStates, "EnabledCMControls") && sti(InterfaceStates.EnabledCMControls) == 1)
+	{
+		CI_CreateAndSetControls( "Sailing3Pers", "BICommandsActivate", CI_GetKeyCode("VK_MBUTTON"), 0, true );
+		CI_CreateAndSetControls( "PrimaryLand", "LICommandsActivate", CI_GetKeyCode("VK_MBUTTON"), 0, true );
+		CI_CreateAndSetControls( "BattleInterfaceControls", "BICommandsConfirm", CI_GetKeyCode("VK_LBUTTON"), 0, true );
+		CI_CreateAndSetControls( "BattleInterfaceControls", "BICommandsCancel", CI_GetKeyCode("VK_RBUTTON"), 0, false );
+		CI_CreateAndSetControls( "BattleInterfaceControls", "BICommandsLeft", CI_GetKeyCode("VK_MWHEEL_DOWN"), 0, true );
+		CI_CreateAndSetControls( "BattleInterfaceControls", "BICommandsRight", CI_GetKeyCode("VK_MWHEEL_UP"), 0, true );
+	}
+	MapControlToGroup("LICommandsActivate","FightModeControls");
+	CI_CreateAndSetControls( "BattleInterfaceControls", "BICommandsUp", CI_GetKeyCode("VK_UP"), 0, true );
+	CI_CreateAndSetControls( "BattleInterfaceControls", "BICommandsDown", CI_GetKeyCode("VK_DOWN"), 0, true );
+	CI_CreateAndSetControls( "Sailing3Pers", "MiniMapZoomIn", CI_GetKeyCode("KEY_E"), 0, true );
+	MapControlToGroup("MiniMapZoomIn","Sailing1Pers");
+	if (standart) 
+	{
+		CI_CreateAndSetControls( "Sailing3Pers", "MiniMapZoomOut", CI_GetKeyCode("KEY_F"), 0, true );
+		CI_CreateAndSetControls( "Sailing3Pers", "BIFastCommand", CI_GetKeyCode("VK_SPACE"), 0, true ); //VK_F3
+	}
+	else
+	{
+		CI_CreateAndSetControls( "Sailing3Pers", "MiniMapZoomOut", CI_GetKeyCode("KEY_Q"), 0, true );
+		CI_CreateAndSetControls( "Sailing3Pers", "BIFastCommand", CI_GetKeyCode("VK_F3"), 0, true ); //VK_F3
+	}
+	MapControlToGroup("MiniMapZoomOut","Sailing1Pers");
+	MapControlToGroup("BIFastCommand","Sailing1Pers");
+	MapControlToGroup("BIFastCommand","PrimaryLand");
+	MapControlToGroup("BIFastCommand","FightModeControls");
+	MapControlToGroup("BIFastCommand","WorldMapControls");
+	MapControlToGroup("BIFastCommand","BattleInterfaceControls");
+
+	// hot keys for cannon charge reload
+		// Balls
+	CI_CreateAndSetControls("Sailing3Pers","hk_charge1", CI_GetKeyCode("KEY_1"), 0, true );
+	MapControlToGroup("hk_charge1","Sailing1Pers");
+	MapControlToGroup("hk_charge1","BattleInterfaceControls");
+		// Grapes
+	CI_CreateAndSetControls("Sailing3Pers","hk_charge2", CI_GetKeyCode("KEY_2"), 0, true );
+	MapControlToGroup("hk_charge2","Sailing1Pers");
+	MapControlToGroup("hk_charge2","BattleInterfaceControls");
+		// Knippels
+	CI_CreateAndSetControls("Sailing3Pers","hk_charge3", CI_GetKeyCode("KEY_3"), 0, true );
+	MapControlToGroup("hk_charge3","Sailing1Pers");
+	MapControlToGroup("hk_charge3","BattleInterfaceControls");
+		// Bombs
+	CI_CreateAndSetControls("Sailing3Pers","hk_charge4", CI_GetKeyCode("KEY_4"), 0, true );
+	MapControlToGroup("hk_charge4","Sailing1Pers");
+	MapControlToGroup("hk_charge4","BattleInterfaceControls");
+
+	//// {*} BUHO-CIC - ADDED CODE - Key Mapping.
+	// All fleet load balls
+	CI_CreateAndSetControls( "Sailing3Pers", "CIC_LoadBalls", CI_GetKeyCode("KEY_5"), 0, true );
+	MapControlToGroup("CIC_LoadBalls","Sailing1Pers");
+	MapControlToGroup("CIC_LoadBalls","BattleInterfaceControls");
+	// All fleet load grapes
+	CI_CreateAndSetControls( "Sailing3Pers", "CIC_LoadGrapes", CI_GetKeyCode("KEY_6"), 0, true );
+	MapControlToGroup("CIC_LoadGrapes","Sailing1Pers");
+	MapControlToGroup("CIC_LoadGrapes","BattleInterfaceControls");
+	// All fleet load chain
+	CI_CreateAndSetControls( "Sailing3Pers", "CIC_LoadChain", CI_GetKeyCode("KEY_7"), 0, true );
+	MapControlToGroup("CIC_LoadChain","Sailing1Pers");
+	MapControlToGroup("CIC_LoadChain","BattleInterfaceControls");
+	// All fleet load bombs
+	CI_CreateAndSetControls( "Sailing3Pers", "CIC_LoadBombs", CI_GetKeyCode("KEY_8"), 0, true );
+	MapControlToGroup("CIC_LoadBombs","Sailing1Pers");
+	MapControlToGroup("CIC_LoadBombs","BattleInterfaceControls");
+	// All fleet load at will
+	CI_CreateAndSetControls( "Sailing3Pers", "CIC_LoadAtWill", CI_GetKeyCode("KEY_9"), 0, true );
+	MapControlToGroup("CIC_LoadAtWill","Sailing1Pers");
+	MapControlToGroup("CIC_LoadAtWill","BattleInterfaceControls");
+	// All fleet sail away
+	CI_CreateAndSetControls( "Sailing3Pers", "CIC_SailAway", CI_GetKeyCode("KEY_O"), 0, true );
+	MapControlToGroup("CIC_SailAway","Sailing1Pers");
+	MapControlToGroup("CIC_SailAway","BattleInterfaceControls");
+	// All fleet lower sails
+	CI_CreateAndSetControls( "Sailing3Pers", "CIC_LowerSails", CI_GetKeyCode("KEY_L"), 0, true );
+	MapControlToGroup("CIC_LowerSails","Sailing1Pers");
+	MapControlToGroup("CIC_LowerSails","BattleInterfaceControls");
+	// All fleet protect flagship
+	CI_CreateAndSetControls( "Sailing3Pers", "CIC_ProtFlagship", CI_GetKeyCode("KEY_P"), 0, true );
+	MapControlToGroup("CIC_ProtFlagship","Sailing1Pers");
+	MapControlToGroup("CIC_ProtFlagship","BattleInterfaceControls");
+	//// {*} BUHO END ADDITION
+
+// Dialog =====================================================================
+	CI_CreateAndSetControls( "DialogControls", "DlgAction", CI_GetKeyCode("VK_SPACE"), 0, false );
+	CI_CreateAndSetControls( "DialogControls", "DlgAction1", CI_GetKeyCode("VK_LBUTTON"), 0, false );   // boal new engine
+	CI_CreateAndSetControls( "DialogControls", "DlgAction2", CI_GetKeyCode("VK_RETURN"), 0, false );
+	CI_CreateAndSetControls( "", "DlgCancel", CI_GetKeyCode("VK_ESCAPE"), 0, false );
+	CI_CreateAndSetControls( "DialogControls", "DlgUp", CI_GetKeyCode("VK_UP"), 0, false );
+	CI_CreateAndSetControls( "DialogControls", "DlgDown", CI_GetKeyCode("VK_DOWN"), 0, false );
+	CI_CreateAndSetControls( "DialogControls", "DlgUp2", CI_GetKeyCode("VK_MWHEEL_UP"), 0, false );
+	CI_CreateAndSetControls( "DialogControls", "DlgDown2", CI_GetKeyCode("VK_MWHEEL_DOWN"), 0, false );
+	CI_CreateAndSetControls( "DialogControls", "DlgUp3", CI_GetKeyCode("KEY_W"), 0, false );
+	CI_CreateAndSetControls( "DialogControls", "DlgDown3", CI_GetKeyCode("KEY_S"), 0, false );
+	CI_CreateAndSetControls( "DialogControls", "DlgScrollUp", CI_GetKeyCode("VK_PRIOR"), 0, false );
+	CI_CreateAndSetControls( "DialogControls", "DlgScrollDown", CI_GetKeyCode("VK_NEXT"), 0, false );
+
+	// Net Controls =====================================================================
+	CI_CreateAndSetControls( "NetShipControls", "Net_Menu", CI_GetKeyCode("VK_ESCAPE"), 0, true );
+	CI_CreateAndSetControls( "PrimaryLand", "Say", CI_GetKeyCode("KEY_O"), 0, true );
+	CI_CreateAndSetControls( "NetShipControls", "Team_Say", CI_GetKeyCode("KEY_O"), 0, true );
+	CI_CreateAndSetControls( "NetShipControls", "Person_Say", CI_GetKeyCode("KEY_T"), 0, true );
+	CI_CreateAndSetControls( "", "gamestat", CI_GetKeyCode("VK_F1"), 0, true );
+	CI_CreateAndSetControls( "", "toplist", CI_GetKeyCode("VK_F2"), 0, true );
+	//CI_CreateAndSetControls( "", "gamechat", CI_GetKeyCode("VK_F3"), 0, true );
+
+	MapControlToGroup("ShipCamera_Turn_H", "NetShipControls");
+	MapControlToGroup("ShipCamera_Turn_V", "NetShipControls");
+
+	MapControlToGroup("DeckCamera_Turn_H", "NetShipControls");
+	MapControlToGroup("DeckCamera_Turn_V", "NetShipControls");
+
+	MapControlToGroup("BICommandsActivate", "NetShipControls");
+
+	// temporary control
+	CI_CreateAndSetControls( "NetShipControls", "Ship_StartRepair", CI_GetKeyCode("KEY_L"), 0, true );
+
+	MapControlToGroup("Ship_TurnLeft", "NetShipControls");
+	MapControlToGroup("Ship_TurnRight", "NetShipControls");
+	MapControlToGroup("Ship_SailUp", "NetShipControls");
+	MapControlToGroup("Ship_SailDown", "NetShipControls");
+	MapControlToGroup("Ship_Fire", "NetShipControls");
+
+	MapControlToGroup("Sea_CameraSwitch", "NetShipControls");
+	MapControlToGroup("TelescopeIn", "NetShipControls");
+
+	MapControlToGroup("hk_charge1", "NetShipControls");
+	MapControlToGroup("hk_charge2", "NetShipControls");
+	MapControlToGroup("hk_charge3", "NetShipControls");
+	MapControlToGroup("hk_charge4", "NetShipControls");
+
+	MapControlToGroup("ShipCamera_Forward", "NetShipControls");
+	MapControlToGroup("ShipCamera_Backward", "NetShipControls");
+	MapControlToGroup("DeckCamera_Forward", "NetShipControls");
+	MapControlToGroup("DeckCamera_Backward", "NetShipControls");
+
+	CI_CreateAndSetControls( "PrimaryLand", "InterfaceDisabler", CI_GetKeyCode("VK_NUMPAD5"), 0, true );
+	MapControlToGroup("InterfaceDisabler","Sailing1Pers");
+	MapControlToGroup("InterfaceDisabler","Sailing3Pers");
+	MapControlToGroup("InterfaceDisabler","FightModeControls");
+	MapControlToGroup("InterfaceDisabler","BattleInterfaceControls");
 }
 
 void ExternInitKeyCodes()

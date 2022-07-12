@@ -1020,6 +1020,10 @@ void QuestComplete(string sQuestName, string qname)
                 RefreshBattleInterface();
             }
 		break;
+
+        case "pir_flag_rise":
+			Flag_Change(PIRATE);
+		break;
 		// агенты в тавернах -->
         case "any_patent_take":
             AddMoneyToCharacter(pchar, -sti(pchar.PatentPrice));
@@ -1032,6 +1036,23 @@ void QuestComplete(string sQuestName, string qname)
             Items[sti(pchar.EquipedPatentId)].TitulCur = 1; // текущ звание сбросим
         	Items[sti(pchar.EquipedPatentId)].TitulCurNext = 0; // счетчик звание сбросим
 		break;
+
+        case "fra_flag_rise":
+            Flag_Change(FRANCE);
+        break;
+
+        case "eng_flag_rise":
+            Flag_Change(ENGLAND);
+        break;
+
+        case "spa_flag_rise":
+            Flag_Change(SPAIN);
+        break;
+
+        case "hol_flag_rise":
+            Flag_Change(HOLLAND);
+        break;
+
         case "QuestAboardCabinDialog":  // диалог в абордаже, в каюте при достижении минНР
 			sld = &Characters[sti(pchar.GenQuest.QuestAboardCabinDialogIdx)]; // фантом, тень отца капитана
 			LAi_SetActorType(pchar);
@@ -10201,18 +10222,16 @@ void QuestComplete(string sQuestName, string qname)
 //========================  Квест "Непутёвый казначей".  =======================
 
 		case "PDM_NK_Viktor":
-			Log_SetStringToLog("Лёгкое оружие + 1");
-			Log_SetStringToLog("Среднее оружие + 1");
-			Log_SetStringToLog("Тяжёлое оружие + 1");
+			Log_SetStringToLog("Холодное оружие + 1");
 			Log_SetStringToLog("Пистолеты + 1");
 			Log_SetStringToLog("Скрытность - 1");
 			Log_SetStringToLog("Торговля - 1");
-			AddCharacterSkill(pchar, "FencingLight", 1);
-			AddCharacterSkill(pchar, "Fencing", 1);
-			AddCharacterSkill(pchar, "FencingHeavy", 1);
-			AddCharacterSkill(pchar, "Pistol", 1);
-			AddCharacterSkill(pchar, "Sneak", -1);
-			AddCharacterSkill(pchar, "Commerce", -1);
+			AddCharacterSkillDontClearExp(pchar, "FencingLight", 1);
+			AddCharacterSkillDontClearExp(pchar, "Fencing", 1);
+			AddCharacterSkillDontClearExp(pchar, "FencingHeavy", 1);
+			AddCharacterSkillDontClearExp(pchar, "Pistol", 1);
+			AddCharacterSkillDontClearExp(pchar, "Sneak", -1);
+			AddCharacterSkillDontClearExp(pchar, "Commerce", -1);
 
 			AddQuestRecord("PDM_Neputyovy_kaznachey", "4");
 

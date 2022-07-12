@@ -18,7 +18,7 @@ void ProcessDialogEvent()
 
 	int Sila = 25 + MOD_SKILL_ENEMY_RATE * 2.8;
 	int DopHP = 40 + MOD_SKILL_ENEMY_RATE * 10;
-	int Rank = sti(pchar.rank) - 5 + MOD_SKILL_ENEMY_RATE * 0.9;
+	int Rank = sti(pchar.rank) - 5 + MOD_SKILL_ENEMY_RATE * 1.2;
 	if (Rank < 1) Rank = 1;
 
 	switch(Dialog.CurrentNode)
@@ -135,23 +135,34 @@ void ProcessDialogEvent()
 
 		case "Viktor_5":
 			dialog.text = "Невинного? Из-за этого идиота я потерял свой фрахт! " + Plata1 + " золотых! Если не больше! Я узнаю, куда он спрятался!";
-			link.l1 = "" + Plata1 + " золотых? И из-за этого ты поднял шум? Вот. Я покрываю твой ущерб, теперь оставь Андреаса в покое.";
-			link.l1.go = "Zaplati";
-			link.l2 = "Уж лучше я тебя покромсаю на мелкие кусочки, чем дам Андреаса в обиду.";
-			link.l2.go = "Viktor_Bitva";
-			link.l3 = "" + Plata1 + "? И из-за этого ты поднял шум? Я принесу тебе эти " + Plata1 + ". Но помни - один залп моего корабля превратит твоё корыто в решето, так что не трогай Андреаса и пальцем!";
-			link.l3.go = "Zaplati";
+			link.l1 = "Уж лучше я тебя покромсаю на мелкие кусочки, чем дам Андреаса в обиду.";
+			link.l1.go = "Viktor_Bitva";
+			link.l2 = "" + Plata1 + " золотых? И из-за этого ты поднял шум? Вот. Я покрываю твой ущерб, теперь оставь Андреаса в покое.";
+			link.l2.go = "Zaplati_ED";
+			link.l3 = "" + Plata1 + "? Я принесу тебе эти деньги. Но помни - один залп моего корабля превратит твоё корыто в решето, так что не трогай Андреаса и пальцем!";
+			link.l3.go = "Zaplati_ND";
 			NextDiag.TempNode = "Viktor_VernulsyDengi";
 		break;
 
-		case "Zaplati":
+		case "Zaplati_ED":
 			dialog.text = "Я сказал " + Plata1 + "? Нет, я ошибся! По крайней мере, " + Plata2 + "!";
-			link.l1 = "Вот, держи свои деньги. Приятного времяпрепровождения, Виктор.";
-			link.l1.go = "Zaplati_2";
-			link.l2 = "Да ты обнаглел, Виктор! Уж лучше я тебя покромсаю на мелкие кусочки, чем дам Андреаса в обиду.";
-			link.l2.go = "Viktor_Bitva";
+			link.l1 = "Да ты обнаглел, Виктор! Уж лучше я тебя покромсаю на мелкие кусочки, чем дам Андреаса в обиду.";
+			link.l1.go = "Viktor_Bitva";
+			link.l2 = "Вот, держи свои деньги. Приятного времяпрепровождения, Виктор.";
+			link.l2.go = "Zaplati_2";
 			link.l3 = "Я принесу тебе эти " + Plata2 + ". Но помни - один залп моего корабля превратит твоё корыто в решето, так что не трогай Андреаса и пальцем!";
 			link.l3.go = "exit";
+			NextDiag.TempNode = "Viktor_VernulsyDengi";
+			AddQuestRecord("PDM_Neputyovy_kaznachey", "2");
+			AddQuestUserData("PDM_Neputyovy_kaznachey", "sMoney", FindRussianMoneyString(sti(pchar.PDM_NK_Plata2.Money)));
+		break;
+		
+		case "Zaplati_ND":
+			dialog.text = "Я сказал " + Plata1 + "? Нет, я ошибся! По крайней мере, " + Plata2 + "!";
+			link.l1 = "Да ты обнаглел, Виктор! Уж лучше я тебя покромсаю на мелкие кусочки, чем дам Андреаса в обиду.";
+			link.l1.go = "Viktor_Bitva";
+			link.l2 = "Хорошо, как только будут у меня деньги, я к тебе загляну.";
+			link.l2.go = "exit";
 			NextDiag.TempNode = "Viktor_VernulsyDengi";
 			AddQuestRecord("PDM_Neputyovy_kaznachey", "2");
 			AddQuestUserData("PDM_Neputyovy_kaznachey", "sMoney", FindRussianMoneyString(sti(pchar.PDM_NK_Plata2.Money)));
@@ -164,9 +175,9 @@ void ProcessDialogEvent()
 				Log_SetStringToLog("Авторитет + 1");
 				Log_SetStringToLog("Торговля + 2");
 				Log_SetStringToLog("Скрытность + 1");
-				AddCharacterSkill(pchar, "Leadership", 1);
-				AddCharacterSkill(pchar, "Commerce", 2);
-				AddCharacterSkill(pchar, "Sneak", 1);
+				AddCharacterSkillDontClearExp(pchar, "Leadership", 1);
+				AddCharacterSkillDontClearExp(pchar, "Commerce", 2);
+				AddCharacterSkillDontClearExp(pchar, "Sneak", 1);
 				sld = CharacterFromID("PDM_NK_Viktor")
 				sld.dialog.filename   = "Quest/PDM/Neputyovy_kaznachey.c";
 				sld.dialog.currentnode   = "Viktor_Poka";
@@ -215,11 +226,12 @@ void ProcessDialogEvent()
 			link.l1 = "Меньше слов - к делу!";
 			link.l1.go = "fight_right_now";
 			sld = CharacterFromID("PDM_NK_Viktor")
-			if (MOD_SKILL_ENEMY_RATE >= 1 && MOD_SKILL_ENEMY_RATE <= 3) sBlade = "blade3";
-			if (MOD_SKILL_ENEMY_RATE >= 4 && MOD_SKILL_ENEMY_RATE <= 6) sBlade = "blade18";
-			if (MOD_SKILL_ENEMY_RATE >= 7 && MOD_SKILL_ENEMY_RATE <= 10) sBlade = "blade39";
-			if (MOD_SKILL_ENEMY_RATE <= 6) FantomMakeCoolFighter(sld, Rank, Sila, Sila, sBlade, "Pistol1", DopHP);
-			if (MOD_SKILL_ENEMY_RATE >= 7) FantomMakeCoolFighter(sld, Rank, Sila, Sila, sBlade, "Pistol2", DopHP);
+
+			if (MOD_SKILL_ENEMY_RATE >= 1 && MOD_SKILL_ENEMY_RATE <= 6) sld.equip.blade = "blade18";
+			if (MOD_SKILL_ENEMY_RATE >= 7 && MOD_SKILL_ENEMY_RATE <= 10) sld.equip.blade = "blade39";
+			if (MOD_SKILL_ENEMY_RATE <= 6) FantomMakeCoolFighter(sld, Rank, Sila, Sila, "", "Pistol1", DopHP);
+			if (MOD_SKILL_ENEMY_RATE >= 7) FantomMakeCoolFighter(sld, Rank, Sila, Sila, "", "Pistol2", DopHP);
+
 			sld.SaveItemsForDead = true;
 			AddMoneyToCharacter(sld, 15000);
 			GiveItem2Character(sld, "Litsenzia");

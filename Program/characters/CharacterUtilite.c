@@ -2974,6 +2974,7 @@ float isEquippedArtefactUse(ref rChar, string sItem, float fOff, float fOn)
 
 int ChangeCharacterReputationABS(ref chref, float incr)
 {
+	if (chref != Pchar) return 0;
 	int curVal = REPUTATION_NEUTRAL;
 	if (CheckAttribute(chref,"reputation") ) curVal = stf(chref.reputation);
 
@@ -2984,6 +2985,7 @@ int ChangeCharacterReputationABS(ref chref, float incr)
 // репутация стремится к нейтральной
 int ChangeCharacterReputationToNeutral(ref chref, float incr)
 {
+	if (chref != Pchar) return 0;
 	int curVal = REPUTATION_NEUTRAL;
 	if (CheckAttribute(chref,"reputation") ) curVal = stf(chref.reputation);
 
@@ -2993,6 +2995,7 @@ int ChangeCharacterReputationToNeutral(ref chref, float incr)
 
 int ChangeCharacterReputation(ref chref, float incr)
 {
+	if (chref != Pchar) return 0;
 	if (CheckAttribute(chref, "GenQuest.ReputationNotChange")) return sti(chref.reputation); //eddy. нужен флаг
 	float prevVal = REPUTATION_NEUTRAL;
 	if (CheckAttribute(chref,"reputation") )	prevVal = stf(chref.reputation);

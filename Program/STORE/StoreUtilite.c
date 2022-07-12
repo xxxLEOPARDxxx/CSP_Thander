@@ -112,29 +112,42 @@ int GetStoreGoodsPrice(ref _refStore, int _Goods, int _PriceType, ref chref, int
  	int tradeType = MakeInt(refGoods.TradeType);
 	float tradeModify = 1.0;
 
+	bool isPirateColony = false;
+	bool isPCharOwner = false;
+	if (_refStore.Colony != "none")
+	{
+		if (sti(Colonies[FindColony(_refStore.Colony)].Nation) == PIRATE) isPirateColony = true;
+		if (sti(Colonies[FindColony(_refStore.Colony)].HeroOwn) == true) isPCharOwner = true;
+	}
+
 	switch (tradeType)
 	{
 		case TRADE_TYPE_EXPORT:
-			tradeModify = 0.55 + stf(refGoods.RndPriceModify); //0.55	+r0.1
+			tradeModify = 0.55 + stf(refGoods.RndPriceModify);		//0.55	+r0.1
 			break;
 		case TRADE_TYPE_NORMAL:
-			tradeModify = 0.85 + stf(refGoods.RndPriceModify); //0.85	+r0.15
+			tradeModify = 0.85 + stf(refGoods.RndPriceModify);		//0.85	+r0.15
 			break;
 		case TRADE_TYPE_IMPORT:
-			tradeModify = 1.2 + stf(refGoods.RndPriceModify); //1.2		+r0.2	//1.2 + r0.15
+			tradeModify = 1.2 + stf(refGoods.RndPriceModify);		//1.2		+r0.2	//1.2 + r0.15
 			break;
 		case TRADE_TYPE_AGGRESSIVE:
-			tradeModify = 1.5 + stf(refGoods.RndPriceModify); //1.8		+r0.25	//1.5 + r0.2
+			tradeModify = 1.5 + stf(refGoods.RndPriceModify);		//1.8		+r0.25	//1.5 + r0.2
 			break;
 		case TRADE_TYPE_CONTRABAND:
-			tradeModify = 1.8 + stf(refGoods.RndPriceModify); //2.4		+r0.35	//1.8 + r0.2
+			if (!isPirateColony || isPCharOwner || (_PriceType == PRICE_TYPE_BUY))
+				tradeModify = 1.8 + stf(refGoods.RndPriceModify);	//2.4		+r0.35	//1.8 + r0.2
+			else
+				// В пиратских поселениях, которые не принадлежат игроку - цена продажи небольшая,
+				// потому что много желающих продать, а покупают только пираты.
+				tradeModify = 0.75 + stf(refGoods.RndPriceModify);	//0.6		+r0.35	//1.8 + r0.2
 			break;
 		case TRADE_TYPE_AMMUNITION:
 			//return basePrice; делаю все тоже, что и длz нормального товара, а тип нужен, чтоб на корабле не скупали лишнее.
 			tradeModify = 0.85 + stf(refGoods.RndPriceModify);
 			break;
 		case TRADE_TYPE_CANNONS:
-			tradeModify = 0.85 + stf(refGoods.RndPriceModify); //0.8
+			tradeModify = 0.85 + stf(refGoods.RndPriceModify);		//0.8
 			break;
 	}
 

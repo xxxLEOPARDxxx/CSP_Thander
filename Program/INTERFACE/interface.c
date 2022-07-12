@@ -1012,18 +1012,18 @@ void LaunchRansackMain(ref _refMy,ref _refEnemy,string captureState)
 	{
 		nPrevInterface = -1;
 		CurrentInterface = INTERFACE_RANSACK_MAIN;
-		InitInterface_RS(Interfaces[CurrentInterface].IniFile,_refEnemy,captureState); // что характерно, _refMy не при делах вообще :) Забавно, право слово. Ну да, совместимости для.
+		InitInterface_RRS(Interfaces[CurrentInterface].IniFile,_refMy,_refEnemy,captureState); // что характерно, _refMy не при делах вообще :) Забавно, право слово. Ну да, совместимости для.
 	}
 	// Это по сути вызов LaunchTransferMain(_refMy, _refEnemy, captureState); , но нужна проверка на	INTERFACE_RANSACK_MAIN
 }
 
-void LaunchTransferMain(ref _refMy,ref _refEnemy, string newCurNod)
+void LaunchTransferMain(ref _refMy, ref _refEnemy, string newCurNod)
 {
 	if(procInterfacePrepare(INTERFACE_TRANSFER_MAIN))
 	{
 		nPrevInterface = -1;
 		CurrentInterface = INTERFACE_TRANSFER_MAIN;
-		InitInterface_RS(Interfaces[CurrentInterface].IniFile,_refEnemy,newCurNod);
+		InitInterface_RRS(Interfaces[CurrentInterface].IniFile,_refMy,_refEnemy,newCurNod);
 	}
 }
 

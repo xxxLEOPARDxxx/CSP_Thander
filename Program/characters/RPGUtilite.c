@@ -1214,6 +1214,7 @@ int GetCharacterSkillSimple(ref _refCharacter, string skillName)
     	skillN = skillN + SetCharacterSkillByItemEquipped(_refCharacter, skillName, SKILL_LEADERSHIP, "hatWhisper", 5);			// {Карманное зеркало}					(+15 к скрытности)
     	skillN = skillN + SetCharacterSkillByItemEquipped(_refCharacter, skillName, SKILL_GRAPPLING, "hatWhisper", 5);			// {Карманное зеркало}					(+15 к скрытности)
     	skillN = skillN + SetCharacterSkillByItemEquipped(_refCharacter, skillName, SKILL_SNEAK, "hatWhisper", -5);				// {Карманное зеркало}					(+15 к скрытности)
+		skillN = skillN + SetCharacterSkillByItemEquipped(_refCharacter, skillName, SKILL_FORTUNE, "Joker", 10);				// {Джокер}							(+10 к везению)
 
     	skillN = skillN + SetCharacterSkillByItemEquipped(_refCharacter, skillName, SKILL_DEFENCE, "Totem_3", 5);				// {Тотем Кецалькоатля} 				(+5 защита)
     	skillN = skillN + SetCharacterSkillByItemEquipped(_refCharacter, skillName, SKILL_ACCURACY, "Totem_4", 5);				// {Тотем Мишкоатля}					(+5 меткость)

@@ -9059,7 +9059,7 @@ int InitItems()
 	itm.ItemType = "QUESTITEMS";
 	n++;
 
-	//Для генераторного квеста "Проигравшийся игрок"
+	//Кошелёк "Проигравшийся игрок"
 	makeref(itm,Items[n]);
 	itm.id = "Bag_with_money";
 	itm.name = "itmname_Bag_with_money";
