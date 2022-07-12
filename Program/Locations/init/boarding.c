@@ -3333,7 +3333,7 @@ int LocationInitBoarding(int n)
 	//Info
 	Locations[n].type = "deck_fight";
 	Locations[n].filespath.models = "locations\decks\deckLowVSMedium";
-	Locations[n].image = "loading\jonny_load\abordage\abord_0" + rand(1) + ".tga";
+	Locations[n].image = "loading\jonny_load\abordage\abord_0" + rand(2) + ".tga";
 
 	Locations[n].lockCamAngle = 0.4;
 	Locations[n].camshuttle = 1;
@@ -3365,7 +3365,7 @@ int LocationInitBoarding(int n)
 	//Info
 	Locations[n].type = "deck_fight";
 	Locations[n].filespath.models = "locations\decks\deckLowVSBig";
-	Locations[n].image = "loading\jonny_load\abordage\abord_" + rand(2) + ".tga";
+	Locations[n].image = "loading\jonny_load\abordage\abord_0" + rand(2) + ".tga";
 
 	Locations[n].lockCamAngle = 0.4;
 	Locations[n].camshuttle = 1;
@@ -3398,7 +3398,7 @@ int LocationInitBoarding(int n)
 	//Info
 	Locations[n].type = "deck_fight";
 	Locations[n].filespath.models = "locations\decks\deckMediumVSBig";
-	Locations[n].image = "loading\jonny_load\abordage\abord_" + rand(2) + ".tga";
+	Locations[n].image = "loading\jonny_load\abordage\abord_0" + rand(2) + ".tga";
 
 	Locations[n].lockCamAngle = 0.4;
 	Locations[n].camshuttle = 1;
@@ -3432,7 +3432,7 @@ int LocationInitBoarding(int n)
 	//Info
 	Locations[n].type = "deck_fight";
 	Locations[n].filespath.models = "locations\decks\deckLineshipVSFrigate";
-	Locations[n].image = "loading\jonny_load\abordage\abord_" + rand(2) + ".tga";
+	Locations[n].image = "loading\jonny_load\abordage\abord_0" + rand(2) + ".tga";
 
 	Locations[n].lockCamAngle = 0.4;
 	Locations[n].camshuttle = 1;

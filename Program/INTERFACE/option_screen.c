@@ -1431,8 +1431,8 @@ void ShowInfo()
 			sHeader = XI_ConvertString("HUDStyle_title");
 			sText1 = XI_ConvertString("HUDStyle_desc");
             sPicture = "INTERFACES\FaqPictures\HUDStyle_CHECKBOX.png";
-			xx = 600;
-			yy = 300;
+			xx = 448;
+			yy = 448;
 		break;
 
 		case "VISUAL_CIRASS_CHECKBOX":
