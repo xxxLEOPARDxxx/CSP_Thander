@@ -250,13 +250,19 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 
 			if (!CheckAttribute(npchar, "questTemp.ShipOrderTime"))
 			{
-			link.l5 = "А можно у вас на верфи заказать корабль, подходящий моим личным предпочтениям?";
-			link.l5.go = "Shipyard1";
+				link.l5 = "А можно у вас на верфи заказать корабль, подходящий моим личным предпочтениям?";
+				link.l5.go = "Shipyard1";
 			}
 			else
 			{
-			link.l5 = "Готов ли заказанный мною корабль?";
-			link.l5.go = "shiporder1";
+				link.l5 = "Готов ли заказанный мною корабль?";
+				link.l5.go = "shiporder1";
+			}
+
+			if ((RealShips[sti(Pchar.Ship.Type)].name == "Flyingdutchman1") && (pchar.location.from_sea == "Pirates_town"))
+			{
+				link.l7 = "Мастер, у меня тут особенный кораблик...";
+				link.l7.go = "DutchmanRepair1";
 			}
 
 			link.l3 = "Мне нужны орудия на корабль.";
@@ -337,13 +343,19 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 
 			if (!CheckAttribute(npchar, "questTemp.ShipOrderTime"))
 			{
-			link.l6 = "А можно у вас на верфи заказать корабль, подходящий моим личным предпочтениям?";
-			link.l6.go = "Shipyard1";
+				link.l6 = "А можно у вас на верфи заказать корабль, подходящий моим личным предпочтениям?";
+				link.l6.go = "Shipyard1";
 			}
 			else
 			{
-			link.l6 = "Готов ли заказанный мною корабль?";
-			link.l6.go = "shiporder1";
+				link.l6 = "Готов ли заказанный мною корабль?";
+				link.l6.go = "shiporder1";
+			}
+
+			if ((RealShips[sti(Pchar.Ship.Type)].name == "Flyingdutchman1") && (pchar.location.from_sea == "Pirates_town"))
+			{
+				link.l7 = "Мастер, у меня тут особенный кораблик...";
+				link.l7.go = "DutchmanRepair1";
 			}
 
 			link.l3 = "Мне нужны орудия на корабль.";
@@ -2433,6 +2445,143 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1.go = "exit";
 		break;
 		//<-Капремонт пса
+
+		case "DutchmanRepair1":
+		    dialog.text = "О-хо-хо, неужто это тот самый Летучий Голландец?! Не думал, что смогу однажды лицезреть его воочию. Честно сказать, я и не верил никогда в эту байку, но это ни что иное как настоящая легенда! Невероятная огневая мощь, фантастически могучий корпус, но в тоже время как быстро красавец идет по морской глади... Неужели вас что-то не устраивает?";
+            link.l1 = "Корабль великолепен, мастер, но сами видите в каком он состоянии. Обросшие борта, трещины в палубе, покореженная отделка - это и выглядит совершенно непрезентабельно, и для моряков небезопасно - такое чувство будто корабль вот-вот развалится.";
+			link.l1.go = "DutchmanRepair2";
+		break;
+
+		case "DutchmanRepair2":
+			dialog.text = "Кхм... а мне казалось, что подобный вид - скорее достоинство для капитана вашей сферы деятельности... Ну да ладно, не мне судить. Что ж, я могу отремонтировать этот корабль, но это очень трудозатратно и потребует серьезных ресурсов. Придется полностью переделать обшивку, внести несколько конструктивных изменений, разве что шпангоут трогать не буду. Возьму я за это миллион пиастров.";
+			if (sti(PChar.money) >= 1000000)
+			{
+				link.l1 = "Цена кусается, но благосостояние корабля мне дороже. Вот ваши деньги.";
+				link.l1.go = "DutchmanRepair3";
+			}
+			link.l2 = "Эмм, что-то туговато для моего кошеля... Зайду попозже.";
+			link.l2.go = "exit";
+		break;
+
+		case "DutchmanRepair3":
+			AddMoneyToCharacter(PChar, -1000000);
+			AddTimeToCurrent(8, 0);
+
+			bool HullSpecial = false;
+			bool SailsSpecial = false;
+			bool CannonsSpecial = false;
+			bool CuBot = false;
+			bool BotPack = false;
+			bool HighBort = false;
+
+			bool TuneHP = false;
+			bool TuneMast = false;
+			bool TuneSpeed = false;
+			bool TuneTurn = false;
+			bool TuneWA = false;
+			bool TuneCap = false;
+			bool TuneMaxCrew = false;
+
+			shTo = &RealShips[sti(Pchar.Ship.Type)];
+			int HullArm = shTo.HullArmor;
+			int CannonsCal = sti(pchar.Ship.Cannons.Type);
+			float MM = stf(shTo.MastMultiplier);
+
+			if (CheckAttribute(shTo,"Tuning.HullSpecial")) HullSpecial = true;
+			if (CheckAttribute(shTo,"Tuning.SailsSpecial")) SailsSpecial = true;
+			if (CheckAttribute(shTo,"Tuning.CannonsSpecial")) CannonsSpecial = true;
+			if (CheckAttribute(shTo,"Tuning.CuBot")) CuBot = true;
+			if (CheckAttribute(shTo,"Tuning.BotPack")) BotPack = true;
+			if (CheckAttribute(shTo,"Tuning.HighBort")) HighBort = true;
+
+			if (CheckAttribute(shTo,"Tuning.HP")) TuneHP = true;
+			if (CheckAttribute(shTo,"Tuning.MastMultiplier")) TuneMast = true;
+			if (CheckAttribute(shTo,"Tuning.SpeedRate")) TuneSpeed = true;
+			if (CheckAttribute(shTo,"Tuning.TurnRate")) TuneTurn = true;
+			if (CheckAttribute(shTo,"Tuning.WindAgainst")) TuneWA = true;
+			if (CheckAttribute(shTo,"Tuning.Capacity")) TuneCap = true;
+			if (CheckAttribute(shTo,"Tuning.MaxCrew")) TuneMaxCrew = true;
+
+			pchar.Ship.Type = GenerateShipExt(SHIP_FLYINGDUTCHMAN_N, true, pchar);
+			SetBaseShipData(pchar);
+			shTo = &RealShips[sti(Pchar.Ship.Type)];
+			shTo.HullArmor = HullArm;
+			shTo.MastMultiplier = MM;
+			pchar.Ship.Cannons.Type = CannonsCal;
+
+			if (TuneHP)
+			{
+				shTo.HP = sti(shTo.HP) + makeint(sti(shTo.HP)/5);
+				shTo.Tuning.HP = true;
+			}
+			if (TuneMast)
+			{
+				shTo.Tuning.MastMultiplier = true;
+			}
+			if (TuneSpeed)
+			{
+				shTo.SpeedRate = (stf(shTo.SpeedRate) + stf(shTo.SpeedRate)/5.0);
+				shTo.Tuning.SpeedRate = true;
+			}
+			if (TuneTurn)
+			{
+				shTo.TurnRate = (stf(shTo.TurnRate) + stf(shTo.TurnRate)/5.0);
+				shTo.Tuning.TurnRate = true;
+			}
+			if (TuneWA)
+			{
+				shTo.WindAgainstSpeed = FloatToString(stf(shTo.WindAgainstSpeed) + 0.5* stf(shTo.WindAgainstSpeed) / stf(shTo.Class) + 0.005, 2);
+				shTo.Tuning.WindAgainst = true;
+			}
+			if (TuneCap)
+			{
+				shTo.Capacity = sti(shTo.Capacity) + makeint(sti(shTo.Capacity)/5);
+				shTo.Tuning.Capacity = true;
+			}
+			if (TuneMaxCrew)
+			{
+				shTo.MaxCrew = sti(shTo.MaxCrew) + makeint(sti(shTo.MaxCrew)/5);
+				shTo.Tuning.MaxCrew = true;
+			}
+
+			if (HullSpecial)
+			{
+				shTo.Tuning.HullSpecial = 1;
+				shTo.price = makeint(sti(shTo.price)*1.5); 
+			}
+			if (SailsSpecial)
+			{
+				shTo.Tuning.SailsSpecial = 1;
+				shTo.price = makeint(sti(shTo.price)*1.35); 
+			}
+			if (CannonsSpecial)
+			{
+				shTo.Tuning.CannonsSpecial = 1;
+				shTo.price = makeint(sti(shTo.price)*1.25); 
+			}
+			if (CuBot)
+			{
+				shTo.Tuning.CuBot = 1;
+				shTo.price = makeint(sti(shTo.price)*1.4); 
+			}
+			if (BotPack)
+			{
+				shTo.Tuning.BotPack = 1;
+				shTo.price = makeint(sti(shTo.price)*1.5); 
+				shTo.Capacity = sti(shTo.Capacity) + makeint(sti(shTo.Capacity)/2);
+				shTo.HP = sti(shTo.HP) - makeint(sti(shTo.HP)/2);
+				if (pchar.ship.hp > sti(shTo.HP)) pchar.ship.hp = sti(shTo.HP);
+			}
+			if (HighBort)
+			{
+				shTo.Tuning.HighBort = 1;
+				shTo.price = makeint(sti(shTo.price)*1.4); 
+			}
+
+			dialog.text = "Отлично, приступаю к ремонту... Готово! Теперь твоя легенда засияет новыми красками.";
+			link.l1 = "Спасибо, мастер.";
+			link.l1.go = "exit";
+		break;
 	}
 	UnloadSegment(NPChar.FileDialog2);  // если где-то выход внутри switch  по return не забыть сделать анлод
 }

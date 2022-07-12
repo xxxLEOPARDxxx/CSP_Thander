@@ -45,6 +45,7 @@ Fleut1 {bortoutfleut1.tga}
 FleutWar1 {FleutOfWar34G.tga}
 FleutWarSat1 {Fleut_War_Sat.tga}
 Flyingdutchman1 {bortoutFdag.tga}
+Flyingdutchmannew1 {bortoutFdag.tga}
 FR_Essex1 {FR_Hull1.tga}
 FR_Frigate1 {WickedWench02.tga}
 FR_Postillionen1 {plank_light_grey.tga}
