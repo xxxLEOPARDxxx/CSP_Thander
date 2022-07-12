@@ -811,15 +811,19 @@ void FillControlsList(int nMode)
 	GameInterface.controls_list.select = 0;
 
 	groupName = GetGroupNameByMode(nMode);
-	if( CheckAttribute(&objControlsState,"keygroups."+groupName) ) {
+	if( CheckAttribute(&objControlsState,"keygroups."+groupName) ) 
+	{
 		makearef(arGrp,objControlsState.keygroups.(groupName));
 		qC = GetAttributesNum(arGrp);
 		idx = 0;
 		for( n=0; n<qC; n++ ) {
 			arC = GetAttributeN(arGrp,n);
-			if( false==CheckAttribute(arC,"invisible") || arC.invisible!="1" ) {
+			if( false==CheckAttribute(arC,"invisible") || arC.invisible!="1" ) 
+			{
 			//if( CheckAttribute(arC,"remapping") && arC.remapping=="1" ) {
-				if( AddToControlsList( idx, GetAttributeName(arC), GetAttributeValue(arC), CheckAttribute(arC,"remapping") && arC.remapping=="1" ) ) {
+				if (GetAttributeValue(arC) == "") continue;
+				if( AddToControlsList( idx, GetAttributeName(arC), GetAttributeValue(arC), CheckAttribute(arC,"remapping") && arC.remapping=="1" ) ) 
+				{
 					idx++;
 				}
 			}
@@ -842,7 +846,8 @@ bool AddToControlsList(int row, string sControl, string sKey, bool bRemapable)
 	if( !bRemapable ) { // выделение контролок которые нельзя поменять
 		GameInterface.controls_list.(rowname).td2.color = argb(255,128,128,128);
 	}
-	if( CheckAttribute(&objControlsState,"key_codes."+sKey+".img") ) {
+	if( CheckAttribute(&objControlsState,"key_codes."+sKey+".img") ) 
+	{
 		GameInterface.controls_list.(rowname).td1.fontidx = 0;
 		GameInterface.controls_list.(rowname).td1.textoffset = "-2,-1";
 		GameInterface.controls_list.(rowname).td1.scale = 0.5;
