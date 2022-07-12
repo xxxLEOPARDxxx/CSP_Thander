@@ -9077,8 +9077,8 @@ int InitItems()
 	itm.groupID = IDOLS_LEFT_ITEM_TYPE;
 	itm.name = "itmname_Joker";
 	itm.describe = "itmdescr_Joker";
-	itm.picIndex = 13;
-	itm.picTexture = "ITEMS_1";
+	itm.picIndex = 7;
+	itm.picTexture = "ITEMS_20";
 	itm.price = 5000;
 	itm.weight = 0.1;
 	itm.ItemType = "QUESTITEMS";
