@@ -175,6 +175,12 @@ void AIAttack_CheckTask(string sGroupID)
 	}
 	if (Group_isDead(rG2name))
 	{
+		if (findSubStr(sGroupID, "IslandGroup", 0) == 0)
+		{
+			Group_SetTaskDrift(sGroupID);
+			return;
+		}
+
 		switch (sGroupType1)
 		{
 			case "trade":
