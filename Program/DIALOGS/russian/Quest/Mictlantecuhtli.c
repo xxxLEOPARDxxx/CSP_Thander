@@ -249,17 +249,17 @@ void ProcessDialogEvent()
 		break;
 
 		case "Uicilopochtli_default":
-			dialog.text = "Приветствую тебя, сметрн" + GetSexPhrase("ый.","ая.");
+			dialog.text = "Приветствую тебя, смертн" + GetSexPhrase("ый.","ая.");
 			link.l1 = "О великий бог войны Уицилопочтли! Преподношу тебе в дар оружие поверженных мною врагов и прошу тебе дать мне силы для будущих сражений!";
 			link.l1.go = "Uicilopochtli_improve";
 
 			if (CheckAttribute(pchar,"ScamFanActive") && CheckAttribute(pchar,"KnowScam") && !CheckAttribute(pchar,"ScamDestroyed"))
 			{
-				link.l2 = "Здравствуй, Уицилопочтли. Извини что побеспокоил, но у меня тут проблема...";
+				link.l2 = "Здравствуй, Уицилопочтли. Извини что побеспокоил" + GetSexPhrase("","а") + ", но у меня тут проблема...";
 				link.l2.go = "Uicilopochtli_fan_1";
 			}
 
-			link.l3 = "Здравствуй, Уицилопочтли. Я так, просто поздороваться зашел...";
+			link.l3 = "Здравствуй, Уицилопочтли. Я так, просто поздороваться " + GetSexPhrase("зашел...", "зашла...");
 			link.l3.go = "Uicilopochtli_exit";
 		break;
 
@@ -267,7 +267,7 @@ void ProcessDialogEvent()
 			sBlade = GetCharacterEquipByGroup(PChar, BLADE_ITEM_TYPE);
 			if (sBlade == "")
 			{
-				dialog.text = "Я бы не против, но ты ведь клинок не экипировал.";
+				dialog.text = "Я бы не против, но ты ведь клинок не экипировал" + GetSexPhrase(".","а.");
 				link.l1 = "Точно! Сейчас разберусь.";
 				link.l1.go = "Uicilopochtli_exit";
 				break;
@@ -295,19 +295,19 @@ void ProcessDialogEvent()
 			sBlade = ImproveGeneratedBlade(sBlade, 0.25);
 			GiveItem2Character(PChar, sBlade);
 			EquipCharacterByItem(PChar, sBlade);
-			Dialog.Text = "Благодарю тебя, сметрн" + GetSexPhrase("ый.","ая.");
+			Dialog.Text = "Благодарю тебя, смертн" + GetSexPhrase("ый.","ая.");
 			link.l1 = "И тебе спасибо, уважаемый бог.";
 			link.l1.go = "Uicilopochtli_exit";
 		break;
 
 		case "Uicilopochtli_fan_1":
 			dialog.text = "Проблема?"
-			link.l1 = "Ага. Видишь это чучело, которое за мной бегает? Хочу от него избавиться, да все никак не могу. Уже по-всякому пробовал - ни рапира, ни чекан, ни мушкет его не берут. И все бы ничего, но он такой доставучий, что я скоро с ума сойду.";
+			link.l1 = "Ага. Видишь это чучело, которое за мной бегает? Хочу от него избавиться, да все никак не могу. Уже по-всякому пробовал" + GetSexPhrase("","а") + " - ни рапира, ни чекан, ни мушкет его не берут. И все бы ничего, но он такой доставучий, что я скоро с ума сойду.";
 			link.l1.go = "Uicilopochtli_fan_2";
 		break;
 
 		case "Uicilopochtli_fan_2":
-			dialog.text = "Вот как. Подожди-ка... Так ведь это же тот дурачек, которого Миктлантекутли сделал бессмертным, ха-ха! Не верится что ты до сих пор не утратил рассудок - этот тип умеет мозги расплавить."
+			dialog.text = "Вот как. Подожди-ка... Так ведь это же тот дурачек, которого Миктлантекутли сделал бессмертным, ха-ха! Не верится что ты до сих пор не утратил" + GetSexPhrase("","а") + " рассудок - этот тип умеет мозги расплавить."
 			link.l1 = "Кажется, еще чуть-чуть и мои мозги таки перейдут в жидкое состояние... Ты можешь что-то с ним сделать?";
 			link.l1.go = "Uicilopochtli_fan_3";
 		break;

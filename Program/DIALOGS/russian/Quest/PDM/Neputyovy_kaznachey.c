@@ -227,10 +227,10 @@ void ProcessDialogEvent()
 			link.l1.go = "fight_right_now";
 			sld = CharacterFromID("PDM_NK_Viktor")
 
-			if (MOD_SKILL_ENEMY_RATE >= 1 && MOD_SKILL_ENEMY_RATE <= 6) sld.equip.blade = "blade18";
-			if (MOD_SKILL_ENEMY_RATE >= 7 && MOD_SKILL_ENEMY_RATE <= 10) sld.equip.blade = "blade39";
-			if (MOD_SKILL_ENEMY_RATE <= 6) FantomMakeCoolFighter(sld, Rank, Sila, Sila, "", "Pistol1", DopHP);
-			if (MOD_SKILL_ENEMY_RATE >= 7) FantomMakeCoolFighter(sld, Rank, Sila, Sila, "", "Pistol2", DopHP);
+			if (MOD_SKILL_ENEMY_RATE <= 6)
+				FantomMakeCoolFighter(sld, Rank, Sila, Sila, "blade18", "Pistol1", DopHP);
+			else
+				FantomMakeCoolFighter(sld, Rank, Sila, Sila, "blade39", "Pistol2", DopHP);
 
 			sld.SaveItemsForDead = true;
 			AddMoneyToCharacter(sld, 15000);

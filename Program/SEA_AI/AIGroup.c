@@ -546,6 +546,27 @@ void Group_SetTaskMove(string sGroupID, float x, float z)
 	}
 }
 
+// Task: Drift
+void Group_SetTaskDrift(string sGroupID)
+{
+	ref rGroup = Group_FindOrCreateGroup(sGroupID);
+
+	rGroup.Task = AITASK_DRIFT;
+	rGroup.Task.Target = "";
+	rGroup.Task.Lock = false;
+
+	int iIndex;
+	int iCharacterIndex;
+	iIndex = 0;
+	while (true)
+	{
+		iCharacterIndex = Group_GetCharacterIndexR(rGroup, iIndex);
+		if (iCharacterIndex < 0) { break; }
+		iIndex++;
+		Ship_SetTaskDrift(SECONDARY_TASK, iCharacterIndex);
+	}
+}
+
 // Task: Reset to none
 void Group_SetTaskNone(string sGroupID)
 {
