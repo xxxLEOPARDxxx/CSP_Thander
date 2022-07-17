@@ -196,6 +196,7 @@ void Map_ReleaseQuestEncounter(string characterID)
 		if(enc.quest.chrID == characterID)
 		{
 			wdmDeleteLoginEncounter(GetAttributeName(enc));
+			break;
 		}
 	}
 	worldMap.deleteUpdate = "";
