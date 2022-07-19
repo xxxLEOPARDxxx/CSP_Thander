@@ -1727,6 +1727,11 @@ ref CalculateGroupShipPos()
 
 	if (shipIndex == 0)
 	{
+		if (CheckAttribute(pchar,"Do180Turn") && pchar.Do180Turn == true)
+		{
+			result[1] = rotation-180.0;
+			pchar.Do180Turn = false;
+		}
 		return &result;
 	}
 

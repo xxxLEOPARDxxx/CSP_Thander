@@ -608,6 +608,8 @@ int ReloadToSea(int island_index, aref reload_data)
 
 	ref rPlayer = GetMainCharacter();
 	rPlayer.lastFightMode = 0;
+	
+	if (HasSubStr(rPlayer.location,"town") || HasSubStr(rPlayer.location,"shore") || HasSubStr(rPlayer.location,"mayak")) rPlayer.Do180Turn = true;
 
 	ref rIsland = GetIslandByIndex(island_index);
 
