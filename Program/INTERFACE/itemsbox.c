@@ -34,6 +34,10 @@ bool blastsort;
 
 int chestsnum;
 int curchest = 1;
+aref box1;
+aref box2;
+aref box3;
+aref box4;
 
 void InitInterface_RS(string iniName, ref itemsRef, string faceID)
 {
@@ -542,6 +546,10 @@ void IDoExit(int exitCode)
 
 	csmDA(pchar, "CSM.LootCollector.Run");
 	// CSM <--
+	if (!bLandInterfaceStart)
+	{
+		StartBattleLandInterface();
+	}
 }
 
 void ProcCommand()
@@ -806,6 +814,7 @@ void FillCharactersScroll()
 	GameInterface.CHARACTERS_SCROLL.ListSize = nListSizeFree + 2;
 
 	GameInterface.CHARACTERS_SCROLL.ImagesGroup.t0 = "EMPTYFACE";
+	GameInterface.CHARACTERS_SCROLL.ImagesGroup.t1 = "BOX_IMAGE";
 
 	FillFaceList("CHARACTERS_SCROLL.ImagesGroup", pchar, 2); // passengers
 
@@ -871,6 +880,23 @@ void FillCharactersScroll()
 				GameInterface.CHARACTERS_SCROLL.(attributeName).tex1 = FindFaceGroupNum("CHARACTERS_SCROLL.ImagesGroup","FACE128_"+Characters[_curCharIdx].FaceID);
 				m++;
 			}
+		}
+	}
+	if (HasSubStr(loadedLocation.id,"_bank"))
+	{
+		ref cabinloc = &locations[FindLocation(Pchar.SystemInfo.CabinType)];
+		chestsnum = 0;
+		if (CheckAttribute(cabinloc,"box1")) {chestsnum++; makearef(box1,cabinloc.box1);}
+		if (CheckAttribute(cabinloc,"box2")) {chestsnum++; makearef(box2,cabinloc.box2);}
+		if (CheckAttribute(cabinloc,"box3")) {chestsnum++; makearef(box3,cabinloc.box3);}
+		if (CheckAttribute(cabinloc,"box4")) {chestsnum++; makearef(box4,cabinloc.box4);}
+		for (i = 1;i <= chestsnum;i++)
+		{
+			attributeName = "pic" + (m + 1);
+			GameInterface.CHARACTERS_SCROLL.(attributeName).character = "box"+i;
+			GameInterface.CHARACTERS_SCROLL.(attributeName).img1 = "BoxImage";
+			GameInterface.CHARACTERS_SCROLL.(attributeName).tex1 = FindFaceGroupNum("CHARACTERS_SCROLL.ImagesGroup","BOX_IMAGE");
+			m++;
 		}
 	}
 }
@@ -1238,6 +1264,17 @@ void SetCharacterName()
 	int iCurCharImageIndex = sti(GameInterface.CHARACTERS_SCROLL.(sAttr).character);
 
 	string sFullName = GetFullName(&characters[iCurCharImageIndex]);
+	if (!HasSubStr(GameInterface.CHARACTERS_SCROLL.(sAttr).character,"box")) sFullName = GetFullName(&characters[iCurCharImageIndex]);
+	else
+	{
+		switch (GameInterface.CHARACTERS_SCROLL.(sAttr).character)
+		{
+			case "box1": sFullName = "1-ый Сундук каюты" break;
+			case "box2": sFullName = "2-ой Сундук каюты" break;
+			case "box3": sFullName = "3-ий Сундук каюты" break;
+			case "box4": sFullName = "4-ый Сундук каюты" break;
+		}
+	}
 
 	GameInterface.strings.CharName = sFullName;
 }
@@ -1274,8 +1311,20 @@ void ProcessFrame()
 		}
 
 		SetDescription();
+		if (HasSubStr(GameInterface.CHARACTERS_SCROLL.(sAttr).character,"box"))
+		{
+			switch (GameInterface.CHARACTERS_SCROLL.(sAttr).character)
+			{
+				case "box1": makeref(refCharacter,box1) break;
+				case "box2": makeref(refCharacter,box2) break;
+				case "box3": makeref(refCharacter,box3) break;
+				case "box4": makeref(refCharacter,box4) break;
+			}
+		}
+		
 		AddToTable(refToChar);
 		FillCharactersImages();
+		SetVariable();
 		GameInterface.TABLE_LIST.select = 1;
 		GameInterface.TABLE_LIST.top = 0;
 		SetCharacterName();
@@ -1289,7 +1338,8 @@ void ProcessFrame()
 void FillCharactersImages()
 {
 	string sInterfaceType = sGetInterfaceType();
-	SetNewPicture("MAIN_CHARACTER_PICTURE", "interfaces\portraits\128\face_" + refCharacter.FaceId + ".tga");
+	if (CheckAttribute(refCharacter,"faceid")) SetNewPicture("MAIN_CHARACTER_PICTURE", "interfaces\portraits\128\face_" + refCharacter.FaceId + ".tga");
+	else SetNewPicture("MAIN_CHARACTER_PICTURE", "interfaces\BoxImage.tga");
 
 	switch(sInterfaceType)
 	{
