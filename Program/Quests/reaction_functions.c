@@ -10716,6 +10716,66 @@ void LambriniPGG_Tavern(string qName)
 }
 //Sinistra Клан Ламбрини <--
 
+//Sinistra Мэри и Шарль -->
+bool SharleMaryIsHere()	//Проверка на Мэри абордажника
+{
+	if (CheckAttribute(pchar, "SharleMaryId"))
+	{
+		sld = CharacterFromID(pchar.SharleMaryId);
+		if (sld.location == pchar.location && !LAi_IsDead(sld))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	else
+	{
+		return false;
+	}
+}
+
+void Mary_SexReady(string qName) // Мэри снова готова к сексу
+{
+	sld = characterFromId("SharleMary");	
+	DeleteAttribute(sld, "quest.daily_sex");
+	pchar.quest.Mary_giveme_sex.win_condition.l1 = "Timer";
+	pchar.quest.Mary_giveme_sex.win_condition.l1.date.hour  = sti(GetTime());
+	pchar.quest.Mary_giveme_sex.win_condition.l1.date.day   = GetAddingDataDay(0, 0, 14);
+	pchar.quest.Mary_giveme_sex.win_condition.l1.date.month = GetAddingDataMonth(0, 0, 14);
+	pchar.quest.Mary_giveme_sex.win_condition.l1.date.year  = GetAddingDataYear(0, 0, 14);
+	pchar.quest.Mary_giveme_sex.function = "Mary_GiveMeSex";
+}
+
+void Mary_GiveMeSex(string qName)	// требует секса, если давно не давал. Пока только в таверне
+{
+	pchar.quest.Mary_giveme_sex1.win_condition.l1 = "Location_Type";
+	pchar.quest.Mary_giveme_sex1.win_condition.l1.location_type = "tavern";
+	pchar.quest.Mary_giveme_sex1.function = "Mary_GetTalk";
+	sld = characterFromId("SharleMary");
+	sld.quest.iwantsex = true;
+	//sld.greeting = "mary_love";
+}
+
+void Mary_GetTalk(string qName) // говорилка Мэри
+{
+	chrDisableReloadToLocation = true;//закрыть локацию
+	sld = characterFromId("SharleMary");
+	if (CheckAttribute(sld, "quest.iwantsex")) sld.dialog.currentnode = "Mary_givemesex";
+	GetCharacterPos(pchar, &locx, &locy, &locz);
+	ChangeCharacterAddressGroup(sld, pchar.location, "goto", LAi_FindNearestFreeLocator("goto", locx, locy, locz));
+	LAi_SetActorType(sld);
+	LAi_ActorDialog(sld, pchar, "", -1, 0);
+}
+void Mary_Pomogaet_v_Kautah(string q)
+{
+	sld = CharacterFromID(pchar.SharleMaryId);
+	ChangeCharacterAddressGroup(sld, pchar.location, "reload", "reload1");
+}
+//Sinistra Мери и Шарль <--
+
 void StartInstantDialogNoType(string id, string node, string fileName)
 {
 	DialogExit();

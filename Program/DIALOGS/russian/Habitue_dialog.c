@@ -217,15 +217,43 @@ void ProcessDialogEvent()
 	        			    link.l1.go = "exit";
 	        			    link.l2 = RandPhraseSimple("Как ты со мной разговариваешь, скотина! Сейчас я научу тебя хорошим манерам.", "Вот я тресну тебя сейчас по башке, вмиг протрезвеешь.");
 	        	            link.l2.go = "tavern_keeper";
+							if (SharleMaryIsHere())
+							{
+								link.l1 = "";
+								link.l1.go = "Mary_Zastupaetsya_1";
+								DeleteAttribute(link, "l2");
+								pchar.Mary.hamila.npcharID = npchar.id;
+							}
 	        			}
 					break;
 				}
 			}
 			Diag.TempNode = "First time";
 	    break;
+		
+		case "Mary_Zastupaetsya_1":
+			StartInstantDialogNoType(pchar.SharleMaryId, "Mary_Zastupaetsya_2", "Habitue_dialog.c");
+		break;
+		
+		case "Mary_Zastupaetsya_2":
+			dialog.text = RandPhraseSimple("(к пьянице) Я тебе сейчас глотку порву!", "(к пьянице) Ты сейчас будешь иметь дело со мной, грязная морда!");
+	        link.l1 = "Тише, тише, Мэри, он уже всё понял.";
+	        link.l1.go = "Mary_Zastupaetsya_3";
+			LAi_SetActorTypeNoGroup(npchar);
+			LAi_ActorTurnToCharacter(npchar, CharacterFromID(pchar.Mary.hamila.npcharID));
+		break;
+		
+		case "Mary_Zastupaetsya_3":
+			DialogExit();
+			
+			sld = characterFromID("SharleMary");
+			sld.Dialog.Filename = "Quest\MainheroPrologues\Mary_dialog.c";
+			sld.dialog.currentnode = "hired";
+			LAi_SetOfficerType(sld);
+		break;
 
 		case "talk_habitue_duel":
-			dialog.text = "Ничего, судар"+ GetSexPhrase("ь","ыня") +", я вам не скажу! И вряд ли кто еще согласится, ведь разговоры с вами плохо кончаются... Но память людская коротка - глядишь через месяцок-другой все ваши похождениях и подзабудутся. Если вы, конечно, память-то людям не освежите, хе-хе... Прощавайте, судар"+ GetSexPhrase("ь","ыня") +". ";
+			dialog.text = "Ничего, судар"+ GetSexPhrase("ь","ыня") +", я вам не скажу! И вряд ли кто ещё согласится, ведь разговоры с вами плохо кончаются... Но память людская коротка - глядишь через месяцок-другой все ваши похождениях и подзабудутся. Если вы, конечно, память-то людям не освежите, хе-хе... Прощавайте, судар"+ GetSexPhrase("ь","ыня") +". ";
 			link.l1 = "Ну и ладно ....";
 			link.l1.go = "exit";
 		break;

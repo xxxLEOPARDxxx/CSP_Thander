@@ -8,6 +8,11 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
             dialog.text = RandPhraseSimple("Какие вопросы?", "Что вам угодно?");
 			link.l1 = RandPhraseSimple("Я "+ GetSexPhrase("передумал","передумала") +"...", "Сейчас мне не о чем говорить");
 		    link.l1.go = "exit";
+			if (CheckAttribute(pchar, "questTemp.BlackYosh_1"))	//Квест "Чёрный Ёж"
+			{
+    			link.l1 = "Я слышал, что на верфи Порт-Рояля пришли два фрегата, чтобы пополнить запасы оружия и провианта.";
+				link.l1.go = "BlackYosh_1";
+			}
 		break;
 
 		case "work_1":  // работа на благо короны - линейка нации
@@ -688,6 +693,18 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			ChangeCharacterNationReputation(pchar, sti(NPChar.nation), 1);
 			//слухи
 			AddSimpleRumour("То, что вы устроили в Форте Оранж - это, знаете ли, впечатляет... Несчастные голландцы...", ENGLAND, 5, 1);
+			
+			//******Чёрный Ёж Sinistra******
+			//Кристофер
+			sld = GetCharacter(NPC_GenerateCharacter("BlackYosh_Kristofer", "sold_eng_2", "man", "man", 10, ENGLAND, -1, false));
+			FantomMakeCoolFighter(sld, sti(pchar.rank), 15, 15, "blade7", "", 0);
+			sld.name	= "Кристофер";
+			sld.lastname	= "Клейстон";
+			sld.Dialog.Filename = "Quest/PDM/Black_Yosh.c";
+			LAi_SetSitType(sld);
+			LAi_SetImmortal(sld, true);
+			LAi_group_MoveCharacter(sld, "ENGLAND_CITIZENS");
+			ChangeCharacterAddressGroup(sld,"PortRoyal_tavern","sit","sit3");
         break;
 
         case "Step_6_1":
@@ -1286,6 +1303,59 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
             pchar.questTemp.State = "EndOfQuestLine";
 			bWorldAlivePause   = false; // Конец линейки
 			UnlockAchievement("Nation_quest_P", 3);
+        break;
+		
+		case "BlackYosh_1":
+            dialog.text = "Да, это правда. Полагаю, вы хотели командовать одним из этих фрегатов? Увы, все должности уже распределены.");
+            link.l1 = "Это ужасно, сэр. Но правда ли, что фрегаты уже очень стары, и совершенно не годятся для ведения военных действий?";
+            link.l1.go = "BlackYosh_2";
+        break;
+		
+		case "BlackYosh_2":
+            dialog.text = "Кто это пустил такой идиотский слух? Говорите немедленно, иначе я велю повесить вас на первой же попавшейся рее!");
+            link.l1 = "Я прошу прощения, сэр, но почему мой простой вопрос вызвал такую реакцию?";
+            link.l1.go = "BlackYosh_3";
+        break;
+		
+		case "BlackYosh_3":
+            dialog.text = "Истинный английский корсар НИКОГДА не усомнится в готовности флота. Вы бросаете тень на меня и на мою компетенцию. Я ещё раз спрашиваю, кто вам это сказал?");
+            link.l1 = "Я встретил в таверне человека, который сказал, что недавно был назначен на один из фрегатов. Он жаловался на состояние судна. Мне казалось, что он совершенно пьян, но слова его звучали правдиво.";
+            link.l1.go = "BlackYosh_4";
+        break;
+		
+		case "BlackYosh_4":
+            dialog.text = "Капитан, если вы пьёте в грязных местных тавернах, вы можете услышать ещё и не такую чушь. Это стыдно. Вы пьёте в таверне вместе с другими офицерами, а потом приходите сюда и повторяете лживые слухи. Когда я найду вашего сплетника, я велю его высечь линьками, как простого матроса!");
+            link.l1 = "Но, сэр...";
+            link.l1.go = "BlackYosh_5_VREMENAYA_ZAGLUSHKA";	//Пока квест не будет сделан, дальше пройти нельзя. Будет переход на временную заглушку.
+			//link.l1.go = "BlackYosh_5";
+        break;
+		
+		case "BlackYosh_5_VREMENAYA_ZAGLUSHKA":	//Временная заглушка
+            dialog.text = "А теперь оставьте меня, мне нужно работать!");
+			link.l1 = "Да, сэр, уже ухожу.";
+            link.l1.go = "exit";
+			DeleteAttribute(pchar, "questTemp.BlackYosh_1");
+        break;
+		
+		case "BlackYosh_5":
+            dialog.text = "Ладно, раз уж вы оказались здесь, то мне как раз нужен капитан, который бы сопроводил один из этих фрегатов до безопасного места.");
+            link.l1 = "Да, сэр, я готов"+ GetSexPhrase("","а") +" взяться за это дело. Куда мне нужно сопроводить фрегат?";
+            link.l1.go = "BlackYosh_6";
+			link.l2 = "Сэр, мне очень жаль, но сейчас я не готов"+ GetSexPhrase("","а") +" взяться за это задание.";
+            link.l2.go = "exit";
+			DeleteAttribute(pchar, "questTemp.BlackYosh_1");
+        break;
+		
+		case "BlackYosh_6":
+            dialog.text = "По имеющемся данным из восточных английских колоний, в Бриджауте не хватает кораблей для патрулирования морской границы. Поэтому Фрегат 'Чёрный Ёж' нужно сопроводить в целости и сохранности до Бриджтауна. Вам это ясно?");
+            link.l1 = "Да, сэр, выхожу в море сегодня же.";
+            link.l1.go = "BlackYosh_7";
+        break;
+		
+		case "BlackYosh_7":
+            dialog.text = "И ещё. Перед тем как вы возьмёте курс на Бриджтаун, я хочу, чтобы вы сначала доставили это письмо губернатору Чарлстауна. Это важно!");
+            link.l1 = "Сначала письмо в Чарлстаун, потом 'Чёрного Ежа' в Бриджтаун, я запомнил"+ GetSexPhrase("","а") +".";
+            link.l1.go = "exit";
         break;
 
 

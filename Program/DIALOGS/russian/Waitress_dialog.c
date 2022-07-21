@@ -60,23 +60,39 @@ void ProcessDialogEvent()
 					dialog.text = "Прости, "+ GetSexPhrase("красавчик","красавица") +", я занята. Хороший день для таверны - не всегда хороший день для разговора!";
 					link.l1 = "...";
 					link.l1.go = "exit";
+					link.l9 = "Я хочу задать тебе пару вопросов.";
+					link.l9.go = "quests";//(перессылка в файл города)
 				break;
 
 				case 1:
 					dialog.text = "Пожалуйста, капитан, не устраивайте дебошей! После них так трудно наводить порядок!";
 					link.l1 = ""+ GetSexPhrase("Кхм... Вроде и не собирался.","Я что, похожа на дебоширку?") +"";
 					link.l1.go = "exit";
+					link.l9 = "Я хочу задать тебе пару вопросов.";
+					link.l9.go = "quests";//(перессылка в файл города)
 				break;
 
 				case 2:
 					dialog.text = ""+ GetSexPhrase("О, капитан! Вы хотели бы попасть в мои объятья сегодня? Я не люблю хвастаться, но ...","Присаживайтесь, капитан. Настоящей морской волчице здесь всегда рады.") +"";
 					link.l1 = ""+ GetSexPhrase("Увы, сейчас я спешу! Давай в другой раз!","Cпасибо, милашка.") +"";
 					link.l1.go = "exit";
+					link.l9 = "Я хочу задать тебе пару вопросов.";
+					link.l9.go = "quests";//(перессылка в файл города)
 					// boal 27.03.2004 -->
 					if (pchar.questTemp.different == "free" && !CheckAttribute(pchar, "questTemp.different.FackWaitress") && pchar.questTemp.piratesLine != "Soukins_toPuertoPrincipe" && PChar.sex != "woman" && pchar.questTemp.piratesLine != "Soukins_seekRings" && Pchar.questTemp.CapBloodLine != true && pchar.GenQuest.EncGirl != "HorseToTavern"/*&& npchar.city != "Villemstad"*/)
 					{
 						link.l2 = "С превеликим удовольствием, крошка!";
 						link.l2.go = "Love_1";
+						link.l9 = "Я хочу задать тебе пару вопросов.";
+						link.l9.go = "quests";//(перессылка в файл города)
+						if (SharleMaryIsHere())
+						{
+							link.l1 = "...";
+							link.l1.go = "Mary_Eto_Lovushka_1";
+							DeleteAttribute(link, "l2");
+							DeleteAttribute(link, "l9");
+							pchar.Mary.waitress.npcharID = npchar.id;
+						}
 					}
 					// boal 27.03.2004 <--
 				break;
@@ -85,12 +101,16 @@ void ProcessDialogEvent()
 					dialog.text = "Если вы хотите что-либо заказать - обратитесь, пожалуйста, к хозяину. Он стоит за стойкой.";
 					link.l1 = "Спасибо за совет.";
 					link.l1.go = "exit";
+					link.l9 = "Я хочу задать тебе пару вопросов.";
+					link.l9.go = "quests";//(перессылка в файл города)
 				break;
 
 				case 4:
 					dialog.text = "Если вы хотите как следует отдохнуть и поправить здоровье - снимите комнату на ночь. Ночёвка в общей зале вряд ли прибавит вам сил.";
 					link.l1 = "Благодарю.";
 					link.l1.go = "exit";
+					link.l9 = "Я хочу задать тебе пару вопросов.";
+					link.l9.go = "quests";//(перессылка в файл города)
 				break;
 			}
 			if (CheckAttribute(pchar, "GenQuest.SeekSpy.City")) //квест мэра поп поиску шпиона
@@ -105,10 +125,26 @@ void ProcessDialogEvent()
 					link.l4.go = "SeekSpy_NotSeen";
 				}
 			}
-			link.l9 = "Я хочу задать тебе пару вопросов.";
-			link.l9.go = "quests";//(перессылка в файл города)
 		break;
 
+		case "Mary_Eto_Lovushka_1":
+			StartInstantDialogNoType(pchar.SharleMaryId, "Mary_Eto_Lovushka_2", "Waitress_dialog.c");
+		break;
+		case "Mary_Eto_Lovushka_2":
+			dialog.text = RandPhraseSimple("(к официанке) Я тебе сейчас глазки выцарапаю, тварь такая!", "(к официанке) Мужа моего увести хочешь?! Сейчас я тебя уведу в ад!");
+	        link.l1 = "Мэри, убери нож! Нам неприятности здесь не нужны.";
+	        link.l1.go = "Mary_Eto_Lovushka_3";
+			LAi_SetActorTypeNoGroup(npchar);
+			LAi_ActorTurnToCharacter(npchar, CharacterFromID(pchar.Mary.waitress.npcharID));
+		break;
+		case "Mary_Eto_Lovushka_3":
+			DialogExit();
+			
+			sld = characterFromID("SharleMary");
+			sld.Dialog.Filename = "Quest\MainheroPrologues\Mary_dialog.c";
+			sld.dialog.currentnode = "hired";
+			LAi_SetOfficerType(sld);
+		break;
         case "Love_1":
 			dialog.text = "Тогда слушай внимательно. Сними комнату у нас в таверне. Иди туда и жди меня. Я незаметно проскочу к тебе попозже...";
 			link.l1 = "Хе! Всё сделаю, дорогуша! Жду!";

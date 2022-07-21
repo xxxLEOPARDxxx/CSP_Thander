@@ -181,11 +181,11 @@ void ProcessDialogEvent()
 				if (IsDay())
 				{
 					dialog.text = NPCStringReactionRepeat("Я рада вас видеть в нашем доме. Меня зовут " + GetFullName(npchar) + ". Чем я могу вам помочь?",
-						"Вы еще здесь?",
+						"Вы ещё здесь?",
 						"Хм, простите, но вам не кажется, что вы уже засиделись у нас?",
 						"Я прошу вас не злоупотреблять нашим гостеприимством.", "block", 1, npchar, Dialog.CurrentNode);
-					link.l1 = HeroStringReactionRepeat( GetFullName(pchar) + " к вашим услугам. К вам заш"+ GetSexPhrase("ел","ла") +" без конкретного дела, познакомиться.",
-						"Еще здесь.",
+					link.l1 = HeroStringReactionRepeat( GetFullName(pchar) + " к вашим услугам. К вам заш"+ GetSexPhrase("ёл","ла") +" без конкретного дела, познакомиться.",
+						"Ещё здесь.",
 						"Ну, как сказать...",
 						"Хорошо.", npchar, Dialog.CurrentNode);
 					link.l1.go = DialogGoNodeRepeat("HouseWoman_1", "exit_setOwner", "exit_setOwner", "exit_setOwner", npchar, Dialog.CurrentNode);
@@ -199,7 +199,7 @@ void ProcessDialogEvent()
 					link.l1 = HeroStringReactionRepeat("Не бойтесь, я ничего плохого вам не сделаю.",
 						"Хорошо, не надо волноваться...",
 						"Ухожу.",
-						"В чем дело?", npchar, Dialog.CurrentNode);
+						"В чём дело?", npchar, Dialog.CurrentNode);
 					link.l1.go = DialogGoNodeRepeat("exit_close", "exit_setOwner", "exit_setOwner", "HouseWoman_2", npchar, Dialog.CurrentNode);
 				}
 			}

@@ -147,8 +147,11 @@ void ProcessDialogEvent()
 				dialog.text = RandPhraseSimple(TimeGreeting() + ". Чем я могу вам помочь, " + GetAddress_Form(NPChar) + "?",
 				                               TimeGreeting() + ". Что я могу для вас сделать, " + GetAddress_Form(NPChar) + "?");
 			}
-			link.l2 = npchar.name + ", я хочу провести время с одной из твоих девушек.";
-			link.l2.go = "Hostess_1";
+			if (!CheckAttribute(pchar, "GenQuest.BrothelLock"))// нет запрета от Мэри
+			{
+				link.l2 = npchar.name + ", я хочу провести время с одной из твоих девушек.";
+				link.l2.go = "Hostess_1";
+			}
 			link.l3 = "Давно я не баловал"+ GetSexPhrase("","а") +" своих парней. Можно сделать оптовый заказ на девочек?";
 			link.l3.go = "ForCrew";
 			link.l4 = "У меня есть вопрос.";
@@ -330,7 +333,7 @@ void ProcessDialogEvent()
 				if (rand(4) == 0 && pchar.sex != "woman" && !CheckAttribute(pchar,"NoPriest") && GetCharacterSPECIALSimple(pchar, SPECIAL_L) >= 8)
 				{
 					dialog.text = "Отлично, дорогой, " + sld.name + " будет ждать тебя в комнате для уединения на втором этаже. Уверена, ты будешь оооочень доволен...");
-					Link.l1 = "Хех, ну я пошел...";
+					Link.l1 = "Хех, ну я пошёл...";
 					Link.l1.go = "exit";
 					AddMoneyToCharacter(pchar, -sti(sld.quest.price));
 					sld.greeting = "Gr_Church";
@@ -349,7 +352,7 @@ void ProcessDialogEvent()
 				else
 				{
 					dialog.text = "Отлично, дорог"+ GetSexPhrase("ой","уша") +". " + sld.name + " будет ждать тебя в комнате для уединения на втором этаже.";
-					Link.l1 = ""+ GetSexPhrase("Хех, ну я пошел","Ну, я побежала") +"...";
+					Link.l1 = ""+ GetSexPhrase("Хех, ну я пошёл","Ну, я побежала") +"...";
 					Link.l1.go = "exit";
 					AddMoneyToCharacter(pchar, -sti(sld.quest.price));
 					sld.dialog.currentnode = "Horse_ReadyFack";
@@ -1047,7 +1050,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "Priest2":
-			dialog.text = "Тебе понравилось? Ты настоящий везунчик, ты первый, кого я окрестил своим достоинством, можешь идти и совершать любые дела и Бог простит тебя";
+			dialog.text = "Тебе понравилось? Ты настоящий везунчик, ты первый, кого я окрестил своим достоинством, можешь идти и совершать любые дела, и Бог простит тебя.";
 			Link.l1 = "Просто нет слов, падре...";
 			Link.l1.go = "exit_2";
 			NextDiag.TempNode = "Priest3";
