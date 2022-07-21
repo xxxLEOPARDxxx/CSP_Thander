@@ -1164,6 +1164,7 @@ void LAi_SetBoardingActors(string locID)
 		    }
 			//}
 			if(CheckAttribute(pchar, "CabinHelp") && pchar.CabinHelp == true)	BSHangover_FlintFight_3("");
+			if(CheckAttribute(pchar, "MaryCabinHelp") && pchar.MaryCabinHelp == true)	Mary_Pomogaet_v_Kautah("");
 		}
 		SetNewModelToChar(chr); //иначе сабли не те, что реально
 		string weaponID = GetCharacterEquipByGroup(chr, BLADE_ITEM_TYPE);

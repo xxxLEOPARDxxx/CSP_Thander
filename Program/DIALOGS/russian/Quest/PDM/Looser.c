@@ -34,7 +34,7 @@ void ProcessDialogEvent()
 		break;
 
 		case "quest":
-			dialog.text = "Слушаю тебя.";
+			dialog.text = "Слушаю тебя, приятель.";
 			link.l1 = "Я забрал"+ GetSexPhrase("","а") +" все кошельки, как ты просил. Так что там с наградой?";
 			link.l1.go = "2";
 		break;

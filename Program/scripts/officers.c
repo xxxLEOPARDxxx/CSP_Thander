@@ -209,8 +209,10 @@ void OfficersReactionResult()
 						if (PlaceCharacter(sld, "goto", "random_must_be_near") != "")
 						{
 							sld.dialog.currentnode = "WantToGo";
-		                    sld.greeting           = "Gr_Officer_Salary";
-
+							if (sld.sex != "woman")
+							{
+								sld.greeting           = "Gr_Officer_Salary";
+							}
 							LAi_SetActorType(sld);
 							LAi_ActorDialog(sld, pchar, "", 2.0, 0);
 							//SetActorDialogAny2Pchar(sld.id, "pchar_back_to_player", 0.0, 0.0);

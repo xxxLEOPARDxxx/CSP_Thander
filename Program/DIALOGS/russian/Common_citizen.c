@@ -193,7 +193,7 @@ void ProcessDialogEvent()
                         +" "+ GetSexPhrase("- старый пройдоха","- отчаянная деваха") +"", "Рад тебя видеть, "+ GetSexPhrase("старина","красавица") +" "
                         + Pchar.name, "О, да это же "+ GetSexPhrase("сам капитан","сама") +" "
                          +GetFullName(Pchar))
-                                        +LinkRandPhrase(". Думал, тебя уже нет на этом свете!", ". И, наверное, "+ GetSexPhrase("как всегда пьян.","уже слегка навеселе.") +"", ". И, как вижу, еще на свободе!")
+                                        +LinkRandPhrase(". Думал, тебя уже нет на этом свете!", ". И, наверное, "+ GetSexPhrase("как всегда пьян.","уже слегка навеселе.") +"", ". И, как вижу, ещё на свободе!")
                                         +LinkRandPhrase(" Ну, говори, чего тебе нужно?", " Чего тебе на этот раз?", " Опять тревожишь меня по пустякам?"),
                                         LinkRandPhrase(TimeGreeting() + ", капитан ", "Здравствуйте, "+GetAddress_Form(NPChar)+" ", "Приветствую вас, капитан ")+GetFullName(Pchar)
                                         +LinkRandPhrase(". Что может быть нужно "+ GetSexPhrase("такому почтенному человеку","такой бравой девушке") +", как вы, от меня?", ". Зачем вы пришли?", ". Что на этот раз вы хотите узнать?")
@@ -203,7 +203,7 @@ void ProcessDialogEvent()
                         PCharRepPhrase(LinkRandPhrase("Здравствуйте, капитан ", "Приветствую, ах это вы "+GetAddress_Form(NPChar)+" ", "А, капитан ")
                                         +GetFullName(Pchar)
                                         +LinkRandPhrase(", я думал"+NPCharSexPhrase(NPChar, " ", "а ")+"мы больше с вами не встретимся,",
-                                                         ", не скажу, что рад"+NPCharSexPhrase(NPChar, " ", "а ")+"вас видеть, но", ", вижу, вы еще живы, прискорбно, а")
+                                                         ", не скажу, что рад"+NPCharSexPhrase(NPChar, " ", "а ")+"вас видеть, но", ", вижу, вы ещё живы, прискорбно, а")
                                         +LinkRandPhrase(" что вам нужно?", " зачем вы пришли?", " чем могу быть "+NPCharSexPhrase(NPChar, "полезен?", "полезна?")),
                                         LinkRandPhrase(TimeGreeting() + ", капитан " + GetFullName(Pchar) + ". Чем могу помочь?",
                                         "О, да это же сам"+ GetSexPhrase("","а") +" капитан " + GetFullName(Pchar) + "! Что вы хотите узнать на этот раз?",
@@ -224,7 +224,7 @@ void ProcessDialogEvent()
 
 		case "ShipLetters_8":
 			dialog.text = LinkRandPhrase("Мне нет дела до незнакомых бумаг, да и читать я не умею. Ступайте к ростовщику, он, говорят, и дьявольской грамоте обучен.",
-										"Понятия не имею о чем Вы говорите, поспрашивайте еще жителей этого города, капитан " + GetFullName(Pchar) + ".",
+										"Понятия не имею о чём Вы говорите, поспрашивайте ещё жителей этого города, капитан " + GetFullName(Pchar) + ".",
 										"Даже не знаю как Вам помочь, капитан " + GetFullName(Pchar) + ". Попробуйте обратиться к ростовщику, может он знает?");
 			link.l1 = "С удовольствием воспользуюсь Вашим советом!";
 			link.l1.go = "exit";
@@ -293,7 +293,7 @@ void ProcessDialogEvent()
 		case "new question":
             dialog.text = NPCharRepPhrase(npchar,
 		                PCharRepPhrase(LinkRandPhrase("О, да я рад"+NPCharSexPhrase(NPChar, " ", "а ")+" тебе, как выпивке, спрашивай, чего хочешь.", "Любишь поболтать, капитан? Что ж, я тоже... Особенно за кружечкой рома.", "Да, " + PChar.name + "?"),
-                                        LinkRandPhrase("Ну, чего тебе еще?", "Вижу, капитан "+PChar.name+", ты охотни"+ GetSexPhrase("к","ца") +" поболтать? ", "Замучил"+ GetSexPhrase("","а") +" вопросами, капитан, лучше бы угостил"+ GetSexPhrase("","а") +" ромом.")),
+                                        LinkRandPhrase("Ну, чего тебе ещё?", "Вижу, капитан "+PChar.name+", ты охотни"+ GetSexPhrase("к","ца") +" поболтать? ", "Замучил"+ GetSexPhrase("","а") +" вопросами, капитан, лучше бы угостил"+ GetSexPhrase("","а") +" ромом.")),
 		                PCharRepPhrase(LinkRandPhrase("Что вы хотели узнать "+ GetAddress_Form(NPChar) + "?", "Я вас слушаю капитан.", "Мне нужно идти, поэтому спрашивайте скорее, капитан."),
                                         LinkRandPhrase("Всегда рад"+NPCharSexPhrase(NPChar, " ", "а ")+" приятному собеседнику, " + GetAddress_Form(NPChar) + " " + PChar.lastname + ". Говорите.",
                                                         "Да, " + GetAddress_Form(NPChar) + "?",
@@ -327,7 +327,7 @@ void ProcessDialogEvent()
 			}
             link.l4 = RandPhraseSimple("Есть важное дело!", "У меня к вам дело.");
 			link.l4.go = "quests";  //(перессылка в файл города)
-			link.l5 = PCharRepPhrase(RandPhraseSimple("Тебе послышалось, я пойду.", "Нет, ничего - просто ш"+ GetSexPhrase("ел","ла") +" в таверну."),
+			link.l5 = PCharRepPhrase(RandPhraseSimple("Тебе послышалось, я пойду.", "Нет, ничего - просто ш"+ GetSexPhrase("ёл","ла") +" в таверну."),
                                         RandPhraseSimple("Ладно, ничего. Удачи!", "Просто осматриваю город. До свидания."));
 			link.l5.go = "exit";
 		break;
@@ -399,7 +399,7 @@ void ProcessDialogEvent()
 		break;
 		//============================ Генератор мэра. Квест по розыску шпиона на улице ============================
 		case "SitySpy":
-			dialog.text = NPCStringReactionRepeat(NPCharSexPhrase(npchar, "Ну, а я здесь при чем? Я местный житель!", "Ну, а я то здесь при чем? Я живу в этом городе, и знать ничего такого не желаю!"),
+			dialog.text = NPCStringReactionRepeat(NPCharSexPhrase(npchar, "Ну, а я здесь при чём? Я местный житель!", "Ну, а я то здесь при чем? Я живу в этом городе, и знать ничего такого не желаю!"),
 				NPCharSexPhrase(npchar, "Что опять вам от меня нужно? Говорил вам уже, что я не шпион!", "Я же говорила вам уже, что я местная!"),
 				NPCharSexPhrase(npchar, "Ну, сколько можно? Отстаньте от меня, я местный житель!", "Ну что вы опять ко мне пристаете со своими дурацкими расспросами?"),
 				NPCharSexPhrase(npchar, "Что, опять?! Ну это ни в какие ворота не лезет!!!", "Послушайте, отстаньте от меня наконец, прошу вас!!"), "block", 0, npchar, Dialog.CurrentNode);
@@ -429,7 +429,7 @@ void ProcessDialogEvent()
 		case "SitySpy_1":
 			if (sti(pchar.GenQuest.SeekSpy.Idx) == -1 || sti(pchar.GenQuest.SeekSpy.Idx) == 1) //на всякий случай
 			{
-				dialog.text = "Да кто угодно! Послушайте, что вы меня достаете?! Если у вас какие-то проблемы, то пройдемте к губернатору, и все проясним!",
+				dialog.text = "Да кто угодно! Послушайте, что вы меня достаете?! Если у вас какие-то проблемы, то пройдемте к губернатору, и всё проясним!",
 				link.l1 = "Гм... пожалуй, не будем его тревожить зря. Я вам верю...";
 				link.l1.go = "exit";
 				break;
@@ -454,7 +454,7 @@ void ProcessDialogEvent()
 		//=================== ноды квеста мэра. поиск шпиона на улице, опрос свидетеля ==================
 		case "SeekSpy_Checking":
 			dialog.text = "Да, я подтверждаю, " + NPCharSexPhrase(&characters[sti(pchar.GenQuest.SeekSpy.BaseIdx)], "он действительно местный житель.", "она действительно местная жительница.");
-			link.l1 = RandPhraseSimple("Я понял"+ GetSexPhrase("","а") +". Спасибо за помощь.", "Все ясно. Спасибо за помощь.");
+			link.l1 = RandPhraseSimple("Я понял"+ GetSexPhrase("","а") +". Спасибо за помощь.", "Всё ясно. Спасибо за помощь.");
 			link.l1.go = "SeekSpy_Checking_1";
 		break;
 		case "SeekSpy_Checking_1":
@@ -473,9 +473,9 @@ void ProcessDialogEvent()
 		// Мини квест на поиск обручального кольца -->
 		case "CitizenFindItem_1":
 			dialog.text = "Дело в том, что я вчера прогуливалась за городом и потеряла свое обручальное кольцо... "+ GetSexPhrase("Капитан, вы не могли бы поискать его?","Девушка, пожалуйста, помогите мне его найти!") +"";
-			link.l1 = "Конечно "+ GetSexPhrase("могу! Ради такой прекрасной девушки я готов сделать все, что угодно!","помогу. Церковь учит помогать ближнему.") +"";
+			link.l1 = "Конечно "+ GetSexPhrase("могу! Ради такой прекрасной девушки я готов сделать всё, что угодно!","помогу. Церковь учит помогать ближнему.") +"";
 			link.l1.go = "CitizenFindItem_2";
-			link.l2 = LinkRandPhrase("Нет, не могу. Извини. У меня очень много дел.", "Извини, не могу. Я вдруг вспомнил"+ GetSexPhrase("","а") +", что у меня еще осталось одно не завершенное дельце...", "У меня сейчас очень мало времени, так что помочь я ничем не смогу...");
+			link.l2 = LinkRandPhrase("Нет, не могу. Извини. У меня очень много дел.", "Извини, не могу. Я вдруг вспомнил"+ GetSexPhrase("","а") +", что у меня ещё осталось одно не завершенное дельце...", "У меня сейчас очень мало времени, так что помочь я ничем не смогу...");
 			link.l2.go = "CitizenFindItem_NoQuest";
 			break;
 
@@ -487,7 +487,7 @@ void ProcessDialogEvent()
 
 		case "CitizenFindItem_3":
 			dialog.text = "Сразу за городскими воротами...";
-			link.l1 = "Ну, тогда я пош"+ GetSexPhrase("ел","ла") +" искать...";
+			link.l1 = "Ну, тогда я пош"+ GetSexPhrase("ёл","ла") +" искать...";
 			link.l1.go = "CitizenFindItem_4";
 		break;
 
@@ -545,7 +545,7 @@ void ProcessDialogEvent()
 
 		case "CitizenFindItem_Complete_3":
 			iTemp = (rand(3)+1)*50;
-			dialog.text = "Ах да, конечно. Вот вам " + FindRussianMoneyString(iTemp) + ". Это все, что у меня есть. Возьмите их... И прощайте.";
+			dialog.text = "Ах да, конечно. Вот вам " + FindRussianMoneyString(iTemp) + ". Это всё, что у меня есть. Возьмите их... И прощайте.";
 			link.l1 = "До свидания, " + GetFullName(NPChar) + ".";
 			link.l1.go = "exit";
 			AddMoneyToCharacter(PChar, iTemp);

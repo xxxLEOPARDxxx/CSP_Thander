@@ -526,8 +526,8 @@ void ProcessDialogEvent()
 		break;
 
 		case "Rostovshik_Fra_Off_1b":
-			dialog.text = "Я всё верну, на следующей недели будут деньги. Мамой клянусь!";
-            link.l1 = "ну, ваши дела меня не касаются.";
+			dialog.text = "Я всё верну, на следующей неделе будут деньги. Мамой клянусь!";
+            link.l1 = "Ну, ваши дела меня не касаются.";
 			link.l1.go = "Rostovshik_Fra_Off_1с";
 		break;
 
