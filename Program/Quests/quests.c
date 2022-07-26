@@ -1933,7 +1933,7 @@ void CalculateCheatsInfo() // Для статистики по читам. Ис�
 	makearef(arAllCheats, PChar.Statistic.Cheats);
 	int iAllCheats = GetAttributesNum(arAllCheats);
 	int iAllCheatsCount = 0;
-	/*
+	
 
 	SetFormatedText("INFO_TEXT2", "Игра начата на версии:\n" + pchar.versionnumber + "\nИспользовавшиеся читы:");
 
@@ -1954,5 +1954,5 @@ void CalculateCheatsInfo() // Для статистики по читам. Ис�
 	AddLineToFormatedText("INFO_TEXT2", XI_ConvertString("Total") + " " + iAllCheatsCount + " раз.");
 
 	if(iAllCheatsCount == 0) // Исли 0, значит читов не юзали
-		SetFormatedText("INFO_TEXT2", "Игра начата на версии:\n" + pchar.versionnumber + "\nЧитов не использовалось!");*/
+		SetFormatedText("INFO_TEXT2", "Игра начата на версии:\n" + pchar.versionnumber + "\nЧитов не использовалось!");
 }
