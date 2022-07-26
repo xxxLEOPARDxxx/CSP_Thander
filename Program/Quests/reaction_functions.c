@@ -5967,7 +5967,8 @@ void CureLordMovie()
 void CureLordMovie_Con1()
 {
     LAi_ActorTurnToLocator(Pchar, "goto", "goto7");
-    LAi_ActorAnimation(Pchar, "Barman_idle", "CureLordMovie_Con2", 5);
+    //LAi_ActorAnimation(Pchar, "Barman_idle", "CureLordMovie_Con2", 5);
+	LAi_ActorAnimation(Pchar, "Barman_idle", "CureLordMovie_Con3", 5);
 }
 
 void CureLordMovie_Con2()
@@ -6013,7 +6014,7 @@ void DragunInvansion()
 void DragunInvansion2()
 {
     pchar.quest.BloodGetBlade.win_condition.l1 = "item";
-    pchar.quest.BloodGetBlade.win_condition.l1.item= "blade2";
+    pchar.quest.BloodGetBlade.win_condition.l1.item= "pistol1";
     pchar.quest.BloodGetBlade.function = "BloodGetBlade";
     pchar.quest.DragunInvansion.win_condition.l1          = "location";
     pchar.quest.DragunInvansion.win_condition.l1.location = "Estate";
