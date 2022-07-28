@@ -515,17 +515,17 @@ float Ship_MastDamage()
             float nDirect = 0.35; //Glancing
             int nKni = nCaliber;
             if(iBallType == GOOD_KNIPPELS)
-                nKni += 5;
-            if(rand(65) < nKni)
-                nDirect = 1.1; //Direct
-            float fCbrMDamage = 0.5 * retMin(makefloat(nCaliber) / MAX_CAL_MAST_DMG, 1.0);
+                nKni *= 1.3;
+            if(rand(105 - nClass*6) < nKni)//20% ok 30% good 50+% penetrate
+                nDirect = 1.6; //Direct
+            float fCbrMDamage = retMin(makefloat(nCaliber) / MAX_CAL_MAST_DMG, 1.0);
             float fClsMDamage = 0.005 * (nClass / 6);
             float tempDamage = 0.0;
             float baseDamage = 0.0;
 			switch (iBallType)
 			{
 				case GOOD_BALLS:
-					baseDamage = pow(nClass, 2.3) * 0.0025; //pow(nClass, 2.0) * 0.005; //0.025; - больше зависимость класса, меньше изначальный урон.
+					baseDamage = pow(nClass, 2.3) * 0.0033; //pow(nClass, 2.0) * 0.005; //0.025; - больше зависимость класса, меньше изначальный урон.
 				break;
 				case GOOD_GRAPES:
 					baseDamage = 0.0;
@@ -533,14 +533,19 @@ float Ship_MastDamage()
 					fClsMDamage = 0.0;
 				break;
 				case GOOD_KNIPPELS:
-					baseDamage = pow(nClass, 2.3) * 0.002; //0.0035 //0.015;
+					baseDamage = pow(nClass, 2.3) * 0.003 //0.015;
 				break;
 				case GOOD_BOMBS:
-					baseDamage = pow(nClass, 2.3) * 0.005; //0.0015 //0.005;
+					baseDamage = pow(nClass, 2.3) * 0.001 //0.005;
 				break;
 			}
 			tempDamage = baseDamage * fCbrMDamage + fClsMDamage;
 			tempDamage = tempDamage * nDirect;
+			// LEO: Общий дамаг по мачтам разделен на классы
+			string sShip = rBaseShip.BaseName;
+			if (sShip == "PRINCE" || sShip == "OXFORD" || sShip == "RESOLUTION" || sShip == "MORDAUNT") 
+				tempDamage = tempDamage * MastMulti * 0.8; //для хрупких кораблей сделать жирнее мачты
+			tempDamage = tempDamage * MastMulti;
 			fDamage = fDamage + tempDamage;
         //#20190113-06
         int iBallCharacterIndex = GetEventData();
@@ -567,10 +572,6 @@ float Ship_MastDamage()
 		RefreshBattleInterface();
 	}
 
-	// LEO: Общий дамаг по мачтам разделен на классы
-	string sShip = rBaseShip.BaseName;
-	if (sShip == "PRINCE" || sShip == "OXFORD" || sShip == "RESOLUTION" || sShip == "MORDAUNT") return fDamage*MastMulti*0.8; //для хрупких кораблей сделать жирнее мачты
-	fDamage = fDamage * MastMulti;
 	return fDamage;
 	//procMastFall
 }
