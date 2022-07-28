@@ -934,17 +934,17 @@ void ShowPGGInfo()
 		SetFormatedText("SHIP_RANK", refBaseShip.Class);
 		SetFormatedText("CLASS_ARMOR", refBaseShip.HullArmor);
 		SetNewGroupPicture("CLASS_ARMOR_ICON", "ICONS_CHAR", "Reputation");
-		if (!CheckAttribute(refBaseShip,"QuestShip"))
-		{
+		//if (!CheckAttribute(refBaseShip,"QuestShip"))
+		//{
 			SetNodeUsing("SHIP_BIG_PICTURE_VIDEO",false);
 			SetNewPicture("SHIP_BIG_PICTURE", "interfaces\ships\" + shipTexture + ".tga.tx");
-		}
+		/*}
 		else
 		{
 			SetNewPicture("SHIP_BIG_PICTURE", "");
 			SetNodeUsing("SHIP_BIG_PICTURE_VIDEO",true);
 			SetNewVideoPicture("SHIP_BIG_PICTURE_VIDEO","SHIP_"+shipTexture);
-		}
+		}*/
 		opened = true;
 		SetNewPicture("SHIP_FRAME_PICTURE", "interfaces\Frame1.tga");
 		string texturedata;
@@ -1498,7 +1498,7 @@ void ShowInfoWindow()
 			makeref(refBaseShip,ShipsTypes[Last_Left_Ship]);
 			sShip = refBaseShip.Name;
 			sPicture = "interfaces\ships\" + sShip + ".tga.tx";
-			if (Last_Left_Ship < 125) {SetNewPicture("SHIP_PICTURE_L", sPicture); SetNodeUsing("SHIP_PICTURE_VL", false);}
+			/*if (Last_Left_Ship < 125) {*/SetNewPicture("SHIP_PICTURE_L", sPicture);/* SetNodeUsing("SHIP_PICTURE_VL", false);}
 			else
 			{
 				if (curselectedshipl != Last_Left_Ship)
@@ -1508,13 +1508,13 @@ void ShowInfoWindow()
 					SetNewVideoPicture("SHIP_PICTURE_VL","SHIP_"+sShip);
 					curselectedshipl = Last_Left_Ship;
 				}
-			}
+			}*/
 		break;
 		case "SHIP_TABLE_LIST_RIGHT":
 			makeref(refBaseShip,ShipsTypes[Last_Right_Ship]);
 			sShip = refBaseShip.Name;
 			sPicture = "interfaces\ships\" + sShip + ".tga.tx";
-			if (Last_Right_Ship < 125) {SetNewPicture("SHIP_PICTURE_R", sPicture); SetNodeUsing("SHIP_PICTURE_VR", false);}
+			/*if (Last_Right_Ship < 125) {*/SetNewPicture("SHIP_PICTURE_R", sPicture);/* SetNodeUsing("SHIP_PICTURE_VR", false);}
 			else
 			{
 				if (curselectedshipr != Last_Right_Ship)
@@ -1524,7 +1524,7 @@ void ShowInfoWindow()
 					SetNewVideoPicture("SHIP_PICTURE_VR","SHIP_"+sShip);
 					curselectedshipr = Last_Right_Ship;
 				}
-			}
+			}*/
 		break;
 	}
 	// CreateTooltip("#" + sHeader, sText1, argb(255,255,255,255), "", argb(255,255,255,255), "", argb(255,192,255,192), "", argb(255,255,255,255), sPicture, "NATIONS", sGroupPicture, 64, 64);
