@@ -2364,29 +2364,38 @@ ref ProcessSailDamage()
 	float sailPower = GetEventData();
 
 	ref chref = GetCharacter(chrIdx);
-	if (CheckAttribute(&RealShips[sti(chref.Ship.Type)], "Tuning.SailsSpecial") && rand(2)<1)
-	{
-		BI_g_fRetVal = 0;
-		return &BI_g_fRetVal;
-	}
-
-	if (LAi_IsImmortal(chref))
-	{
-		BI_g_fRetVal = 0;
-		return &BI_g_fRetVal;
-	}
 
 	string groupName = ""+groupNum;
 	aref arSail;
 	makearef(arSail,chref.ship.sails.(reyName).(groupName));
+	
+	if (LAi_IsImmortal(chref))
+	{
+		arSail.hd = DeleteOneSailHole(sti(chref.index), groupName, reyName, holeData, 1);
+		BI_g_fRetVal = 0;
+		return &BI_g_fRetVal;
+	}
 
 	float sailDmg = 0.0;
 	float sailDmgMax = GetCharacterShipSP(chref) * sailPower;
+	if(!CheckAttribute(arSail, "oldhd"))
+	{
+		arSail.oldhd = 0;
+	}
+	if(!CheckAttribute(arSail, "olddmg"))
+	{
+		arSail.olddmg = 0;
+	}
+	if(!CheckAttribute(arSail, "oldhc")) 
+	{
+		arSail.oldhc = 0;
+	}
 	if( !CheckAttribute(arSail,"dmg") )	{ sailDmg = 0.0; }
-
+	
 	if(sMastName=="*")
 	{
-		sailDmg = sailDmg + GetRigDamage(shootIdx,sti(AIBalls.CurrentBallType),chref);
+		//sailDmg = sailDmg + GetRigDamage(shootIdx,sti(AIBalls.CurrentBallType),chref);
+		//RigDamage тут всегда 0
 		if(sailDmg>sailDmgMax)	{ sailDmg = sailDmgMax; }
 		int needHole = GetNeedHoleFromDmg(sailDmg,sailDmgMax,maxHoleCount);
 		if(holeCount!=needHole)
@@ -2401,6 +2410,7 @@ ref ProcessSailDamage()
 				sailDmg = GetNeedDmgFromHole(holeCount,sailDmgMax,maxHoleCount);
 			}
 		}
+		sailDmg = GetNeedDmgFromHole(holeCount,sailDmgMax,maxHoleCount);
 	}
 	else
 	{
@@ -2412,13 +2422,41 @@ ref ProcessSailDamage()
 	{
 		Log_SetStringtoLog("MUST DIE!!! " + sailDmg);
 	}*/
+	
+	if(CheckAttribute(&RealShips[sti(chref.Ship.Type)], "Tuning.SailsSpecial") && rand(5)<1 && holedata != sti(arSail.oldhd))
+	{
 
-	arSail.hc = holeCount;
-	arSail.hd = holeData;
+		if(sailDmg - stf(arSail.olddmg) >=1)
+		{
+			arSail.hd = DeleteOneSailHole(sti(chref.index), groupName, reyName, holeData, 1);
+			arSail.oldhd = sti(arSail.hd);
+			if(!CheckAttribute(arSail, "defended"))
+			{
+				arSail.defended = 1;
+			}	
+			arSail.defended = sti(arSail.defended)+1;
+			arSail.hc = sti(arSail.oldhc);
+			arSail.oldhc = sti(arSail.hc);
+			arSail.dmg = stf(arSail.olddmg);
+			arSail.olddmg = stf(arSail.dmg);
+			chref.ship.SP = CalculateShipSP(chref);
+			BI_g_fRetVal = 0.0;
+			return &BI_g_fRetVal;
+		}
+	}
+	else
+	{
+		arSail.dmg = sailDmg;
+		arSail.hd = holeData;
+		arSail.hc = holeCount;
+		arSail.oldhd = holeData;
+	}
+	//Log_Info("NewHitCount "+arSail.NewHitCount+", HoleCount "+holeCount+", sailDmg "+sailDmg+", defendedCount "+arSail.defended);
+	
 	arSail.mhc = maxHoleCount;
 	arSail.sp = sailPower;
-	arSail.dmg = sailDmg;
 
+	
 	chref.ship.SP = CalculateShipSP(chref);
 	BI_g_fRetVal = sailDmg;
 	return &BI_g_fRetVal;
